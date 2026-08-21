@@ -951,8 +951,8 @@ function ComponentPreview({ name }: { name: string }) {
         <Pagination>
           <PaginationContent>
             <PaginationItem><PaginationPrevious href="#top" /></PaginationItem>
-            <PaginationItem><PaginationLink href="#top" isActive>1</PaginationLink></PaginationItem>
-            <PaginationItem><PaginationLink href="#top">2</PaginationLink></PaginationItem>
+            <PaginationItem><PaginationLink aria-label="Page 1" href="#top" isActive>1</PaginationLink></PaginationItem>
+            <PaginationItem><PaginationLink aria-label="Page 2" href="#top">2</PaginationLink></PaginationItem>
             <PaginationItem><PaginationEllipsis /></PaginationItem>
             <PaginationItem><PaginationNext href="#top" /></PaginationItem>
           </PaginationContent>
