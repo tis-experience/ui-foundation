@@ -38,6 +38,7 @@ function extractExports(relativePaths) {
 }
 
 const catalog = readJson("registry/catalog.json")
+const contractSource = readJson("contracts/component-contracts.json")
 const packageJson = readJson("package.json")
 const foundations = readJson("tokens/foundations.json")
 const densities = readJson("tokens/densities.json")
@@ -49,11 +50,32 @@ const foundationTokenCount = foundations.groups.reduce(
   0
 )
 
+const resolvedContracts = catalog.components.map((component) => {
+  const profileName = contractSource.components[component.name]
+  const profile = contractSource.profiles[profileName]
+
+  if (!profile) {
+    throw new Error(`${component.name}: missing or unknown component contract profile`)
+  }
+
+  return {
+    name: component.name,
+    title: component.title,
+    category: component.category,
+    profile: profileName,
+    ...profile,
+    accessibility: component.accessibility,
+  }
+})
+
 if (catalog.version !== packageJson.version) {
   throw new Error(`Version mismatch: package=${packageJson.version}, catalog=${catalog.version}`)
 }
 if (customizer.version !== packageJson.version) {
   throw new Error(`Version mismatch: package=${packageJson.version}, customizer=${customizer.version}`)
+}
+if (contractSource.version !== packageJson.version) {
+  throw new Error(`Version mismatch: package=${packageJson.version}, contracts=${contractSource.version}`)
 }
 
 const manifest = {
@@ -97,8 +119,14 @@ const manifest = {
     tokenCount: foundationTokenCount,
     groups: foundations.groups,
   },
+  componentContracts: {
+    source: publicUrl("contracts/components.json"),
+    profiles: Object.keys(contractSource.profiles).length,
+    components: resolvedContracts.length,
+  },
   rules: [
     "Read this manifest before selecting or generating components.",
+    "Read the selected resolved component contracts before implementing behavior or states.",
     "Install registry source instead of recreating component markup from memory.",
     "Use Neutral unless the TIS identity is explicitly requested.",
     "Use Comfortable density unless the product explicitly requires Compact or Spacious controls.",
@@ -114,6 +142,7 @@ const manifest = {
     publicUrl("llms.txt"),
     publicUrl("r/registry.json"),
     publicUrl("registry/catalog.json"),
+    publicUrl("contracts/components.json"),
     publicUrl("ai/customizer.json"),
     publicUrl("tokens/foundations.json"),
     publicUrl("tokens/densities.json"),
@@ -124,7 +153,8 @@ const manifest = {
     publicUrl("docs/blocks.md"),
     publicUrl("docs/charts.md"),
     publicUrl("docs/customization.md"),
-    publicUrl("docs/compositions.md")
+    publicUrl("docs/compositions.md"),
+    publicUrl("docs/maintenance.md"),
   ],
   guides: (catalog.guides ?? []).map((guide) => ({
     ...guide,
@@ -142,7 +172,11 @@ const manifest = {
     files: component.files,
     dependencies: component.dependencies ?? [],
     registryDependencies: component.registryDependencies ?? [],
-    accessibility: component.accessibility
+    accessibility: component.accessibility,
+    contract: {
+      profile: contractSource.components[component.name],
+      source: publicUrl("contracts/components.json"),
+    },
   })),
   blocks: (catalog.blocks ?? []).map((block) => ({
     name: block.name,
@@ -214,6 +248,12 @@ ${manifest.rules.map((rule) => `- ${rule}`).join("\n")}
 
 ${foundations.groups.map((group) => `- ${group.label}: ${group.tokens.map((token) => `--${token.name}`).join(", ")}`).join("\n")}
 
+## Component contracts
+
+- Resolved source: ${publicUrl("contracts/components.json")}
+- ${resolvedContracts.length} components across ${Object.keys(contractSource.profiles).length} behavior profiles
+- Each contract declares behavior ownership, keyboard strategy, responsive responsibility, required states and consumer responsibilities.
+
 ## Components (${manifest.components.length})
 
 ${manifest.components.map((component) => `- ${component.title} (${component.name}): ${component.description} Exports: ${component.exports.join(", ")}.`).join("\n")}
@@ -240,6 +280,11 @@ const outputs = new Map([
   ["public/ai/customizer.json", `${JSON.stringify(customizer, null, 2)}\n`],
   ["public/llms.txt", `${llms}${guideLlms}`],
   ["public/registry/catalog.json", fs.readFileSync(path.join(root, "registry/catalog.json"), "utf8")],
+  ["public/contracts/components.json", `${JSON.stringify({
+    $schema: publicUrl("schemas/resolved-component-contracts.schema.json"),
+    version: packageJson.version,
+    components: resolvedContracts,
+  }, null, 2)}\n`],
   ["public/tokens/foundations.json", fs.readFileSync(path.join(root, "tokens/foundations.json"), "utf8")],
   ["public/tokens/densities.json", fs.readFileSync(path.join(root, "tokens/densities.json"), "utf8")],
   ["public/tokens/customizer.json", fs.readFileSync(path.join(root, "tokens/customizer.json"), "utf8")],
@@ -247,6 +292,8 @@ const outputs = new Map([
   ["public/tokens/themes/tis.json", fs.readFileSync(path.join(root, "tokens/themes/tis.json"), "utf8")],
   ["public/schemas/ai-manifest.schema.json", fs.readFileSync(path.join(root, "schemas/ai-manifest.schema.json"), "utf8")],
   ["public/schemas/component-catalog.schema.json", fs.readFileSync(path.join(root, "schemas/component-catalog.schema.json"), "utf8")],
+  ["public/schemas/component-contracts.schema.json", fs.readFileSync(path.join(root, "schemas/component-contracts.schema.json"), "utf8")],
+  ["public/schemas/resolved-component-contracts.schema.json", fs.readFileSync(path.join(root, "schemas/resolved-component-contracts.schema.json"), "utf8")],
   ["public/tokens/foundation.schema.json", fs.readFileSync(path.join(root, "tokens/foundation.schema.json"), "utf8")],
   ["public/tokens/density.schema.json", fs.readFileSync(path.join(root, "tokens/density.schema.json"), "utf8")],
   ["public/tokens/customizer.schema.json", fs.readFileSync(path.join(root, "tokens/customizer.schema.json"), "utf8")],

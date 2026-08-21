@@ -1,0 +1,290 @@
+{
+  "$schema": "../schemas/component-contracts.schema.json",
+  "version": "0.1.0-alpha.0",
+  "profiles": {
+    "action": {
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": ["default", "disabled", "focus-visible"],
+      "consumerResponsibilities": ["Provide an accessible name", "Choose button or link semantics from the intended action"]
+    },
+    "action-group": {
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": ["default", "disabled", "focus-visible", "selected"],
+      "consumerResponsibilities": ["Provide a group label", "Keep the action order meaningful"]
+    },
+    "data-display": {
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": ["default"],
+      "consumerResponsibilities": ["Provide meaningful content and alternatives for non-text information"]
+    },
+    "data-table": {
+      "classification": "data-display",
+      "behaviorOwner": "external",
+      "keyboard": "composed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": ["default", "empty", "loading", "selected"],
+      "consumerResponsibilities": ["Provide column labels", "Own sorting, filtering, pagination and data state"]
+    },
+    "data-visualization": {
+      "classification": "data-display",
+      "behaviorOwner": "external",
+      "keyboard": "composed",
+      "responsive": "consumer-layout",
+      "requiredStates": ["default", "empty", "loading"],
+      "consumerResponsibilities": ["Provide a concise text summary", "Provide exact values in a table when the task requires them"]
+    },
+    "disclosure": {
+      "classification": "disclosure",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": ["collapsed", "expanded", "disabled", "focus-visible"],
+      "consumerResponsibilities": ["Use concise trigger labels", "Keep hidden content understandable when revealed"]
+    },
+    "external-control": {
+      "classification": "form-control",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": ["default", "disabled", "focus-visible", "invalid"],
+      "consumerResponsibilities": ["Compose a visible label and error description", "Own value, validation and submission"]
+    },
+    "external-interactive": {
+      "classification": "interactive-composition",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": ["default", "disabled", "focus-visible"],
+      "consumerResponsibilities": ["Provide accessible names", "Own application data and side effects"]
+    },
+    "form-composition": {
+      "classification": "form-control",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "consumer-layout",
+      "requiredStates": ["default", "disabled", "focus-visible", "invalid", "read-only"],
+      "consumerResponsibilities": ["Compose visible labels, descriptions and errors", "Own value, validation and submission"]
+    },
+    "form-structure": {
+      "classification": "form-structure",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": ["default", "disabled", "invalid", "read-only"],
+      "consumerResponsibilities": ["Maintain stable IDs and label relationships", "Connect descriptions and errors with aria-describedby"]
+    },
+    "live-feedback": {
+      "classification": "feedback",
+      "behaviorOwner": "base-ui",
+      "keyboard": "composed",
+      "responsive": "viewport-constrained",
+      "requiredStates": ["default", "success", "warning", "error"],
+      "consumerResponsibilities": ["Use the correct urgency", "Keep dismiss and action labels explicit"]
+    },
+    "external-live-feedback": {
+      "classification": "feedback",
+      "behaviorOwner": "external",
+      "keyboard": "composed",
+      "responsive": "viewport-constrained",
+      "requiredStates": ["default", "success", "warning", "error"],
+      "consumerResponsibilities": ["Use the correct urgency", "Keep dismiss and action labels explicit"]
+    },
+    "menu": {
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": ["closed", "open", "disabled", "focus-visible", "selected"],
+      "consumerResponsibilities": ["Use menus for actions rather than arbitrary form values", "Provide meaningful item labels"]
+    },
+    "modal-overlay": {
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": ["closed", "open", "focus-visible"],
+      "consumerResponsibilities": ["Provide a title and description", "Provide a clear close or decision path"]
+    },
+    "native-control": {
+      "classification": "form-control",
+      "behaviorOwner": "browser",
+      "keyboard": "native",
+      "responsive": "intrinsic",
+      "requiredStates": ["default", "disabled", "focus-visible", "invalid", "read-only"],
+      "consumerResponsibilities": ["Compose a visible label and error description", "Own value, validation and submission"]
+    },
+    "navigation": {
+      "classification": "navigation",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": ["default", "current", "disabled", "focus-visible"],
+      "consumerResponsibilities": ["Provide a navigation label when multiple regions exist", "Own routes and destination state"]
+    },
+    "navigation-overlay": {
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": ["closed", "open", "current", "focus-visible"],
+      "consumerResponsibilities": ["Use real links for destinations", "Provide meaningful trigger and link labels"]
+    },
+    "nonmodal-overlay": {
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": ["closed", "open", "focus-visible"],
+      "consumerResponsibilities": ["Provide an accessible trigger name", "Keep essential information available without relying only on the overlay"]
+    },
+    "scroll-surface": {
+      "classification": "layout",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "scroll-contained",
+      "requiredStates": ["default", "focus-visible", "overflowing"],
+      "consumerResponsibilities": ["Provide a constrained size", "Do not hide essential actions outside the initial viewport"]
+    },
+    "selection-control": {
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": ["default", "disabled", "focus-visible", "invalid", "selected"],
+      "consumerResponsibilities": ["Compose a visible label and error description", "Own value, validation and submission"]
+    },
+    "static-feedback": {
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": ["default", "success", "warning", "error"],
+      "consumerResponsibilities": ["Choose status or alert semantics from urgency", "Provide actionable recovery copy when applicable"]
+    },
+    "status": {
+      "classification": "feedback",
+      "behaviorOwner": "base-ui",
+      "keyboard": "not-applicable",
+      "responsive": "intrinsic",
+      "requiredStates": ["default", "loading", "complete"],
+      "consumerResponsibilities": ["Provide an accessible name", "Expose determinate values when known"]
+    },
+    "passive-status": {
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "intrinsic",
+      "requiredStates": ["default", "loading", "complete"],
+      "consumerResponsibilities": ["Provide an accessible status name when progress is not already described nearby", "Avoid announcing decorative loading placeholders"]
+    },
+    "tabs": {
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": ["default", "selected", "disabled", "focus-visible"],
+      "consumerResponsibilities": ["Use concise tab labels", "Keep each panel associated with its tab"]
+    },
+    "text-control": {
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "native",
+      "responsive": "intrinsic",
+      "requiredStates": ["default", "disabled", "focus-visible", "invalid", "read-only"],
+      "consumerResponsibilities": ["Compose a visible label and error description", "Own value, validation and submission"]
+    },
+    "toggle-action": {
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": ["default", "disabled", "focus-visible", "selected"],
+      "consumerResponsibilities": ["Provide an accessible name", "Expose pressed state without relying on color alone"]
+    },
+    "utility": {
+      "classification": "utility",
+      "behaviorOwner": "base-ui",
+      "keyboard": "not-applicable",
+      "responsive": "intrinsic",
+      "requiredStates": ["default"],
+      "consumerResponsibilities": ["Apply only at an intentional application boundary"]
+    }
+  },
+  "components": {
+    "accordion": "disclosure",
+    "alert": "static-feedback",
+    "alert-dialog": "modal-overlay",
+    "aspect-ratio": "data-display",
+    "attachment": "action",
+    "avatar": "data-display",
+    "badge": "data-display",
+    "breadcrumb": "navigation",
+    "bubble": "data-display",
+    "button": "action",
+    "button-group": "action-group",
+    "calendar": "external-control",
+    "card": "data-display",
+    "carousel": "external-interactive",
+    "chart": "data-visualization",
+    "checkbox": "selection-control",
+    "collapsible": "disclosure",
+    "combobox": "form-composition",
+    "command": "external-interactive",
+    "context-menu": "menu",
+    "data-table": "data-table",
+    "date-picker": "form-composition",
+    "dialog": "modal-overlay",
+    "direction": "utility",
+    "drawer": "modal-overlay",
+    "dropdown-menu": "menu",
+    "empty": "static-feedback",
+    "field": "form-structure",
+    "form": "form-structure",
+    "hover-card": "nonmodal-overlay",
+    "input": "text-control",
+    "input-group": "form-composition",
+    "input-otp": "external-control",
+    "item": "data-display",
+    "kbd": "data-display",
+    "label": "form-structure",
+    "marker": "data-display",
+    "menubar": "menu",
+    "message": "static-feedback",
+    "message-scroller": "scroll-surface",
+    "native-select": "native-control",
+    "navigation-menu": "navigation-overlay",
+    "pagination": "navigation",
+    "popover": "nonmodal-overlay",
+    "progress": "status",
+    "questionnaire": "form-structure",
+    "radio-group": "selection-control",
+    "resizable": "external-interactive",
+    "scroll-area": "scroll-surface",
+    "select": "selection-control",
+    "separator": "data-display",
+    "sheet": "modal-overlay",
+    "sidebar": "navigation",
+    "skeleton": "passive-status",
+    "slider": "selection-control",
+    "sonner": "external-live-feedback",
+    "spinner": "passive-status",
+    "switch": "selection-control",
+    "table": "data-display",
+    "tabs": "tabs",
+    "textarea": "native-control",
+    "toast": "live-feedback",
+    "toggle": "toggle-action",
+    "toggle-group": "action-group",
+    "tooltip": "nonmodal-overlay",
+    "typography": "data-display"
+  }
+}

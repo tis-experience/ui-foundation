@@ -4,10 +4,12 @@
   "version": "0.1.0-alpha.0",
   "type": "module",
   "scripts": {
+    "agent:preflight": "node scripts/agent-preflight.mjs",
     "build:themes": "node scripts/build-themes.mjs",
     "check:themes": "node scripts/build-themes.mjs --check",
     "build:registry:source": "node scripts/build-registry.mjs",
     "check:registry": "node scripts/build-registry.mjs --check",
+    "check:contracts": "node scripts/check-component-contracts.mjs",
     "build:registry": "npm run build:registry:source && shadcn build registry.json -o public/r",
     "build:ai": "node scripts/build-ai.mjs",
     "check:ai": "node scripts/build-ai.mjs --check",
@@ -21,7 +23,7 @@
     "preview": "vite preview",
     "test:e2e": "playwright test",
     "test:consumer": "node scripts/test-consumer.mjs",
-    "test": "npm run check:themes && npm run check:registry && npm run check:ai && npm run lint && npm run build && npm run check:public"
+    "test": "npm run check:themes && npm run check:registry && npm run check:contracts && npm run check:ai && npm run lint && npm run build && npm run check:public"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

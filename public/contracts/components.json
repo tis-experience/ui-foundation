@@ -1,0 +1,1340 @@
+{
+  "$schema": "https://tis-experience.github.io/ui-foundation/schemas/resolved-component-contracts.schema.json",
+  "version": "0.1.0-alpha.0",
+  "components": [
+    {
+      "name": "accordion",
+      "title": "Accordion",
+      "category": "disclosure",
+      "profile": "disclosure",
+      "classification": "disclosure",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "collapsed",
+        "expanded",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Use concise trigger labels",
+        "Keep hidden content understandable when revealed"
+      ],
+      "accessibility": "Base UI manages keyboard navigation, expanded state and panel relationships."
+    },
+    {
+      "name": "alert",
+      "title": "Alert",
+      "category": "feedback",
+      "profile": "static-feedback",
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "success",
+        "warning",
+        "error"
+      ],
+      "consumerResponsibilities": [
+        "Choose status or alert semantics from urgency",
+        "Provide actionable recovery copy when applicable"
+      ],
+      "accessibility": "Uses role=alert; reserve it for content that should be announced immediately."
+    },
+    {
+      "name": "alert-dialog",
+      "title": "Alert Dialog",
+      "category": "overlay",
+      "profile": "modal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a title and description",
+        "Provide a clear close or decision path"
+      ],
+      "accessibility": "Always provide a title and description; Base UI traps focus and requires an explicit response."
+    },
+    {
+      "name": "aspect-ratio",
+      "title": "Aspect Ratio",
+      "category": "layout",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "The wrapper is presentational; provide appropriate semantics and alternative text for its content."
+    },
+    {
+      "name": "attachment",
+      "title": "Attachment",
+      "category": "data-display",
+      "profile": "action",
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible name",
+        "Choose button or link semantics from the intended action"
+      ],
+      "accessibility": "Use descriptive filenames, expose file type and size in text, and label icon-only actions."
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Provide meaningful alt text for informative images and always include AvatarFallback."
+    },
+    {
+      "name": "badge",
+      "title": "Badge",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Decorative badges must not be the only way status is communicated."
+    },
+    {
+      "name": "breadcrumb",
+      "title": "Breadcrumb",
+      "category": "navigation",
+      "profile": "navigation",
+      "classification": "navigation",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "current",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a navigation label when multiple regions exist",
+        "Own routes and destination state"
+      ],
+      "accessibility": "Uses a named breadcrumb navigation landmark and aria-current on the current page."
+    },
+    {
+      "name": "bubble",
+      "title": "Bubble",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Keep sender and timing information available in text and preserve chronological reading order."
+    },
+    {
+      "name": "button",
+      "title": "Button",
+      "category": "action",
+      "profile": "action",
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible name",
+        "Choose button or link semantics from the intended action"
+      ],
+      "accessibility": "Base UI preserves native button semantics, disabled state and keyboard activation."
+    },
+    {
+      "name": "button-group",
+      "title": "Button Group",
+      "category": "action",
+      "profile": "action-group",
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Provide a group label",
+        "Keep the action order meaningful"
+      ],
+      "accessibility": "Provide an accessible label for the group when the relationship is not clear from context."
+    },
+    {
+      "name": "calendar",
+      "title": "Calendar",
+      "category": "form-control",
+      "profile": "external-control",
+      "classification": "form-control",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Provide a visible purpose and date format; React DayPicker manages the calendar grid and keyboard navigation."
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "category": "layout",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Choose semantic children and headings based on the content hierarchy."
+    },
+    {
+      "name": "carousel",
+      "title": "Carousel",
+      "category": "data-display",
+      "profile": "external-interactive",
+      "classification": "interactive-composition",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide accessible names",
+        "Own application data and side effects"
+      ],
+      "accessibility": "Name the carousel, label meaningful slides and keep previous and next controls available to keyboard users."
+    },
+    {
+      "name": "chart",
+      "title": "Chart",
+      "category": "data-display",
+      "profile": "data-visualization",
+      "classification": "data-display",
+      "behaviorOwner": "external",
+      "keyboard": "composed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "empty",
+        "loading"
+      ],
+      "consumerResponsibilities": [
+        "Provide a concise text summary",
+        "Provide exact values in a table when the task requires them"
+      ],
+      "accessibility": "Provide a textual summary or data table and never rely on color alone to distinguish series."
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "category": "form-control",
+      "profile": "selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Pair with FieldLabel; Base UI manages checked, indeterminate and disabled states."
+    },
+    {
+      "name": "collapsible",
+      "title": "Collapsible",
+      "category": "disclosure",
+      "profile": "disclosure",
+      "classification": "disclosure",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "collapsed",
+        "expanded",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Use concise trigger labels",
+        "Keep hidden content understandable when revealed"
+      ],
+      "accessibility": "Base UI connects trigger and panel while exposing expanded state to assistive technology."
+    },
+    {
+      "name": "combobox",
+      "title": "Combobox",
+      "category": "form-control",
+      "profile": "form-composition",
+      "classification": "form-control",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Compose visible labels, descriptions and errors",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Use a visible label; Base UI manages active options, selection, filtering and keyboard navigation."
+    },
+    {
+      "name": "command",
+      "title": "Command",
+      "category": "navigation",
+      "profile": "external-interactive",
+      "classification": "interactive-composition",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide accessible names",
+        "Own application data and side effects"
+      ],
+      "accessibility": "Give the search input a clear label and keep every command reachable by keyboard."
+    },
+    {
+      "name": "context-menu",
+      "title": "Context Menu",
+      "category": "navigation",
+      "profile": "menu",
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Use menus for actions rather than arbitrary form values",
+        "Provide meaningful item labels"
+      ],
+      "accessibility": "Base UI manages focus and menu navigation; every action must remain available without a pointing device."
+    },
+    {
+      "name": "data-table",
+      "title": "Data Table",
+      "category": "data-display",
+      "profile": "data-table",
+      "classification": "data-display",
+      "behaviorOwner": "external",
+      "keyboard": "composed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "empty",
+        "loading",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Provide column labels",
+        "Own sorting, filtering, pagination and data state"
+      ],
+      "accessibility": "Requires an accessible table name, exposes aria-sort on sortable headers and keeps filter and pagination controls keyboard operable."
+    },
+    {
+      "name": "date-picker",
+      "title": "Date Picker",
+      "category": "form-control",
+      "profile": "form-composition",
+      "classification": "form-control",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Compose visible labels, descriptions and errors",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Use with a visible FieldLabel; the trigger has native button semantics and the calendar preserves DayPicker keyboard navigation."
+    },
+    {
+      "name": "dialog",
+      "title": "Dialog",
+      "category": "overlay",
+      "profile": "modal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a title and description",
+        "Provide a clear close or decision path"
+      ],
+      "accessibility": "Always provide DialogTitle and DialogDescription; Base UI manages focus trapping and restoration."
+    },
+    {
+      "name": "direction",
+      "title": "Direction",
+      "category": "utility",
+      "profile": "utility",
+      "classification": "utility",
+      "behaviorOwner": "base-ui",
+      "keyboard": "not-applicable",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Apply only at an intentional application boundary"
+      ],
+      "accessibility": "Keep the provider direction aligned with the document language and reading order."
+    },
+    {
+      "name": "drawer",
+      "title": "Drawer",
+      "category": "overlay",
+      "profile": "modal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a title and description",
+        "Provide a clear close or decision path"
+      ],
+      "accessibility": "Always provide a title and description; Base UI manages modal focus and dismissal."
+    },
+    {
+      "name": "dropdown-menu",
+      "title": "Dropdown Menu",
+      "category": "navigation",
+      "profile": "menu",
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Use menus for actions rather than arbitrary form values",
+        "Provide meaningful item labels"
+      ],
+      "accessibility": "Use menu items for actions rather than site navigation; Base UI manages roving focus and keyboard navigation."
+    },
+    {
+      "name": "empty",
+      "title": "Empty",
+      "category": "feedback",
+      "profile": "static-feedback",
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "success",
+        "warning",
+        "error"
+      ],
+      "consumerResponsibilities": [
+        "Choose status or alert semantics from urgency",
+        "Provide actionable recovery copy when applicable"
+      ],
+      "accessibility": "Use a real heading and concise description; keep the primary recovery action keyboard accessible."
+    },
+    {
+      "name": "field",
+      "title": "Field",
+      "category": "form-structure",
+      "profile": "form-structure",
+      "classification": "form-structure",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Maintain stable IDs and label relationships",
+        "Connect descriptions and errors with aria-describedby"
+      ],
+      "accessibility": "Connect labels, descriptions and errors to the control with stable IDs and aria-describedby."
+    },
+    {
+      "name": "form",
+      "title": "Form",
+      "category": "form-structure",
+      "profile": "form-structure",
+      "classification": "form-structure",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Maintain stable IDs and label relationships",
+        "Connect descriptions and errors with aria-describedby"
+      ],
+      "accessibility": "Preserves native form submission and validation semantics; compose every control with a visible label and connected error text."
+    },
+    {
+      "name": "hover-card",
+      "title": "Hover Card",
+      "category": "overlay",
+      "profile": "nonmodal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible trigger name",
+        "Keep essential information available without relying only on the overlay"
+      ],
+      "accessibility": "Do not hide essential actions in the preview; Base UI supports pointer and keyboard focus triggers."
+    },
+    {
+      "name": "input",
+      "title": "Input",
+      "category": "form-control",
+      "profile": "text-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "native",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Use inside Field with a visible label; provide autocomplete and inputMode where relevant."
+    },
+    {
+      "name": "input-group",
+      "title": "Input Group",
+      "category": "form-control",
+      "profile": "form-composition",
+      "classification": "form-control",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Compose visible labels, descriptions and errors",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons."
+    },
+    {
+      "name": "input-otp",
+      "title": "Input OTP",
+      "category": "form-control",
+      "profile": "external-control",
+      "classification": "form-control",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Provide a visible label, autocomplete=one-time-code and clear validation text."
+    },
+    {
+      "name": "item",
+      "title": "Item",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Use Field instead when the row contains a form control; label icon-only actions."
+    },
+    {
+      "name": "kbd",
+      "title": "Kbd",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Include the shortcut in adjacent text when its meaning is not evident from the key labels."
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "category": "form-structure",
+      "profile": "form-structure",
+      "classification": "form-structure",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Maintain stable IDs and label relationships",
+        "Connect descriptions and errors with aria-describedby"
+      ],
+      "accessibility": "Use htmlFor to bind the label to a native or Base UI control."
+    },
+    {
+      "name": "marker",
+      "title": "Marker",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Mark decorative icons hidden and keep the marker text meaningful without visual separators."
+    },
+    {
+      "name": "menubar",
+      "title": "Menubar",
+      "category": "navigation",
+      "profile": "menu",
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Use menus for actions rather than arbitrary form values",
+        "Provide meaningful item labels"
+      ],
+      "accessibility": "Use for application commands, not ordinary site navigation; Base UI manages menu bar keyboard patterns."
+    },
+    {
+      "name": "message",
+      "title": "Message",
+      "category": "data-display",
+      "profile": "static-feedback",
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "success",
+        "warning",
+        "error"
+      ],
+      "consumerResponsibilities": [
+        "Choose status or alert semantics from urgency",
+        "Provide actionable recovery copy when applicable"
+      ],
+      "accessibility": "Preserve chronological DOM order and include sender and status information in accessible text."
+    },
+    {
+      "name": "message-scroller",
+      "title": "Message Scroller",
+      "category": "layout",
+      "profile": "scroll-surface",
+      "classification": "layout",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "scroll-contained",
+      "requiredStates": [
+        "default",
+        "focus-visible",
+        "overflowing"
+      ],
+      "consumerResponsibilities": [
+        "Provide a constrained size",
+        "Do not hide essential actions outside the initial viewport"
+      ],
+      "accessibility": "Announce newly received messages intentionally and keep scroll controls named and keyboard operable."
+    },
+    {
+      "name": "native-select",
+      "title": "Native Select",
+      "category": "form-control",
+      "profile": "native-control",
+      "classification": "form-control",
+      "behaviorOwner": "browser",
+      "keyboard": "native",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Associate the select with a visible label and use optgroup for meaningful option groups."
+    },
+    {
+      "name": "navigation-menu",
+      "title": "Navigation Menu",
+      "category": "navigation",
+      "profile": "navigation-overlay",
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "current",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Use real links for destinations",
+        "Provide meaningful trigger and link labels"
+      ],
+      "accessibility": "Use real links for destinations and ensure disclosed content remains reachable by keyboard."
+    },
+    {
+      "name": "pagination",
+      "title": "Pagination",
+      "category": "navigation",
+      "profile": "navigation",
+      "classification": "navigation",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "current",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a navigation label when multiple regions exist",
+        "Own routes and destination state"
+      ],
+      "accessibility": "Provide destination links, mark the current page and localize the navigation label."
+    },
+    {
+      "name": "popover",
+      "title": "Popover",
+      "category": "overlay",
+      "profile": "nonmodal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible trigger name",
+        "Keep essential information available without relying only on the overlay"
+      ],
+      "accessibility": "Use a meaningful trigger and title or description when the content needs a named region."
+    },
+    {
+      "name": "progress",
+      "title": "Progress",
+      "category": "feedback",
+      "profile": "status",
+      "classification": "feedback",
+      "behaviorOwner": "base-ui",
+      "keyboard": "not-applicable",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "loading",
+        "complete"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible name",
+        "Expose determinate values when known"
+      ],
+      "accessibility": "Provide a label and meaningful value; use Spinner instead when progress is indeterminate."
+    },
+    {
+      "name": "questionnaire",
+      "title": "Questionnaire",
+      "category": "form-structure",
+      "profile": "form-structure",
+      "classification": "form-structure",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Maintain stable IDs and label relationships",
+        "Connect descriptions and errors with aria-describedby"
+      ],
+      "accessibility": "Use semantic field groups and announce step changes, validation errors and progress."
+    },
+    {
+      "name": "radio-group",
+      "title": "Radio Group",
+      "category": "form-control",
+      "profile": "selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Wrap the group in FieldSet and FieldLegend; Base UI manages arrow-key navigation."
+    },
+    {
+      "name": "resizable",
+      "title": "Resizable",
+      "category": "layout",
+      "profile": "external-interactive",
+      "classification": "interactive-composition",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide accessible names",
+        "Own application data and side effects"
+      ],
+      "accessibility": "Keep the separator keyboard operable and provide sensible minimum and maximum panel sizes."
+    },
+    {
+      "name": "scroll-area",
+      "title": "Scroll Area",
+      "category": "layout",
+      "profile": "scroll-surface",
+      "classification": "layout",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "scroll-contained",
+      "requiredStates": [
+        "default",
+        "focus-visible",
+        "overflowing"
+      ],
+      "consumerResponsibilities": [
+        "Provide a constrained size",
+        "Do not hide essential actions outside the initial viewport"
+      ],
+      "accessibility": "Only add a tab stop when the region needs keyboard focus and provide an accessible name in that case."
+    },
+    {
+      "name": "select",
+      "title": "Select",
+      "category": "form-control",
+      "profile": "selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Base UI manages trigger, popup, active option and keyboard navigation relationships."
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "category": "layout",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Use decorative=false only when the divider conveys document structure."
+    },
+    {
+      "name": "sheet",
+      "title": "Sheet",
+      "category": "overlay",
+      "profile": "modal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a title and description",
+        "Provide a clear close or decision path"
+      ],
+      "accessibility": "Always provide SheetTitle and SheetDescription; Base UI manages focus trapping and restoration."
+    },
+    {
+      "name": "sidebar",
+      "title": "Sidebar",
+      "category": "navigation",
+      "profile": "navigation",
+      "classification": "navigation",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "current",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a navigation label when multiple regions exist",
+        "Own routes and destination state"
+      ],
+      "accessibility": "Label the navigation landmark, expose the collapse control name and preserve access to all destinations on mobile."
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "category": "feedback",
+      "profile": "passive-status",
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "loading",
+        "complete"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible status name when progress is not already described nearby",
+        "Avoid announcing decorative loading placeholders"
+      ],
+      "accessibility": "Mark the containing region busy and provide a meaningful loading label outside the skeleton."
+    },
+    {
+      "name": "slider",
+      "title": "Slider",
+      "category": "form-control",
+      "profile": "selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Provide an accessible label and meaningful minimum, maximum and step values for every thumb."
+    },
+    {
+      "name": "sonner",
+      "title": "Sonner",
+      "category": "feedback",
+      "profile": "external-live-feedback",
+      "classification": "feedback",
+      "behaviorOwner": "external",
+      "keyboard": "composed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "default",
+        "success",
+        "warning",
+        "error"
+      ],
+      "consumerResponsibilities": [
+        "Use the correct urgency",
+        "Keep dismiss and action labels explicit"
+      ],
+      "accessibility": "Choose polite or assertive announcements based on urgency and keep important actions available elsewhere."
+    },
+    {
+      "name": "spinner",
+      "title": "Spinner",
+      "category": "feedback",
+      "profile": "passive-status",
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "loading",
+        "complete"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible status name when progress is not already described nearby",
+        "Avoid announcing decorative loading placeholders"
+      ],
+      "accessibility": "Provides role=status and a default accessible label that can be localized."
+    },
+    {
+      "name": "switch",
+      "title": "Switch",
+      "category": "form-control",
+      "profile": "selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Pair with FieldLabel; Base UI exposes switch semantics and checked state."
+    },
+    {
+      "name": "table",
+      "title": "Table",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Use header cells with scope, a caption or nearby heading, and expose sorting state when interactive."
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "category": "navigation",
+      "profile": "tabs",
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "selected",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Use concise tab labels",
+        "Keep each panel associated with its tab"
+      ],
+      "accessibility": "Keep triggers inside TabsList; Base UI manages roles, selection and arrow-key navigation."
+    },
+    {
+      "name": "textarea",
+      "title": "Textarea",
+      "category": "form-control",
+      "profile": "native-control",
+      "classification": "form-control",
+      "behaviorOwner": "browser",
+      "keyboard": "native",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Use inside Field with a visible label and describe limits or requirements before errors occur."
+    },
+    {
+      "name": "toast",
+      "title": "Toast",
+      "category": "feedback",
+      "profile": "live-feedback",
+      "classification": "feedback",
+      "behaviorOwner": "base-ui",
+      "keyboard": "composed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "default",
+        "success",
+        "warning",
+        "error"
+      ],
+      "consumerResponsibilities": [
+        "Use the correct urgency",
+        "Keep dismiss and action labels explicit"
+      ],
+      "accessibility": "Use the appropriate urgency, keep action labels concise and never rely on a transient toast for essential information."
+    },
+    {
+      "name": "toggle",
+      "title": "Toggle",
+      "category": "form-control",
+      "profile": "toggle-action",
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible name",
+        "Expose pressed state without relying on color alone"
+      ],
+      "accessibility": "Provide an accessible name, especially for icon-only toggles; Base UI exposes pressed state."
+    },
+    {
+      "name": "toggle-group",
+      "title": "Toggle Group",
+      "category": "form-control",
+      "profile": "action-group",
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Provide a group label",
+        "Keep the action order meaningful"
+      ],
+      "accessibility": "Provide a group label and use Base UI array values for both single and multiple selection."
+    },
+    {
+      "name": "tooltip",
+      "title": "Tooltip",
+      "category": "overlay",
+      "profile": "nonmodal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible trigger name",
+        "Keep essential information available without relying only on the overlay"
+      ],
+      "accessibility": "Do not place interactive content in a tooltip; wrap the application in TooltipProvider."
+    },
+    {
+      "name": "typography",
+      "title": "Typography",
+      "category": "content",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Preserves the semantics of headings, paragraphs, lists, links, code and tables; content authors remain responsible for a logical heading order."
+    }
+  ]
+}

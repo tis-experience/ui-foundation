@@ -27,6 +27,7 @@ const requiredFiles = [
   "r/button.json",
   "r/theme-tis.json",
   "registry/catalog.json",
+  "contracts/components.json",
   "tokens/foundations.json",
   "tokens/densities.json",
   "tokens/customizer.json",
@@ -34,11 +35,14 @@ const requiredFiles = [
   "tokens/themes/tis.json",
   "schemas/ai-manifest.schema.json",
   "schemas/component-catalog.schema.json",
+  "schemas/component-contracts.schema.json",
+  "schemas/resolved-component-contracts.schema.json",
   "docs/ai-usage.md",
   "docs/blocks.md",
   "docs/charts.md",
   "docs/customization.md",
   "docs/compositions.md",
+  "docs/maintenance.md",
 ]
 
 for (const relativePath of requiredFiles) {
@@ -49,9 +53,25 @@ const index = read("index.html")
 assert(/(?:src|href)="\.\/assets\//.test(index), "Vite assets are not relative to the Pages project path")
 
 const manifest = JSON.parse(read("ai/manifest.json"))
+const manifestSchema = JSON.parse(read("schemas/ai-manifest.schema.json"))
+const contracts = JSON.parse(read("contracts/components.json"))
 const registry = JSON.parse(read("r/registry.json"))
 assert(manifest.distribution.registryBaseUrl === `${siteBaseUrl}r`, "Registry base URL is not public")
 assert(manifest.theming.customizer.route === `${siteBaseUrl}#customize`, "Customizer URL is not public")
+assert(
+  manifestSchema.properties.components.items.required.includes("contract") &&
+    !manifestSchema.properties.blocks.items.required.includes("contract") &&
+    !manifestSchema.properties.charts.items.required.includes("contract"),
+  "AI manifest schema assigns component contracts to the wrong collection"
+)
+assert(contracts.components.length === manifest.components.length, "Resolved component contracts are incomplete")
+assert(manifest.componentContracts.components === manifest.components.length, "Manifest component contract count is stale")
+assert(
+  manifest.components.every((component) =>
+    component.contract?.profile && component.contract.source === manifest.componentContracts.source
+  ),
+  "Manifest components do not reference their resolved contracts"
+)
 
 for (const source of manifest.sources) {
   const url = new URL(source)
@@ -75,7 +95,7 @@ for (const item of registry.items) {
   }
 }
 
-for (const relativePath of ["ai/manifest.json", "llms.txt", "registry/catalog.json"]) {
+for (const relativePath of ["ai/manifest.json", "contracts/components.json", "llms.txt", "registry/catalog.json"]) {
   const content = read(relativePath)
   assert(!content.includes("ui-foundation.local"), `${relativePath} contains the retired local hostname`)
   assert(!content.includes("127.0.0.1"), `${relativePath} contains a localhost URL`)
