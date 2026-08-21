@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Uses role=alert; reserve it for content that should be announced immediately.",
+    "accessibility": "Choose role=status for advisory updates and role=alert only for urgent dynamic content; keep title, description and recovery action visible.",
     "status": "alpha"
   },
   "categories": [

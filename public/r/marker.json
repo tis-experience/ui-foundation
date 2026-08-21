@@ -27,7 +27,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Mark decorative icons hidden and keep the marker text meaningful without visual separators.",
+    "accessibility": "Keep marker text meaningful without its icon or separator; hide decorative media and add status semantics only for real updates.",
     "status": "alpha"
   },
   "categories": [

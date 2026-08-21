@@ -405,7 +405,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Uses role=alert; reserve it for content that should be announced immediately.",
+        "accessibility": "Choose role=status for advisory updates and role=alert only for urgent dynamic content; keep title, description and recovery action visible.",
         "status": "alpha"
       }
     },
@@ -456,7 +456,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "The wrapper is presentational; provide appropriate semantics and alternative text for its content.",
+        "accessibility": "The ratio wrapper is presentational; give the hosted image, media, figure or other content its own semantics and alternative text.",
         "status": "alpha"
       }
     },
@@ -507,7 +507,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Provide meaningful alt text for informative images and always include AvatarFallback.",
+        "accessibility": "Name informative people or entities, keep decorative avatars hidden, always include AvatarFallback and provide context for group overflow counts.",
         "status": "alpha"
       }
     },
@@ -536,7 +536,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Decorative badges must not be the only way status is communicated.",
+        "accessibility": "Keep badges as text by default; use status semantics only for actual state and never rely on color alone.",
         "status": "alpha"
       }
     },
@@ -586,7 +586,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Keep sender and timing information available in text and preserve chronological reading order.",
+        "accessibility": "When bubbles form a conversation, provide a named log, identify each speaker and preserve chronological DOM order.",
         "status": "alpha"
       }
     },
@@ -699,7 +699,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Choose semantic children and headings based on the content hierarchy.",
+        "accessibility": "Add region or article semantics only when the card is a meaningful standalone section and connect it to a heading at the correct level.",
         "status": "alpha"
       }
     },
@@ -1025,7 +1025,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Keep the provider direction aligned with the document language and reading order.",
+        "accessibility": "Keep direction aligned with the content language and DOM reading order; the provider must not reverse meaning or keyboard sequence.",
         "status": "alpha"
       }
     },
@@ -1100,7 +1100,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Use a real heading and concise description; keep the primary recovery action keyboard accessible.",
+        "accessibility": "Use a programmatic heading, concise description, decorative media and a named keyboard-operable recovery action.",
         "status": "alpha"
       }
     },
@@ -1285,7 +1285,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Use Field instead when the row contains a form control; label icon-only actions.",
+        "accessibility": "Give standalone items an appropriate article, listitem or link semantic, connect title and description, and name every action; use Field for form controls.",
         "status": "alpha"
       }
     },
@@ -1310,7 +1310,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Include the shortcut in adjacent text when its meaning is not evident from the key labels.",
+        "accessibility": "Use native kbd markup and pair keys with adjacent text that explains the command; do not make the keycap itself focusable.",
         "status": "alpha"
       }
     },
@@ -1335,7 +1335,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Use htmlFor to bind the label to a native or Base UI control.",
+        "accessibility": "Bind the visible label to exactly one labelable control with htmlFor and a matching id so pointer activation moves focus.",
         "status": "alpha"
       }
     },
@@ -1368,7 +1368,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Mark decorative icons hidden and keep the marker text meaningful without visual separators.",
+        "accessibility": "Keep marker text meaningful without its icon or separator; hide decorative media and add status semantics only for real updates.",
         "status": "alpha"
       }
     },
@@ -1418,7 +1418,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Preserve chronological DOM order and include sender and status information in accessible text.",
+        "accessibility": "Expose each message as a named article when needed, keep sender, content and delivery state in accessible text and preserve chronological DOM order.",
         "status": "alpha"
       }
     },
@@ -1739,7 +1739,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Use decorative=false only when the divider conveys document structure.",
+        "accessibility": "Keep purely visual dividers decorative; expose separator semantics and orientation only when the divider communicates document structure.",
         "status": "alpha"
       }
     },
@@ -1833,7 +1833,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Mark the containing region busy and provide a meaningful loading label outside the skeleton.",
+        "accessibility": "Keep skeleton shapes hidden from assistive technology and mark the containing region busy with one meaningful loading label.",
         "status": "alpha"
       }
     },
@@ -1910,7 +1910,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Provides role=status and a default accessible label that can be localized.",
+        "accessibility": "Name standalone loading status, localize that label and hide the spinner when adjacent button or status text already communicates loading.",
         "status": "alpha"
       }
     },
@@ -1960,7 +1960,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Use header cells with scope, a caption or nearby heading, and expose sorting state when interactive.",
+        "accessibility": "Provide a caption or associated name, use scoped header cells and native row order, and expose sorting only through actual controls and aria-sort.",
         "status": "alpha"
       }
     },
@@ -2157,7 +2157,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Preserves the semantics of headings, paragraphs, lists, links, code and tables; content authors remain responsible for a logical heading order.",
+        "accessibility": "Preserve native document elements, logical heading order, meaningful links and readable lists; Typeset changes presentation, not semantics.",
         "status": "alpha",
         "introducedIn": "0.1.0-alpha.0"
       }

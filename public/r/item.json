@@ -18,7 +18,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Use Field instead when the row contains a form control; label icon-only actions.",
+    "accessibility": "Give standalone items an appropriate article, listitem or link semantic, connect title and description, and name every action; use Field for form controls.",
     "status": "alpha"
   },
   "categories": [

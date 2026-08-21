@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Provides role=status and a default accessible label that can be localized.",
+    "accessibility": "Name standalone loading status, localize that label and hide the spinner when adjacent button or status text already communicates loading.",
     "status": "alpha"
   },
   "categories": [

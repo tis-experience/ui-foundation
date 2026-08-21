@@ -10,14 +10,14 @@
   "files": [
     {
       "path": "src/components/ui/skeleton.tsx",
-      "content": "import { cn } from \"@/lib/utils\"\n\nfunction Skeleton({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\"animate-pulse rounded-md bg-muted\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton }\n",
+      "content": "import { cn } from \"@/lib/utils\"\n\nfunction Skeleton({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      aria-hidden=\"true\"\n      className={cn(\"animate-pulse rounded-md bg-muted\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton }\n",
       "type": "registry:ui"
     }
   ],
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Mark the containing region busy and provide a meaningful loading label outside the skeleton.",
+    "accessibility": "Keep skeleton shapes hidden from assistive technology and mark the containing region busy with one meaningful loading label.",
     "status": "alpha"
   },
   "categories": [

@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Keep sender and timing information available in text and preserve chronological reading order.",
+    "accessibility": "When bubbles form a conversation, provide a named log, identify each speaker and preserve chronological DOM order.",
     "status": "alpha"
   },
   "categories": [

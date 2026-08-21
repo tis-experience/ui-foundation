@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Provide meaningful alt text for informative images and always include AvatarFallback.",
+    "accessibility": "Name informative people or entities, keep decorative avatars hidden, always include AvatarFallback and provide context for group overflow counts.",
     "status": "alpha"
   },
   "categories": [

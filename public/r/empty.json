@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Use a real heading and concise description; keep the primary recovery action keyboard accessible.",
+    "accessibility": "Use a programmatic heading, concise description, decorative media and a named keyboard-operable recovery action.",
     "status": "alpha"
   },
   "categories": [

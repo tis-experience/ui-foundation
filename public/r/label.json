@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Use htmlFor to bind the label to a native or Base UI control.",
+    "accessibility": "Bind the visible label to exactly one labelable control with htmlFor and a matching id so pointer activation moves focus.",
     "status": "alpha"
   },
   "categories": [

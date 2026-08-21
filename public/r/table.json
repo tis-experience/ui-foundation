@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Use header cells with scope, a caption or nearby heading, and expose sorting state when interactive.",
+    "accessibility": "Provide a caption or associated name, use scoped header cells and native row order, and expose sorting only through actual controls and aria-sort.",
     "status": "alpha"
   },
   "categories": [

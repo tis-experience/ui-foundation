@@ -494,6 +494,48 @@ function ButtonGroupPreview() {
   )
 }
 
+function EmptyPreview({ id }: { id: string }) {
+  const [status, setStatus] = useState("No empty-state action")
+  const titleId = `${id}-empty-title`
+
+  return (
+    <div className="preview-stack">
+      <Empty className="preview-card" role="region" aria-labelledby={titleId}>
+        <EmptyHeader>
+          <EmptyMedia variant="icon"><FolderOpenIcon aria-hidden="true" /></EmptyMedia>
+          <EmptyTitle id={titleId} role="heading" aria-level={4}>No components selected</EmptyTitle>
+          <EmptyDescription>Choose a component to add it to the project.</EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent>
+          <Button size="sm" onClick={() => setStatus("Component browser opened")}>Browse components</Button>
+        </EmptyContent>
+      </Empty>
+      <span className="sr-only" data-contract-status aria-live="polite">{status}</span>
+    </div>
+  )
+}
+
+function ItemPreview({ id }: { id: string }) {
+  const [status, setStatus] = useState("No item action")
+  const titleId = `${id}-item-title`
+
+  return (
+    <div className="preview-stack preview-wide">
+      <Item variant="outline" role="article" aria-labelledby={titleId}>
+        <ItemMedia variant="icon"><CheckCircle2Icon aria-hidden="true" /></ItemMedia>
+        <ItemContent>
+          <ItemTitle id={titleId} role="heading" aria-level={4}>Registry connected</ItemTitle>
+          <ItemDescription>Component source can be installed locally.</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button size="sm" variant="outline" onClick={() => setStatus("Registry details opened")}>Inspect</Button>
+        </ItemActions>
+      </Item>
+      <span className="sr-only" data-contract-status aria-live="polite">{status}</span>
+    </div>
+  )
+}
+
 function SonnerPreview() {
   const [status, setStatus] = useState("No Sonner action")
 
@@ -604,7 +646,7 @@ function ComponentPreview({ name }: { name: string }) {
     case "alert":
       return (
         <div className="preview-stack preview-wide">
-          <Alert>
+          <Alert role="status">
             <CheckCircle2Icon aria-hidden="true" />
             <AlertTitle>Ready to install</AlertTitle>
             <AlertDescription>The neutral theme is active.</AlertDescription>
@@ -641,9 +683,12 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "aspect-ratio":
       return (
-        <AspectRatio ratio={16 / 9} className="w-64 overflow-hidden rounded-lg bg-muted">
-          <div className="flex size-full items-center justify-center text-sm font-medium">16:9 preview</div>
-        </AspectRatio>
+        <figure className="w-64">
+          <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-lg bg-muted">
+            <div aria-hidden="true" className="flex size-full items-center justify-center text-sm font-medium">16:9</div>
+          </AspectRatio>
+          <figcaption className="sr-only">Widescreen component preview</figcaption>
+        </figure>
       )
 
     case "attachment":
@@ -651,11 +696,11 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "avatar":
       return (
-        <AvatarGroup aria-label="Project members">
-          <Avatar><AvatarFallback>AM</AvatarFallback></Avatar>
-          <Avatar><AvatarFallback>JS</AvatarFallback></Avatar>
-          <Avatar><AvatarFallback>RK</AvatarFallback></Avatar>
-          <AvatarGroupCount>+4</AvatarGroupCount>
+        <AvatarGroup aria-label="Project members" role="group">
+          <Avatar role="img" aria-label="Ana Martins"><AvatarFallback>AM</AvatarFallback></Avatar>
+          <Avatar role="img" aria-label="João Silva"><AvatarFallback>JS</AvatarFallback></Avatar>
+          <Avatar role="img" aria-label="Rita Kiala"><AvatarFallback>RK</AvatarFallback></Avatar>
+          <AvatarGroupCount aria-label="4 more project members">+4</AvatarGroupCount>
         </AvatarGroup>
       )
 
@@ -665,7 +710,7 @@ function ComponentPreview({ name }: { name: string }) {
           <Badge>Default</Badge>
           <Badge variant="secondary">Beta</Badge>
           <Badge variant="outline">Outline</Badge>
-          <Badge variant="destructive">Blocked</Badge>
+          <Badge variant="destructive" role="status">Blocked</Badge>
         </div>
       )
 
@@ -684,9 +729,9 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "bubble":
       return (
-        <BubbleGroup className="w-72">
-          <Bubble variant="muted"><BubbleContent>Can I use the neutral theme?</BubbleContent></Bubble>
-          <Bubble align="end"><BubbleContent>Yes. The TIS identity is optional.</BubbleContent></Bubble>
+        <BubbleGroup className="w-72" role="log" aria-label="Theme support conversation">
+          <Bubble variant="muted" role="article" aria-label="Question from developer"><BubbleContent>Can I use the neutral theme?</BubbleContent></Bubble>
+          <Bubble align="end" role="article" aria-label="Answer from UI Foundation"><BubbleContent>Yes. The TIS identity is optional.</BubbleContent></Bubble>
         </BubbleGroup>
       )
 
@@ -708,17 +753,19 @@ function ComponentPreview({ name }: { name: string }) {
     case "calendar":
       return <CalendarPreview id={id} />
 
-    case "card":
+    case "card": {
+      const titleId = `${id}-card-title`
       return (
-        <Card className="preview-card">
+        <Card className="preview-card" role="region" aria-labelledby={titleId}>
           <CardHeader>
-            <CardTitle>Component ownership</CardTitle>
+            <CardTitle id={titleId} role="heading" aria-level={4}>Component ownership</CardTitle>
             <CardDescription>Source code remains in your project.</CardDescription>
           </CardHeader>
           <CardContent>Adapt locally while preserving the public contract.</CardContent>
           <CardFooter><Button size="sm" variant="outline">View source</Button></CardFooter>
         </Card>
       )
+    }
 
     case "carousel":
       return (
@@ -925,16 +972,7 @@ function ComponentPreview({ name }: { name: string }) {
       )
 
     case "empty":
-      return (
-        <Empty className="preview-card">
-          <EmptyHeader>
-            <EmptyMedia variant="icon"><FolderOpenIcon /></EmptyMedia>
-            <EmptyTitle>No components selected</EmptyTitle>
-            <EmptyDescription>Choose a component to add it to the project.</EmptyDescription>
-          </EmptyHeader>
-          <EmptyContent><Button size="sm">Browse components</Button></EmptyContent>
-        </Empty>
-      )
+      return <EmptyPreview id={id} />
 
     case "field": {
       const fieldId = `${id}-field`
@@ -1047,16 +1085,7 @@ function ComponentPreview({ name }: { name: string }) {
       )
 
     case "item":
-      return (
-        <Item className="preview-wide" variant="outline">
-          <ItemMedia variant="icon"><CheckCircle2Icon /></ItemMedia>
-          <ItemContent>
-            <ItemTitle>Registry connected</ItemTitle>
-            <ItemDescription>Component source can be installed locally.</ItemDescription>
-          </ItemContent>
-          <ItemActions><Button size="sm" variant="outline">Inspect</Button></ItemActions>
-        </Item>
-      )
+      return <ItemPreview id={id} />
 
     case "kbd":
       return (
@@ -1078,7 +1107,7 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "marker":
       return (
-        <Marker className="w-72" variant="separator">
+        <Marker className="w-72" variant="separator" role="status">
           <MarkerIcon><CheckCircle2Icon /></MarkerIcon>
           <MarkerContent>12 components validated</MarkerContent>
         </Marker>
@@ -1113,7 +1142,7 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "message":
       return (
-        <Message className="w-72">
+        <Message className="w-72" role="article" aria-label="Message from UI Foundation">
           <MessageAvatar aria-hidden="true">UI</MessageAvatar>
           <MessageContent>
             <MessageHeader>UI Foundation</MessageHeader>
@@ -1277,7 +1306,7 @@ function ComponentPreview({ name }: { name: string }) {
     case "separator":
       return (
         <div className="separator-preview">
-          <span>Before</span><Separator /><span>After</span>
+          <span>Before</span><Separator decorative={false} /><span>After</span>
           <Separator orientation="vertical" />
           <span>Vertical</span>
         </div>
@@ -1329,7 +1358,7 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "skeleton":
       return (
-        <div className="skeleton-preview" role="status" aria-label="Loading content">
+        <div className="skeleton-preview" role="status" aria-label="Loading content" aria-busy="true">
           <Skeleton className="skeleton-avatar" />
           <div><Skeleton className="skeleton-line" /><Skeleton className="skeleton-line short" /></div>
         </div>
@@ -1346,7 +1375,7 @@ function ComponentPreview({ name }: { name: string }) {
         <div className="preview-inline">
           <Spinner />
           <Spinner className="size-5 text-primary" aria-label="Loading preview" />
-          <Button disabled><Spinner data-icon="inline-start" />Saving</Button>
+          <Button disabled><Spinner data-icon="inline-start" aria-hidden="true" />Saving</Button>
         </div>
       )
 
