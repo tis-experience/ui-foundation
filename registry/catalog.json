@@ -62,7 +62,7 @@
       "category": "disclosure",
       "description": "A vertically stacked set of interactive headings that reveal content.",
       "files": ["src/components/ui/accordion.tsx"],
-      "accessibility": "Base UI manages keyboard navigation, expanded state and panel relationships."
+      "accessibility": "Base UI connects headings, triggers and panels; Enter and Space toggle a panel while Tab follows normal document order."
     },
     {
       "name": "alert",
@@ -178,7 +178,7 @@
       ],
       "dependencies": ["embla-carousel-react@8.6.0"],
       "registryDependencies": ["button"],
-      "accessibility": "Name the carousel, label meaningful slides and keep previous and next controls available to keyboard users."
+      "accessibility": "Name the carousel and every slide, provide Previous and Next as non-drag controls, and do not capture arrow keys from interactive slide content."
     },
     {
       "name": "chart",
@@ -204,7 +204,7 @@
       "category": "disclosure",
       "description": "A trigger that reveals or hides a single region of related content.",
       "files": ["src/components/ui/collapsible.tsx"],
-      "accessibility": "Base UI connects trigger and panel while exposing expanded state to assistive technology."
+      "accessibility": "Base UI connects the trigger and panel with expanded and controlled-region state while preserving trigger focus."
     },
     {
       "name": "combobox",
@@ -227,7 +227,7 @@
       "files": ["src/components/ui/command.tsx"],
       "dependencies": ["cmdk@1.1.1"],
       "registryDependencies": ["dialog", "input-group"],
-      "accessibility": "Give the search input a clear label and keep every command reachable by keyboard."
+      "accessibility": "Name the search input, keep items inside groups with stable values, and attach one observable onSelect action to every executable command."
     },
     {
       "name": "context-menu",
@@ -285,7 +285,7 @@
       "category": "overlay",
       "description": "A swipeable edge panel with modal, nested and snap-point behavior.",
       "files": ["src/components/ui/drawer.tsx"],
-      "accessibility": "Always provide a title and description; Base UI manages modal focus and dismissal."
+      "accessibility": "Always provide a title, description and explicit close path; swipe and snap points require equivalent non-drag controls, and the base stylesheet positions body for iOS Safari."
     },
     {
       "name": "dropdown-menu",
@@ -328,7 +328,7 @@
       "category": "overlay",
       "description": "A non-modal preview surface shown from hover or keyboard focus.",
       "files": ["src/components/ui/hover-card.tsx"],
-      "accessibility": "Do not hide essential actions in the preview; Base UI supports pointer and keyboard focus triggers."
+      "accessibility": "Use a real destination link as the trigger, keep focus on that link and never hide essential information or actions only in the visual preview."
     },
     {
       "name": "input",
@@ -399,7 +399,7 @@
       "category": "navigation",
       "description": "A persistent horizontal set of menus for application commands.",
       "files": ["src/components/ui/menubar.tsx"],
-      "accessibility": "Use for application commands, not ordinary site navigation; Base UI manages menu bar keyboard patterns."
+      "accessibility": "Use for application commands, place items inside MenubarGroup and connect every action; Base UI manages roving trigger and menu focus."
     },
     {
       "name": "message",
@@ -440,7 +440,7 @@
         "src/components/ui/navigation-menu.components.tsx",
         "src/components/ui/navigation-menu.variants.ts"
       ],
-      "accessibility": "Use real links for destinations and ensure disclosed content remains reachable by keyboard."
+      "accessibility": "Name the navigation landmark, use real links, mark the current route and keep disclosed destinations reachable by keyboard."
     },
     {
       "name": "pagination",
@@ -449,7 +449,7 @@
       "description": "A page navigation pattern with current, previous, next and overflow states.",
       "files": ["src/components/ui/pagination.tsx"],
       "registryDependencies": ["button"],
-      "accessibility": "Provide destination links, mark the current page and localize the navigation label."
+      "accessibility": "Provide unique native links, mark exactly one current page, localize the landmark and remove unavailable Previous or Next links from the tab order."
     },
     {
       "name": "popover",
@@ -525,7 +525,7 @@
       "description": "A modal panel that enters from an edge of the viewport.",
       "files": ["src/components/ui/sheet.tsx"],
       "registryDependencies": ["button"],
-      "accessibility": "Always provide SheetTitle and SheetDescription; Base UI manages focus trapping and restoration."
+      "accessibility": "Always provide SheetTitle, SheetDescription and an explicit close path; content and actions must remain scroll-reachable at mobile widths and zoom."
     },
     {
       "name": "sidebar",
@@ -539,7 +539,7 @@
         "src/hooks/use-mobile.ts"
       ],
       "registryDependencies": ["button", "input", "separator", "sheet", "skeleton", "tooltip"],
-      "accessibility": "Label the navigation landmark, expose the collapse control name and preserve access to all destinations on mobile."
+      "accessibility": "Compose a named navigation landmark with real links, aria-current and the generated trigger relationship; keep a visible close path in the mobile Sheet."
     },
     {
       "name": "skeleton",
@@ -634,7 +634,7 @@
       "description": "A single or multiple selection group composed from toggle items.",
       "files": ["src/components/ui/toggle-group.tsx"],
       "registryDependencies": ["toggle"],
-      "accessibility": "Provide a group label and use Base UI array values for both single and multiple selection."
+      "accessibility": "Provide a group and item names, unique array values and an explicit selection mode; visual orientation is forwarded to Base UI keyboard behavior."
     },
     {
       "name": "tooltip",

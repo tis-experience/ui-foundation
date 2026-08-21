@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Use for application commands, not ordinary site navigation; Base UI manages menu bar keyboard patterns.",
+    "accessibility": "Use for application commands, place items inside MenubarGroup and connect every action; Base UI manages roving trigger and menu focus.",
     "status": "alpha"
   },
   "categories": [

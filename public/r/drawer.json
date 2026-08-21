@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Always provide a title and description; Base UI manages modal focus and dismissal.",
+    "accessibility": "Always provide a title, description and explicit close path; swipe and snap points require equivalent non-drag controls, and the base stylesheet positions body for iOS Safari.",
     "status": "alpha"
   },
   "categories": [

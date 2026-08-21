@@ -21,9 +21,44 @@
         "Use concise trigger labels",
         "Keep hidden content understandable when revealed"
       ],
-      "accessibility": "Base UI manages keyboard navigation, expanded state and panel relationships.",
+      "accessibility": "Base UI connects headings, triggers and panels; Enter and Space toggle a panel while Tab follows normal document order.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "headers=heading",
+          "triggers=button",
+          "trigger.aria-expanded=state",
+          "trigger.aria-controls=panel"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Toggle the focused panel"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through enabled triggers in document order without roving focus"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the trigger after expanding or collapsing",
+          "Expose every enabled trigger in the normal tab sequence"
+        ],
+        "requiredComposition": [
+          "Place each Trigger and Content inside one uniquely-valued AccordionItem",
+          "Keep trigger text concise and do not nest interactive controls inside it"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/accordion",
+          "behavior": "https://base-ui.com/react/components/accordion"
+        },
+        "evidence": "tests/component-contracts.spec.ts#accordion"
       }
     },
     {
@@ -419,9 +454,48 @@
         "Provide accessible names",
         "Own application data and side effects"
       ],
-      "accessibility": "Name the carousel, label meaningful slides and keep previous and next controls available to keyboard users.",
+      "accessibility": "Name the carousel and every slide, provide Previous and Next as non-drag controls, and do not capture arrow keys from interactive slide content.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=region-or-group",
+          "aria-roledescription=carousel",
+          "name=required",
+          "slides=group+slide-description+name",
+          "controls=native-buttons"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through carousel controls and interactive slide content in document order"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate Previous or Next without moving focus from the control"
+          }
+        ],
+        "focusManagement": [
+          "Do not capture arrow keys from controls nested inside slides",
+          "Keep focus on an activated navigation button while it remains available",
+          "Keep non-visible interactive slide content out of the tab sequence"
+        ],
+        "requiredComposition": [
+          "Name the carousel without repeating the word carousel",
+          "Name every slide by content or position such as 1 of 3",
+          "Provide Previous and Next as keyboard and single-pointer alternatives to swipe",
+          "If autoplay is used, provide a start-stop control and stop on focus and hover"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/carousel",
+          "behavior": "https://www.embla-carousel.com/"
+        },
+        "evidence": "tests/component-contracts.spec.ts#carousel"
       }
     },
     {
@@ -517,9 +591,36 @@
         "Use concise trigger labels",
         "Keep hidden content understandable when revealed"
       ],
-      "accessibility": "Base UI connects trigger and panel while exposing expanded state to assistive technology.",
+      "accessibility": "Base UI connects the trigger and panel with expanded and controlled-region state while preserving trigger focus.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "trigger.role=button",
+          "trigger.aria-expanded=state",
+          "trigger.aria-controls=panel"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Toggle the related panel"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the trigger after toggling",
+          "Do not add a separate tab stop for the panel or root"
+        ],
+        "requiredComposition": [
+          "Compose one Root, one Trigger and one related Content panel",
+          "Use Base UI render composition when the trigger is a Button"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/collapsible",
+          "behavior": "https://base-ui.com/react/components/collapsible"
+        },
+        "evidence": "tests/component-contracts.spec.ts#collapsible"
       }
     },
     {
@@ -600,23 +701,70 @@
       "name": "command",
       "title": "Command",
       "category": "navigation",
-      "profile": "external-interactive",
-      "classification": "interactive-composition",
+      "profile": "command-list",
+      "classification": "navigation",
       "behaviorOwner": "external",
       "keyboard": "managed",
       "responsive": "consumer-layout",
       "requiredStates": [
         "default",
+        "filtered",
+        "empty",
+        "selected",
         "disabled",
         "focus-visible"
       ],
       "consumerResponsibilities": [
-        "Provide accessible names",
-        "Own application data and side effects"
+        "Provide a named search input and stable item values",
+        "Connect every executable item to one onSelect action"
       ],
-      "accessibility": "Give the search input a clear label and keep every command reachable by keyboard.",
+      "accessibility": "Name the search input, keep items inside groups with stable values, and attach one observable onSelect action to every executable command.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=combobox",
+          "name=required",
+          "popup=listbox",
+          "items=option",
+          "selected-option=aria-selected"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Typing"
+            ],
+            "outcome": "Filter the available commands"
+          },
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp",
+              "Home",
+              "End"
+            ],
+            "outcome": "Move the selected option while keeping DOM focus on the input"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Execute the active command exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Keep DOM focus on the command input while options are active",
+          "In CommandDialog, focus the input on open and restore the opener on close"
+        ],
+        "requiredComposition": [
+          "Compose CommandInput and CommandList, with CommandItem instances inside CommandGroup",
+          "Keep CommandEmpty inside CommandList",
+          "Give every item a stable value and onSelect action"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/command",
+          "behavior": "https://github.com/dip/cmdk"
+        },
+        "evidence": "tests/component-contracts.spec.ts#command"
       }
     },
     {
@@ -878,9 +1026,54 @@
         "Provide a title and description",
         "Provide a clear close or decision path"
       ],
-      "accessibility": "Always provide a title and description; Base UI manages modal focus and dismissal.",
+      "accessibility": "Always provide a title, description and explicit close path; swipe and snap points require equivalent non-drag controls, and the base stylesheet positions body for iOS Safari.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=dialog",
+          "name=title",
+          "description=required",
+          "aria-modal=true-when-modal"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open from the trigger and activate explicit close actions"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Dismiss without completing the action"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Cycle focus within a modal drawer"
+          }
+        ],
+        "focusManagement": [
+          "Move focus inside after keyboard open",
+          "Trap focus while modal",
+          "Restore focus to the trigger after every dismissal path"
+        ],
+        "requiredComposition": [
+          "Include DrawerTitle and DrawerDescription",
+          "Provide DrawerClose or another explicit close action",
+          "Never make swipe the only dismissal path",
+          "Provide buttons or another non-drag alternative when snap points expose meaningful states",
+          "Install the required positioned-body base style for iOS Safari"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/drawer",
+          "behavior": "https://base-ui.com/react/components/drawer"
+        },
+        "evidence": "tests/component-contracts.spec.ts#drawer"
       }
     },
     {
@@ -1099,9 +1292,51 @@
         "Provide an accessible trigger name",
         "Keep essential information available without relying only on the overlay"
       ],
-      "accessibility": "Do not hide essential actions in the preview; Base UI supports pointer and keyboard focus triggers.",
+      "accessibility": "Use a real destination link as the trigger, keep focus on that link and never hide essential information or actions only in the visual preview.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "trigger=link",
+          "name=required",
+          "popup=visual-preview",
+          "no-dialog-or-tooltip-role"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Focusing the link exposes the preview without moving focus"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Dismiss the preview while retaining focus on the link"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Follow the trigger link rather than moving focus into the preview"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the trigger",
+          "Close after focus leaves the trigger",
+          "Do not add preview contents to the tab sequence"
+        ],
+        "requiredComposition": [
+          "Use a real link with an href",
+          "Keep all essential information and actions available at the destination",
+          "Allow pointer movement from trigger to popup without premature dismissal"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/hover-card",
+          "behavior": "https://base-ui.com/react/components/preview-card"
+        },
+        "evidence": "tests/component-contracts.spec.ts#hover-card"
       }
     },
     {
@@ -1386,9 +1621,55 @@
         "Use menus for actions rather than arbitrary form values",
         "Provide meaningful item labels"
       ],
-      "accessibility": "Use for application commands, not ordinary site navigation; Base UI manages menu bar keyboard patterns.",
+      "accessibility": "Use for application commands, place items inside MenubarGroup and connect every action; Base UI manages roving trigger and menu focus.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=menubar",
+          "orientation=horizontal",
+          "triggers=menuitem",
+          "popup=menu",
+          "actions=menuitem"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft",
+              "Home",
+              "End"
+            ],
+            "outcome": "Move roving focus between menu triggers"
+          },
+          {
+            "keys": [
+              "ArrowDown",
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open a menu and focus an item"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close the menu"
+          }
+        ],
+        "focusManagement": [
+          "Expose one menubar trigger in the tab sequence",
+          "Move focus into the open menu and restore its trigger after dismissal"
+        ],
+        "requiredComposition": [
+          "Compose MenubarMenu with Trigger and Content",
+          "Place MenubarItem instances inside MenubarGroup",
+          "Use callbacks for actions and links for destinations"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/menubar",
+          "behavior": "https://base-ui.com/react/components/menubar"
+        },
+        "evidence": "tests/component-contracts.spec.ts#menubar"
       }
     },
     {
@@ -1519,22 +1800,78 @@
         "focus-visible"
       ],
       "consumerResponsibilities": [
-        "Use real links for destinations",
-        "Provide meaningful trigger and link labels"
+        "Use real links for destinations and mark the current route",
+        "Provide a landmark label plus meaningful trigger and link labels"
       ],
-      "accessibility": "Use real links for destinations and ensure disclosed content remains reachable by keyboard.",
+      "accessibility": "Name the navigation landmark, use real links, mark the current route and keep disclosed destinations reachable by keyboard.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "landmark=navigation",
+          "landmark-name=required",
+          "trigger.aria-expanded=state",
+          "destinations=links",
+          "current=aria-current-page"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft"
+            ],
+            "outcome": "Move between top-level items"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open disclosed content and focus its first link"
+          },
+          {
+            "keys": [
+              "ArrowDown"
+            ],
+            "outcome": "Open from a horizontal trigger or move between disclosed links"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move between disclosed links and adjacent page controls"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close disclosed content"
+          }
+        ],
+        "focusManagement": [
+          "Move to the first disclosed link when opened with Enter or Space",
+          "Restore focus to the trigger after Escape"
+        ],
+        "requiredComposition": [
+          "Place each Trigger and Content pair inside NavigationMenuItem",
+          "Use real links or router links through render",
+          "Mark the active destination with active and aria-current"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/navigation-menu",
+          "behavior": "https://base-ui.com/react/components/navigation-menu"
+        },
+        "evidence": "tests/component-contracts.spec.ts#navigation-menu"
       }
     },
     {
       "name": "pagination",
       "title": "Pagination",
       "category": "navigation",
-      "profile": "navigation",
+      "profile": "native-link-navigation",
       "classification": "navigation",
-      "behaviorOwner": "library",
-      "keyboard": "composed",
+      "behaviorOwner": "browser",
+      "keyboard": "native",
       "responsive": "consumer-managed-horizontal",
       "requiredStates": [
         "default",
@@ -1543,12 +1880,48 @@
         "focus-visible"
       ],
       "consumerResponsibilities": [
-        "Provide a navigation label when multiple regions exist",
-        "Own routes and destination state"
+        "Provide unique destination links and a localized landmark name",
+        "Omit href and tab stops from unavailable Previous or Next links"
       ],
-      "accessibility": "Provide destination links, mark the current page and localize the navigation label.",
+      "accessibility": "Provide unique native links, mark exactly one current page, localize the landmark and remove unavailable Previous or Next links from the tab order.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "landmark=navigation",
+          "landmark-name=required",
+          "destinations=native-links",
+          "current=exactly-one-page",
+          "ellipsis=decorative"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through available destinations in document order"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Navigate to the focused destination natively"
+          }
+        ],
+        "focusManagement": [
+          "Expose a visible native focus indicator on every available link",
+          "Let the application place focus in updated content after navigation"
+        ],
+        "requiredComposition": [
+          "Use unique href values and a localized navigation label",
+          "Mark exactly one page current",
+          "Omit href, use aria-disabled and remove unavailable Previous or Next links from the tab order"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/pagination",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+        },
+        "evidence": "tests/component-contracts.spec.ts#pagination"
       }
     },
     {
@@ -1910,33 +2283,124 @@
         "Provide a title and description",
         "Provide a clear close or decision path"
       ],
-      "accessibility": "Always provide SheetTitle and SheetDescription; Base UI manages focus trapping and restoration.",
+      "accessibility": "Always provide SheetTitle, SheetDescription and an explicit close path; content and actions must remain scroll-reachable at mobile widths and zoom.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=dialog",
+          "name=title",
+          "description=required",
+          "aria-modal=true"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open from the trigger and activate close actions"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Dismiss the sheet"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Cycle focus within the sheet"
+          }
+        ],
+        "focusManagement": [
+          "Move initial focus to the first meaningful control or the popup",
+          "Trap focus while open",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Include SheetTitle and SheetDescription",
+          "Provide an explicit close path when showCloseButton is false",
+          "Keep content and close actions reachable at mobile widths and zoom"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/sheet",
+          "behavior": "https://base-ui.com/react/components/dialog"
+        },
+        "evidence": "tests/component-contracts.spec.ts#sheet"
       }
     },
     {
       "name": "sidebar",
       "title": "Sidebar",
       "category": "navigation",
-      "profile": "navigation",
+      "profile": "responsive-navigation-shell",
       "classification": "navigation",
       "behaviorOwner": "library",
       "keyboard": "composed",
-      "responsive": "consumer-managed-horizontal",
+      "responsive": "viewport-constrained",
       "requiredStates": [
-        "default",
+        "expanded",
+        "collapsed",
+        "mobile-open",
         "current",
         "disabled",
         "focus-visible"
       ],
       "consumerResponsibilities": [
-        "Provide a navigation label when multiple regions exist",
-        "Own routes and destination state"
+        "Compose Provider, Sidebar, Trigger and Inset with a named navigation landmark",
+        "Render destinations as links, mark the current route and keep a visible mobile close path"
       ],
-      "accessibility": "Label the navigation landmark, expose the collapse control name and preserve access to all destinations on mobile.",
+      "accessibility": "Compose a named navigation landmark with real links, aria-current and the generated trigger relationship; keep a visible close path in the mobile Sheet.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "landmark=navigation",
+          "landmark-name=required",
+          "trigger.aria-expanded=state",
+          "trigger.aria-controls=sidebar",
+          "current=aria-current-page",
+          "mobile=dialog"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Toggle the sidebar from its trigger"
+          },
+          {
+            "keys": [
+              "Control+B",
+              "Meta+B"
+            ],
+            "outcome": "Toggle once from the application shortcut"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close the mobile sidebar"
+          }
+        ],
+        "focusManagement": [
+          "Keep trigger focus when toggling the desktop sidebar",
+          "Move focus inside the mobile dialog and restore the trigger when it closes",
+          "Keep hidden destinations out of the tab sequence"
+        ],
+        "requiredComposition": [
+          "Wrap Sidebar, SidebarTrigger and SidebarInset in SidebarProvider",
+          "Place real destination links inside a named navigation landmark",
+          "Mark the current destination with aria-current",
+          "Keep a visible close path in the mobile sheet"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/sidebar",
+          "behavior": "https://base-ui.com/react/components/dialog"
+        },
+        "evidence": "tests/component-contracts.spec.ts#sidebar"
       }
     },
     {
@@ -2327,7 +2791,7 @@
       "name": "toggle-group",
       "title": "Toggle Group",
       "category": "form-control",
-      "profile": "action-group",
+      "profile": "toggle-group",
       "classification": "action",
       "behaviorOwner": "base-ui",
       "keyboard": "managed",
@@ -2339,12 +2803,56 @@
         "selected"
       ],
       "consumerResponsibilities": [
-        "Provide a group label",
-        "Keep the action order meaningful"
+        "Provide a group label and unique item values",
+        "Choose single or multiple selection and forward the visual orientation to behavior"
       ],
-      "accessibility": "Provide a group label and use Base UI array values for both single and multiple selection.",
+      "accessibility": "Provide a group and item names, unique array values and an explicit selection mode; visual orientation is forwarded to Base UI keyboard behavior.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=group",
+          "group-name=required",
+          "items=buttons",
+          "items.aria-pressed=state",
+          "value=array",
+          "mode=single-or-multiple"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft"
+            ],
+            "outcome": "Move roving focus in a horizontal group"
+          },
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Move roving focus in a vertical group"
+          },
+          {
+            "keys": [
+              "Space"
+            ],
+            "outcome": "Select or toggle the focused item according to multiple mode"
+          }
+        ],
+        "focusManagement": [
+          "Expose one roving tab stop within the enabled group",
+          "Skip disabled items and optionally loop according to loopFocus"
+        ],
+        "requiredComposition": [
+          "Provide a group name and an accessible name for every item",
+          "Use unique item values and explicitly choose single or multiple selection",
+          "Forward orientation to the Base UI primitive"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/toggle-group",
+          "behavior": "https://base-ui.com/react/components/toggle-group"
+        },
+        "evidence": "tests/component-contracts.spec.ts#toggle-group"
       }
     },
     {

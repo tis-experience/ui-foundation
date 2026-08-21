@@ -32,9 +32,15 @@ All notable changes to UI Foundation will be documented in this file.
 - Component-level browser contracts for every catalog specimen plus direct keyboard, form, menu, disclosure, scrolling and semantic coverage across previously untested families.
 - First interaction-tested contract wave for 12 high-risk controls and overlays, publishing exact semantics, keyboard outcomes, focus management, composition rules, official upstream references and matching Playwright evidence.
 - Second interaction-tested contract wave for 12 form and data-entry components, raising published behavior evidence to 24 of 66 catalog components.
+- Third interaction-tested contract wave for 12 disclosure, navigation and overlay components, raising published behavior evidence to 36 of 66 catalog components.
 
 ### Fixed
 
+- Forward Toggle Group orientation and merged consumer styles to Base UI so visual direction and roving keyboard focus stay aligned.
+- Stop Carousel from intercepting arrow keys in nested controls, preserve consumer click handlers and publish named carousel and slide specimens.
+- Replace the Hover Card button specimen with a real destination link and align Menubar groups, Navigation Menu current state and Pagination disabled links with their public contracts.
+- Relate Sidebar triggers to generated controlled regions, expose expanded state, ignore repeated global shortcuts and preserve a visible mobile close path.
+- Keep Sheet content scroll-reachable at mobile widths and install the positioned-body base rule required by Drawer on iOS Safari.
 - Connect visible labels, descriptions and errors across form specimens while preserving native validation, submission and responsive focus order.
 - Normalize scalar Slider values to a single indexed thumb and render the library focus outline on the actual focused control.
 - Name Date Picker popups, keep serialized values aligned with disabled state and restore trigger focus after selection.

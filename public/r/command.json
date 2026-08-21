@@ -21,7 +21,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Give the search input a clear label and keep every command reachable by keyboard.",
+    "accessibility": "Name the search input, keep items inside groups with stable values, and attach one observable onSelect action to every executable command.",
     "status": "alpha"
   },
   "categories": [

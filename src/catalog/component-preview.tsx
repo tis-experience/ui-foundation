@@ -66,6 +66,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Bubble, BubbleContent, BubbleGroup } from "@/components/ui/bubble"
 import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button.variants"
 import { ButtonGroup } from "@/components/ui/button-group"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -206,6 +207,7 @@ import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker"
 import {
   Menubar,
   MenubarContent,
+  MenubarGroup,
   MenubarItem,
   MenubarMenu,
   MenubarSeparator,
@@ -305,10 +307,12 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
+  SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Slider } from "@/components/ui/slider"
@@ -417,6 +421,30 @@ function CalendarPreview({ id }: { id: string }) {
         onSelect={(date) => date && setSelected(date)}
       />
     </Field>
+  )
+}
+
+function CommandPreview() {
+  const [executedCommand, setExecutedCommand] = useState("No command executed")
+
+  return (
+    <div className="preview-stack">
+      <Command className="h-48 w-72 border">
+        <CommandInput aria-label="Search commands" placeholder="Search commands…" />
+        <CommandList>
+          <CommandEmpty>No command found.</CommandEmpty>
+          <CommandGroup heading="Actions">
+            <CommandItem value="open component" onSelect={() => setExecutedCommand("Open component executed")}>
+              Open component <CommandShortcut>⌘O</CommandShortcut>
+            </CommandItem>
+            <CommandItem value="copy install command" onSelect={() => setExecutedCommand("Copy install command executed")}>
+              Copy install command <CommandShortcut>⌘C</CommandShortcut>
+            </CommandItem>
+          </CommandGroup>
+        </CommandList>
+      </Command>
+      <p aria-live="polite" className="text-xs text-muted-foreground">{executedCommand}</p>
+    </div>
   )
 }
 
@@ -616,10 +644,10 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "carousel":
       return (
-        <Carousel className="w-64">
+        <Carousel aria-label="Featured components" className="w-64">
           <CarouselContent>
             {[1, 2, 3].map((slide) => (
-              <CarouselItem key={slide}>
+              <CarouselItem aria-label={`${slide} of 3`} key={slide}>
                 <div className="flex h-28 items-center justify-center rounded-lg border bg-card text-2xl font-semibold">
                   {slide}
                 </div>
@@ -683,18 +711,7 @@ function ComponentPreview({ name }: { name: string }) {
       )
 
     case "command":
-      return (
-        <Command className="h-48 w-72 border">
-          <CommandInput aria-label="Search commands" placeholder="Search commands…" />
-          <CommandList>
-            <CommandEmpty>No command found.</CommandEmpty>
-            <CommandGroup heading="Actions">
-              <CommandItem>Open component <CommandShortcut>⌘O</CommandShortcut></CommandItem>
-              <CommandItem>Copy install command <CommandShortcut>⌘C</CommandShortcut></CommandItem>
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      )
+      return <CommandPreview />
 
     case "context-menu":
       return (
@@ -871,7 +888,11 @@ function ComponentPreview({ name }: { name: string }) {
     case "hover-card":
       return (
         <HoverCard>
-          <HoverCardTrigger render={<Button variant="link" />}>
+          <HoverCardTrigger
+            render={
+              <a className={buttonVariants({ variant: "link" })} href="#components" />
+            }
+          >
             @ui-foundation
           </HoverCardTrigger>
           <HoverCardContent>
@@ -978,15 +999,23 @@ function ComponentPreview({ name }: { name: string }) {
           <MenubarMenu>
             <MenubarTrigger>File</MenubarTrigger>
             <MenubarContent>
-              <MenubarItem>New file <MenubarShortcut>⌘N</MenubarShortcut></MenubarItem>
-              <MenubarItem>Open</MenubarItem>
+              <MenubarGroup>
+                <MenubarItem>New file <MenubarShortcut>⌘N</MenubarShortcut></MenubarItem>
+                <MenubarItem>Open</MenubarItem>
+              </MenubarGroup>
               <MenubarSeparator />
-              <MenubarItem>Close</MenubarItem>
+              <MenubarGroup>
+                <MenubarItem>Close</MenubarItem>
+              </MenubarGroup>
             </MenubarContent>
           </MenubarMenu>
           <MenubarMenu>
             <MenubarTrigger>Edit</MenubarTrigger>
-            <MenubarContent><MenubarItem>Undo <MenubarShortcut>⌘Z</MenubarShortcut></MenubarItem></MenubarContent>
+            <MenubarContent>
+              <MenubarGroup>
+                <MenubarItem>Undo <MenubarShortcut>⌘Z</MenubarShortcut></MenubarItem>
+              </MenubarGroup>
+            </MenubarContent>
           </MenubarMenu>
         </Menubar>
       )
@@ -1036,13 +1065,13 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "navigation-menu":
       return (
-        <NavigationMenu>
+        <NavigationMenu aria-label="Primary">
           <NavigationMenuList>
             <NavigationMenuItem>
               <NavigationMenuTrigger>Components</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="grid w-72 gap-1 p-2">
-                  <NavigationMenuLink href="#components">Browse catalog</NavigationMenuLink>
+                  <NavigationMenuLink active href="#components">Browse catalog</NavigationMenuLink>
                   <NavigationMenuLink href="#top">Installation</NavigationMenuLink>
                 </div>
               </NavigationMenuContent>
@@ -1054,13 +1083,13 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "pagination":
       return (
-        <Pagination>
+        <Pagination aria-label="Component pages">
           <PaginationContent>
-            <PaginationItem><PaginationPrevious href="#top" /></PaginationItem>
-            <PaginationItem><PaginationLink aria-label="Page 1" href="#top" isActive>1</PaginationLink></PaginationItem>
-            <PaginationItem><PaginationLink aria-label="Page 2" href="#top">2</PaginationLink></PaginationItem>
+            <PaginationItem><PaginationPrevious disabled /></PaginationItem>
+            <PaginationItem><PaginationLink aria-label="Page 1" href="#page-1" isActive>1</PaginationLink></PaginationItem>
+            <PaginationItem><PaginationLink aria-label="Page 2" href="#page-2">2</PaginationLink></PaginationItem>
             <PaginationItem><PaginationEllipsis /></PaginationItem>
-            <PaginationItem><PaginationNext href="#top" /></PaginationItem>
+            <PaginationItem><PaginationNext href="#page-2" /></PaginationItem>
           </PaginationContent>
         </Pagination>
       )
@@ -1165,21 +1194,32 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "sidebar":
       return (
-        <SidebarProvider className="h-48 min-h-0 w-72 overflow-hidden rounded-lg border" style={{ "--sidebar-width": "11rem" } as CSSProperties}>
-          <Sidebar collapsible="none">
-            <SidebarContent>
+        <SidebarProvider className="relative h-48 min-h-0 w-72 overflow-hidden rounded-lg border" style={{ "--sidebar-width": "11rem" } as CSSProperties}>
+          <Sidebar className="!absolute !inset-y-0 !left-0 !h-full" collapsible="icon">
+            <SidebarContent aria-label="Component catalog" role="navigation">
               <SidebarGroup>
                 <SidebarGroupLabel>Workspace</SidebarGroupLabel>
                 <SidebarGroupContent>
                   <SidebarMenu>
-                    <SidebarMenuItem><SidebarMenuButton isActive><MenuIcon />Components</SidebarMenuButton></SidebarMenuItem>
-                    <SidebarMenuItem><SidebarMenuButton><SearchIcon />Search</SidebarMenuButton></SidebarMenuItem>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton aria-current="page" isActive render={<a href="#components" />}>
+                        <MenuIcon />Components
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton render={<a href="#top" />}>
+                        <SearchIcon />Search
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
                   </SidebarMenu>
                 </SidebarGroupContent>
               </SidebarGroup>
             </SidebarContent>
           </Sidebar>
-          <div className="flex flex-1 items-center justify-center text-sm text-muted-foreground">Content</div>
+          <SidebarInset className="min-w-0 items-center justify-center">
+            <SidebarTrigger />
+            <span className="text-sm text-muted-foreground">Content</span>
+          </SidebarInset>
         </SidebarProvider>
       )
 
@@ -1273,11 +1313,18 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "toggle-group":
       return (
-        <ToggleGroup aria-label="Text formatting" defaultValue={["bold"]} multiple>
-          <ToggleGroupItem aria-label="Bold" value="bold"><BoldIcon /></ToggleGroupItem>
-          <ToggleGroupItem aria-label="Italic" value="italic"><ItalicIcon /></ToggleGroupItem>
-          <ToggleGroupItem aria-label="Underline" value="underline"><UnderlineIcon /></ToggleGroupItem>
-        </ToggleGroup>
+        <div className="preview-inline items-start">
+          <ToggleGroup aria-label="Text formatting" defaultValue={["bold"]} multiple>
+            <ToggleGroupItem aria-label="Bold" value="bold"><BoldIcon /></ToggleGroupItem>
+            <ToggleGroupItem aria-label="Italic" value="italic"><ItalicIcon /></ToggleGroupItem>
+            <ToggleGroupItem aria-label="Underline" value="underline"><UnderlineIcon /></ToggleGroupItem>
+          </ToggleGroup>
+          <ToggleGroup aria-label="Text alignment" defaultValue={["left"]} orientation="vertical" size="sm">
+            <ToggleGroupItem value="left">Left</ToggleGroupItem>
+            <ToggleGroupItem value="center">Center</ToggleGroupItem>
+            <ToggleGroupItem value="right">Right</ToggleGroupItem>
+          </ToggleGroup>
+        </div>
       )
 
     case "tooltip":
