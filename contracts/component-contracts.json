@@ -12,11 +12,11 @@
     },
     "action-group": {
       "classification": "action",
-      "behaviorOwner": "base-ui",
-      "keyboard": "managed",
+      "behaviorOwner": "library",
+      "keyboard": "native",
       "responsive": "consumer-managed-horizontal",
-      "requiredStates": ["default", "disabled", "focus-visible", "selected"],
-      "consumerResponsibilities": ["Provide a group label", "Keep the action order meaningful"]
+      "requiredStates": ["default", "disabled", "focus-visible"],
+      "consumerResponsibilities": ["Provide a group label", "Keep the action order meaningful", "Use Toggle Group when the items expose pressed or mutually exclusive state"]
     },
     "command-list": {
       "classification": "navigation",
@@ -389,6 +389,34 @@
       },
       "evidence": "tests/component-contracts.spec.ts#alert-dialog"
     },
+    "attachment": {
+      "semantics": ["container=attachment", "trigger=native-button-or-link", "actions=native-buttons", "state=visible-text"],
+      "keyboardInteractions": [
+        { "keys": ["Tab", "Shift+Tab"], "outcome": "Move independently through the attachment actions and trigger" },
+        { "keys": ["Enter", "Space"], "outcome": "Activate the focused attachment action or trigger exactly once" }
+      ],
+      "focusManagement": ["Expose every enabled action and trigger in the normal tab sequence", "Draw the focus outline only around the focused control"],
+      "requiredComposition": ["Keep filename, file type and size available as text", "Give every icon-only action and trigger an accessible name", "Expose upload or error state in text rather than color alone"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/attachment",
+        "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button"
+      },
+      "evidence": "tests/component-contracts.spec.ts#attachment"
+    },
+    "breadcrumb": {
+      "semantics": ["landmark=navigation", "landmark-name=required", "items=ordered-list", "destinations=native-links", "current=exactly-one-page", "separators=decorative"],
+      "keyboardInteractions": [
+        { "keys": ["Tab", "Shift+Tab"], "outcome": "Move through breadcrumb destinations in document order" },
+        { "keys": ["Enter"], "outcome": "Follow the focused destination natively" }
+      ],
+      "focusManagement": ["Expose only available destinations in the normal tab sequence", "Keep the current non-link page out of the tab sequence"],
+      "requiredComposition": ["Provide a navigation label when more than one navigation region exists", "Use real links for destinations and aria-current on exactly one current page", "When collapsing items, expose them through a labelled menu trigger"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/breadcrumb",
+        "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav"
+      },
+      "evidence": "tests/component-contracts.spec.ts#breadcrumb"
+    },
     "button": {
       "semantics": ["role=button", "name=required"],
       "keyboardInteractions": [
@@ -401,6 +429,20 @@
         "behavior": "https://base-ui.com/react/components/button"
       },
       "evidence": "tests/component-contracts.spec.ts#button"
+    },
+    "button-group": {
+      "semantics": ["role=group", "group-name=required", "items=independent-native-controls", "pressed-state=not-implied"],
+      "keyboardInteractions": [
+        { "keys": ["Tab", "Shift+Tab"], "outcome": "Move through enabled actions in native document order" },
+        { "keys": ["Enter", "Space"], "outcome": "Activate the focused action exactly once" }
+      ],
+      "focusManagement": ["Do not use roving focus for independent actions", "Keep focus on the activated action while it remains available"],
+      "requiredComposition": ["Provide a group name and keep action order meaningful", "Use Toggle Group instead when items expose pressed or mutually exclusive state", "Keep separators decorative"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/button-group",
+        "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button"
+      },
+      "evidence": "tests/component-contracts.spec.ts#button-group"
     },
     "calendar": {
       "semantics": ["grid=calendar", "days=buttons", "selected-date=state", "purpose=visible"],
@@ -430,6 +472,19 @@
         "behavior": "https://www.embla-carousel.com/"
       },
       "evidence": "tests/component-contracts.spec.ts#carousel"
+    },
+    "chart": {
+      "semantics": ["graphic=role-img-or-figure", "name=required", "text-summary=required", "exact-values=available-when-task-requires"],
+      "keyboardInteractions": [
+        { "keys": ["Tab", "Shift+Tab"], "outcome": "Move only through intentionally interactive chart controls or data points" }
+      ],
+      "focusManagement": ["Do not add graph marks to the tab sequence unless they perform an interaction", "Expose a visible focus indicator on every interactive chart control"],
+      "requiredComposition": ["Provide a concise text summary of the visible trend or comparison", "Provide exact values in a table when users must inspect or compare them", "Do not communicate series or state through color alone"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/chart",
+        "behavior": "https://recharts.github.io/en-US/guide/accessibility/"
+      },
+      "evidence": "tests/component-contracts.spec.ts#chart"
     },
     "checkbox": {
       "semantics": ["role=checkbox", "name=required", "aria-checked=state"],
@@ -501,6 +556,21 @@
         "behavior": "https://base-ui.com/react/components/context-menu"
       },
       "evidence": "tests/component-contracts.spec.ts#context-menu"
+    },
+    "data-table": {
+      "semantics": ["element=table", "name-or-caption=required", "headers=associated", "sortable-header.aria-sort=state", "result-status=live"],
+      "keyboardInteractions": [
+        { "keys": ["Tab", "Shift+Tab"], "outcome": "Move through sorting, filtering, selection and pagination controls in document order" },
+        { "keys": ["Enter", "Space"], "outcome": "Activate the focused sort, selection or pagination control" },
+        { "keys": ["Typing"], "outcome": "Filter the owned data through the named filter control" }
+      ],
+      "focusManagement": ["Use native table reading order and native focus for embedded controls", "Preserve a meaningful focus target after sorting, filtering or pagination updates"],
+      "requiredComposition": ["Define meaningful column labels and associate row and column headers", "Own sorting, filtering, selection, pagination and loading state", "Provide empty and result-count feedback", "Keep the table horizontally scrollable at narrow widths and high zoom"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/data-table",
+        "behavior": "https://tanstack.com/table/latest/docs/introduction"
+      },
+      "evidence": "tests/component-contracts.spec.ts#data-table"
     },
     "date-picker": {
       "semantics": ["trigger.role=button", "trigger.name=visible-label", "popup.name=required", "hidden-value=selected-date"],
@@ -662,6 +732,20 @@
       },
       "evidence": "tests/component-contracts.spec.ts#menubar"
     },
+    "message-scroller": {
+      "semantics": ["viewport=scroll-container", "feed=role-log", "feed-name=required", "messages=stable-id", "scroll-to-end=native-button"],
+      "keyboardInteractions": [
+        { "keys": ["PageDown", "PageUp", "Home", "End"], "outcome": "Scroll the focused viewport natively" },
+        { "keys": ["Enter", "Space"], "outcome": "Move the viewport to the live edge from the scroll button" }
+      ],
+      "focusManagement": ["Never move keyboard focus when messages stream", "Follow new content only while the reader remains at the live edge", "Keep the scroll-to-end button focusable when it is shown and move focus to the viewport after activation makes the button unavailable"],
+      "requiredComposition": ["Give the viewport and log a contextual name", "Provide a stable messageId and a meaningful scroll anchor", "Include MessageScrollerButton when readers can move away from the live edge", "Use live announcements intentionally and avoid re-announcing the complete history"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/message-scroller",
+        "behavior": "https://ui.shadcn.com/docs/components/base/message-scroller"
+      },
+      "evidence": "tests/component-contracts.spec.ts#message-scroller"
+    },
     "native-select": {
       "semantics": ["role=combobox", "name=visible-label", "options=native", "invalid=aria-invalid"],
       "keyboardInteractions": [
@@ -722,6 +806,19 @@
       },
       "evidence": "tests/component-contracts.spec.ts#popover"
     },
+    "progress": {
+      "semantics": ["role=progressbar", "name=required", "aria-valuemin=state", "aria-valuemax=state", "aria-valuenow=determinate-state"],
+      "keyboardInteractions": [
+        { "keys": ["Not applicable"], "outcome": "Remain passive; progress is exposed through progressbar semantics and live status rather than keyboard interaction" }
+      ],
+      "focusManagement": ["Do not add a passive progress indicator to the tab sequence"],
+      "requiredComposition": ["Provide an accessible label and expose the current value when determinate", "Omit the current value when progress is indeterminate", "Do not rely on the visual indicator as the only status feedback"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/progress",
+        "behavior": "https://base-ui.com/react/components/progress"
+      },
+      "evidence": "tests/component-contracts.spec.ts#progress"
+    },
     "questionnaire": {
       "semantics": ["element=form", "items=fieldset", "titles=legend", "progress=progressbar", "errors=alert"],
       "keyboardInteractions": [
@@ -750,6 +847,33 @@
         "behavior": "https://base-ui.com/react/components/radio-group"
       },
       "evidence": "tests/component-contracts.spec.ts#radio-group"
+    },
+    "resizable": {
+      "semantics": ["handle.role=separator", "handle.orientation=state", "handle.aria-valuemin=state", "handle.aria-valuemax=state", "handle.aria-valuenow=state"],
+      "keyboardInteractions": [
+        { "keys": ["ArrowRight", "ArrowDown"], "outcome": "Increase the panel size associated with the focused separator" },
+        { "keys": ["ArrowLeft", "ArrowUp"], "outcome": "Decrease the panel size associated with the focused separator" }
+      ],
+      "focusManagement": ["Expose every enabled separator in the tab sequence", "Keep focus on the separator while resizing and show a visible outline"],
+      "requiredComposition": ["Place one handle between adjacent panels", "Provide practical minimum and maximum panel sizes", "Keep every drag operation available from the keyboard"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/resizable",
+        "behavior": "https://github.com/bvaughn/react-resizable-panels"
+      },
+      "evidence": "tests/component-contracts.spec.ts#resizable"
+    },
+    "scroll-area": {
+      "semantics": ["viewport=native-scroll-container", "region-name=required-when-focusable", "scrollbars=visual-enhancement"],
+      "keyboardInteractions": [
+        { "keys": ["PageDown", "PageUp", "Home", "End"], "outcome": "Scroll the focused viewport natively" }
+      ],
+      "focusManagement": ["Add a viewport tab stop only when the region has an accessible name", "Keep focusable descendants in document order"],
+      "requiredComposition": ["Provide a constrained size and preserve native overflow behavior", "Keep essential actions initially visible or otherwise clearly reachable", "Give a focusable scroll region a contextual accessible name"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/scroll-area",
+        "behavior": "https://base-ui.com/react/components/scroll-area"
+      },
+      "evidence": "tests/component-contracts.spec.ts#scroll-area"
     },
     "select": {
       "semantics": ["role=combobox", "name=required", "popup=listbox", "items=option", "trigger.aria-expanded=state"],
@@ -811,6 +935,20 @@
       },
       "evidence": "tests/component-contracts.spec.ts#slider"
     },
+    "sonner": {
+      "semantics": ["container=live-region", "urgency=polite-or-assertive", "content=visible-text", "actions=native-buttons"],
+      "keyboardInteractions": [
+        { "keys": ["Tab", "Shift+Tab"], "outcome": "Move to an available toast action or dismiss control" },
+        { "keys": ["Enter", "Space"], "outcome": "Activate the focused action or dismiss control" }
+      ],
+      "focusManagement": ["Never steal focus when a toast arrives", "Keep a toast visible while its controls are focused or hovered", "After dismissal, preserve or restore a logical application focus target"],
+      "requiredComposition": ["Choose live-region urgency from the consequence rather than visual style", "Keep essential information available in persistent page content", "Give every action and dismiss control an explicit name"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/sonner",
+        "behavior": "https://sonner.emilkowal.ski/"
+      },
+      "evidence": "tests/component-contracts.spec.ts#sonner"
+    },
     "switch": {
       "semantics": ["role=switch", "name=required", "aria-checked=state"],
       "keyboardInteractions": [
@@ -852,6 +990,33 @@
         "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea"
       },
       "evidence": "tests/component-contracts.spec.ts#textarea"
+    },
+    "toast": {
+      "semantics": ["container=live-region", "urgency=polite-or-assertive", "content=visible-text", "actions=native-buttons", "stacking=managed"],
+      "keyboardInteractions": [
+        { "keys": ["Tab", "Shift+Tab"], "outcome": "Move to an available toast action or dismiss control" },
+        { "keys": ["Enter", "Space"], "outcome": "Activate the focused action or dismiss control" }
+      ],
+      "focusManagement": ["Never steal focus when a toast arrives", "Pause dismissal while a toast control is focused", "After dismissal, preserve or restore a logical application focus target"],
+      "requiredComposition": ["Choose live-region urgency from the consequence rather than visual style", "Keep essential information available in persistent page content", "Give every action and close control an explicit name"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/toast",
+        "behavior": "https://base-ui.com/react/components/toast"
+      },
+      "evidence": "tests/component-contracts.spec.ts#toast"
+    },
+    "toggle": {
+      "semantics": ["role=button", "name=required", "aria-pressed=state"],
+      "keyboardInteractions": [
+        { "keys": ["Enter", "Space"], "outcome": "Toggle the pressed state exactly once" }
+      ],
+      "focusManagement": ["Keep focus on the control after toggling", "Expose a visible focus indicator"],
+      "requiredComposition": ["Provide a visible label or equivalent accessible name", "Expose pressed state without relying on color alone", "Use Toggle Group when multiple toggles form one coordinated choice"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/toggle",
+        "behavior": "https://base-ui.com/react/components/toggle"
+      },
+      "evidence": "tests/component-contracts.spec.ts#toggle"
     },
     "toggle-group": {
       "semantics": ["role=group", "group-name=required", "items=buttons", "items.aria-pressed=state", "value=array", "mode=single-or-multiple"],

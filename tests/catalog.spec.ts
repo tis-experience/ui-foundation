@@ -662,7 +662,9 @@ test("keeps wave two disclosure and selection behavior functional", async ({ pag
   await page.getByRole("tab", { name: "Code" }).click()
   await expect(page.getByRole("tabpanel")).toContainText("Installable source registry entry")
 
-  const boldToggle = page.getByRole("button", { name: "Toggle bold" })
+  const boldToggle = page
+    .locator('article.component-row[id="toggle"]')
+    .getByRole("button", { name: "Bold", exact: true })
   await expect(boldToggle).toHaveAttribute("aria-pressed", "true")
   await boldToggle.click()
   await expect(boldToggle).toHaveAttribute("aria-pressed", "false")

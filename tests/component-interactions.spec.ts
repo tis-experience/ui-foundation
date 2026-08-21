@@ -162,11 +162,11 @@ test("keeps calendar, resizable and scroll surfaces operable", async ({ page }) 
 
 test("exposes accessible semantics for status, data and navigation specimens", async ({ page }) => {
   await expect(component(page, "attachment").getByRole("button", {
-    name: "Remove attachment",
+    name: "Remove component-spec.pdf",
   })).toBeEnabled()
   await expect(component(page, "avatar").getByLabel("Project members")).toBeVisible()
   await expect(component(page, "button-group").getByRole("group", {
-    name: "Text alignment",
+    name: "Document actions",
   })).toBeVisible()
   await expect(component(page, "chart").getByRole("img", {
     name: "Monthly component installs",

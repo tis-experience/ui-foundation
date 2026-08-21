@@ -96,7 +96,7 @@
       "description": "A file attachment surface with media, metadata, actions and an optional trigger.",
       "files": ["src/components/ui/attachment.tsx"],
       "registryDependencies": ["button"],
-      "accessibility": "Use descriptive filenames, expose file type and size in text, and label icon-only actions."
+      "accessibility": "Keep filename, file type, size and upload or error state available as text; give every icon-only action and trigger its own accessible name and tab stop."
     },
     {
       "name": "avatar",
@@ -120,7 +120,7 @@
       "category": "navigation",
       "description": "A hierarchical path that locates the current page within a structure.",
       "files": ["src/components/ui/breadcrumb.tsx"],
-      "accessibility": "Uses a named breadcrumb navigation landmark and aria-current on the current page."
+      "accessibility": "Use a named navigation landmark with an ordered list, real destination links, decorative separators and aria-current on exactly one current page."
     },
     {
       "name": "bubble",
@@ -145,7 +145,7 @@
       "description": "A visual and semantic grouping for closely related actions or controls.",
       "files": ["src/components/ui/button-group.tsx", "src/components/ui/button-group.variants.ts"],
       "registryDependencies": ["separator"],
-      "accessibility": "Provide an accessible label for the group when the relationship is not clear from context."
+      "accessibility": "Name the group, preserve native tab order and use Toggle Group instead when the items represent pressed or mutually exclusive state."
     },
     {
       "name": "calendar",
@@ -188,7 +188,7 @@
       "files": ["src/components/ui/chart.tsx"],
       "dependencies": ["recharts@3.8.0"],
       "registryDependencies": ["card"],
-      "accessibility": "Provide a textual summary or data table and never rely on color alone to distinguish series."
+      "accessibility": "Name the graphic, provide a concise text summary and exact values when the task requires them, and never rely on color alone to distinguish series."
     },
     {
       "name": "checkbox",
@@ -250,7 +250,7 @@
       ],
       "dependencies": ["@tanstack/react-table@9.1.2"],
       "registryDependencies": ["button", "input", "table"],
-      "accessibility": "Requires an accessible table name, exposes aria-sort on sortable headers and keeps filter and pagination controls keyboard operable."
+      "accessibility": "Provide a table name or caption, associated headers, aria-sort, keyboard-operable filter and pagination controls, empty feedback and a live result count."
     },
     {
       "name": "date-picker",
@@ -420,7 +420,7 @@
       ],
       "dependencies": ["@shadcn/react@0.3.0"],
       "registryDependencies": ["button"],
-      "accessibility": "Announce newly received messages intentionally and keep scroll controls named and keyboard operable."
+      "accessibility": "Name the scroll viewport and log, keep stable message IDs, announce new content intentionally, preserve reader position and transfer focus to the viewport after the scroll-to-end control disappears."
     },
     {
       "name": "native-select",
@@ -465,7 +465,7 @@
       "category": "feedback",
       "description": "A determinate progress indicator with optional label and value.",
       "files": ["src/components/ui/progress.tsx"],
-      "accessibility": "Provide a label and meaningful value; use Spinner instead when progress is indeterminate."
+      "accessibility": "Provide an accessible label plus minimum, maximum and current values when determinate; omit the current value when indeterminate and do not add a tab stop."
     },
     {
       "name": "questionnaire",
@@ -492,7 +492,7 @@
       "description": "A set of panels whose dimensions can be adjusted with a separator.",
       "files": ["src/components/ui/resizable.tsx"],
       "dependencies": ["react-resizable-panels@4.12.3"],
-      "accessibility": "Keep the separator keyboard operable and provide sensible minimum and maximum panel sizes."
+      "accessibility": "Expose the separator orientation and current range, keep every drag adjustment keyboard operable and provide sensible minimum and maximum panel sizes."
     },
     {
       "name": "scroll-area",
@@ -500,7 +500,7 @@
       "category": "layout",
       "description": "A styled scroll viewport that preserves native scrolling behavior.",
       "files": ["src/components/ui/scroll-area.tsx"],
-      "accessibility": "Only add a tab stop when the region needs keyboard focus and provide an accessible name in that case."
+      "accessibility": "Preserve native scrolling; only add a viewport tab stop when keyboard scrolling is required and provide a contextual region name in that case."
     },
     {
       "name": "select",
@@ -564,7 +564,7 @@
       "description": "A lightweight toast renderer that follows the active UI Foundation theme.",
       "files": ["src/components/ui/sonner.tsx"],
       "dependencies": ["sonner@2.0.8"],
-      "accessibility": "Choose polite or assertive announcements based on urgency and keep important actions available elsewhere."
+      "accessibility": "Choose polite or assertive announcements from urgency, never steal focus, name every action and keep essential information available in persistent content."
     },
     {
       "name": "spinner",
@@ -617,7 +617,7 @@
         "src/components/ui/toast.manager.ts"
       ],
       "registryDependencies": ["button"],
-      "accessibility": "Use the appropriate urgency, keep action labels concise and never rely on a transient toast for essential information."
+      "accessibility": "Choose the appropriate live-region urgency, never steal focus, pause dismissal during interaction, name every action and keep essential information persistent elsewhere."
     },
     {
       "name": "toggle",
@@ -625,7 +625,7 @@
       "category": "form-control",
       "description": "A two-state pressed control for formatting or view options.",
       "files": ["src/components/ui/toggle.tsx", "src/components/ui/toggle.variants.ts"],
-      "accessibility": "Provide an accessible name, especially for icon-only toggles; Base UI exposes pressed state."
+      "accessibility": "Provide a visible or equivalent accessible name, expose aria-pressed without relying on color and keep focus on the control after keyboard activation."
     },
     {
       "name": "toggle-group",

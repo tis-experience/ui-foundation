@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator"
 
 function ButtonGroup({
   className,
-  orientation,
+  orientation = "horizontal",
   ...props
 }: React.ComponentProps<"div"> & ButtonGroupVariantProps) {
   return (

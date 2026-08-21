@@ -57,6 +57,43 @@ test.describe("contract: alert-dialog", () => {
   })
 })
 
+test.describe("contract: attachment", () => {
+  test("keeps the card trigger and file action independently operable", async ({ page }) => {
+    const row = component(page, "attachment")
+    const remove = row.getByRole("button", { name: "Remove component-spec.pdf" })
+    const preview = row.getByRole("button", { name: "Preview component-spec.pdf" })
+    const status = row.locator("[data-contract-status]")
+
+    await remove.focus()
+    await remove.press("Space")
+    await expect(status).toHaveText("Attachment removed")
+    await expect(remove).toBeFocused()
+    await remove.press("Tab")
+    await expect(preview).toBeFocused()
+    await preview.press("Enter")
+    await expect(status).toHaveText("Attachment preview opened")
+
+    const containerShadow = await row.locator('[data-slot="attachment"]').evaluate(
+      (element) => getComputedStyle(element).boxShadow
+    )
+    expect(containerShadow).toBe("none")
+  })
+})
+
+test.describe("contract: breadcrumb", () => {
+  test("exposes a named path with native links and one current page", async ({ page }) => {
+    const row = component(page, "breadcrumb")
+    const navigation = row.getByRole("navigation", { name: "breadcrumb" })
+
+    await expect(navigation.locator("ol")).toBeVisible()
+    await expect(navigation.getByRole("link", { name: "Library" })).toHaveAttribute("href", "#top")
+    await expect(navigation.getByRole("link", { name: "Components" })).toHaveAttribute("href", "#components")
+    await expect(navigation.getByRole("link", { name: "Breadcrumb" })).toHaveAttribute("aria-current", "page")
+    await expect(navigation.locator('[data-slot="breadcrumb-separator"]')).toHaveCount(2)
+    await expect(navigation.locator('[data-slot="breadcrumb-separator"]').first()).toHaveAttribute("aria-hidden", "true")
+  })
+})
+
 test.describe("contract: button", () => {
   test("exposes native semantics and one activation per key", async ({ page }) => {
     const button = component(page, "button").getByRole("button", { name: "Primary" })
@@ -75,6 +112,24 @@ test.describe("contract: button", () => {
     await button.press("Space")
     await expect(button).toHaveAttribute("data-contract-activations", "2")
     await expect(button).toBeFocused()
+  })
+})
+
+test.describe("contract: button-group", () => {
+  test("groups independent native actions without roving selection", async ({ page }) => {
+    const row = component(page, "button-group")
+    const group = row.getByRole("group", { name: "Document actions" })
+    const archive = group.getByRole("button", { name: "Archive" })
+    const report = group.getByRole("button", { name: "Report" })
+
+    await expect(group).toHaveAttribute("data-orientation", "horizontal")
+    await expect(group.getByRole("button")).toHaveCount(3)
+    await archive.focus()
+    await archive.press("Enter")
+    await expect(row.locator("[data-contract-status]")).toHaveText("Document archived")
+    await archive.press("Tab")
+    await expect(report).toBeFocused()
+    await expect(archive).not.toHaveAttribute("aria-pressed", /.+/)
   })
 })
 
@@ -126,6 +181,20 @@ test.describe("contract: carousel", () => {
     await expect(next).toBeFocused()
     await next.press("Space")
     await expect(next).toBeDisabled()
+  })
+})
+
+test.describe("contract: chart", () => {
+  test("provides a named graphic and a concise textual trend summary", async ({ page }) => {
+    const chart = component(page, "chart").getByRole("img", {
+      name: "Monthly component installs",
+    })
+
+    await expect(chart).toHaveAccessibleDescription(
+      "Installs increased each month from 86 in May to 212 in August."
+    )
+    await expect(chart.locator(".recharts-wrapper")).toBeVisible()
+    await expect(chart.locator(".recharts-bar-rectangle")).toHaveCount(4)
   })
 })
 
@@ -248,6 +317,29 @@ test.describe("contract: date-picker", () => {
     await expect(trigger).toContainText("2026-08-21")
     await expect(row.locator('input[type="hidden"][name="releaseDate"]')).toHaveValue("2026-08-21")
     await expect(trigger).toBeFocused()
+  })
+})
+
+test.describe("contract: data-table", () => {
+  test("sorts, filters and paginates through named native controls", async ({ page }) => {
+    const row = component(page, "data-table")
+    const table = row.getByRole("table", { name: "Installable components" })
+    const componentHeader = table.getByRole("columnheader", { name: "Component" })
+    const sort = componentHeader.getByRole("button", { name: "Component" })
+
+    await expect(componentHeader).toHaveAttribute("aria-sort", "none")
+    await sort.focus()
+    await sort.press("Enter")
+    await expect(componentHeader).toHaveAttribute("aria-sort", "ascending")
+    await expect(sort).toBeFocused()
+
+    const filter = row.getByRole("textbox", { name: "Filter components" })
+    await filter.fill("Table")
+    await expect(table.getByRole("row")).toHaveCount(2)
+    await expect(table).toContainText("Table")
+    await expect(row.getByText("1 results")).toBeVisible()
+    await expect(row.getByRole("button", { name: "Go to previous page" })).toBeDisabled()
+    await expect(row.getByRole("button", { name: "Go to next page" })).toBeDisabled()
   })
 })
 
@@ -451,6 +543,23 @@ test.describe("contract: menubar", () => {
   })
 })
 
+test.describe("contract: message-scroller", () => {
+  test("names the transcript and offers a keyboard scroll-to-end control", async ({ page }) => {
+    const row = component(page, "message-scroller")
+    const log = row.getByRole("log", { name: "Component conversation" })
+    const viewport = row.locator('[data-slot="message-scroller-viewport"]')
+    const toEnd = row.getByRole("button", { name: "Scroll to end" })
+
+    await expect(log.locator('[data-slot="message-scroller-item"]')).toHaveCount(4)
+    await expect(log).toHaveAttribute("aria-live", "polite")
+    await expect(toEnd).toBeEnabled()
+    await toEnd.focus()
+    await toEnd.press("Enter")
+    await expect.poll(() => viewport.evaluate((element) => element.scrollTop)).toBeGreaterThan(0)
+    await expect(viewport).toBeFocused()
+  })
+})
+
 test.describe("contract: native-select", () => {
   test("uses its visible label and native keyboard selection", async ({ page }) => {
     const select = component(page, "native-select").getByRole("combobox", {
@@ -518,6 +627,20 @@ test.describe("contract: popover", () => {
   })
 })
 
+test.describe("contract: progress", () => {
+  test("connects the visible label and determinate value", async ({ page }) => {
+    const progress = component(page, "progress").getByRole("progressbar", {
+      name: "Installation",
+    })
+
+    await expect(progress).toHaveAttribute("aria-valuemin", "0")
+    await expect(progress).toHaveAttribute("aria-valuemax", "100")
+    await expect(progress).toHaveAttribute("aria-valuenow", "68")
+    await expect(progress).toContainText("68%")
+    await expect(progress.locator('[data-slot="progress-indicator"]')).toHaveAttribute("data-progressing", "")
+  })
+})
+
 test.describe("contract: questionnaire", () => {
   test("validates, advances, preserves answers and submits from the keyboard", async ({ page }) => {
     const form = component(page, "questionnaire").getByRole("form", {
@@ -575,6 +698,45 @@ test.describe("contract: radio-group", () => {
     await source.press("ArrowDown")
     await expect(packageOption).toBeChecked()
     await expect(packageOption).toBeFocused()
+  })
+})
+
+test.describe("contract: resizable", () => {
+  test("exposes a keyboard adjustable separator and visible focus", async ({ page }) => {
+    const row = component(page, "resizable")
+    const separator = row.getByRole("separator")
+    const initialValue = await separator.getAttribute("aria-valuenow")
+
+    await expect(separator).toHaveAttribute("aria-valuemin")
+    await expect(separator).toHaveAttribute("aria-valuemax")
+    await separator.focus()
+    await separator.press("ArrowRight")
+    await expect.poll(() => separator.getAttribute("aria-valuenow")).not.toBe(initialValue)
+    await expect(separator).toBeFocused()
+
+    const focusStyle = await row.locator('[data-slot="resizable-panel-group"]').evaluate((element) => {
+      const style = getComputedStyle(element)
+      return { offset: style.outlineOffset, style: style.outlineStyle, width: style.outlineWidth }
+    })
+    expect(focusStyle).toEqual({ offset: "2px", style: "solid", width: "2px" })
+  })
+})
+
+test.describe("contract: scroll-area", () => {
+  test("keeps a named native scroll viewport keyboard operable", async ({ page }) => {
+    const viewport = component(page, "scroll-area").getByRole("region", {
+      name: "Component list",
+    })
+
+    const overflow = await viewport.evaluate((element) => ({
+      clientHeight: element.clientHeight,
+      scrollHeight: element.scrollHeight,
+    }))
+    expect(overflow.scrollHeight).toBeGreaterThan(overflow.clientHeight)
+    await viewport.focus()
+    await viewport.press("PageDown")
+    await expect.poll(() => viewport.evaluate((element) => element.scrollTop)).toBeGreaterThan(0)
+    await expect(viewport).toBeFocused()
   })
 })
 
@@ -675,6 +837,21 @@ test.describe("contract: slider", () => {
   })
 })
 
+test.describe("contract: sonner", () => {
+  test("announces success and keeps its optional action keyboard operable", async ({ page }) => {
+    const row = component(page, "sonner")
+    await row.getByRole("button", { name: "Show Sonner toast" }).click()
+
+    const toast = page.locator('[data-sonner-toast]').filter({ hasText: "Theme saved" })
+    await expect(toast).toBeVisible()
+    await expect(toast).toHaveAttribute("data-type", "success")
+    const action = page.getByRole("button", { name: "Undo theme change" })
+    await action.focus()
+    await action.press("Enter")
+    await expect(row.locator("[data-contract-status]")).toHaveText("Theme change undone")
+  })
+})
+
 test.describe("contract: switch", () => {
   test("uses its visible label and toggles with Space", async ({ page }) => {
     const switchControl = component(page, "switch").getByRole("switch", {
@@ -723,6 +900,40 @@ test.describe("contract: textarea", () => {
     await textarea.pressSequentially("X")
     await expect(textarea).toHaveValue("Line one\nLine two")
     await expect(textarea).toBeFocused()
+  })
+})
+
+test.describe("contract: toast", () => {
+  test("announces content and exposes action and close controls", async ({ page }) => {
+    const row = component(page, "toast")
+    await row.getByRole("button", { name: "Show Base UI toast" }).click()
+
+    const toast = page.locator('[data-slot="toast"]').filter({ hasText: "Component installed" })
+    await expect(toast).toBeVisible()
+    await expect(toast).toContainText("Source files are now in your project.")
+    const action = page.getByRole("button", { name: "Undo install" })
+    await action.focus()
+    await action.press("Space")
+    await expect(row.locator("[data-contract-status]")).toHaveText("Installation undone")
+    await expect(page.getByRole("button", { name: "Close toast" })).toBeEnabled()
+  })
+})
+
+test.describe("contract: toggle", () => {
+  test("uses its visible name and preserves focus while toggling pressed state", async ({ page }) => {
+    const toggle = component(page, "toggle").getByRole("button", { name: "Bold" })
+
+    await expect(toggle).toHaveAttribute("aria-pressed", "true")
+    await toggle.focus()
+    await toggle.press("Space")
+    await expect(toggle).toHaveAttribute("aria-pressed", "false")
+    await expect(toggle).toBeFocused()
+
+    const focusStyle = await toggle.evaluate((element) => {
+      const style = getComputedStyle(element)
+      return { offset: style.outlineOffset, style: style.outlineStyle, width: style.outlineWidth }
+    })
+    expect(focusStyle).toEqual({ offset: "2px", style: "solid", width: "2px" })
   })
 })
 

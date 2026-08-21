@@ -22,7 +22,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Provide an accessible name, especially for icon-only toggles; Base UI exposes pressed state.",
+    "accessibility": "Provide a visible or equivalent accessible name, expose aria-pressed without relying on color and keep focus on the control after keyboard activation.",
     "status": "alpha"
   },
   "categories": [

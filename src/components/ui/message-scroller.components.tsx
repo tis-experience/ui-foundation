@@ -83,9 +83,25 @@ function MessageScrollerButton({
   render,
   variant = "secondary",
   size = "icon-sm",
+  onClick,
   ...props
 }: React.ComponentProps<typeof MessageScrollerPrimitive.Button> &
   Pick<React.ComponentProps<typeof Button>, "variant" | "size">) {
+  const handleClick = React.useCallback<
+    NonNullable<React.ComponentProps<typeof MessageScrollerPrimitive.Button>["onClick"]>
+  >((event) => {
+    onClick?.(event)
+    if (event.defaultPrevented) return
+
+    const trigger = event.currentTarget as HTMLElement
+    queueMicrotask(() => {
+      trigger
+        .closest<HTMLElement>('[data-slot="message-scroller"]')
+        ?.querySelector<HTMLElement>('[data-slot="message-scroller-viewport"]')
+        ?.focus({ preventScroll: true })
+    })
+  }, [onClick])
+
   return (
     <MessageScrollerPrimitive.Button
       data-slot="message-scroller-button"
@@ -98,12 +114,12 @@ function MessageScrollerButton({
         className
       )}
       render={render ?? <Button variant={variant} size={size} />}
+      onClick={handleClick}
       {...props}
     >
       {children ?? (
         <>
-          <ArrowDownIcon
-          />
+          <ArrowDownIcon aria-hidden="true" />
           <span className="sr-only">
             {direction === "end" ? "Scroll to end" : "Scroll to start"}
           </span>
