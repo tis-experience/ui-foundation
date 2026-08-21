@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tis-experience.github.io/ui-foundation/tokens/theme.schema.json",
+  "title": "UI Foundation theme",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "label", "modes"],
+  "properties": {
+    "name": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+    "label": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "modes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["light", "dark"],
+      "properties": {
+        "light": { "$ref": "#/$defs/tokenMap" },
+        "dark": { "$ref": "#/$defs/tokenMap" }
+      }
+    }
+  },
+  "$defs": {
+    "tokenMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    }
+  }
+}

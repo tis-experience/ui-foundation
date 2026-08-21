@@ -1,0 +1,72 @@
+#!/usr/bin/env node
+
+import fs from "node:fs"
+import path from "node:path"
+import { fileURLToPath } from "node:url"
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
+const dist = path.join(root, "dist")
+const siteBaseUrl = "https://tis-experience.github.io/ui-foundation/"
+
+function assert(condition, message) {
+  if (!condition) throw new Error(message)
+}
+
+function read(relativePath) {
+  return fs.readFileSync(path.join(dist, relativePath), "utf8")
+}
+
+assert(fs.existsSync(dist), "dist is missing. Run npm run build first.")
+
+const requiredFiles = [
+  "index.html",
+  "ai/manifest.json",
+  "ai/customizer.json",
+  "llms.txt",
+  "r/registry.json",
+  "r/button.json",
+  "r/theme-tis.json",
+  "registry/catalog.json",
+  "tokens/foundations.json",
+  "tokens/densities.json",
+  "tokens/customizer.json",
+  "tokens/themes/neutral.json",
+  "tokens/themes/tis.json",
+  "schemas/ai-manifest.schema.json",
+  "schemas/component-catalog.schema.json",
+  "docs/ai-usage.md",
+  "docs/blocks.md",
+  "docs/charts.md",
+  "docs/customization.md",
+  "docs/compositions.md",
+]
+
+for (const relativePath of requiredFiles) {
+  assert(fs.existsSync(path.join(dist, relativePath)), `Missing public artifact: ${relativePath}`)
+}
+
+const index = read("index.html")
+assert(/(?:src|href)="\.\/assets\//.test(index), "Vite assets are not relative to the Pages project path")
+
+const manifest = JSON.parse(read("ai/manifest.json"))
+assert(manifest.distribution.registryBaseUrl === `${siteBaseUrl}r`, "Registry base URL is not public")
+assert(manifest.theming.customizer.route === `${siteBaseUrl}#customize`, "Customizer URL is not public")
+
+for (const source of manifest.sources) {
+  const url = new URL(source)
+  assert(url.href.startsWith(siteBaseUrl), `Machine-readable source is outside the site: ${source}`)
+  const relativePath = url.pathname.replace(/^\/ui-foundation\//, "")
+  assert(fs.existsSync(path.join(dist, relativePath)), `Manifest source is missing from dist: ${relativePath}`)
+}
+
+for (const item of [...manifest.components, ...manifest.blocks, ...manifest.charts]) {
+  assert(item.install.includes(`${siteBaseUrl}r/`), `${item.name}: install command is not public`)
+}
+
+for (const relativePath of ["ai/manifest.json", "llms.txt", "registry/catalog.json"]) {
+  const content = read(relativePath)
+  assert(!content.includes("ui-foundation.local"), `${relativePath} contains the retired local hostname`)
+  assert(!content.includes("127.0.0.1"), `${relativePath} contains a localhost URL`)
+}
+
+console.log(`Public build valid: ${requiredFiles.length} required artifacts and ${manifest.sources.length} manifest sources.`)

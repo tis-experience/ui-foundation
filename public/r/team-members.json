@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "team-members",
+  "title": "Team Members",
+  "description": "A member management card with identity, role, status and explicit row actions.",
+  "dependencies": [],
+  "registryDependencies": [
+    "./ui-base.json",
+    "./avatar.json",
+    "./badge.json",
+    "./button.json",
+    "./card.json"
+  ],
+  "files": [
+    {
+      "path": "src/blocks/team-members.tsx",
+      "content": "import { MoreHorizontalIcon, PlusIcon } from \"lucide-react\"\n\nimport { Avatar, AvatarBadge, AvatarFallback } from \"@/components/ui/avatar\"\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\n\ninterface TeamMember {\n  email: string\n  initials: string\n  name: string\n  role: string\n  status: \"active\" | \"invited\" | \"offline\"\n}\n\ninterface TeamMembersProps {\n  members?: TeamMember[]\n  onInvite?: () => void\n  onMemberAction?: (member: TeamMember) => void\n}\n\nconst defaultMembers: TeamMember[] = [\n  { name: \"Ana Martins\", email: \"ana@example.com\", initials: \"AM\", role: \"Admin\", status: \"active\" },\n  { name: \"David Costa\", email: \"david@example.com\", initials: \"DC\", role: \"Editor\", status: \"active\" },\n  { name: \"Marta Silva\", email: \"marta@example.com\", initials: \"MS\", role: \"Viewer\", status: \"invited\" },\n]\n\nfunction TeamMembers({ members = defaultMembers, onInvite, onMemberAction }: TeamMembersProps) {\n  return (\n    <Card aria-labelledby=\"team-members-title\">\n      <CardHeader>\n        <CardTitle><h2 id=\"team-members-title\">Team members</h2></CardTitle>\n        <CardDescription>Manage access and responsibilities.</CardDescription>\n      </CardHeader>\n      <CardContent className=\"grid gap-1\">\n        {members.map((member) => (\n          <div className=\"grid grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-3 rounded-lg px-2 py-3 hover:bg-muted/60\" key={member.email}>\n            <Avatar>\n              <AvatarFallback>{member.initials}</AvatarFallback>\n              {member.status === \"active\" ? <AvatarBadge><span className=\"sr-only\">Active</span></AvatarBadge> : null}\n            </Avatar>\n            <div className=\"min-w-0\">\n              <div className=\"truncate text-sm font-medium\">{member.name}</div>\n              <div className=\"truncate text-xs text-muted-foreground\">{member.email}</div>\n            </div>\n            <Badge variant=\"outline\">{member.status === \"invited\" ? \"Invited\" : member.role}</Badge>\n            <Button type=\"button\" variant=\"ghost\" size=\"icon-sm\" aria-label={`Actions for ${member.name}`} onClick={() => onMemberAction?.(member)}>\n              <MoreHorizontalIcon />\n            </Button>\n          </div>\n        ))}\n        <Button type=\"button\" variant=\"outline\" className=\"mt-2 w-full\" onClick={onInvite}>\n          <PlusIcon data-icon=\"inline-start\" />\n          Invite member\n        </Button>\n      </CardContent>\n    </Card>\n  )\n}\n\nexport { TeamMembers, type TeamMember, type TeamMembersProps }\n",
+      "type": "registry:component",
+      "target": "src/blocks/team-members.tsx"
+    }
+  ],
+  "meta": {
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "distribution": "shadcn-source",
+    "accessibility": "Every member action has a unique accessible name and status remains available as text.",
+    "status": "alpha"
+  },
+  "categories": [
+    "team"
+  ],
+  "type": "registry:block"
+}

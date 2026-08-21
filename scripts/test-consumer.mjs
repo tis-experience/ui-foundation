@@ -1,0 +1,103 @@
+#!/usr/bin/env node
+
+import { execFileSync } from "node:child_process"
+import fs from "node:fs"
+import os from "node:os"
+import path from "node:path"
+import { fileURLToPath } from "node:url"
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
+const template = path.join(root, "fixtures", "consumer-template")
+const catalog = JSON.parse(
+  fs.readFileSync(path.join(root, "registry", "catalog.json"), "utf8")
+)
+const consumer = fs.mkdtempSync(path.join(os.tmpdir(), "ui-foundation-consumer-"))
+const npmCache = path.join(os.tmpdir(), "ui-foundation-npm-cache")
+let passed = false
+
+function run(command, args, cwd = consumer) {
+  execFileSync(command, args, {
+    cwd,
+    env: { ...process.env, npm_config_cache: npmCache },
+    stdio: "inherit",
+  })
+}
+
+try {
+  fs.cpSync(template, consumer, { recursive: true })
+  for (const file of fs.readdirSync(path.join(root, "public", "r"))) {
+    if (file.endsWith(".json")) {
+      fs.copyFileSync(
+        path.join(root, "public", "r", file),
+        path.join(consumer, file)
+      )
+    }
+  }
+  run("npm", ["install", "--no-audit", "--no-fund"])
+
+  const items = [
+    ...catalog.components.map(({ name }) => name),
+    ...(catalog.blocks ?? []).map(({ name }) => name),
+    ...(catalog.charts ?? []).map(({ name }) => name),
+    "theme-tis",
+  ].map((name) =>
+    path.join(consumer, `${name}.json`)
+  )
+  run(path.join(root, "node_modules", ".bin", "shadcn"), [
+    "add",
+    "--yes",
+    ...items,
+  ])
+
+  const requiredFiles = [
+    ...catalog.components.flatMap(({ files }) => files),
+    ...(catalog.blocks ?? []).flatMap(({ files }) => files),
+    ...(catalog.charts ?? []).flatMap(({ files }) => files),
+    "src/lib/utils.ts",
+  ]
+  for (const file of requiredFiles) {
+    if (!fs.existsSync(path.join(consumer, file))) {
+      throw new Error(`Consumer install is missing ${file}`)
+    }
+  }
+
+  const css = fs.readFileSync(path.join(consumer, "src", "index.css"), "utf8")
+  if (
+    !css.includes("[data-ui-theme=\"tis\"]") ||
+    !css.includes("--color-overlay") ||
+    !css.includes("--font-sans") ||
+    !css.includes("--duration-normal") ||
+    !css.includes("--shadow-md") ||
+    !css.includes("[data-ui-density=\"comfortable\"]") ||
+    !css.includes("--ui-control-height-md: 2.5rem") ||
+    !css.includes("--focus-ring-width: 2px") ||
+    !css.includes(":focus-visible")
+  ) {
+    throw new Error("Consumer CSS is missing the theme, density, focus or core foundation contract")
+  }
+
+  const typesetCss = fs.readFileSync(
+    path.join(consumer, "src", "components", "ui", "typography.css"),
+    "utf8"
+  )
+  for (const variable of [
+    "--typeset-config-size",
+    "--typeset-config-leading",
+    "--typeset-config-flow",
+    "--typeset-config-measure",
+  ]) {
+    if (!typesetCss.includes(variable)) {
+      throw new Error(`Installed Typeset CSS is missing ${variable}`)
+    }
+  }
+
+  run("npm", ["run", "build"])
+  console.log(`Consumer smoke passed: ${catalog.components.length} components, ${(catalog.blocks ?? []).length} blocks, ${(catalog.charts ?? []).length} chart bundles, dependencies, density profiles, accessible focus, portable Typeset rhythm, TIS preset and production build.`)
+  passed = true
+} finally {
+  if (passed) {
+    fs.rmSync(consumer, { recursive: true, force: true })
+  } else {
+    console.error(`Consumer fixture preserved for inspection: ${consumer}`)
+  }
+}

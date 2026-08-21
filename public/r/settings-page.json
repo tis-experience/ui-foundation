@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "settings-page",
+  "title": "Settings Page",
+  "description": "A responsive workspace settings form for identity, localization and notification preferences.",
+  "dependencies": [],
+  "registryDependencies": [
+    "./ui-base.json",
+    "./button.json",
+    "./card.json",
+    "./field.json",
+    "./input.json",
+    "./native-select.json",
+    "./separator.json",
+    "./switch.json"
+  ],
+  "files": [
+    {
+      "path": "src/blocks/settings-page.tsx",
+      "content": "import type { FormEventHandler } from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Field, FieldDescription, FieldGroup, FieldLabel } from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\nimport { NativeSelect, NativeSelectOption } from \"@/components/ui/native-select\"\nimport { Separator } from \"@/components/ui/separator\"\nimport { Switch } from \"@/components/ui/switch\"\n\ninterface SettingsPageProps {\n  onSubmit?: FormEventHandler<HTMLFormElement>\n}\n\nfunction SettingsPage({ onSubmit }: SettingsPageProps) {\n  return (\n    <section className=\"grid gap-5\" aria-labelledby=\"settings-page-title\">\n      <header>\n        <h2 id=\"settings-page-title\" className=\"font-heading text-2xl font-semibold tracking-tight\">Workspace settings</h2>\n        <p className=\"text-sm text-muted-foreground\">Manage identity, localization and notifications.</p>\n      </header>\n\n      <form onSubmit={onSubmit}>\n        <Card>\n          <CardHeader>\n            <CardTitle>General</CardTitle>\n            <CardDescription>Information shown across the workspace.</CardDescription>\n          </CardHeader>\n          <CardContent>\n            <FieldGroup>\n              <Field>\n                <FieldLabel htmlFor=\"settings-workspace-name\">Workspace name</FieldLabel>\n                <Input id=\"settings-workspace-name\" name=\"workspaceName\" defaultValue=\"Digital services\" required />\n                <FieldDescription>Use a clear name people can recognize.</FieldDescription>\n              </Field>\n              <Field>\n                <FieldLabel htmlFor=\"settings-locale\">Default locale</FieldLabel>\n                <NativeSelect id=\"settings-locale\" name=\"locale\" defaultValue=\"pt-AO\" className=\"w-full max-w-sm\">\n                  <NativeSelectOption value=\"pt-AO\">Português (Angola)</NativeSelectOption>\n                  <NativeSelectOption value=\"pt-BR\">Português (Brasil)</NativeSelectOption>\n                  <NativeSelectOption value=\"en\">English</NativeSelectOption>\n                </NativeSelect>\n              </Field>\n              <Separator />\n              <Field orientation=\"horizontal\">\n                <div className=\"flex-1\">\n                  <FieldLabel htmlFor=\"settings-weekly-summary\">Weekly summary</FieldLabel>\n                  <FieldDescription>Receive an email with activity and adoption trends.</FieldDescription>\n                </div>\n                <Switch id=\"settings-weekly-summary\" name=\"weeklySummary\" defaultChecked />\n              </Field>\n              <Field orientation=\"horizontal\">\n                <div className=\"flex-1\">\n                  <FieldLabel htmlFor=\"settings-product-updates\">Product updates</FieldLabel>\n                  <FieldDescription>Receive important release and maintenance notices.</FieldDescription>\n                </div>\n                <Switch id=\"settings-product-updates\" name=\"productUpdates\" defaultChecked />\n              </Field>\n            </FieldGroup>\n          </CardContent>\n          <CardFooter className=\"justify-end gap-2\">\n            <Button type=\"reset\" variant=\"ghost\">Reset</Button>\n            <Button type=\"submit\">Save settings</Button>\n          </CardFooter>\n        </Card>\n      </form>\n    </section>\n  )\n}\n\nexport { SettingsPage, type SettingsPageProps }\n",
+      "type": "registry:component",
+      "target": "src/blocks/settings-page.tsx"
+    }
+  ],
+  "meta": {
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "distribution": "shadcn-source",
+    "accessibility": "Groups visible labels, descriptions and native form controls in a predictable keyboard order.",
+    "status": "alpha"
+  },
+  "categories": [
+    "settings"
+  ],
+  "type": "registry:block"
+}

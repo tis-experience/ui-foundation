@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "form",
+  "title": "Form",
+  "description": "A native form composition with Field-based body layout, pending state and responsive actions.",
+  "dependencies": [],
+  "registryDependencies": [
+    "./ui-base.json",
+    "./field.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/form.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { FieldGroup } from \"@/components/ui/field\"\n\ntype FormProps = React.ComponentProps<\"form\"> & {\n  pending?: boolean\n}\n\nfunction Form({ className, pending = false, ...props }: FormProps) {\n  return (\n    <form\n      data-slot=\"form\"\n      data-pending={pending || undefined}\n      aria-busy={pending || undefined}\n      className={cn(\"flex w-full flex-col gap-6\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction FormBody({ className, ...props }: React.ComponentProps<typeof FieldGroup>) {\n  return (\n    <FieldGroup\n      data-slot=\"form-body\"\n      className={cn(\"gap-5\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction FormActions({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"form-actions\"\n      className={cn(\n        \"flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Form, FormActions, FormBody, type FormProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "distribution": "shadcn-source",
+    "accessibility": "Preserves native form submission and validation semantics; compose every control with a visible label and connected error text.",
+    "status": "alpha",
+    "introducedIn": "0.1.0-alpha.0"
+  },
+  "categories": [
+    "form-structure"
+  ],
+  "type": "registry:ui"
+}

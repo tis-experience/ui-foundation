@@ -1,0 +1,139 @@
+# UI Foundation
+
+Standalone React component library. Neutral is the default theme; TIS is optional. There is no ds-tis dependency and no Figma library in this alpha.
+
+## Runtime and distribution
+
+- React 19
+- shadcn source registry: 4.18.0
+- Base UI behavior engine: 1.7.0
+- Tailwind CSS 4
+
+## Agent rules
+
+- Read this manifest before selecting or generating components.
+- Install registry source instead of recreating component markup from memory.
+- Use Neutral unless the TIS identity is explicitly requested.
+- Use Comfortable density unless the product explicitly requires Compact or Spacious controls.
+- Use Base UI render composition; do not translate examples to Radix asChild.
+- Use the theme and foundation token contracts; never hardcode brand colors in components.
+- Prefer an installable block when it matches the requested application pattern, then adapt its owned source.
+- Use the chart recipe bundle for Area, Bar, Line, Pie, Radar or Radial visualizations and keep its text summary or an equivalent data table.
+- Preserve visible labels, focus behavior, keyboard paths and responsive states.
+- Do not claim a Figma library or handoff exists for this alpha.
+
+## Themes
+
+- Neutral: default, light and dark
+- TIS: optional via data-ui-theme="tis", light and dark
+
+## Density
+
+- Comfortable: default; control heights 32 / 40 / 48px for sm / md / lg
+- Compact: opt-in for dense interfaces; 28 / 32 / 36px
+- Spacious: opt-in for generous and touch-oriented interfaces; 40 / 48 / 56px
+- Apply with data-ui-density="compact|comfortable|spacious" on the document root
+
+## Customizer
+
+- Human interface: https://tis-experience.github.io/ui-foundation/#customize
+- Machine-readable contract: https://tis-experience.github.io/ui-foundation/tokens/customizer.json
+- Identity presets: neutral, tis, custom
+- Base colors: neutral, slate, stone, zinc
+- Fonts: geist, humanist, serif, system
+- Typeset presets: compact (14px / 1.6 leading / 58ch), default (16px / 1.75 leading / 65ch), reading (18px / 1.9 leading / 68ch)
+- Radius: none, small, default, large, full
+- Outputs: css, registry-theme, share-url
+
+## Foundations (50 tokens)
+
+- Typography: --font-sans, --font-heading, --font-mono, --text-xs, --text-xs--line-height, --text-sm, --text-sm--line-height, --text-base, --text-base--line-height, --text-lg, --text-lg--line-height, --text-xl, --text-xl--line-height, --text-2xl, --text-2xl--line-height, --text-3xl, --text-3xl--line-height, --text-4xl, --text-4xl--line-height, --font-weight-normal, --font-weight-medium, --font-weight-semibold, --font-weight-bold, --tracking-tight, --tracking-normal, --tracking-wide
+- Spacing: --spacing
+- Radius: --control-radius, --control-radius-sm, --radius-sm, --radius-md, --radius-lg, --radius-xl, --radius-2xl, --radius-3xl, --radius-4xl
+- Borders: --border-width-default, --border-width-strong, --focus-ring-width, --focus-ring-offset
+- Elevation: --shadow-xs, --shadow-sm, --shadow-md, --shadow-lg
+- Motion: --duration-fast, --duration-normal, --duration-slow, --ease-standard, --ease-enter, --ease-exit
+
+## Components (66)
+
+- Accordion (accordion): A vertically stacked set of interactive headings that reveal content. Exports: Accordion, AccordionContent, AccordionItem, AccordionTrigger.
+- Alert (alert): A static status message with optional title, icon and action. Exports: Alert, AlertAction, AlertDescription, AlertTitle.
+- Alert Dialog (alert-dialog): A modal confirmation surface for important or destructive decisions. Exports: AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogMedia, AlertDialogOverlay, AlertDialogPortal, AlertDialogTitle, AlertDialogTrigger.
+- Aspect Ratio (aspect-ratio): A layout primitive that preserves a fixed width-to-height ratio. Exports: AspectRatio.
+- Attachment (attachment): A file attachment surface with media, metadata, actions and an optional trigger. Exports: Attachment, AttachmentAction, AttachmentActions, AttachmentContent, AttachmentDescription, AttachmentGroup, AttachmentMedia, AttachmentTitle, AttachmentTrigger.
+- Avatar (avatar): A user or entity image with fallback, badge and grouping support. Exports: Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage.
+- Badge (badge): A compact label for status, category or metadata. Exports: Badge, BadgeVariantProps, badgeVariants.
+- Breadcrumb (breadcrumb): A hierarchical path that locates the current page within a structure. Exports: Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator.
+- Bubble (bubble): A conversational content surface with alignment and reaction support. Exports: Bubble, BubbleContent, BubbleGroup, BubbleReactions.
+- Button (button): A primary action primitive with visual variants and sizes. Exports: Button, ButtonVariantProps, buttonVariants.
+- Button Group (button-group): A visual and semantic grouping for closely related actions or controls. Exports: ButtonGroup, ButtonGroupSeparator, ButtonGroupText, ButtonGroupVariantProps, buttonGroupVariants.
+- Calendar (calendar): A date selection calendar with single, multiple and range modes. Exports: Calendar, CalendarDayButton.
+- Card (card): A compositional surface for grouped content and actions. Exports: Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle.
+- Carousel (carousel): A keyboard-operable sequence of slides powered by Embla Carousel. Exports: Carousel, CarouselApi, CarouselContent, CarouselContext, CarouselItem, CarouselNext, CarouselPrevious, useCarousel.
+- Chart (chart): Token-aware wrappers, tooltip and legend utilities for Recharts visualizations. Exports: ChartContainer, ChartLegend, ChartLegendContent, ChartStyle, ChartTooltip, ChartTooltipContent.
+- Checkbox (checkbox): A binary or mixed-state selection control. Exports: Checkbox.
+- Collapsible (collapsible): A trigger that reveals or hides a single region of related content. Exports: Collapsible, CollapsibleContent, CollapsibleTrigger.
+- Combobox (combobox): A searchable single or multiple selection input with listbox behavior. Exports: Combobox, ComboboxChip, ComboboxChips, ComboboxChipsInput, ComboboxCollection, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxLabel, ComboboxList, ComboboxSeparator, ComboboxTrigger, ComboboxValue, useComboboxAnchor.
+- Command (command): A searchable command list that can be embedded or opened in a dialog. Exports: Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut.
+- Context Menu (context-menu): A contextual action menu opened from pointer or keyboard interaction. Exports: ContextMenu, ContextMenuCheckboxItem, ContextMenuContent, ContextMenuGroup, ContextMenuItem, ContextMenuLabel, ContextMenuPortal, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger.
+- Data Table (data-table): A reusable TanStack Table composition with sorting, filtering, pagination and selection support. Exports: createDataTableColumnHelper, DataTable, DataTableColumnHeader, DataTableColumnHeaderProps, dataTableFeatures, DataTableFeatures, DataTableFilter, DataTableProps.
+- Date Picker (date-picker): A controlled or uncontrolled date selection composition built from Button, Calendar and Popover. Exports: DatePicker, DatePickerProps.
+- Dialog (dialog): A modal task surface with focus management and dismissal behavior. Exports: Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger.
+- Direction (direction): A provider for left-to-right and right-to-left component behavior. Exports: DirectionProvider, useDirection.
+- Drawer (drawer): A swipeable edge panel with modal, nested and snap-point behavior. Exports: Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerPortal, DrawerSwipeHandle, DrawerTitle, DrawerTrigger.
+- Dropdown Menu (dropdown-menu): An anchored menu for actions, selections and nested commands. Exports: DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger.
+- Empty (empty): A structured empty state with media, explanation and an optional next action. Exports: Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle.
+- Field (field): A semantic composition for labels, controls, descriptions and validation messages. Exports: Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet, FieldTitle.
+- Form (form): A native form composition with Field-based body layout, pending state and responsive actions. Exports: Form, FormActions, FormBody, FormProps.
+- Hover Card (hover-card): A non-modal preview surface shown from hover or keyboard focus. Exports: HoverCard, HoverCardContent, HoverCardTrigger.
+- Input (input): A single-line text input built on the Base UI input primitive. Exports: Input.
+- Input Group (input-group): A text control composed with inline addons, actions or keyboard hints. Exports: InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput, InputGroupText, InputGroupTextarea.
+- Input OTP (input-otp): A segmented one-time-password input backed by a single accessible value. Exports: InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot.
+- Item (item): A compositional row for media, title, description and related actions. Exports: Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader, ItemMedia, ItemSeparator, ItemTitle.
+- Kbd (kbd): A compact representation of keyboard input or shortcuts. Exports: Kbd, KbdGroup.
+- Label (label): A visible label for form controls. Exports: Label.
+- Marker (marker): A compact annotated line with optional icon, border or separators. Exports: Marker, MarkerContent, MarkerIcon, markerVariants.
+- Menubar (menubar): A persistent horizontal set of menus for application commands. Exports: Menubar, MenubarCheckboxItem, MenubarContent, MenubarGroup, MenubarItem, MenubarLabel, MenubarMenu, MenubarPortal, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger.
+- Message (message): A structured conversation message with content, metadata and actions. Exports: Message, MessageAvatar, MessageContent, MessageFooter, MessageGroup, MessageHeader.
+- Message Scroller (message-scroller): A conversation viewport with managed anchoring and scroll-to-start or end controls. Exports: MessageScroller, MessageScrollerButton, MessageScrollerContent, MessageScrollerItem, MessageScrollerProvider, MessageScrollerViewport, useMessageScroller, useMessageScrollerScrollable, useMessageScrollerVisibility.
+- Native Select (native-select): A styled native select for simple options and platform-native behavior. Exports: NativeSelect, NativeSelectOptGroup, NativeSelectOption.
+- Navigation Menu (navigation-menu): A responsive navigation structure with links and optional disclosure panels. Exports: NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuPositioner, NavigationMenuTrigger, navigationMenuTriggerStyle.
+- Pagination (pagination): A page navigation pattern with current, previous, next and overflow states. Exports: Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious.
+- Popover (popover): A non-modal anchored surface for compact interactive content. Exports: Popover, PopoverContent, PopoverDescription, PopoverHeader, PopoverTitle, PopoverTrigger.
+- Progress (progress): A determinate progress indicator with optional label and value. Exports: Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue.
+- Questionnaire (questionnaire): A multi-step question flow with navigation and progress state. Exports: Questionnaire, QuestionnaireActions, QuestionnaireChoice, QuestionnaireChoiceDescription, QuestionnaireChoices, QuestionnaireDescription, QuestionnaireError, QuestionnaireInput, QuestionnaireItem, QuestionnaireNext, QuestionnairePrevious, QuestionnaireProgress, QuestionnaireSkip, QuestionnaireSubmit, QuestionnaireTitle.
+- Radio Group (radio-group): A mutually exclusive set of options. Exports: RadioGroup, RadioGroupItem.
+- Resizable (resizable): A set of panels whose dimensions can be adjusted with a separator. Exports: ResizableHandle, ResizablePanel, ResizablePanelGroup.
+- Scroll Area (scroll-area): A styled scroll viewport that preserves native scrolling behavior. Exports: ScrollArea, ScrollBar.
+- Select (select): A single-selection popup control with groups and scrolling support. Exports: Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue.
+- Separator (separator): A horizontal or vertical visual divider. Exports: Separator.
+- Sheet (sheet): A modal panel that enters from an edge of the viewport. Exports: Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger.
+- Sidebar (sidebar): A responsive application sidebar with collapsible and mobile sheet behavior. Exports: Sidebar, SidebarContent, SidebarContext, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, useSidebar.
+- Skeleton (skeleton): A non-interactive placeholder for content that is loading. Exports: Skeleton.
+- Slider (slider): A single or range value input along a horizontal or vertical track. Exports: Slider.
+- Sonner (sonner): A lightweight toast renderer that follows the active UI Foundation theme. Exports: Toaster.
+- Spinner (spinner): A compact animated progress indicator for indeterminate work. Exports: Spinner.
+- Switch (switch): An immediate on or off setting control. Exports: Switch.
+- Table (table): Semantic table primitives for structured rows, headers, captions and summaries. Exports: Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow.
+- Tabs (tabs): A set of panels where one section is visible at a time. Exports: Tabs, TabsContent, TabsList, TabsListVariantProps, tabsListVariants, TabsTrigger.
+- Textarea (textarea): A multi-line text input that grows with its content. Exports: Textarea.
+- Toast (toast): A Base UI toast system with queueing, actions, swipe dismissal and a five-item visible limit. Exports: createToastManager, toast, Toast, ToastAction, ToastClose, ToastContent, ToastDescription, Toaster, ToastPortal, ToastProvider, ToastTitle, ToastViewport, useToastManager.
+- Toggle (toggle): A two-state pressed control for formatting or view options. Exports: Toggle, ToggleVariantProps, toggleVariants.
+- Toggle Group (toggle-group): A single or multiple selection group composed from toggle items. Exports: ToggleGroup, ToggleGroupItem.
+- Tooltip (tooltip): A short non-interactive explanation for a focused or hovered trigger. Exports: Tooltip, TooltipContent, TooltipProvider, TooltipTrigger.
+- Typography (typography): A token-aware Typeset container for semantic HTML and rendered Markdown content. Exports: Typeset, TypesetProps, TypesetScroll.
+
+## Blocks (4)
+
+- Dashboard Overview (dashboard-overview): A responsive product dashboard with metrics, an accessible trend chart and recent activity. Installable registry:block. Exports: DashboardActivity, DashboardMetric, DashboardOverview, DashboardOverviewProps.
+- Login Page (login-page): A complete sign-in surface with native form semantics, password recovery and account access guidance. Installable registry:block. Exports: LoginPage, LoginPageProps.
+- Settings Page (settings-page): A responsive workspace settings form for identity, localization and notification preferences. Installable registry:block. Exports: SettingsPage, SettingsPageProps.
+- Team Members (team-members): A member management card with identity, role, status and explicit row actions. Installable registry:block. Exports: TeamMember, TeamMembers, TeamMembersProps.
+
+## Chart recipe bundles (1)
+
+- Chart Recipes (chart-recipes): Six token-aware and accessible Recharts recipes: Area, Bar, Line, Pie, Radar and Radial. Installable registry:block. Exports: AreaChartRecipe, BarChartRecipe, LineChartRecipe, PieChartRecipe, RadarChartRecipe, RadialChartRecipe.
+
+## Canonical machine-readable source
+
+Read https://tis-experience.github.io/ui-foundation/ai/manifest.json before generating an interface.

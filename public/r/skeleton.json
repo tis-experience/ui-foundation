@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "title": "Skeleton",
+  "description": "A non-interactive placeholder for content that is loading.",
+  "dependencies": [],
+  "registryDependencies": [
+    "./ui-base.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/skeleton.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nfunction Skeleton({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\"animate-pulse rounded-md bg-muted\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "distribution": "shadcn-source",
+    "accessibility": "Mark the containing region busy and provide a meaningful loading label outside the skeleton.",
+    "status": "alpha"
+  },
+  "categories": [
+    "feedback"
+  ],
+  "type": "registry:ui"
+}

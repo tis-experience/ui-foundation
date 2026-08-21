@@ -1,0 +1,660 @@
+{
+  "$schema": "../schemas/component-catalog.schema.json",
+  "version": "0.1.0-alpha.0",
+  "distribution": "shadcn-source",
+  "behaviorEngine": "@base-ui/react@1.7.0",
+  "defaultTheme": "neutral",
+  "optionalThemes": ["tis"],
+  "guides": [],
+  "blocks": [
+    {
+      "name": "dashboard-overview",
+      "title": "Dashboard Overview",
+      "category": "dashboard",
+      "description": "A responsive product dashboard with metrics, an accessible trend chart and recent activity.",
+      "files": ["src/blocks/dashboard-overview.tsx"],
+      "registryDependencies": ["badge", "button", "card", "chart", "table"],
+      "accessibility": "Includes a labelled chart with an accessibility layer, a named activity table and a heading-led page hierarchy."
+    },
+    {
+      "name": "login-page",
+      "title": "Login Page",
+      "category": "authentication",
+      "description": "A complete sign-in surface with native form semantics, password recovery and account access guidance.",
+      "files": ["src/blocks/login-page.tsx"],
+      "registryDependencies": ["button", "card", "checkbox", "field", "input"],
+      "accessibility": "Uses native labelled inputs, autocomplete attributes, a submit button and visible recovery links."
+    },
+    {
+      "name": "settings-page",
+      "title": "Settings Page",
+      "category": "settings",
+      "description": "A responsive workspace settings form for identity, localization and notification preferences.",
+      "files": ["src/blocks/settings-page.tsx"],
+      "registryDependencies": ["button", "card", "field", "input", "native-select", "separator", "switch"],
+      "accessibility": "Groups visible labels, descriptions and native form controls in a predictable keyboard order."
+    },
+    {
+      "name": "team-members",
+      "title": "Team Members",
+      "category": "team",
+      "description": "A member management card with identity, role, status and explicit row actions.",
+      "files": ["src/blocks/team-members.tsx"],
+      "registryDependencies": ["avatar", "badge", "button", "card"],
+      "accessibility": "Every member action has a unique accessible name and status remains available as text."
+    }
+  ],
+  "charts": [
+    {
+      "name": "chart-recipes",
+      "title": "Chart Recipes",
+      "category": "data-visualization",
+      "description": "Six token-aware and accessible Recharts recipes: Area, Bar, Line, Pie, Radar and Radial.",
+      "files": ["src/charts/chart-recipes.tsx"],
+      "registryDependencies": ["chart"],
+      "accessibility": "Every chart has an accessible name, Recharts accessibility layer and a concise text summary of the data."
+    }
+  ],
+  "components": [
+    {
+      "name": "accordion",
+      "title": "Accordion",
+      "category": "disclosure",
+      "description": "A vertically stacked set of interactive headings that reveal content.",
+      "files": ["src/components/ui/accordion.tsx"],
+      "accessibility": "Base UI manages keyboard navigation, expanded state and panel relationships."
+    },
+    {
+      "name": "alert",
+      "title": "Alert",
+      "category": "feedback",
+      "description": "A static status message with optional title, icon and action.",
+      "files": ["src/components/ui/alert.tsx"],
+      "accessibility": "Uses role=alert; reserve it for content that should be announced immediately."
+    },
+    {
+      "name": "alert-dialog",
+      "title": "Alert Dialog",
+      "category": "overlay",
+      "description": "A modal confirmation surface for important or destructive decisions.",
+      "files": ["src/components/ui/alert-dialog.tsx"],
+      "registryDependencies": ["button"],
+      "accessibility": "Always provide a title and description; Base UI traps focus and requires an explicit response."
+    },
+    {
+      "name": "aspect-ratio",
+      "title": "Aspect Ratio",
+      "category": "layout",
+      "description": "A layout primitive that preserves a fixed width-to-height ratio.",
+      "files": ["src/components/ui/aspect-ratio.tsx"],
+      "accessibility": "The wrapper is presentational; provide appropriate semantics and alternative text for its content."
+    },
+    {
+      "name": "attachment",
+      "title": "Attachment",
+      "category": "data-display",
+      "description": "A file attachment surface with media, metadata, actions and an optional trigger.",
+      "files": ["src/components/ui/attachment.tsx"],
+      "registryDependencies": ["button"],
+      "accessibility": "Use descriptive filenames, expose file type and size in text, and label icon-only actions."
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "category": "data-display",
+      "description": "A user or entity image with fallback, badge and grouping support.",
+      "files": ["src/components/ui/avatar.tsx"],
+      "accessibility": "Provide meaningful alt text for informative images and always include AvatarFallback."
+    },
+    {
+      "name": "badge",
+      "title": "Badge",
+      "category": "data-display",
+      "description": "A compact label for status, category or metadata.",
+      "files": ["src/components/ui/badge.tsx", "src/components/ui/badge.variants.ts"],
+      "accessibility": "Decorative badges must not be the only way status is communicated."
+    },
+    {
+      "name": "breadcrumb",
+      "title": "Breadcrumb",
+      "category": "navigation",
+      "description": "A hierarchical path that locates the current page within a structure.",
+      "files": ["src/components/ui/breadcrumb.tsx"],
+      "accessibility": "Uses a named breadcrumb navigation landmark and aria-current on the current page."
+    },
+    {
+      "name": "bubble",
+      "title": "Bubble",
+      "category": "data-display",
+      "description": "A conversational content surface with alignment and reaction support.",
+      "files": ["src/components/ui/bubble.tsx"],
+      "accessibility": "Keep sender and timing information available in text and preserve chronological reading order."
+    },
+    {
+      "name": "button",
+      "title": "Button",
+      "category": "action",
+      "description": "A primary action primitive with visual variants and sizes.",
+      "files": ["src/components/ui/button.tsx", "src/components/ui/button.variants.ts"],
+      "accessibility": "Base UI preserves native button semantics, disabled state and keyboard activation."
+    },
+    {
+      "name": "button-group",
+      "title": "Button Group",
+      "category": "action",
+      "description": "A visual and semantic grouping for closely related actions or controls.",
+      "files": ["src/components/ui/button-group.tsx", "src/components/ui/button-group.variants.ts"],
+      "registryDependencies": ["separator"],
+      "accessibility": "Provide an accessible label for the group when the relationship is not clear from context."
+    },
+    {
+      "name": "calendar",
+      "title": "Calendar",
+      "category": "form-control",
+      "description": "A date selection calendar with single, multiple and range modes.",
+      "files": ["src/components/ui/calendar.tsx"],
+      "dependencies": ["react-day-picker@10.0.1", "date-fns@4.4.0"],
+      "registryDependencies": ["button"],
+      "accessibility": "Provide a visible purpose and date format; React DayPicker manages the calendar grid and keyboard navigation."
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "category": "layout",
+      "description": "A compositional surface for grouped content and actions.",
+      "files": ["src/components/ui/card.tsx"],
+      "accessibility": "Choose semantic children and headings based on the content hierarchy."
+    },
+    {
+      "name": "carousel",
+      "title": "Carousel",
+      "category": "data-display",
+      "description": "A keyboard-operable sequence of slides powered by Embla Carousel.",
+      "files": [
+        "src/components/ui/carousel.ts",
+        "src/components/ui/carousel.components.tsx",
+        "src/components/ui/carousel.context.ts",
+        "src/components/ui/carousel.types.ts"
+      ],
+      "dependencies": ["embla-carousel-react@8.6.0"],
+      "registryDependencies": ["button"],
+      "accessibility": "Name the carousel, label meaningful slides and keep previous and next controls available to keyboard users."
+    },
+    {
+      "name": "chart",
+      "title": "Chart",
+      "category": "data-display",
+      "description": "Token-aware wrappers, tooltip and legend utilities for Recharts visualizations.",
+      "files": ["src/components/ui/chart.tsx"],
+      "dependencies": ["recharts@3.8.0"],
+      "registryDependencies": ["card"],
+      "accessibility": "Provide a textual summary or data table and never rely on color alone to distinguish series."
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "category": "form-control",
+      "description": "A binary or mixed-state selection control.",
+      "files": ["src/components/ui/checkbox.tsx"],
+      "accessibility": "Pair with FieldLabel; Base UI manages checked, indeterminate and disabled states."
+    },
+    {
+      "name": "collapsible",
+      "title": "Collapsible",
+      "category": "disclosure",
+      "description": "A trigger that reveals or hides a single region of related content.",
+      "files": ["src/components/ui/collapsible.tsx"],
+      "accessibility": "Base UI connects trigger and panel while exposing expanded state to assistive technology."
+    },
+    {
+      "name": "combobox",
+      "title": "Combobox",
+      "category": "form-control",
+      "description": "A searchable single or multiple selection input with listbox behavior.",
+      "files": [
+        "src/components/ui/combobox.ts",
+        "src/components/ui/combobox.components.tsx",
+        "src/components/ui/combobox.hooks.ts"
+      ],
+      "registryDependencies": ["button", "input-group"],
+      "accessibility": "Use a visible label; Base UI manages active options, selection, filtering and keyboard navigation."
+    },
+    {
+      "name": "command",
+      "title": "Command",
+      "category": "navigation",
+      "description": "A searchable command list that can be embedded or opened in a dialog.",
+      "files": ["src/components/ui/command.tsx"],
+      "dependencies": ["cmdk@1.1.1"],
+      "registryDependencies": ["dialog", "input-group"],
+      "accessibility": "Give the search input a clear label and keep every command reachable by keyboard."
+    },
+    {
+      "name": "context-menu",
+      "title": "Context Menu",
+      "category": "navigation",
+      "description": "A contextual action menu opened from pointer or keyboard interaction.",
+      "files": ["src/components/ui/context-menu.tsx"],
+      "accessibility": "Base UI manages focus and menu navigation; every action must remain available without a pointing device."
+    },
+    {
+      "name": "data-table",
+      "title": "Data Table",
+      "category": "data-display",
+      "description": "A reusable TanStack Table composition with sorting, filtering, pagination and selection support.",
+      "introducedIn": "0.1.0-alpha.0",
+      "files": [
+        "src/components/ui/data-table.ts",
+        "src/components/ui/data-table.components.tsx",
+        "src/components/ui/data-table.features.ts"
+      ],
+      "dependencies": ["@tanstack/react-table@9.1.2"],
+      "registryDependencies": ["button", "input", "table"],
+      "accessibility": "Requires an accessible table name, exposes aria-sort on sortable headers and keeps filter and pagination controls keyboard operable."
+    },
+    {
+      "name": "date-picker",
+      "title": "Date Picker",
+      "category": "form-control",
+      "description": "A controlled or uncontrolled date selection composition built from Button, Calendar and Popover.",
+      "introducedIn": "0.1.0-alpha.0",
+      "files": ["src/components/ui/date-picker.tsx"],
+      "registryDependencies": ["button", "calendar", "popover"],
+      "accessibility": "Use with a visible FieldLabel; the trigger has native button semantics and the calendar preserves DayPicker keyboard navigation."
+    },
+    {
+      "name": "dialog",
+      "title": "Dialog",
+      "category": "overlay",
+      "description": "A modal task surface with focus management and dismissal behavior.",
+      "files": ["src/components/ui/dialog.tsx"],
+      "registryDependencies": ["button"],
+      "accessibility": "Always provide DialogTitle and DialogDescription; Base UI manages focus trapping and restoration."
+    },
+    {
+      "name": "direction",
+      "title": "Direction",
+      "category": "utility",
+      "description": "A provider for left-to-right and right-to-left component behavior.",
+      "files": ["src/components/ui/direction.ts"],
+      "accessibility": "Keep the provider direction aligned with the document language and reading order."
+    },
+    {
+      "name": "drawer",
+      "title": "Drawer",
+      "category": "overlay",
+      "description": "A swipeable edge panel with modal, nested and snap-point behavior.",
+      "files": ["src/components/ui/drawer.tsx"],
+      "accessibility": "Always provide a title and description; Base UI manages modal focus and dismissal."
+    },
+    {
+      "name": "dropdown-menu",
+      "title": "Dropdown Menu",
+      "category": "navigation",
+      "description": "An anchored menu for actions, selections and nested commands.",
+      "files": ["src/components/ui/dropdown-menu.tsx"],
+      "accessibility": "Use menu items for actions rather than site navigation; Base UI manages roving focus and keyboard navigation."
+    },
+    {
+      "name": "empty",
+      "title": "Empty",
+      "category": "feedback",
+      "description": "A structured empty state with media, explanation and an optional next action.",
+      "files": ["src/components/ui/empty.tsx"],
+      "accessibility": "Use a real heading and concise description; keep the primary recovery action keyboard accessible."
+    },
+    {
+      "name": "field",
+      "title": "Field",
+      "category": "form-structure",
+      "description": "A semantic composition for labels, controls, descriptions and validation messages.",
+      "files": ["src/components/ui/field.tsx"],
+      "registryDependencies": ["label", "separator"],
+      "accessibility": "Connect labels, descriptions and errors to the control with stable IDs and aria-describedby."
+    },
+    {
+      "name": "form",
+      "title": "Form",
+      "category": "form-structure",
+      "description": "A native form composition with Field-based body layout, pending state and responsive actions.",
+      "introducedIn": "0.1.0-alpha.0",
+      "files": ["src/components/ui/form.tsx"],
+      "registryDependencies": ["field"],
+      "accessibility": "Preserves native form submission and validation semantics; compose every control with a visible label and connected error text."
+    },
+    {
+      "name": "hover-card",
+      "title": "Hover Card",
+      "category": "overlay",
+      "description": "A non-modal preview surface shown from hover or keyboard focus.",
+      "files": ["src/components/ui/hover-card.tsx"],
+      "accessibility": "Do not hide essential actions in the preview; Base UI supports pointer and keyboard focus triggers."
+    },
+    {
+      "name": "input",
+      "title": "Input",
+      "category": "form-control",
+      "description": "A single-line text input built on the Base UI input primitive.",
+      "files": ["src/components/ui/input.tsx"],
+      "accessibility": "Use inside Field with a visible label; provide autocomplete and inputMode where relevant."
+    },
+    {
+      "name": "input-group",
+      "title": "Input Group",
+      "category": "form-control",
+      "description": "A text control composed with inline addons, actions or keyboard hints.",
+      "files": ["src/components/ui/input-group.tsx"],
+      "registryDependencies": ["button", "input", "textarea"],
+      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons."
+    },
+    {
+      "name": "input-otp",
+      "title": "Input OTP",
+      "category": "form-control",
+      "description": "A segmented one-time-password input backed by a single accessible value.",
+      "files": ["src/components/ui/input-otp.tsx"],
+      "dependencies": ["input-otp@1.5.0"],
+      "accessibility": "Provide a visible label, autocomplete=one-time-code and clear validation text."
+    },
+    {
+      "name": "item",
+      "title": "Item",
+      "category": "data-display",
+      "description": "A compositional row for media, title, description and related actions.",
+      "files": ["src/components/ui/item.tsx"],
+      "registryDependencies": ["separator"],
+      "accessibility": "Use Field instead when the row contains a form control; label icon-only actions."
+    },
+    {
+      "name": "kbd",
+      "title": "Kbd",
+      "category": "data-display",
+      "description": "A compact representation of keyboard input or shortcuts.",
+      "files": ["src/components/ui/kbd.tsx"],
+      "accessibility": "Include the shortcut in adjacent text when its meaning is not evident from the key labels."
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "category": "form-structure",
+      "description": "A visible label for form controls.",
+      "files": ["src/components/ui/label.tsx"],
+      "accessibility": "Use htmlFor to bind the label to a native or Base UI control."
+    },
+    {
+      "name": "marker",
+      "title": "Marker",
+      "category": "data-display",
+      "description": "A compact annotated line with optional icon, border or separators.",
+      "files": [
+        "src/components/ui/marker.ts",
+        "src/components/ui/marker.components.tsx",
+        "src/components/ui/marker.variants.ts"
+      ],
+      "accessibility": "Mark decorative icons hidden and keep the marker text meaningful without visual separators."
+    },
+    {
+      "name": "menubar",
+      "title": "Menubar",
+      "category": "navigation",
+      "description": "A persistent horizontal set of menus for application commands.",
+      "files": ["src/components/ui/menubar.tsx"],
+      "accessibility": "Use for application commands, not ordinary site navigation; Base UI manages menu bar keyboard patterns."
+    },
+    {
+      "name": "message",
+      "title": "Message",
+      "category": "data-display",
+      "description": "A structured conversation message with content, metadata and actions.",
+      "files": ["src/components/ui/message.tsx"],
+      "accessibility": "Preserve chronological DOM order and include sender and status information in accessible text."
+    },
+    {
+      "name": "message-scroller",
+      "title": "Message Scroller",
+      "category": "layout",
+      "description": "A conversation viewport with managed anchoring and scroll-to-start or end controls.",
+      "files": [
+        "src/components/ui/message-scroller.ts",
+        "src/components/ui/message-scroller.components.tsx"
+      ],
+      "dependencies": ["@shadcn/react@0.3.0"],
+      "registryDependencies": ["button"],
+      "accessibility": "Announce newly received messages intentionally and keep scroll controls named and keyboard operable."
+    },
+    {
+      "name": "native-select",
+      "title": "Native Select",
+      "category": "form-control",
+      "description": "A styled native select for simple options and platform-native behavior.",
+      "files": ["src/components/ui/native-select.tsx"],
+      "accessibility": "Associate the select with a visible label and use optgroup for meaningful option groups."
+    },
+    {
+      "name": "navigation-menu",
+      "title": "Navigation Menu",
+      "category": "navigation",
+      "description": "A responsive navigation structure with links and optional disclosure panels.",
+      "files": [
+        "src/components/ui/navigation-menu.ts",
+        "src/components/ui/navigation-menu.components.tsx",
+        "src/components/ui/navigation-menu.variants.ts"
+      ],
+      "accessibility": "Use real links for destinations and ensure disclosed content remains reachable by keyboard."
+    },
+    {
+      "name": "pagination",
+      "title": "Pagination",
+      "category": "navigation",
+      "description": "A page navigation pattern with current, previous, next and overflow states.",
+      "files": ["src/components/ui/pagination.tsx"],
+      "registryDependencies": ["button"],
+      "accessibility": "Provide destination links, mark the current page and localize the navigation label."
+    },
+    {
+      "name": "popover",
+      "title": "Popover",
+      "category": "overlay",
+      "description": "A non-modal anchored surface for compact interactive content.",
+      "files": ["src/components/ui/popover.tsx"],
+      "accessibility": "Use a meaningful trigger and title or description when the content needs a named region."
+    },
+    {
+      "name": "progress",
+      "title": "Progress",
+      "category": "feedback",
+      "description": "A determinate progress indicator with optional label and value.",
+      "files": ["src/components/ui/progress.tsx"],
+      "accessibility": "Provide a label and meaningful value; use Spinner instead when progress is indeterminate."
+    },
+    {
+      "name": "questionnaire",
+      "title": "Questionnaire",
+      "category": "form-structure",
+      "description": "A multi-step question flow with navigation and progress state.",
+      "files": ["src/components/ui/questionnaire.tsx"],
+      "dependencies": ["@shadcn/react@0.3.0"],
+      "registryDependencies": ["button"],
+      "accessibility": "Use semantic field groups and announce step changes, validation errors and progress."
+    },
+    {
+      "name": "radio-group",
+      "title": "Radio Group",
+      "category": "form-control",
+      "description": "A mutually exclusive set of options.",
+      "files": ["src/components/ui/radio-group.tsx"],
+      "accessibility": "Wrap the group in FieldSet and FieldLegend; Base UI manages arrow-key navigation."
+    },
+    {
+      "name": "resizable",
+      "title": "Resizable",
+      "category": "layout",
+      "description": "A set of panels whose dimensions can be adjusted with a separator.",
+      "files": ["src/components/ui/resizable.tsx"],
+      "dependencies": ["react-resizable-panels@4.12.3"],
+      "accessibility": "Keep the separator keyboard operable and provide sensible minimum and maximum panel sizes."
+    },
+    {
+      "name": "scroll-area",
+      "title": "Scroll Area",
+      "category": "layout",
+      "description": "A styled scroll viewport that preserves native scrolling behavior.",
+      "files": ["src/components/ui/scroll-area.tsx"],
+      "accessibility": "Only add a tab stop when the region needs keyboard focus and provide an accessible name in that case."
+    },
+    {
+      "name": "select",
+      "title": "Select",
+      "category": "form-control",
+      "description": "A single-selection popup control with groups and scrolling support.",
+      "files": ["src/components/ui/select.tsx"],
+      "accessibility": "Base UI manages trigger, popup, active option and keyboard navigation relationships."
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "category": "layout",
+      "description": "A horizontal or vertical visual divider.",
+      "files": ["src/components/ui/separator.tsx"],
+      "accessibility": "Use decorative=false only when the divider conveys document structure."
+    },
+    {
+      "name": "sheet",
+      "title": "Sheet",
+      "category": "overlay",
+      "description": "A modal panel that enters from an edge of the viewport.",
+      "files": ["src/components/ui/sheet.tsx"],
+      "registryDependencies": ["button"],
+      "accessibility": "Always provide SheetTitle and SheetDescription; Base UI manages focus trapping and restoration."
+    },
+    {
+      "name": "sidebar",
+      "title": "Sidebar",
+      "category": "navigation",
+      "description": "A responsive application sidebar with collapsible and mobile sheet behavior.",
+      "files": [
+        "src/components/ui/sidebar.ts",
+        "src/components/ui/sidebar.components.tsx",
+        "src/components/ui/sidebar.context.ts",
+        "src/hooks/use-mobile.ts"
+      ],
+      "registryDependencies": ["button", "input", "separator", "sheet", "skeleton", "tooltip"],
+      "accessibility": "Label the navigation landmark, expose the collapse control name and preserve access to all destinations on mobile."
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "category": "feedback",
+      "description": "A non-interactive placeholder for content that is loading.",
+      "files": ["src/components/ui/skeleton.tsx"],
+      "accessibility": "Mark the containing region busy and provide a meaningful loading label outside the skeleton."
+    },
+    {
+      "name": "slider",
+      "title": "Slider",
+      "category": "form-control",
+      "description": "A single or range value input along a horizontal or vertical track.",
+      "files": ["src/components/ui/slider.tsx"],
+      "accessibility": "Provide an accessible label and meaningful minimum, maximum and step values for every thumb."
+    },
+    {
+      "name": "sonner",
+      "title": "Sonner",
+      "category": "feedback",
+      "description": "A lightweight toast renderer that follows the active UI Foundation theme.",
+      "files": ["src/components/ui/sonner.tsx"],
+      "dependencies": ["sonner@2.0.8"],
+      "accessibility": "Choose polite or assertive announcements based on urgency and keep important actions available elsewhere."
+    },
+    {
+      "name": "spinner",
+      "title": "Spinner",
+      "category": "feedback",
+      "description": "A compact animated progress indicator for indeterminate work.",
+      "files": ["src/components/ui/spinner.tsx"],
+      "accessibility": "Provides role=status and a default accessible label that can be localized."
+    },
+    {
+      "name": "switch",
+      "title": "Switch",
+      "category": "form-control",
+      "description": "An immediate on or off setting control.",
+      "files": ["src/components/ui/switch.tsx"],
+      "accessibility": "Pair with FieldLabel; Base UI exposes switch semantics and checked state."
+    },
+    {
+      "name": "table",
+      "title": "Table",
+      "category": "data-display",
+      "description": "Semantic table primitives for structured rows, headers, captions and summaries.",
+      "files": ["src/components/ui/table.tsx"],
+      "accessibility": "Use header cells with scope, a caption or nearby heading, and expose sorting state when interactive."
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "category": "navigation",
+      "description": "A set of panels where one section is visible at a time.",
+      "files": ["src/components/ui/tabs.tsx", "src/components/ui/tabs.variants.ts"],
+      "accessibility": "Keep triggers inside TabsList; Base UI manages roles, selection and arrow-key navigation."
+    },
+    {
+      "name": "textarea",
+      "title": "Textarea",
+      "category": "form-control",
+      "description": "A multi-line text input that grows with its content.",
+      "files": ["src/components/ui/textarea.tsx"],
+      "accessibility": "Use inside Field with a visible label and describe limits or requirements before errors occur."
+    },
+    {
+      "name": "toast",
+      "title": "Toast",
+      "category": "feedback",
+      "description": "A Base UI toast system with queueing, actions, swipe dismissal and a five-item visible limit.",
+      "files": [
+        "src/components/ui/toast.ts",
+        "src/components/ui/toast.components.tsx",
+        "src/components/ui/toast.manager.ts"
+      ],
+      "registryDependencies": ["button"],
+      "accessibility": "Use the appropriate urgency, keep action labels concise and never rely on a transient toast for essential information."
+    },
+    {
+      "name": "toggle",
+      "title": "Toggle",
+      "category": "form-control",
+      "description": "A two-state pressed control for formatting or view options.",
+      "files": ["src/components/ui/toggle.tsx", "src/components/ui/toggle.variants.ts"],
+      "accessibility": "Provide an accessible name, especially for icon-only toggles; Base UI exposes pressed state."
+    },
+    {
+      "name": "toggle-group",
+      "title": "Toggle Group",
+      "category": "form-control",
+      "description": "A single or multiple selection group composed from toggle items.",
+      "files": ["src/components/ui/toggle-group.tsx"],
+      "registryDependencies": ["toggle"],
+      "accessibility": "Provide a group label and use Base UI array values for both single and multiple selection."
+    },
+    {
+      "name": "tooltip",
+      "title": "Tooltip",
+      "category": "overlay",
+      "description": "A short non-interactive explanation for a focused or hovered trigger.",
+      "files": ["src/components/ui/tooltip.tsx"],
+      "accessibility": "Do not place interactive content in a tooltip; wrap the application in TooltipProvider."
+    },
+    {
+      "name": "typography",
+      "title": "Typography",
+      "category": "content",
+      "description": "A token-aware Typeset container for semantic HTML and rendered Markdown content.",
+      "introducedIn": "0.1.0-alpha.0",
+      "files": [
+        "src/components/ui/typography.tsx",
+        "src/components/ui/typography.css"
+      ],
+      "accessibility": "Preserves the semantics of headings, paragraphs, lists, links, code and tables; content authors remain responsible for a logical heading order."
+    }
+  ]
+}

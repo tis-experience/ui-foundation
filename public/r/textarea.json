@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "title": "Textarea",
+  "description": "A multi-line text input that grows with its content.",
+  "dependencies": [],
+  "registryDependencies": [
+    "./ui-base.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/textarea.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Textarea({ className, ...props }: React.ComponentProps<\"textarea\">) {\n  return (\n    <textarea\n      data-slot=\"textarea\"\n      className={cn(\n        \"flex field-sizing-content min-h-[calc(var(--ui-control-height-md)*2)] w-full rounded-[var(--control-radius)] border border-input bg-transparent px-[var(--ui-control-padding-inline-md)] py-[var(--ui-control-gap-md)] text-[length:var(--ui-control-font-size-md)] transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Textarea }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "distribution": "shadcn-source",
+    "accessibility": "Use inside Field with a visible label and describe limits or requirements before errors occur.",
+    "status": "alpha"
+  },
+  "categories": [
+    "form-control"
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,100 @@
+{
+  "$schema": "./customizer.schema.json",
+  "version": "0.1.0-alpha.0",
+  "default": {
+    "identity": "neutral",
+    "baseColor": "neutral",
+    "brand": "#171717",
+    "chartPalette": "neutral",
+    "bodyFont": "geist",
+    "headingFont": "geist",
+    "typesetPreset": "default",
+    "typesetSize": 16,
+    "typesetLeading": 1.75,
+    "typesetFlow": 1.25,
+    "typesetMeasure": 65,
+    "radius": "default",
+    "density": "comfortable",
+    "mode": "light"
+  },
+  "presets": {
+    "neutral": {
+      "identity": "neutral",
+      "baseColor": "neutral",
+      "brand": "#171717",
+      "chartPalette": "neutral",
+      "bodyFont": "geist",
+      "headingFont": "geist",
+      "typesetPreset": "default",
+      "typesetSize": 16,
+      "typesetLeading": 1.75,
+      "typesetFlow": 1.25,
+      "typesetMeasure": 65,
+      "radius": "default",
+      "density": "comfortable",
+      "mode": "light"
+    },
+    "tis": {
+      "identity": "tis",
+      "baseColor": "slate",
+      "brand": "#0056e0",
+      "chartPalette": "categorical",
+      "bodyFont": "geist",
+      "headingFont": "geist",
+      "typesetPreset": "default",
+      "typesetSize": 16,
+      "typesetLeading": 1.75,
+      "typesetFlow": 1.25,
+      "typesetMeasure": 65,
+      "radius": "default",
+      "density": "comfortable",
+      "mode": "light"
+    }
+  },
+  "options": {
+    "identity": [
+      { "label": "Neutral", "value": "neutral" },
+      { "label": "TIS", "value": "tis" },
+      { "label": "Custom", "value": "custom" }
+    ],
+    "density": [
+      { "label": "Compact", "value": "compact" },
+      { "label": "Comfortable", "value": "comfortable" },
+      { "label": "Spacious", "value": "spacious" }
+    ],
+    "mode": [
+      { "label": "Light", "value": "light" },
+      { "label": "Dark", "value": "dark" }
+    ],
+    "baseColor": [
+      { "label": "Neutral", "value": "neutral", "swatch": "#737373" },
+      { "label": "Slate", "value": "slate", "swatch": "#64748b" },
+      { "label": "Stone", "value": "stone", "swatch": "#78716c" },
+      { "label": "Zinc", "value": "zinc", "swatch": "#71717a" }
+    ],
+    "chartPalette": [
+      { "label": "Brand", "value": "brand" },
+      { "label": "Categorical", "value": "categorical" },
+      { "label": "Neutral", "value": "neutral" }
+    ],
+    "font": [
+      { "label": "Geist", "value": "geist", "stack": "'Geist Variable', 'Geist', ui-sans-serif, system-ui, sans-serif", "source": "bundled" },
+      { "label": "Humanist", "value": "humanist", "stack": "'Avenir Next', Avenir, 'Segoe UI', ui-sans-serif, system-ui, sans-serif", "source": "system-stack" },
+      { "label": "Serif", "value": "serif", "stack": "Charter, 'Iowan Old Style', Georgia, serif", "source": "system-stack" },
+      { "label": "System", "value": "system", "stack": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", "source": "system-stack" }
+    ],
+    "typeset": [
+      { "label": "Compact", "value": "compact", "size": 14, "leading": 1.6, "flow": 1, "measure": 58 },
+      { "label": "Default", "value": "default", "size": 16, "leading": 1.75, "flow": 1.25, "measure": 65 },
+      { "label": "Reading", "value": "reading", "size": 18, "leading": 1.9, "flow": 1.5, "measure": 68 }
+    ],
+    "radius": [
+      { "label": "None", "value": "none", "cssValue": "0rem", "surfaceValue": "0rem" },
+      { "label": "Small", "value": "small", "cssValue": "0.375rem", "surfaceValue": "0.375rem" },
+      { "label": "Default", "value": "default", "cssValue": "0.625rem", "surfaceValue": "0.625rem" },
+      { "label": "Large", "value": "large", "cssValue": "0.875rem", "surfaceValue": "0.875rem" },
+      { "label": "Pill / Full", "value": "full", "cssValue": "9999px", "surfaceValue": "0.875rem" }
+    ]
+  },
+  "outputs": ["css", "registry-theme", "share-url"]
+}

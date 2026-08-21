@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+@import "./styles/generated/foundations.css";
+@import "./styles/generated/densities.css";
+@import "./styles/generated/themes.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-overlay: var(--overlay);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+}
+
+:where([readonly], [aria-readonly="true"], [data-readonly]) {
+  --focus-ring-color: var(--muted-foreground);
+}
+
+:where([aria-invalid="true"], [data-invalid]) {
+  --focus-ring-color: var(--destructive);
+}
+
+:where([data-slot]),
+:where(
+  [data-slot] button,
+  [data-slot] a,
+  [data-slot] input,
+  [data-slot] textarea,
+  [data-slot] select,
+  [data-slot] [tabindex]:not([tabindex="-1"])
+) {
+  outline-color: var(--focus-ring-color, var(--ring));
+  outline-offset: var(--focus-ring-offset);
+  outline-width: var(--focus-ring-width);
+}
+
+:where([data-slot]):focus-visible:not(
+  [data-slot="input-group-control"],
+  [data-slot="combobox-input"],
+  [data-slot="message-scroller-viewport"],
+  [data-slot="resizable-handle"]
+),
+:where(
+  [data-slot] button,
+  [data-slot] a,
+  [data-slot] input,
+  [data-slot] textarea,
+  [data-slot] select,
+  [data-slot] [tabindex]:not([tabindex="-1"])
+):focus-visible:not(
+  [data-slot="input-group-control"],
+  [data-slot="combobox-input"],
+  [data-slot="message-scroller-viewport"],
+  [data-slot="resizable-handle"]
+) {
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  outline-color: var(--focus-ring-color, var(--ring)) !important;
+  outline-offset: var(--focus-ring-offset) !important;
+  outline-style: solid !important;
+  outline-width: var(--focus-ring-width) !important;
+}
+
+:where([data-slot="input-group"]):has([data-slot="input-group-control"]:focus-visible),
+:where([data-slot="combobox-chips"]):focus-within,
+:where([data-slot="questionnaire-choice"]):has(input:focus-visible),
+:where([data-slot="message-scroller"]):has([data-slot="message-scroller-viewport"]:focus-visible),
+:where([data-slot="resizable-panel-group"]):has([data-slot="resizable-handle"]:focus-visible) {
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  outline-color: var(--focus-ring-color, var(--ring)) !important;
+  outline-offset: var(--focus-ring-offset) !important;
+  outline-style: solid !important;
+  outline-width: var(--focus-ring-width) !important;
+}
+
+:where([data-slot="message-scroller-viewport"], [data-slot="resizable-handle"]):focus-visible {
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  outline-style: none !important;
+}
+
+:where([data-slot="input-group"]):has([readonly], [aria-readonly="true"], [data-readonly]),
+:where([data-slot="combobox-chips"]):has([readonly], [aria-readonly="true"], [data-readonly]),
+:where([data-slot="questionnaire-choice"]):has([readonly], [aria-readonly="true"], [data-readonly]) {
+  --focus-ring-color: var(--muted-foreground);
+}
+
+:where([data-slot="input-group"]):has([aria-invalid="true"], [data-invalid]),
+:where([data-slot="combobox-chips"]):has([aria-invalid="true"], [data-invalid]),
+:where([data-slot="questionnaire-choice"]):has([aria-invalid="true"], [data-invalid]) {
+  --focus-ring-color: var(--destructive);
+}
+
+:where([data-slot="field-label"]):has(:focus-visible),
+:where([data-slot="attachment"]):focus-within {
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+@media (forced-colors: active) {
+  :where([data-slot]):focus-visible,
+  :where(
+    [data-slot] button,
+    [data-slot] a,
+    [data-slot] input,
+    [data-slot] textarea,
+    [data-slot] select,
+    [data-slot] [tabindex]:not([tabindex="-1"])
+  ):focus-visible,
+  :where([data-slot="input-group"]):has([data-slot="input-group-control"]:focus-visible),
+  :where([data-slot="combobox-chips"]):focus-within,
+  :where([data-slot="questionnaire-choice"]):has(input:focus-visible),
+  :where([data-slot="message-scroller"]):has([data-slot="message-scroller-viewport"]:focus-visible),
+  :where([data-slot="resizable-panel-group"]):has([data-slot="resizable-handle"]:focus-visible) {
+    outline-color: Highlight !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    outline-color: var(--focus-ring-color, var(--ring));
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+}
