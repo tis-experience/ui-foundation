@@ -21,11 +21,12 @@
     },
     "componentContracts": {
       "type": "object",
-      "required": ["source", "profiles", "components"],
+      "required": ["source", "profiles", "components", "interactionTested"],
       "properties": {
         "source": { "type": "string" },
         "profiles": { "type": "integer", "minimum": 1 },
-        "components": { "type": "integer", "minimum": 1 }
+        "components": { "type": "integer", "minimum": 1 },
+        "interactionTested": { "type": "integer", "minimum": 0 }
       }
     },
     "rules": { "type": "array", "items": { "type": "string" } },
@@ -91,10 +92,11 @@
           "accessibility": { "type": "string" },
           "contract": {
             "type": "object",
-            "required": ["profile", "source"],
+            "required": ["profile", "source", "level"],
             "properties": {
               "profile": { "type": "string" },
-              "source": { "type": "string" }
+              "source": { "type": "string" },
+              "level": { "enum": ["profile", "interaction-tested"] }
             }
           }
         }

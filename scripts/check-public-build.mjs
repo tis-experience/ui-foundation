@@ -66,11 +66,25 @@ assert(
 )
 assert(contracts.components.length === manifest.components.length, "Resolved component contracts are incomplete")
 assert(manifest.componentContracts.components === manifest.components.length, "Manifest component contract count is stale")
+const interactionTestedContracts = contracts.components.filter(
+  (component) => component.verification?.level === "interaction-tested"
+)
+assert(
+  interactionTestedContracts.length === manifest.componentContracts.interactionTested,
+  "Manifest interaction-tested contract count is stale"
+)
 assert(
   manifest.components.every((component) =>
-    component.contract?.profile && component.contract.source === manifest.componentContracts.source
+    component.contract?.profile &&
+    component.contract.source === manifest.componentContracts.source &&
+    ["profile", "interaction-tested"].includes(component.contract.level)
   ),
   "Manifest components do not reference their resolved contracts"
+)
+assert(
+  manifest.components.filter((component) => component.contract.level === "interaction-tested").length ===
+    interactionTestedContracts.length,
+  "Manifest component verification levels do not match resolved contracts"
 )
 
 for (const source of manifest.sources) {

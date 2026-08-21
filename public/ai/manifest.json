@@ -609,7 +609,8 @@
   "componentContracts": {
     "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
     "profiles": 27,
-    "components": 66
+    "components": 66,
+    "interactionTested": 12
   },
   "rules": [
     "Read this manifest before selecting or generating components.",
@@ -666,7 +667,8 @@
       "accessibility": "Base UI manages keyboard navigation, expanded state and panel relationships.",
       "contract": {
         "profile": "disclosure",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -690,7 +692,8 @@
       "accessibility": "Uses role=alert; reserve it for content that should be announced immediately.",
       "contract": {
         "profile": "static-feedback",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -724,7 +727,8 @@
       "accessibility": "Always provide a title and description; Base UI traps focus and requires an explicit response.",
       "contract": {
         "profile": "modal-overlay",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -745,7 +749,8 @@
       "accessibility": "The wrapper is presentational; provide appropriate semantics and alternative text for its content.",
       "contract": {
         "profile": "data-display",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -776,7 +781,8 @@
       "accessibility": "Use descriptive filenames, expose file type and size in text, and label icon-only actions.",
       "contract": {
         "profile": "action",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -802,7 +808,8 @@
       "accessibility": "Provide meaningful alt text for informative images and always include AvatarFallback.",
       "contract": {
         "profile": "data-display",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -826,7 +833,8 @@
       "accessibility": "Decorative badges must not be the only way status is communicated.",
       "contract": {
         "profile": "data-display",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -853,7 +861,8 @@
       "accessibility": "Uses a named breadcrumb navigation landmark and aria-current on the current page.",
       "contract": {
         "profile": "navigation",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -877,7 +886,8 @@
       "accessibility": "Keep sender and timing information available in text and preserve chronological reading order.",
       "contract": {
         "profile": "data-display",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -901,7 +911,8 @@
       "accessibility": "Base UI preserves native button semantics, disabled state and keyboard activation.",
       "contract": {
         "profile": "action",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -929,7 +940,8 @@
       "accessibility": "Provide an accessible label for the group when the relationship is not clear from context.",
       "contract": {
         "profile": "action-group",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -956,7 +968,8 @@
       "accessibility": "Provide a visible purpose and date format; React DayPicker manages the calendar grid and keyboard navigation.",
       "contract": {
         "profile": "external-control",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -983,7 +996,8 @@
       "accessibility": "Choose semantic children and headings based on the content hierarchy.",
       "contract": {
         "profile": "data-display",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1018,7 +1032,8 @@
       "accessibility": "Name the carousel, label meaningful slides and keep previous and next controls available to keyboard users.",
       "contract": {
         "profile": "external-interactive",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1048,7 +1063,8 @@
       "accessibility": "Provide a textual summary or data table and never rely on color alone to distinguish series.",
       "contract": {
         "profile": "data-visualization",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1069,7 +1085,8 @@
       "accessibility": "Pair with FieldLabel; Base UI manages checked, indeterminate and disabled states.",
       "contract": {
         "profile": "selection-control",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -1092,7 +1109,8 @@
       "accessibility": "Base UI connects trigger and panel while exposing expanded state to assistive technology.",
       "contract": {
         "profile": "disclosure",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1133,7 +1151,8 @@
       "accessibility": "Use a visible label; Base UI manages active options, selection, filtering and keyboard navigation.",
       "contract": {
         "profile": "form-composition",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1167,7 +1186,8 @@
       "accessibility": "Give the search input a clear label and keep every command reachable by keyboard.",
       "contract": {
         "profile": "external-interactive",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1202,7 +1222,8 @@
       "accessibility": "Base UI manages focus and menu navigation; every action must remain available without a pointing device.",
       "contract": {
         "profile": "menu",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -1239,7 +1260,8 @@
       "accessibility": "Requires an accessible table name, exposes aria-sort on sortable headers and keeps filter and pagination controls keyboard operable.",
       "contract": {
         "profile": "data-table",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1266,7 +1288,8 @@
       "accessibility": "Use with a visible FieldLabel; the trigger has native button semantics and the calendar preserves DayPicker keyboard navigation.",
       "contract": {
         "profile": "form-composition",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1298,7 +1321,8 @@
       "accessibility": "Always provide DialogTitle and DialogDescription; Base UI manages focus trapping and restoration.",
       "contract": {
         "profile": "modal-overlay",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -1320,7 +1344,8 @@
       "accessibility": "Keep the provider direction aligned with the document language and reading order.",
       "contract": {
         "profile": "utility",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1351,7 +1376,8 @@
       "accessibility": "Always provide a title and description; Base UI manages modal focus and dismissal.",
       "contract": {
         "profile": "modal-overlay",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1386,7 +1412,8 @@
       "accessibility": "Use menu items for actions rather than site navigation; Base UI manages roving focus and keyboard navigation.",
       "contract": {
         "profile": "menu",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -1412,7 +1439,8 @@
       "accessibility": "Use a real heading and concise description; keep the primary recovery action keyboard accessible.",
       "contract": {
         "profile": "static-feedback",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1445,7 +1473,8 @@
       "accessibility": "Connect labels, descriptions and errors to the control with stable IDs and aria-describedby.",
       "contract": {
         "profile": "form-structure",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1472,7 +1501,8 @@
       "accessibility": "Preserves native form submission and validation semantics; compose every control with a visible label and connected error text.",
       "contract": {
         "profile": "form-structure",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1495,7 +1525,8 @@
       "accessibility": "Do not hide essential actions in the preview; Base UI supports pointer and keyboard focus triggers.",
       "contract": {
         "profile": "nonmodal-overlay",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1516,7 +1547,8 @@
       "accessibility": "Use inside Field with a visible label; provide autocomplete and inputMode where relevant.",
       "contract": {
         "profile": "text-control",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1546,7 +1578,8 @@
       "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons.",
       "contract": {
         "profile": "form-composition",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1572,7 +1605,8 @@
       "accessibility": "Provide a visible label, autocomplete=one-time-code and clear validation text.",
       "contract": {
         "profile": "external-control",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1604,7 +1638,8 @@
       "accessibility": "Use Field instead when the row contains a form control; label icon-only actions.",
       "contract": {
         "profile": "data-display",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1626,7 +1661,8 @@
       "accessibility": "Include the shortcut in adjacent text when its meaning is not evident from the key labels.",
       "contract": {
         "profile": "data-display",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1647,7 +1683,8 @@
       "accessibility": "Use htmlFor to bind the label to a native or Base UI control.",
       "contract": {
         "profile": "form-structure",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1673,7 +1710,8 @@
       "accessibility": "Mark decorative icons hidden and keep the marker text meaningful without visual separators.",
       "contract": {
         "profile": "data-display",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1709,7 +1747,8 @@
       "accessibility": "Use for application commands, not ordinary site navigation; Base UI manages menu bar keyboard patterns.",
       "contract": {
         "profile": "menu",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1735,7 +1774,8 @@
       "accessibility": "Preserve chronological DOM order and include sender and status information in accessible text.",
       "contract": {
         "profile": "static-feedback",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1769,7 +1809,8 @@
       "accessibility": "Announce newly received messages intentionally and keep scroll controls named and keyboard operable.",
       "contract": {
         "profile": "scroll-surface",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1792,7 +1833,8 @@
       "accessibility": "Associate the select with a visible label and use optgroup for meaningful option groups.",
       "contract": {
         "profile": "native-control",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1823,7 +1865,8 @@
       "accessibility": "Use real links for destinations and ensure disclosed content remains reachable by keyboard.",
       "contract": {
         "profile": "navigation-overlay",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1852,7 +1895,8 @@
       "accessibility": "Provide destination links, mark the current page and localize the navigation label.",
       "contract": {
         "profile": "navigation",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1878,7 +1922,8 @@
       "accessibility": "Use a meaningful trigger and title or description when the content needs a named region.",
       "contract": {
         "profile": "nonmodal-overlay",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -1903,7 +1948,8 @@
       "accessibility": "Provide a label and meaningful value; use Spinner instead when progress is indeterminate.",
       "contract": {
         "profile": "status",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1942,7 +1988,8 @@
       "accessibility": "Use semantic field groups and announce step changes, validation errors and progress.",
       "contract": {
         "profile": "form-structure",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -1964,7 +2011,8 @@
       "accessibility": "Wrap the group in FieldSet and FieldLegend; Base UI manages arrow-key navigation.",
       "contract": {
         "profile": "selection-control",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -1989,7 +2037,8 @@
       "accessibility": "Keep the separator keyboard operable and provide sensible minimum and maximum panel sizes.",
       "contract": {
         "profile": "external-interactive",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2011,7 +2060,8 @@
       "accessibility": "Only add a tab stop when the region needs keyboard focus and provide an accessible name in that case.",
       "contract": {
         "profile": "scroll-surface",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2041,7 +2091,8 @@
       "accessibility": "Base UI manages trigger, popup, active option and keyboard navigation relationships.",
       "contract": {
         "profile": "selection-control",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -2062,7 +2113,8 @@
       "accessibility": "Use decorative=false only when the divider conveys document structure.",
       "contract": {
         "profile": "data-display",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2092,7 +2144,8 @@
       "accessibility": "Always provide SheetTitle and SheetDescription; Base UI manages focus trapping and restoration.",
       "contract": {
         "profile": "modal-overlay",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2147,7 +2200,8 @@
       "accessibility": "Label the navigation landmark, expose the collapse control name and preserve access to all destinations on mobile.",
       "contract": {
         "profile": "navigation",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2168,7 +2222,8 @@
       "accessibility": "Mark the containing region busy and provide a meaningful loading label outside the skeleton.",
       "contract": {
         "profile": "passive-status",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2189,7 +2244,8 @@
       "accessibility": "Provide an accessible label and meaningful minimum, maximum and step values for every thumb.",
       "contract": {
         "profile": "selection-control",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2212,7 +2268,8 @@
       "accessibility": "Choose polite or assertive announcements based on urgency and keep important actions available elsewhere.",
       "contract": {
         "profile": "external-live-feedback",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2233,7 +2290,8 @@
       "accessibility": "Provides role=status and a default accessible label that can be localized.",
       "contract": {
         "profile": "passive-status",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2254,7 +2312,8 @@
       "accessibility": "Pair with FieldLabel; Base UI exposes switch semantics and checked state.",
       "contract": {
         "profile": "selection-control",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -2282,7 +2341,8 @@
       "accessibility": "Use header cells with scope, a caption or nearby heading, and expose sorting state when interactive.",
       "contract": {
         "profile": "data-display",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2309,7 +2369,8 @@
       "accessibility": "Keep triggers inside TabsList; Base UI manages roles, selection and arrow-key navigation.",
       "contract": {
         "profile": "tabs",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -2330,7 +2391,8 @@
       "accessibility": "Use inside Field with a visible label and describe limits or requirements before errors occur.",
       "contract": {
         "profile": "native-control",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2367,7 +2429,8 @@
       "accessibility": "Use the appropriate urgency, keep action labels concise and never rely on a transient toast for essential information.",
       "contract": {
         "profile": "live-feedback",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2391,7 +2454,8 @@
       "accessibility": "Provide an accessible name, especially for icon-only toggles; Base UI exposes pressed state.",
       "contract": {
         "profile": "toggle-action",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2415,7 +2479,8 @@
       "accessibility": "Provide a group label and use Base UI array values for both single and multiple selection.",
       "contract": {
         "profile": "action-group",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     },
     {
@@ -2439,7 +2504,8 @@
       "accessibility": "Do not place interactive content in a tooltip; wrap the application in TooltipProvider.",
       "contract": {
         "profile": "nonmodal-overlay",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "interaction-tested"
       }
     },
     {
@@ -2464,7 +2530,8 @@
       "accessibility": "Preserves the semantics of headings, paragraphs, lists, links, code and tables; content authors remain responsible for a logical heading order.",
       "contract": {
         "profile": "data-display",
-        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json"
+        "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
+        "level": "profile"
       }
     }
   ],
