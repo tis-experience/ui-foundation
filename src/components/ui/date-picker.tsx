@@ -9,6 +9,7 @@ import { Calendar } from "@/components/ui/calendar"
 import {
   Popover,
   PopoverContent,
+  PopoverTitle,
   PopoverTrigger,
 } from "@/components/ui/popover"
 
@@ -28,6 +29,7 @@ type DatePickerProps = {
   onValueChange?: (date: Date | undefined) => void
   open?: boolean
   placeholder?: string
+  popoverLabel?: string
   triggerProps?: Omit<React.ComponentProps<typeof Button>, "children" | "disabled">
   value?: Date | null
 }
@@ -56,6 +58,7 @@ function DatePicker({
   onValueChange,
   open,
   placeholder = "Pick a date",
+  popoverLabel = "Choose a date",
   triggerProps,
   value,
 }: DatePickerProps) {
@@ -82,6 +85,7 @@ function DatePicker({
       {name ? (
         <input
           type="hidden"
+          disabled={disabled}
           name={name}
           value={selected ? serializeDate(selected) : ""}
         />
@@ -108,6 +112,7 @@ function DatePicker({
           className="w-auto p-0"
           {...contentProps}
         >
+          <PopoverTitle className="sr-only">{popoverLabel}</PopoverTitle>
           <Calendar
             mode="single"
             selected={selected}

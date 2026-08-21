@@ -22,9 +22,9 @@ Read `docs/maintenance.md` for the standalone contract, responsibilities and rel
 ## Architecture contract
 
 - Distribution: shadcn source registry.
-- React behavior: Base UI only.
+- React primitives use Base UI. Official shadcn compositions and specialized external controls may own behavior only when their dependency and external behavior profile are explicit in the catalog and component contract.
 - Styling: Tailwind CSS plus core variables generated from `tokens/foundations.json`, control variables generated from `tokens/densities.json`, and semantic variables generated from the active theme contract.
-- Never add Radix UI to this adapter.
+- Never add Radix UI to this adapter or replace Base UI as the primitive engine.
 - Use Base UI's `render` composition API. Do not use Radix's `asChild` convention.
 - Components consume semantic variables such as `--primary`, `--background`, and `--ring`. Do not hardcode identity colors in component source.
 - Typography, spacing, radius scale, borders, elevation and motion come from `tokens/foundations.json`; do not document a foundation token that is absent from that contract or the installed base item.

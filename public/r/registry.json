@@ -852,7 +852,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Use a visible label; Base UI manages active options, selection, filtering and keyboard navigation.",
+        "accessibility": "Use a visible label and name clear or remove actions; Base UI manages active options, selection, filtering and keyboard navigation.",
         "status": "alpha"
       }
     },
@@ -973,7 +973,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Use with a visible FieldLabel; the trigger has native button semantics and the calendar preserves DayPicker keyboard navigation.",
+        "accessibility": "Use a visible FieldLabel and named popup; the trigger restores focus, the calendar preserves DayPicker keyboard navigation and the hidden form value follows disabled state.",
         "status": "alpha",
         "introducedIn": "0.1.0-alpha.0"
       }
@@ -1232,7 +1232,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons.",
+        "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons; clicking a non-interactive addon focuses the contained control.",
         "status": "alpha"
       }
     },
@@ -1612,7 +1612,7 @@
       "meta": {
         "behaviorEngine": "@base-ui/react@1.7.0",
         "distribution": "shadcn-source",
-        "accessibility": "Use semantic field groups and announce step changes, validation errors and progress.",
+        "accessibility": "The declared @shadcn/react flow owns step behavior; use semantic field groups and announce step changes, validation errors and progress.",
         "status": "alpha"
       }
     },

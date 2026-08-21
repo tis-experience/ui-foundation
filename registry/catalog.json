@@ -217,7 +217,7 @@
         "src/components/ui/combobox.hooks.ts"
       ],
       "registryDependencies": ["button", "input-group"],
-      "accessibility": "Use a visible label; Base UI manages active options, selection, filtering and keyboard navigation."
+      "accessibility": "Use a visible label and name clear or remove actions; Base UI manages active options, selection, filtering and keyboard navigation."
     },
     {
       "name": "command",
@@ -260,7 +260,7 @@
       "introducedIn": "0.1.0-alpha.0",
       "files": ["src/components/ui/date-picker.tsx"],
       "registryDependencies": ["button", "calendar", "popover"],
-      "accessibility": "Use with a visible FieldLabel; the trigger has native button semantics and the calendar preserves DayPicker keyboard navigation."
+      "accessibility": "Use a visible FieldLabel and named popup; the trigger restores focus, the calendar preserves DayPicker keyboard navigation and the hidden form value follows disabled state."
     },
     {
       "name": "dialog",
@@ -345,7 +345,7 @@
       "description": "A text control composed with inline addons, actions or keyboard hints.",
       "files": ["src/components/ui/input-group.tsx"],
       "registryDependencies": ["button", "input", "textarea"],
-      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons."
+      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons; clicking a non-interactive addon focuses the contained control."
     },
     {
       "name": "input-otp",
@@ -475,7 +475,7 @@
       "files": ["src/components/ui/questionnaire.tsx"],
       "dependencies": ["@shadcn/react@0.3.0"],
       "registryDependencies": ["button"],
-      "accessibility": "Use semantic field groups and announce step changes, validation errors and progress."
+      "accessibility": "The declared @shadcn/react flow owns step behavior; use semantic field groups and announce step changes, validation errors and progress."
     },
     {
       "name": "radio-group",

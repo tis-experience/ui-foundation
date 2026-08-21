@@ -749,7 +749,7 @@ test("keeps the four installable compositions functional", async ({ page }) => {
   await dataTable.getByRole("button", { name: "Go to next page" }).click()
   await expect(dataTable.getByRole("cell", { name: "Table", exact: true })).toBeVisible()
 
-  const datePicker = page.getByRole("button", { name: "2026-08-20" })
+  const datePicker = page.getByRole("button", { name: "Release date" })
   await datePicker.click()
   await expect(
     page.locator("[data-slot=popover-content] [data-slot=calendar]")

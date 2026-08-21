@@ -58,8 +58,8 @@ Standalone React component library. Neutral is the default theme; TIS is optiona
 ## Component contracts
 
 - Resolved source: https://tis-experience.github.io/ui-foundation/contracts/components.json
-- 66 components across 27 behavior profiles
-- 12 components have direct semantic, keyboard, focus and composition evidence.
+- 66 components across 32 behavior profiles
+- 24 components have direct semantic, keyboard, focus and composition evidence.
 - Every contract declares behavior ownership, keyboard strategy, responsive responsibility, required states and consumer responsibilities.
 
 ## Components (66)

@@ -20,7 +20,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Use semantic field groups and announce step changes, validation errors and progress.",
+    "accessibility": "The declared @shadcn/react flow owns step behavior; use semantic field groups and announce step changes, validation errors and progress.",
     "status": "alpha"
   },
   "categories": [

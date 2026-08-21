@@ -31,9 +31,16 @@ All notable changes to UI Foundation will be documented in this file.
 - Public GitHub Pages distribution for the interactive catalog, shadcn registry, token contracts, schemas, documentation and AI manifest.
 - Component-level browser contracts for every catalog specimen plus direct keyboard, form, menu, disclosure, scrolling and semantic coverage across previously untested families.
 - First interaction-tested contract wave for 12 high-risk controls and overlays, publishing exact semantics, keyboard outcomes, focus management, composition rules, official upstream references and matching Playwright evidence.
+- Second interaction-tested contract wave for 12 form and data-entry components, raising published behavior evidence to 24 of 66 catalog components.
 
 ### Fixed
 
+- Connect visible labels, descriptions and errors across form specimens while preserving native validation, submission and responsive focus order.
+- Normalize scalar Slider values to a single indexed thumb and render the library focus outline on the actual focused control.
+- Name Date Picker popups, keep serialized values aligned with disabled state and restore trigger focus after selection.
+- Propagate invalid state to Input OTP groups and keep a single labeled, autocomplete-aware native input.
+- Focus both Input and Textarea controls from Input Group addons and give Combobox clear and chip removal actions stable names.
+- Document the narrow behavior-owner exception for official shadcn compositions without introducing a second primitive engine.
 - Align the Tooltip specimen with Base UI's visual-only guidance by giving its icon trigger a matching accessible name and keeping the popup supplementary.
 - Provide a visible keyboard-operable action menu alongside the Context Menu specimen and a programmatic group name for the Radio Group specimen.
 - Upgrade GitHub Pages workflows to current Node 24-based Actions while retaining Node 22 as the library build runtime.

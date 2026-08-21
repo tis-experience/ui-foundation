@@ -608,9 +608,9 @@
   },
   "componentContracts": {
     "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-    "profiles": 27,
+    "profiles": 32,
     "components": 66,
-    "interactionTested": 12
+    "interactionTested": 24
   },
   "rules": [
     "Read this manifest before selecting or generating components.",
@@ -969,7 +969,7 @@
       "contract": {
         "profile": "external-control",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1148,11 +1148,11 @@
         "button",
         "input-group"
       ],
-      "accessibility": "Use a visible label; Base UI manages active options, selection, filtering and keyboard navigation.",
+      "accessibility": "Use a visible label and name clear or remove actions; Base UI manages active options, selection, filtering and keyboard navigation.",
       "contract": {
-        "profile": "form-composition",
+        "profile": "searchable-selection-control",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1285,11 +1285,11 @@
         "calendar",
         "popover"
       ],
-      "accessibility": "Use with a visible FieldLabel; the trigger has native button semantics and the calendar preserves DayPicker keyboard navigation.",
+      "accessibility": "Use a visible FieldLabel and named popup; the trigger restores focus, the calendar preserves DayPicker keyboard navigation and the hidden form value follows disabled state.",
       "contract": {
-        "profile": "form-composition",
+        "profile": "date-selection-control",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1474,7 +1474,7 @@
       "contract": {
         "profile": "form-structure",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1500,9 +1500,9 @@
       ],
       "accessibility": "Preserves native form submission and validation semantics; compose every control with a visible label and connected error text.",
       "contract": {
-        "profile": "form-structure",
+        "profile": "native-form",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1548,7 +1548,7 @@
       "contract": {
         "profile": "text-control",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1575,11 +1575,11 @@
         "input",
         "textarea"
       ],
-      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons.",
+      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons; clicking a non-interactive addon focuses the contained control.",
       "contract": {
         "profile": "form-composition",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1606,7 +1606,7 @@
       "contract": {
         "profile": "external-control",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1832,9 +1832,9 @@
       "registryDependencies": [],
       "accessibility": "Associate the select with a visible label and use optgroup for meaningful option groups.",
       "contract": {
-        "profile": "native-control",
+        "profile": "native-choice-control",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1985,11 +1985,11 @@
       "registryDependencies": [
         "button"
       ],
-      "accessibility": "Use semantic field groups and announce step changes, validation errors and progress.",
+      "accessibility": "The declared @shadcn/react flow owns step behavior; use semantic field groups and announce step changes, validation errors and progress.",
       "contract": {
-        "profile": "form-structure",
+        "profile": "external-form-flow",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -2245,7 +2245,7 @@
       "contract": {
         "profile": "selection-control",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -2392,7 +2392,7 @@
       "contract": {
         "profile": "native-control",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {

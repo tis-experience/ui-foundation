@@ -334,7 +334,51 @@
       ],
       "accessibility": "Provide a visible purpose and date format; React DayPicker manages the calendar grid and keyboard navigation.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "grid=calendar",
+          "days=buttons",
+          "selected-date=state",
+          "purpose=visible"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft",
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Move focus by day or week"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Select the focused date"
+          },
+          {
+            "keys": [
+              "PageDown",
+              "PageUp"
+            ],
+            "outcome": "Move to the next or previous month"
+          }
+        ],
+        "focusManagement": [
+          "Use one roving tab stop in the date grid",
+          "Keep focus on the selected day after selection"
+        ],
+        "requiredComposition": [
+          "Provide a visible purpose for the calendar",
+          "Own selected state and onSelect when the calendar is interactive"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/calendar",
+          "behavior": "https://react-day-picker.js.org"
+        },
+        "evidence": "tests/component-contracts.spec.ts#calendar"
       }
     },
     {
@@ -482,25 +526,74 @@
       "name": "combobox",
       "title": "Combobox",
       "category": "form-control",
-      "profile": "form-composition",
+      "profile": "searchable-selection-control",
       "classification": "form-control",
-      "behaviorOwner": "library",
-      "keyboard": "composed",
-      "responsive": "consumer-layout",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
       "requiredStates": [
-        "default",
+        "closed",
+        "open",
         "disabled",
         "focus-visible",
         "invalid",
-        "read-only"
+        "selected",
+        "empty"
       ],
       "consumerResponsibilities": [
-        "Compose visible labels, descriptions and errors",
-        "Own value, validation and submission"
+        "Compose a visible label and connected error description",
+        "Own items, value, validation and submission"
       ],
-      "accessibility": "Use a visible label; Base UI manages active options, selection, filtering and keyboard navigation.",
+      "accessibility": "Use a visible label and name clear or remove actions; Base UI manages active options, selection, filtering and keyboard navigation.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=combobox",
+          "name=required",
+          "popup=listbox",
+          "items=option",
+          "aria-expanded=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Typing"
+            ],
+            "outcome": "Filter the available options"
+          },
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Open and move the active option"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Commit the active option"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close without replacing the committed value"
+          }
+        ],
+        "focusManagement": [
+          "Keep DOM focus on the input while navigating options",
+          "Return focus to the input after commit, clear or dismissal"
+        ],
+        "requiredComposition": [
+          "Associate a visible label with the input",
+          "Give clear and chip removal controls accessible names"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/combobox",
+          "behavior": "https://base-ui.com/react/components/combobox"
+        },
+        "evidence": "tests/component-contracts.spec.ts#combobox"
       }
     },
     {
@@ -612,25 +705,75 @@
       "name": "date-picker",
       "title": "Date Picker",
       "category": "form-control",
-      "profile": "form-composition",
+      "profile": "date-selection-control",
       "classification": "form-control",
       "behaviorOwner": "library",
       "keyboard": "composed",
-      "responsive": "consumer-layout",
+      "responsive": "viewport-constrained",
       "requiredStates": [
-        "default",
+        "closed",
+        "open",
         "disabled",
         "focus-visible",
-        "invalid",
-        "read-only"
+        "selected"
       ],
       "consumerResponsibilities": [
-        "Compose visible labels, descriptions and errors",
-        "Own value, validation and submission"
+        "Compose a visible label and contextual popup name",
+        "Own value, validation, time zone and submission"
       ],
-      "accessibility": "Use with a visible FieldLabel; the trigger has native button semantics and the calendar preserves DayPicker keyboard navigation.",
+      "accessibility": "Use a visible FieldLabel and named popup; the trigger restores focus, the calendar preserves DayPicker keyboard navigation and the hidden form value follows disabled state.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "trigger.role=button",
+          "trigger.name=visible-label",
+          "popup.name=required",
+          "hidden-value=selected-date"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open the date picker"
+          },
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft",
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Move through dates in the calendar"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Commit the focused date"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close without changing the selected date"
+          }
+        ],
+        "focusManagement": [
+          "Move focus to the selected date when opened",
+          "Restore focus to the trigger after commit or dismissal"
+        ],
+        "requiredComposition": [
+          "Compose Button, Popover and Calendar",
+          "Provide a visible FieldLabel and a contextual popup title"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/date-picker",
+          "behavior": "https://base-ui.com/react/components/popover"
+        },
+        "evidence": "tests/component-contracts.spec.ts#date-picker"
       }
     },
     {
@@ -850,31 +993,92 @@
       ],
       "accessibility": "Connect labels, descriptions and errors to the control with stable IDs and aria-describedby.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "label=control-name",
+          "description=aria-describedby",
+          "error=alert",
+          "grouping=fieldset-and-legend"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through contained controls without adding a wrapper tab stop"
+          }
+        ],
+        "focusManagement": [
+          "Clicking the label focuses its associated control",
+          "Validation errors do not replace control focus"
+        ],
+        "requiredComposition": [
+          "Use stable IDs for label, description and error relationships",
+          "Use FieldSet and FieldLegend for related choices"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/field",
+          "behavior": "https://www.w3.org/WAI/tutorials/forms/labels/"
+        },
+        "evidence": "tests/component-contracts.spec.ts#field"
       }
     },
     {
       "name": "form",
       "title": "Form",
       "category": "form-structure",
-      "profile": "form-structure",
+      "profile": "native-form",
       "classification": "form-structure",
-      "behaviorOwner": "library",
-      "keyboard": "not-applicable",
+      "behaviorOwner": "browser",
+      "keyboard": "native",
       "responsive": "consumer-layout",
       "requiredStates": [
         "default",
-        "disabled",
         "invalid",
-        "read-only"
+        "pending"
       ],
       "consumerResponsibilities": [
-        "Maintain stable IDs and label relationships",
-        "Connect descriptions and errors with aria-describedby"
+        "Compose labelled controls and connected validation messages",
+        "Own submission side effects and duplicate-submit protection"
       ],
       "accessibility": "Preserves native form submission and validation semantics; compose every control with a visible label and connected error text.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "element=form",
+          "name=required-for-landmark",
+          "native-validation=preserved",
+          "aria-busy=pending-state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Submit from an eligible control when native validation passes"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Follow the same logical and visual control order"
+          }
+        ],
+        "focusManagement": [
+          "Keep the first invalid native control available for correction",
+          "Do not introduce focusable layout wrappers"
+        ],
+        "requiredComposition": [
+          "Use FormBody with Field-based controls",
+          "Keep submit and reset actions in FormActions"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/field",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form"
+        },
+        "evidence": "tests/component-contracts.spec.ts#form"
       }
     },
     {
@@ -922,7 +1126,42 @@
       ],
       "accessibility": "Use inside Field with a visible label; provide autocomplete and inputMode where relevant.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=textbox",
+          "name=visible-label",
+          "readonly=native",
+          "invalid=aria-invalid"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Typing",
+              "Backspace",
+              "Delete"
+            ],
+            "outcome": "Edit the native value when enabled and writable"
+          },
+          {
+            "keys": [
+              "Tab"
+            ],
+            "outcome": "Participate once in the native tab order"
+          }
+        ],
+        "focusManagement": [
+          "Remain focusable when read-only",
+          "Expose a visible state-aware focus outline"
+        ],
+        "requiredComposition": [
+          "Compose inside Field with a visible FieldLabel",
+          "Connect descriptions and errors with aria-describedby"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/input",
+          "behavior": "https://base-ui.com/react/components/input"
+        },
+        "evidence": "tests/component-contracts.spec.ts#input"
       }
     },
     {
@@ -945,9 +1184,43 @@
         "Compose visible labels, descriptions and errors",
         "Own value, validation and submission"
       ],
-      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons.",
+      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons; clicking a non-interactive addon focuses the contained control.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=group",
+          "group-name=required",
+          "control=InputGroupInput-or-InputGroupTextarea",
+          "addons=supplementary"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move between the control and named addon buttons without stopping on layout wrappers"
+          },
+          {
+            "keys": [
+              "Typing"
+            ],
+            "outcome": "Edit the composed input or textarea"
+          }
+        ],
+        "focusManagement": [
+          "Clicking a non-button addon focuses the composed control",
+          "Display the focus outline on the group container"
+        ],
+        "requiredComposition": [
+          "Use InputGroupInput or InputGroupTextarea as the control",
+          "Give interactive addons accessible names and type=button by default"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/input-group",
+          "behavior": "https://base-ui.com/react/components/input"
+        },
+        "evidence": "tests/component-contracts.spec.ts#input-group"
       }
     },
     {
@@ -971,7 +1244,42 @@
       ],
       "accessibility": "Provide a visible label, autocomplete=one-time-code and clear validation text.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=textbox",
+          "name=visible-label",
+          "one-real-input=true",
+          "autocomplete=one-time-code"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Typing",
+              "Backspace",
+              "Delete"
+            ],
+            "outcome": "Edit one shared OTP value"
+          },
+          {
+            "keys": [
+              "Paste"
+            ],
+            "outcome": "Populate the complete code through one input event"
+          }
+        ],
+        "focusManagement": [
+          "Expose exactly one tab stop",
+          "Mirror caret and invalid state into the visual slots"
+        ],
+        "requiredComposition": [
+          "Provide a visible label and one-time-code autocomplete",
+          "Use slots only as visual mirrors of the real input"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/input-otp",
+          "behavior": "https://input-otp.rodz.dev"
+        },
+        "evidence": "tests/component-contracts.spec.ts#input-otp"
       }
     },
     {
@@ -1134,7 +1442,7 @@
       "name": "native-select",
       "title": "Native Select",
       "category": "form-control",
-      "profile": "native-control",
+      "profile": "native-choice-control",
       "classification": "form-control",
       "behaviorOwner": "browser",
       "keyboard": "native",
@@ -1144,15 +1452,55 @@
         "disabled",
         "focus-visible",
         "invalid",
-        "read-only"
+        "selected"
       ],
       "consumerResponsibilities": [
         "Compose a visible label and error description",
-        "Own value, validation and submission"
+        "Own options, value, validation and submission"
       ],
       "accessibility": "Associate the select with a visible label and use optgroup for meaningful option groups.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=combobox",
+          "name=visible-label",
+          "options=native",
+          "invalid=aria-invalid"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Move through native options"
+          },
+          {
+            "keys": [
+              "Typing"
+            ],
+            "outcome": "Select the next native option matching the typed prefix"
+          },
+          {
+            "keys": [
+              "Tab"
+            ],
+            "outcome": "Participate once in the native tab order"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the select while changing options",
+          "Skip the control when disabled"
+        ],
+        "requiredComposition": [
+          "Associate a visible label with the select",
+          "Use optgroup for meaningful option groups"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/native-select",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select"
+        },
+        "evidence": "tests/component-contracts.spec.ts#native-select"
       }
     },
     {
@@ -1286,24 +1634,67 @@
       "name": "questionnaire",
       "title": "Questionnaire",
       "category": "form-structure",
-      "profile": "form-structure",
+      "profile": "external-form-flow",
       "classification": "form-structure",
-      "behaviorOwner": "library",
-      "keyboard": "not-applicable",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
       "responsive": "consumer-layout",
       "requiredStates": [
-        "default",
-        "disabled",
+        "unanswered",
+        "answered",
+        "skipped",
         "invalid",
-        "read-only"
+        "disabled"
       ],
       "consumerResponsibilities": [
-        "Maintain stable IDs and label relationships",
-        "Connect descriptions and errors with aria-describedby"
+        "Keep the items contract aligned with rendered questions",
+        "Own persistence, transport and conditional branching"
       ],
-      "accessibility": "Use semantic field groups and announce step changes, validation errors and progress.",
+      "accessibility": "The declared @shadcn/react flow owns step behavior; use semantic field groups and announce step changes, validation errors and progress.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "element=form",
+          "items=fieldset",
+          "titles=legend",
+          "progress=progressbar",
+          "errors=alert"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Space",
+              "Number shortcuts"
+            ],
+            "outcome": "Select and focus a choice"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Advance from an answered choice"
+          },
+          {
+            "keys": [
+              "Control+Enter",
+              "Meta+Enter"
+            ],
+            "outcome": "Advance or submit the active item"
+          }
+        ],
+        "focusManagement": [
+          "Focus the first invalid answer when validation fails",
+          "Move focus into the newly active item and keep inactive items inert"
+        ],
+        "requiredComposition": [
+          "Keep Root.items aligned with rendered Item and Choice elements",
+          "Include Description and Error for every validated item"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/questionnaire",
+          "behavior": "https://ui.shadcn.com/docs/components/base/questionnaire"
+        },
+        "evidence": "tests/component-contracts.spec.ts#questionnaire"
       }
     },
     {
@@ -1593,7 +1984,50 @@
       ],
       "accessibility": "Provide an accessible label and meaningful minimum, maximum and step values for every thumb.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=slider-per-thumb",
+          "name=required-per-thumb",
+          "aria-valuemin=state",
+          "aria-valuemax=state",
+          "aria-valuenow=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowUp"
+            ],
+            "outcome": "Increase the active value by one step"
+          },
+          {
+            "keys": [
+              "ArrowLeft",
+              "ArrowDown"
+            ],
+            "outcome": "Decrease the active value by one step"
+          },
+          {
+            "keys": [
+              "Home",
+              "End"
+            ],
+            "outcome": "Move to the minimum or maximum"
+          }
+        ],
+        "focusManagement": [
+          "Expose one tab stop per thumb",
+          "Draw the visible focus outline around the rendered thumb"
+        ],
+        "requiredComposition": [
+          "Provide an accessible label for every thumb",
+          "Pass an explicit index to every range thumb"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/slider",
+          "behavior": "https://base-ui.com/react/components/slider"
+        },
+        "evidence": "tests/component-contracts.spec.ts#slider"
       }
     },
     {
@@ -1802,7 +2236,43 @@
       ],
       "accessibility": "Use inside Field with a visible label and describe limits or requirements before errors occur.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "role=textbox",
+          "multiline=true",
+          "name=visible-label",
+          "readonly=native",
+          "invalid=aria-invalid"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Typing",
+              "Backspace",
+              "Delete"
+            ],
+            "outcome": "Edit the native multi-line value when enabled and writable"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Insert a line break without submitting the enclosing form"
+          }
+        ],
+        "focusManagement": [
+          "Remain focusable when read-only",
+          "Expose a visible state-aware focus outline"
+        ],
+        "requiredComposition": [
+          "Compose inside Field with a visible FieldLabel",
+          "Describe limits and validation requirements with aria-describedby"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/textarea",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea"
+        },
+        "evidence": "tests/component-contracts.spec.ts#textarea"
       }
     },
     {
