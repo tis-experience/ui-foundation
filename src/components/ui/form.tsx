@@ -34,7 +34,7 @@ function FormActions({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="form-actions"
       className={cn(
-        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        "flex flex-col gap-2 sm:flex-row sm:justify-end",
         className
       )}
       {...props}

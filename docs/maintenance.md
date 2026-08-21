@@ -66,7 +66,7 @@ The harness uses three responsibilities. One person or agent may perform more th
 
 1. Run `npm run agent:preflight` and isolate unrelated changes.
 2. Read the component contract, catalog entry, source and current tests.
-3. Consult current primary documentation for the relevant shadcn recipe and behavior engine.
+3. Consult current primary documentation for the relevant shadcn recipe and declared behavior engine; Base UI remains the primitive engine, while official compositions and specialized controls may declare a narrow external owner.
 4. Change the contract first when the public responsibility or behavior changes.
 5. Implement the smallest source change and add direct evidence for the affected interaction.
 6. Run `npm run build:all` to regenerate registry, contracts and AI surfaces.

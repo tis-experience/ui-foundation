@@ -1,4 +1,4 @@
-import { useId, type CSSProperties } from "react"
+import { useId, useState, type CSSProperties } from "react"
 import {
   AlertCircleIcon,
   BoldIcon,
@@ -167,6 +167,7 @@ import {
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
   FieldLegend,
@@ -183,6 +184,7 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
+  InputGroupTextarea,
 } from "@/components/ui/input-group"
 import {
   InputOTP,
@@ -264,7 +266,11 @@ import {
   QuestionnaireChoice,
   QuestionnaireChoices,
   QuestionnaireDescription,
+  QuestionnaireError,
+  QuestionnaireInput,
   QuestionnaireItem,
+  QuestionnaireNext,
+  QuestionnairePrevious,
   QuestionnaireProgress,
   QuestionnaireSubmit,
   QuestionnaireTitle,
@@ -363,6 +369,10 @@ const questionnaireItems = [
       { value: "tis" },
     ],
   },
+  {
+    name: "presetName",
+    required: true,
+  },
 ] as const
 
 type ComponentRow = {
@@ -391,6 +401,60 @@ const dataTableRows: ComponentRow[] = [
   { component: "Dialog", status: "Ready" },
   { component: "Table", status: "Ready" },
 ]
+
+function CalendarPreview({ id }: { id: string }) {
+  const [selected, setSelected] = useState(new Date(2026, 7, 20))
+  const labelId = `${id}-calendar-label`
+
+  return (
+    <Field className="preview-form">
+      <FieldLabel id={labelId}>Release date</FieldLabel>
+      <Calendar
+        aria-labelledby={labelId}
+        defaultMonth={selected}
+        mode="single"
+        selected={selected}
+        onSelect={(date) => date && setSelected(date)}
+      />
+    </Field>
+  )
+}
+
+function QuestionnairePreview({ id }: { id: string }) {
+  const inputLabelId = `${id}-preset-name-label`
+
+  return (
+    <Questionnaire
+      aria-label="Identity setup"
+      className="w-72 rounded-lg border p-4"
+      items={questionnaireItems}
+      shortcuts="numbers"
+      onSubmit={(event) => event.preventDefault()}
+    >
+      <QuestionnaireProgress />
+      <QuestionnaireItem name="identity" required>
+        <QuestionnaireTitle>Choose an identity</QuestionnaireTitle>
+        <QuestionnaireDescription>Behavior stays the same in both options.</QuestionnaireDescription>
+        <QuestionnaireChoices>
+          <QuestionnaireChoice value="neutral">Neutral</QuestionnaireChoice>
+          <QuestionnaireChoice value="tis">TIS</QuestionnaireChoice>
+        </QuestionnaireChoices>
+        <QuestionnaireError />
+      </QuestionnaireItem>
+      <QuestionnaireItem name="presetName" required>
+        <QuestionnaireTitle id={inputLabelId}>Name the preset</QuestionnaireTitle>
+        <QuestionnaireDescription>Use a name the team will recognize.</QuestionnaireDescription>
+        <QuestionnaireInput aria-labelledby={inputLabelId} />
+        <QuestionnaireError>Enter a preset name to continue.</QuestionnaireError>
+      </QuestionnaireItem>
+      <QuestionnaireActions>
+        <QuestionnairePrevious />
+        <QuestionnaireNext />
+        <QuestionnaireSubmit>Apply</QuestionnaireSubmit>
+      </QuestionnaireActions>
+    </Questionnaire>
+  )
+}
 
 function ComponentPreview({ name }: { name: string }) {
   const id = useId()
@@ -536,14 +600,7 @@ function ComponentPreview({ name }: { name: string }) {
       )
 
     case "calendar":
-      return (
-        <Calendar
-          mode="single"
-          defaultMonth={new Date(2026, 7, 1)}
-          selected={new Date(2026, 7, 20)}
-          className="rounded-lg border"
-        />
-      )
+      return <CalendarPreview id={id} />
 
     case "card":
       return (
@@ -611,15 +668,18 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "combobox":
       return (
-        <Combobox items={comboboxItems} defaultValue="Design">
-          <ComboboxInput className="w-64" aria-label="Team" placeholder="Choose a team" />
-          <ComboboxContent>
-            <ComboboxEmpty>No team found.</ComboboxEmpty>
-            <ComboboxList>
-              {comboboxItems.map((item) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>)}
-            </ComboboxList>
-          </ComboboxContent>
-        </Combobox>
+        <Field className="preview-form">
+          <FieldLabel htmlFor={`${id}-combobox`}>Team</FieldLabel>
+          <Combobox items={comboboxItems} defaultValue="Design">
+            <ComboboxInput id={`${id}-combobox`} className="w-64" placeholder="Choose a team" showClear />
+            <ComboboxContent>
+              <ComboboxEmpty>No team found.</ComboboxEmpty>
+              <ComboboxList>
+                {(item) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}
+              </ComboboxList>
+            </ComboboxContent>
+          </Combobox>
+        </Field>
       )
 
     case "command":
@@ -683,11 +743,16 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "date-picker":
       return (
-        <DatePicker
-          defaultValue={new Date(2026, 7, 20)}
-          name="releaseDate"
-          formatValue={(date) => date.toLocaleDateString("en-CA")}
-        />
+        <Field className="preview-form">
+          <FieldLabel htmlFor={`${id}-date-picker`}>Release date</FieldLabel>
+          <DatePicker
+            defaultValue={new Date(2026, 7, 20)}
+            name="releaseDate"
+            popoverLabel="Choose a release date"
+            triggerProps={{ id: `${id}-date-picker` }}
+            formatValue={(date) => date.toLocaleDateString("en-CA")}
+          />
+        </Field>
       )
 
     case "dialog":
@@ -765,12 +830,15 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "field": {
       const fieldId = `${id}-field`
+      const descriptionId = `${fieldId}-description`
+      const errorId = `${fieldId}-error`
       return (
         <FieldGroup className="preview-form">
-          <Field>
+          <Field data-invalid>
             <FieldLabel htmlFor={fieldId}>Project name</FieldLabel>
-            <Input id={fieldId} defaultValue="Customer portal" />
-            <FieldDescription>Used in the generated package metadata.</FieldDescription>
+            <Input id={fieldId} aria-invalid aria-describedby={`${descriptionId} ${errorId}`} />
+            <FieldDescription id={descriptionId}>Used in the generated package metadata.</FieldDescription>
+            <FieldError id={errorId}>Project name is required.</FieldError>
           </Field>
         </FieldGroup>
       )
@@ -778,16 +846,18 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "form": {
       const formId = `${id}-form-name`
+      const descriptionId = `${formId}-description`
       return (
         <Form
+          aria-label="Project settings"
           className="preview-form"
           onSubmit={(event) => event.preventDefault()}
         >
           <FormBody>
             <Field>
               <FieldLabel htmlFor={formId}>Project name</FieldLabel>
-              <Input id={formId} name="projectName" required />
-              <FieldDescription>Required before saving.</FieldDescription>
+              <Input id={formId} name="projectName" required aria-describedby={descriptionId} />
+              <FieldDescription id={descriptionId}>Required before saving.</FieldDescription>
             </Field>
           </FormBody>
           <FormActions>
@@ -812,37 +882,56 @@ function ComponentPreview({ name }: { name: string }) {
       )
 
     case "input":
-      return <Input className="preview-input" aria-label="Example input" placeholder="Enter a value…" />
+      return (
+        <Field className="preview-form">
+          <FieldLabel htmlFor={`${id}-input`}>Example input</FieldLabel>
+          <Input id={`${id}-input`} className="preview-input" placeholder="Enter a value…" />
+        </Field>
+      )
 
     case "input-group": {
       const inputGroupId = `${id}-input-group`
+      const textareaGroupId = `${id}-textarea-group`
       return (
-        <div className="preview-form">
-          <Label htmlFor={inputGroupId}>Search documentation</Label>
-          <InputGroup>
-            <InputGroupAddon><SearchIcon aria-hidden="true" /></InputGroupAddon>
-            <InputGroupInput id={inputGroupId} placeholder="Search…" />
-            <InputGroupAddon align="inline-end"><Kbd>⌘K</Kbd></InputGroupAddon>
-          </InputGroup>
-        </div>
+        <FieldGroup className="preview-form">
+          <Field>
+            <FieldLabel id={`${inputGroupId}-label`} htmlFor={inputGroupId}>Search documentation</FieldLabel>
+            <InputGroup aria-labelledby={`${inputGroupId}-label`}>
+              <InputGroupAddon><SearchIcon aria-hidden="true" /></InputGroupAddon>
+              <InputGroupInput id={inputGroupId} placeholder="Search…" />
+              <InputGroupAddon align="inline-end"><Kbd>⌘K</Kbd></InputGroupAddon>
+            </InputGroup>
+          </Field>
+          <Field>
+            <FieldLabel id={`${textareaGroupId}-label`} htmlFor={textareaGroupId}>Review notes</FieldLabel>
+            <InputGroup aria-labelledby={`${textareaGroupId}-label`}>
+              <InputGroupAddon>Note</InputGroupAddon>
+              <InputGroupTextarea id={textareaGroupId} placeholder="Add context…" />
+            </InputGroup>
+          </Field>
+        </FieldGroup>
       )
     }
 
     case "input-otp":
       return (
-        <InputOTP aria-label="Verification code" maxLength={6} defaultValue="248">
-          <InputOTPGroup>
-            <InputOTPSlot index={0} />
-            <InputOTPSlot index={1} />
-            <InputOTPSlot index={2} />
-          </InputOTPGroup>
-          <InputOTPSeparator />
-          <InputOTPGroup>
-            <InputOTPSlot index={3} />
-            <InputOTPSlot index={4} />
-            <InputOTPSlot index={5} />
-          </InputOTPGroup>
-        </InputOTP>
+        <Field className="preview-form" data-invalid>
+          <FieldLabel htmlFor={`${id}-otp`}>Verification code</FieldLabel>
+          <InputOTP id={`${id}-otp`} aria-invalid autoComplete="one-time-code" inputMode="numeric" maxLength={6} defaultValue="248">
+            <InputOTPGroup>
+              <InputOTPSlot index={0} />
+              <InputOTPSlot index={1} />
+              <InputOTPSlot index={2} />
+            </InputOTPGroup>
+            <InputOTPSeparator />
+            <InputOTPGroup>
+              <InputOTPSlot index={3} />
+              <InputOTPSlot index={4} />
+              <InputOTPSlot index={5} />
+            </InputOTPGroup>
+          </InputOTP>
+          <FieldError>Enter all six digits.</FieldError>
+        </Field>
       )
 
     case "item":
@@ -935,11 +1024,14 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "native-select":
       return (
-        <NativeSelect aria-label="Release channel" defaultValue="stable">
-          <NativeSelectOption value="stable">Stable</NativeSelectOption>
-          <NativeSelectOption value="preview">Preview</NativeSelectOption>
-          <NativeSelectOption value="canary">Canary</NativeSelectOption>
-        </NativeSelect>
+        <Field className="preview-form">
+          <FieldLabel htmlFor={`${id}-native-select`}>Release channel</FieldLabel>
+          <NativeSelect id={`${id}-native-select`} defaultValue="stable">
+            <NativeSelectOption value="stable">Stable</NativeSelectOption>
+            <NativeSelectOption value="preview">Preview</NativeSelectOption>
+            <NativeSelectOption value="canary">Canary</NativeSelectOption>
+          </NativeSelect>
+        </Field>
       )
 
     case "navigation-menu":
@@ -996,25 +1088,7 @@ function ComponentPreview({ name }: { name: string }) {
       )
 
     case "questionnaire":
-      return (
-        <Questionnaire
-          className="w-72 rounded-lg border p-4"
-          items={questionnaireItems}
-          shortcuts="numbers"
-          onSubmit={(event) => event.preventDefault()}
-        >
-          <QuestionnaireProgress>Question 1 of 1</QuestionnaireProgress>
-          <QuestionnaireItem name="identity" required>
-            <QuestionnaireTitle>Choose an identity</QuestionnaireTitle>
-            <QuestionnaireDescription>Behavior stays the same in both options.</QuestionnaireDescription>
-            <QuestionnaireChoices>
-              <QuestionnaireChoice value="neutral">Neutral</QuestionnaireChoice>
-              <QuestionnaireChoice value="tis">TIS</QuestionnaireChoice>
-            </QuestionnaireChoices>
-          </QuestionnaireItem>
-          <QuestionnaireActions><QuestionnaireSubmit>Apply</QuestionnaireSubmit></QuestionnaireActions>
-        </Questionnaire>
-      )
+      return <QuestionnairePreview id={id} />
 
     case "radio-group":
       return (
@@ -1118,7 +1192,7 @@ function ComponentPreview({ name }: { name: string }) {
       )
 
     case "slider":
-      return <Slider className="w-64" defaultValue={[35]} getThumbAriaLabel={() => "Volume"} />
+      return <Slider className="w-64" defaultValue={35} getThumbAriaLabel={() => "Volume"} />
 
     case "sonner":
       return (
@@ -1172,7 +1246,12 @@ function ComponentPreview({ name }: { name: string }) {
       )
 
     case "textarea":
-      return <Textarea className="preview-input" aria-label="Example textarea" placeholder="Describe the intended experience…" />
+      return (
+        <Field className="preview-form">
+          <FieldLabel htmlFor={`${id}-textarea`}>Example textarea</FieldLabel>
+          <Textarea id={`${id}-textarea`} className="preview-input" placeholder="Describe the intended experience…" />
+        </Field>
+      )
 
     case "toast":
       return (

@@ -95,6 +95,7 @@
 :where([data-slot="input-group"]):has([data-slot="input-group-control"]:focus-visible),
 :where([data-slot="combobox-chips"]):focus-within,
 :where([data-slot="questionnaire-choice"]):has(input:focus-visible),
+:where([data-slot="slider-thumb"]):has(input:focus-visible),
 :where([data-slot="message-scroller"]):has([data-slot="message-scroller-viewport"]:focus-visible),
 :where([data-slot="resizable-panel-group"]):has([data-slot="resizable-handle"]:focus-visible) {
   --tw-ring-offset-shadow: 0 0 #0000 !important;
@@ -105,7 +106,8 @@
   outline-width: var(--focus-ring-width) !important;
 }
 
-:where([data-slot="message-scroller-viewport"], [data-slot="resizable-handle"]):focus-visible {
+:where([data-slot="message-scroller-viewport"], [data-slot="resizable-handle"]):focus-visible,
+:where([data-slot="slider-thumb"] input):focus-visible {
   --tw-ring-offset-shadow: 0 0 #0000 !important;
   --tw-ring-shadow: 0 0 #0000 !important;
   outline-style: none !important;
@@ -142,6 +144,7 @@
   :where([data-slot="input-group"]):has([data-slot="input-group-control"]:focus-visible),
   :where([data-slot="combobox-chips"]):focus-within,
   :where([data-slot="questionnaire-choice"]):has(input:focus-visible),
+  :where([data-slot="slider-thumb"]):has(input:focus-visible),
   :where([data-slot="message-scroller"]):has([data-slot="message-scroller-viewport"]:focus-visible),
   :where([data-slot="resizable-panel-group"]):has([data-slot="resizable-handle"]:focus-visible) {
     outline-color: Highlight !important;

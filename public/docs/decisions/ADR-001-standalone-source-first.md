@@ -9,7 +9,7 @@ An earlier experiment mixed the existing TIS design system, shadcn components, p
 
 ## Decision
 
-Create UI Foundation as an independent product with a neutral default theme, an optional TIS adapter, Base UI behavior for the React implementation, and shadcn source distribution. Figma is not part of this phase.
+Create UI Foundation as an independent product with a neutral default theme, an optional TIS adapter, Base UI as the React primitive engine, and shadcn source distribution. Official shadcn compositions and specialized external controls may keep their own behavior engine when the dependency and ownership are explicit in the component catalog and contract. They do not replace Base UI or become a second primitive layer. Figma is not part of this phase.
 
 Future technology implementations will share contracts and intent, not runtime component code.
 
