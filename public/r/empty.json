@@ -5,7 +5,7 @@
   "description": "A structured empty state with media, explanation and an optional next action.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

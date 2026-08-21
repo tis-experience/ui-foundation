@@ -5,7 +5,7 @@
   "description": "Semantic table primitives for structured rows, headers, captions and summaries.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

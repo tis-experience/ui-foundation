@@ -5,13 +5,13 @@
   "description": "A responsive application sidebar with collapsible and mobile sheet behavior.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json",
-    "./input.json",
-    "./separator.json",
-    "./sheet.json",
-    "./skeleton.json",
-    "./tooltip.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json",
+    "https://tis-experience.github.io/ui-foundation/r/input.json",
+    "https://tis-experience.github.io/ui-foundation/r/separator.json",
+    "https://tis-experience.github.io/ui-foundation/r/sheet.json",
+    "https://tis-experience.github.io/ui-foundation/r/skeleton.json",
+    "https://tis-experience.github.io/ui-foundation/r/tooltip.json"
   ],
   "files": [
     {

@@ -5,7 +5,7 @@
   "description": "A compact representation of keyboard input or shortcuts.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

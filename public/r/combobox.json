@@ -5,9 +5,9 @@
   "description": "A searchable single or multiple selection input with listbox behavior.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json",
-    "./input-group.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json",
+    "https://tis-experience.github.io/ui-foundation/r/input-group.json"
   ],
   "files": [
     {

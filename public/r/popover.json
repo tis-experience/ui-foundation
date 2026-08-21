@@ -5,7 +5,7 @@
   "description": "A non-modal anchored surface for compact interactive content.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

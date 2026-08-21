@@ -5,7 +5,7 @@
   "description": "A compact label for status, category or metadata.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

@@ -5,8 +5,8 @@
   "description": "A page navigation pattern with current, previous, next and overflow states.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json"
   ],
   "files": [
     {

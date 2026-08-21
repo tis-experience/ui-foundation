@@ -5,7 +5,7 @@
   "description": "A token-aware Typeset container for semantic HTML and rendered Markdown content.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

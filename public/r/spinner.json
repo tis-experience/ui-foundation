@@ -5,7 +5,7 @@
   "description": "A compact animated progress indicator for indeterminate work.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

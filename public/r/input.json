@@ -5,7 +5,7 @@
   "description": "A single-line text input built on the Base UI input primitive.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

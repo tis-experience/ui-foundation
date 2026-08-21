@@ -5,7 +5,7 @@
   "description": "A contextual action menu opened from pointer or keyboard interaction.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

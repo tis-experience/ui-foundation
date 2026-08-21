@@ -7,10 +7,10 @@
     "@tanstack/react-table@9.1.2"
   ],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json",
-    "./input.json",
-    "./table.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json",
+    "https://tis-experience.github.io/ui-foundation/r/input.json",
+    "https://tis-experience.github.io/ui-foundation/r/table.json"
   ],
   "files": [
     {

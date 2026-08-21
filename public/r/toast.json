@@ -5,8 +5,8 @@
   "description": "A Base UI toast system with queueing, actions, swipe dismissal and a five-item visible limit.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json"
   ],
   "files": [
     {

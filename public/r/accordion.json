@@ -5,7 +5,7 @@
   "description": "A vertically stacked set of interactive headings that reveal content.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

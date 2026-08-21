@@ -5,9 +5,9 @@
   "description": "A semantic composition for labels, controls, descriptions and validation messages.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./label.json",
-    "./separator.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/label.json",
+    "https://tis-experience.github.io/ui-foundation/r/separator.json"
   ],
   "files": [
     {

@@ -49,6 +49,7 @@ const index = read("index.html")
 assert(/(?:src|href)="\.\/assets\//.test(index), "Vite assets are not relative to the Pages project path")
 
 const manifest = JSON.parse(read("ai/manifest.json"))
+const registry = JSON.parse(read("r/registry.json"))
 assert(manifest.distribution.registryBaseUrl === `${siteBaseUrl}r`, "Registry base URL is not public")
 assert(manifest.theming.customizer.route === `${siteBaseUrl}#customize`, "Customizer URL is not public")
 
@@ -61,6 +62,17 @@ for (const source of manifest.sources) {
 
 for (const item of [...manifest.components, ...manifest.blocks, ...manifest.charts]) {
   assert(item.install.includes(`${siteBaseUrl}r/`), `${item.name}: install command is not public`)
+}
+
+for (const item of registry.items) {
+  for (const dependency of item.registryDependencies ?? []) {
+    assert(
+      dependency.startsWith(`${siteBaseUrl}r/`),
+      `${item.name}: registry dependency is not a public absolute URL: ${dependency}`
+    )
+    const relativePath = new URL(dependency).pathname.replace(/^\/ui-foundation\//, "")
+    assert(fs.existsSync(path.join(dist, relativePath)), `${item.name}: missing registry dependency ${relativePath}`)
+  }
 }
 
 for (const relativePath of ["ai/manifest.json", "llms.txt", "registry/catalog.json"]) {

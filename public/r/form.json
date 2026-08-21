@@ -5,8 +5,8 @@
   "description": "A native form composition with Field-based body layout, pending state and responsive actions.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./field.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/field.json"
   ],
   "files": [
     {

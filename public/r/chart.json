@@ -7,8 +7,8 @@
     "recharts@3.8.0"
   ],
   "registryDependencies": [
-    "./ui-base.json",
-    "./card.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/card.json"
   ],
   "files": [
     {

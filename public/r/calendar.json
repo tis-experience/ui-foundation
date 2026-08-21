@@ -8,8 +8,8 @@
     "date-fns@4.4.0"
   ],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json"
   ],
   "files": [
     {

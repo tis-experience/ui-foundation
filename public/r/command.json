@@ -7,9 +7,9 @@
     "cmdk@1.1.1"
   ],
   "registryDependencies": [
-    "./ui-base.json",
-    "./dialog.json",
-    "./input-group.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/dialog.json",
+    "https://tis-experience.github.io/ui-foundation/r/input-group.json"
   ],
   "files": [
     {

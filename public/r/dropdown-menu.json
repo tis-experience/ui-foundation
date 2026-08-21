@@ -5,7 +5,7 @@
   "description": "An anchored menu for actions, selections and nested commands.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

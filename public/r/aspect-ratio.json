@@ -5,7 +5,7 @@
   "description": "A layout primitive that preserves a fixed width-to-height ratio.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

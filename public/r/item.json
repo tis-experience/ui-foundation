@@ -5,8 +5,8 @@
   "description": "A compositional row for media, title, description and related actions.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./separator.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/separator.json"
   ],
   "files": [
     {

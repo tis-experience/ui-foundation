@@ -5,7 +5,7 @@
   "description": "A non-interactive placeholder for content that is loading.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

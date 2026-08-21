@@ -5,7 +5,7 @@
   "description": "A swipeable edge panel with modal, nested and snap-point behavior.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

@@ -5,8 +5,8 @@
   "description": "A single or multiple selection group composed from toggle items.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./toggle.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/toggle.json"
   ],
   "files": [
     {

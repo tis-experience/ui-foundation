@@ -5,8 +5,8 @@
   "description": "A modal panel that enters from an edge of the viewport.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json"
   ],
   "files": [
     {

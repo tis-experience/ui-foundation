@@ -5,7 +5,7 @@
   "description": "A styled scroll viewport that preserves native scrolling behavior.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

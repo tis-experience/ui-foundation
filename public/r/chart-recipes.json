@@ -5,8 +5,8 @@
   "description": "Six token-aware and accessible Recharts recipes: Area, Bar, Line, Pie, Radar and Radial.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./chart.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/chart.json"
   ],
   "files": [
     {

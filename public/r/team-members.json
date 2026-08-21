@@ -5,11 +5,11 @@
   "description": "A member management card with identity, role, status and explicit row actions.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./avatar.json",
-    "./badge.json",
-    "./button.json",
-    "./card.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/avatar.json",
+    "https://tis-experience.github.io/ui-foundation/r/badge.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json",
+    "https://tis-experience.github.io/ui-foundation/r/card.json"
   ],
   "files": [
     {

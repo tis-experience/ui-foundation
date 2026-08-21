@@ -7,7 +7,7 @@
     "react-resizable-panels@4.12.3"
   ],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

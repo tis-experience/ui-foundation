@@ -5,10 +5,10 @@
   "description": "A text control composed with inline addons, actions or keyboard hints.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json",
-    "./input.json",
-    "./textarea.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json",
+    "https://tis-experience.github.io/ui-foundation/r/input.json",
+    "https://tis-experience.github.io/ui-foundation/r/textarea.json"
   ],
   "files": [
     {

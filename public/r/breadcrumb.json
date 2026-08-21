@@ -5,7 +5,7 @@
   "description": "A hierarchical path that locates the current page within a structure.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

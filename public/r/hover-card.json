@@ -5,7 +5,7 @@
   "description": "A non-modal preview surface shown from hover or keyboard focus.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

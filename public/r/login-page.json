@@ -5,12 +5,12 @@
   "description": "A complete sign-in surface with native form semantics, password recovery and account access guidance.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json",
-    "./card.json",
-    "./checkbox.json",
-    "./field.json",
-    "./input.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json",
+    "https://tis-experience.github.io/ui-foundation/r/card.json",
+    "https://tis-experience.github.io/ui-foundation/r/checkbox.json",
+    "https://tis-experience.github.io/ui-foundation/r/field.json",
+    "https://tis-experience.github.io/ui-foundation/r/input.json"
   ],
   "files": [
     {

@@ -5,7 +5,7 @@
   "description": "A set of panels where one section is visible at a time.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

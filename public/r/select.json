@@ -5,7 +5,7 @@
   "description": "A single-selection popup control with groups and scrolling support.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

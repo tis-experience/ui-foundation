@@ -5,8 +5,8 @@
   "description": "A file attachment surface with media, metadata, actions and an optional trigger.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json"
   ],
   "files": [
     {

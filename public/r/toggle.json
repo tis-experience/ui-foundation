@@ -5,7 +5,7 @@
   "description": "A two-state pressed control for formatting or view options.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

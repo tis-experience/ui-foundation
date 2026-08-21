@@ -5,7 +5,7 @@
   "description": "A compositional surface for grouped content and actions.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

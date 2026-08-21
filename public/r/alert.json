@@ -5,7 +5,7 @@
   "description": "A static status message with optional title, icon and action.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

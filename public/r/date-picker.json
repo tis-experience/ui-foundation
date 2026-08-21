@@ -5,10 +5,10 @@
   "description": "A controlled or uncontrolled date selection composition built from Button, Calendar and Popover.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json",
-    "./calendar.json",
-    "./popover.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json",
+    "https://tis-experience.github.io/ui-foundation/r/calendar.json",
+    "https://tis-experience.github.io/ui-foundation/r/popover.json"
   ],
   "files": [
     {

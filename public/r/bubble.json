@@ -5,7 +5,7 @@
   "description": "A conversational content surface with alignment and reaction support.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

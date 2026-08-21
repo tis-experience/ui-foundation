@@ -13,6 +13,7 @@ const catalog = JSON.parse(
 )
 const consumer = fs.mkdtempSync(path.join(os.tmpdir(), "ui-foundation-consumer-"))
 const npmCache = path.join(os.tmpdir(), "ui-foundation-npm-cache")
+const publicRegistryBaseUrl = "https://tis-experience.github.io/ui-foundation/r/"
 let passed = false
 
 function run(command, args, cwd = consumer) {
@@ -27,9 +28,10 @@ try {
   fs.cpSync(template, consumer, { recursive: true })
   for (const file of fs.readdirSync(path.join(root, "public", "r"))) {
     if (file.endsWith(".json")) {
-      fs.copyFileSync(
-        path.join(root, "public", "r", file),
-        path.join(consumer, file)
+      const source = fs.readFileSync(path.join(root, "public", "r", file), "utf8")
+      fs.writeFileSync(
+        path.join(consumer, file),
+        source.replaceAll(publicRegistryBaseUrl, `${consumer}${path.sep}`)
       )
     }
   }

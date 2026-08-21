@@ -4,7 +4,7 @@
   "title": "TIS Theme",
   "description": "Optional standalone TIS identity preset for UI Foundation.",
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "css": {
     "[data-ui-theme=\"tis\"]": {

@@ -8,6 +8,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const outputFile = path.join(root, "registry.json")
 const checkOnly = process.argv.includes("--check")
 const homepage = "https://tis-experience.github.io/ui-foundation/"
+const registryBaseUrl = `${homepage}r`
+const registryDependency = (name) => `${registryBaseUrl}/${name}.json`
 
 function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(root, relativePath), "utf8"))
@@ -183,8 +185,8 @@ function componentItem(component) {
     description: component.description,
     dependencies: component.dependencies ?? [],
     registryDependencies: [
-      "./ui-base.json",
-      ...(component.registryDependencies ?? []).map((name) => `./${name}.json`),
+      registryDependency("ui-base"),
+      ...(component.registryDependencies ?? []).map(registryDependency),
     ],
     files: component.files.map((file) => ({
       path: file,
@@ -213,8 +215,8 @@ function blockItem(block) {
     description: block.description,
     dependencies: block.dependencies ?? [],
     registryDependencies: [
-      "./ui-base.json",
-      ...(block.registryDependencies ?? []).map((name) => `./${name}.json`),
+      registryDependency("ui-base"),
+      ...(block.registryDependencies ?? []).map(registryDependency),
     ],
     files: block.files.map((file) => ({
       path: file,
@@ -320,7 +322,7 @@ const registry = {
       type: "registry:theme",
       title: "TIS Theme",
       description: "Optional standalone TIS identity preset for UI Foundation.",
-      registryDependencies: ["./ui-base.json"],
+      registryDependencies: [registryDependency("ui-base")],
       css: {
         "[data-ui-theme=\"tis\"]": cssVariableMap(tis.modes.light),
         ".dark[data-ui-theme=\"tis\"]": cssVariableMap(tis.modes.dark),

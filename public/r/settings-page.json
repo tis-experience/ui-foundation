@@ -5,14 +5,14 @@
   "description": "A responsive workspace settings form for identity, localization and notification preferences.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./button.json",
-    "./card.json",
-    "./field.json",
-    "./input.json",
-    "./native-select.json",
-    "./separator.json",
-    "./switch.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/button.json",
+    "https://tis-experience.github.io/ui-foundation/r/card.json",
+    "https://tis-experience.github.io/ui-foundation/r/field.json",
+    "https://tis-experience.github.io/ui-foundation/r/input.json",
+    "https://tis-experience.github.io/ui-foundation/r/native-select.json",
+    "https://tis-experience.github.io/ui-foundation/r/separator.json",
+    "https://tis-experience.github.io/ui-foundation/r/switch.json"
   ],
   "files": [
     {

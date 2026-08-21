@@ -5,7 +5,7 @@
   "description": "A horizontal or vertical visual divider.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

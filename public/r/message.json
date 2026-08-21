@@ -5,7 +5,7 @@
   "description": "A structured conversation message with content, metadata and actions.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
   ],
   "files": [
     {

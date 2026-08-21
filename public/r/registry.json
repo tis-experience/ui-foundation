@@ -279,7 +279,7 @@
       "title": "TIS Theme",
       "description": "Optional standalone TIS identity preset for UI Foundation.",
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "css": {
         "[data-ui-theme=\"tis\"]": {
@@ -366,7 +366,7 @@
       "description": "A vertically stacked set of interactive headings that reveal content.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -391,7 +391,7 @@
       "description": "A static status message with optional title, icon and action.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -416,8 +416,8 @@
       "description": "A modal confirmation surface for important or destructive decisions.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json"
       ],
       "files": [
         {
@@ -442,7 +442,7 @@
       "description": "A layout primitive that preserves a fixed width-to-height ratio.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -467,8 +467,8 @@
       "description": "A file attachment surface with media, metadata, actions and an optional trigger.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json"
       ],
       "files": [
         {
@@ -493,7 +493,7 @@
       "description": "A user or entity image with fallback, badge and grouping support.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -518,7 +518,7 @@
       "description": "A compact label for status, category or metadata.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -547,7 +547,7 @@
       "description": "A hierarchical path that locates the current page within a structure.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -572,7 +572,7 @@
       "description": "A conversational content surface with alignment and reaction support.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -597,7 +597,7 @@
       "description": "A primary action primitive with visual variants and sizes.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -626,8 +626,8 @@
       "description": "A visual and semantic grouping for closely related actions or controls.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./separator.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/separator.json"
       ],
       "files": [
         {
@@ -659,8 +659,8 @@
         "date-fns@4.4.0"
       ],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json"
       ],
       "files": [
         {
@@ -685,7 +685,7 @@
       "description": "A compositional surface for grouped content and actions.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -712,8 +712,8 @@
         "embla-carousel-react@8.6.0"
       ],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json"
       ],
       "files": [
         {
@@ -752,8 +752,8 @@
         "recharts@3.8.0"
       ],
       "registryDependencies": [
-        "./ui-base.json",
-        "./card.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/card.json"
       ],
       "files": [
         {
@@ -778,7 +778,7 @@
       "description": "A binary or mixed-state selection control.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -803,7 +803,7 @@
       "description": "A trigger that reveals or hides a single region of related content.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -828,9 +828,9 @@
       "description": "A searchable single or multiple selection input with listbox behavior.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json",
-        "./input-group.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json",
+        "https://tis-experience.github.io/ui-foundation/r/input-group.json"
       ],
       "files": [
         {
@@ -865,9 +865,9 @@
         "cmdk@1.1.1"
       ],
       "registryDependencies": [
-        "./ui-base.json",
-        "./dialog.json",
-        "./input-group.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/dialog.json",
+        "https://tis-experience.github.io/ui-foundation/r/input-group.json"
       ],
       "files": [
         {
@@ -892,7 +892,7 @@
       "description": "A contextual action menu opened from pointer or keyboard interaction.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -919,10 +919,10 @@
         "@tanstack/react-table@9.1.2"
       ],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json",
-        "./input.json",
-        "./table.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json",
+        "https://tis-experience.github.io/ui-foundation/r/input.json",
+        "https://tis-experience.github.io/ui-foundation/r/table.json"
       ],
       "files": [
         {
@@ -956,10 +956,10 @@
       "description": "A controlled or uncontrolled date selection composition built from Button, Calendar and Popover.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json",
-        "./calendar.json",
-        "./popover.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json",
+        "https://tis-experience.github.io/ui-foundation/r/calendar.json",
+        "https://tis-experience.github.io/ui-foundation/r/popover.json"
       ],
       "files": [
         {
@@ -985,8 +985,8 @@
       "description": "A modal task surface with focus management and dismissal behavior.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json"
       ],
       "files": [
         {
@@ -1011,7 +1011,7 @@
       "description": "A provider for left-to-right and right-to-left component behavior.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1036,7 +1036,7 @@
       "description": "A swipeable edge panel with modal, nested and snap-point behavior.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1061,7 +1061,7 @@
       "description": "An anchored menu for actions, selections and nested commands.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1086,7 +1086,7 @@
       "description": "A structured empty state with media, explanation and an optional next action.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1111,9 +1111,9 @@
       "description": "A semantic composition for labels, controls, descriptions and validation messages.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./label.json",
-        "./separator.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/label.json",
+        "https://tis-experience.github.io/ui-foundation/r/separator.json"
       ],
       "files": [
         {
@@ -1138,8 +1138,8 @@
       "description": "A native form composition with Field-based body layout, pending state and responsive actions.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./field.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/field.json"
       ],
       "files": [
         {
@@ -1165,7 +1165,7 @@
       "description": "A non-modal preview surface shown from hover or keyboard focus.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1190,7 +1190,7 @@
       "description": "A single-line text input built on the Base UI input primitive.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1215,10 +1215,10 @@
       "description": "A text control composed with inline addons, actions or keyboard hints.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json",
-        "./input.json",
-        "./textarea.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json",
+        "https://tis-experience.github.io/ui-foundation/r/input.json",
+        "https://tis-experience.github.io/ui-foundation/r/textarea.json"
       ],
       "files": [
         {
@@ -1245,7 +1245,7 @@
         "input-otp@1.5.0"
       ],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1270,8 +1270,8 @@
       "description": "A compositional row for media, title, description and related actions.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./separator.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/separator.json"
       ],
       "files": [
         {
@@ -1296,7 +1296,7 @@
       "description": "A compact representation of keyboard input or shortcuts.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1321,7 +1321,7 @@
       "description": "A visible label for form controls.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1346,7 +1346,7 @@
       "description": "A compact annotated line with optional icon, border or separators.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1379,7 +1379,7 @@
       "description": "A persistent horizontal set of menus for application commands.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1404,7 +1404,7 @@
       "description": "A structured conversation message with content, metadata and actions.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1431,8 +1431,8 @@
         "@shadcn/react@0.3.0"
       ],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json"
       ],
       "files": [
         {
@@ -1461,7 +1461,7 @@
       "description": "A styled native select for simple options and platform-native behavior.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1486,7 +1486,7 @@
       "description": "A responsive navigation structure with links and optional disclosure panels.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1519,8 +1519,8 @@
       "description": "A page navigation pattern with current, previous, next and overflow states.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json"
       ],
       "files": [
         {
@@ -1545,7 +1545,7 @@
       "description": "A non-modal anchored surface for compact interactive content.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1570,7 +1570,7 @@
       "description": "A determinate progress indicator with optional label and value.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1597,8 +1597,8 @@
         "@shadcn/react@0.3.0"
       ],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json"
       ],
       "files": [
         {
@@ -1623,7 +1623,7 @@
       "description": "A mutually exclusive set of options.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1650,7 +1650,7 @@
         "react-resizable-panels@4.12.3"
       ],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1675,7 +1675,7 @@
       "description": "A styled scroll viewport that preserves native scrolling behavior.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1700,7 +1700,7 @@
       "description": "A single-selection popup control with groups and scrolling support.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1725,7 +1725,7 @@
       "description": "A horizontal or vertical visual divider.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1750,8 +1750,8 @@
       "description": "A modal panel that enters from an edge of the viewport.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json"
       ],
       "files": [
         {
@@ -1776,13 +1776,13 @@
       "description": "A responsive application sidebar with collapsible and mobile sheet behavior.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json",
-        "./input.json",
-        "./separator.json",
-        "./sheet.json",
-        "./skeleton.json",
-        "./tooltip.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json",
+        "https://tis-experience.github.io/ui-foundation/r/input.json",
+        "https://tis-experience.github.io/ui-foundation/r/separator.json",
+        "https://tis-experience.github.io/ui-foundation/r/sheet.json",
+        "https://tis-experience.github.io/ui-foundation/r/skeleton.json",
+        "https://tis-experience.github.io/ui-foundation/r/tooltip.json"
       ],
       "files": [
         {
@@ -1819,7 +1819,7 @@
       "description": "A non-interactive placeholder for content that is loading.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1844,7 +1844,7 @@
       "description": "A single or range value input along a horizontal or vertical track.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1871,7 +1871,7 @@
         "sonner@2.0.8"
       ],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1896,7 +1896,7 @@
       "description": "A compact animated progress indicator for indeterminate work.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1921,7 +1921,7 @@
       "description": "An immediate on or off setting control.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1946,7 +1946,7 @@
       "description": "Semantic table primitives for structured rows, headers, captions and summaries.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -1971,7 +1971,7 @@
       "description": "A set of panels where one section is visible at a time.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -2000,7 +2000,7 @@
       "description": "A multi-line text input that grows with its content.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -2025,8 +2025,8 @@
       "description": "A Base UI toast system with queueing, actions, swipe dismissal and a five-item visible limit.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json"
       ],
       "files": [
         {
@@ -2059,7 +2059,7 @@
       "description": "A two-state pressed control for formatting or view options.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -2088,8 +2088,8 @@
       "description": "A single or multiple selection group composed from toggle items.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./toggle.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/toggle.json"
       ],
       "files": [
         {
@@ -2114,7 +2114,7 @@
       "description": "A short non-interactive explanation for a focused or hovered trigger.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -2139,7 +2139,7 @@
       "description": "A token-aware Typeset container for semantic HTML and rendered Markdown content.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json"
       ],
       "files": [
         {
@@ -2169,12 +2169,12 @@
       "description": "A responsive product dashboard with metrics, an accessible trend chart and recent activity.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./badge.json",
-        "./button.json",
-        "./card.json",
-        "./chart.json",
-        "./table.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/badge.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json",
+        "https://tis-experience.github.io/ui-foundation/r/card.json",
+        "https://tis-experience.github.io/ui-foundation/r/chart.json",
+        "https://tis-experience.github.io/ui-foundation/r/table.json"
       ],
       "files": [
         {
@@ -2200,12 +2200,12 @@
       "description": "A complete sign-in surface with native form semantics, password recovery and account access guidance.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json",
-        "./card.json",
-        "./checkbox.json",
-        "./field.json",
-        "./input.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json",
+        "https://tis-experience.github.io/ui-foundation/r/card.json",
+        "https://tis-experience.github.io/ui-foundation/r/checkbox.json",
+        "https://tis-experience.github.io/ui-foundation/r/field.json",
+        "https://tis-experience.github.io/ui-foundation/r/input.json"
       ],
       "files": [
         {
@@ -2231,14 +2231,14 @@
       "description": "A responsive workspace settings form for identity, localization and notification preferences.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./button.json",
-        "./card.json",
-        "./field.json",
-        "./input.json",
-        "./native-select.json",
-        "./separator.json",
-        "./switch.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json",
+        "https://tis-experience.github.io/ui-foundation/r/card.json",
+        "https://tis-experience.github.io/ui-foundation/r/field.json",
+        "https://tis-experience.github.io/ui-foundation/r/input.json",
+        "https://tis-experience.github.io/ui-foundation/r/native-select.json",
+        "https://tis-experience.github.io/ui-foundation/r/separator.json",
+        "https://tis-experience.github.io/ui-foundation/r/switch.json"
       ],
       "files": [
         {
@@ -2264,11 +2264,11 @@
       "description": "A member management card with identity, role, status and explicit row actions.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./avatar.json",
-        "./badge.json",
-        "./button.json",
-        "./card.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/avatar.json",
+        "https://tis-experience.github.io/ui-foundation/r/badge.json",
+        "https://tis-experience.github.io/ui-foundation/r/button.json",
+        "https://tis-experience.github.io/ui-foundation/r/card.json"
       ],
       "files": [
         {
@@ -2294,8 +2294,8 @@
       "description": "Six token-aware and accessible Recharts recipes: Area, Bar, Line, Pie, Radar and Radial.",
       "dependencies": [],
       "registryDependencies": [
-        "./ui-base.json",
-        "./chart.json"
+        "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+        "https://tis-experience.github.io/ui-foundation/r/chart.json"
       ],
       "files": [
         {

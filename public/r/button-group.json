@@ -5,8 +5,8 @@
   "description": "A visual and semantic grouping for closely related actions or controls.",
   "dependencies": [],
   "registryDependencies": [
-    "./ui-base.json",
-    "./separator.json"
+    "https://tis-experience.github.io/ui-foundation/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/r/separator.json"
   ],
   "files": [
     {
