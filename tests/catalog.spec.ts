@@ -741,6 +741,8 @@ test("keeps the four installable compositions functional", async ({ page }) => {
 })
 
 test("has no automated WCAG A or AA violations in core themes", async ({ page }) => {
+  test.setTimeout(120_000)
+
   const states = [
     { theme: "neutral", mode: "Light" },
     { theme: "neutral", mode: "Dark" },

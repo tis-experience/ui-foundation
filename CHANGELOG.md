@@ -30,6 +30,7 @@ All notable changes to UI Foundation will be documented in this file.
 
 ### Fixed
 
+- Allow the complete 24-state WCAG theme and catalog matrix to finish on slower CI runners without reducing coverage.
 - Separate control and surface radius roles so Pill / Full affects controls while cards, panels, dialogs and other containers remain at Large.
 - Align the TIS theme and customizer preset with the Default radius option.
 - Add a Pill / Full radius option to custom themes and portable presets.
