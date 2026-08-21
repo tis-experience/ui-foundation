@@ -164,7 +164,10 @@ test("exposes accessible semantics for status, data and navigation specimens", a
   await expect(component(page, "attachment").getByRole("button", {
     name: "Remove component-spec.pdf",
   })).toBeEnabled()
-  await expect(component(page, "avatar").getByLabel("Project members")).toBeVisible()
+  await expect(component(page, "avatar").getByRole("group", {
+    name: "Project members",
+    exact: true,
+  })).toBeVisible()
   await expect(component(page, "button-group").getByRole("group", {
     name: "Document actions",
   })).toBeVisible()

@@ -4,13 +4,17 @@ import { cn } from "@/lib/utils"
 
 function Separator({
   className,
+  decorative = true,
   orientation = "horizontal",
   ...props
-}: SeparatorPrimitive.Props) {
+}: SeparatorPrimitive.Props & { decorative?: boolean }) {
   return (
     <SeparatorPrimitive
       data-slot="separator"
       orientation={orientation}
+      role={decorative ? "presentation" : "separator"}
+      aria-hidden={decorative || undefined}
+      aria-orientation={decorative ? undefined : orientation}
       className={cn(
         "shrink-0 bg-border data-horizontal:h-px data-horizontal:w-full data-vertical:w-px data-vertical:self-stretch",
         className

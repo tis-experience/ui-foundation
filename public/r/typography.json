@@ -22,7 +22,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Preserves the semantics of headings, paragraphs, lists, links, code and tables; content authors remain responsible for a logical heading order.",
+    "accessibility": "Preserve native document elements, logical heading order, meaningful links and readable lists; Typeset changes presentation, not semantics.",
     "status": "alpha",
     "introducedIn": "0.1.0-alpha.0"
   },

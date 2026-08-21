@@ -70,7 +70,7 @@
       "category": "feedback",
       "description": "A static status message with optional title, icon and action.",
       "files": ["src/components/ui/alert.tsx"],
-      "accessibility": "Uses role=alert; reserve it for content that should be announced immediately."
+      "accessibility": "Choose role=status for advisory updates and role=alert only for urgent dynamic content; keep title, description and recovery action visible."
     },
     {
       "name": "alert-dialog",
@@ -87,7 +87,7 @@
       "category": "layout",
       "description": "A layout primitive that preserves a fixed width-to-height ratio.",
       "files": ["src/components/ui/aspect-ratio.tsx"],
-      "accessibility": "The wrapper is presentational; provide appropriate semantics and alternative text for its content."
+      "accessibility": "The ratio wrapper is presentational; give the hosted image, media, figure or other content its own semantics and alternative text."
     },
     {
       "name": "attachment",
@@ -104,7 +104,7 @@
       "category": "data-display",
       "description": "A user or entity image with fallback, badge and grouping support.",
       "files": ["src/components/ui/avatar.tsx"],
-      "accessibility": "Provide meaningful alt text for informative images and always include AvatarFallback."
+      "accessibility": "Name informative people or entities, keep decorative avatars hidden, always include AvatarFallback and provide context for group overflow counts."
     },
     {
       "name": "badge",
@@ -112,7 +112,7 @@
       "category": "data-display",
       "description": "A compact label for status, category or metadata.",
       "files": ["src/components/ui/badge.tsx", "src/components/ui/badge.variants.ts"],
-      "accessibility": "Decorative badges must not be the only way status is communicated."
+      "accessibility": "Keep badges as text by default; use status semantics only for actual state and never rely on color alone."
     },
     {
       "name": "breadcrumb",
@@ -128,7 +128,7 @@
       "category": "data-display",
       "description": "A conversational content surface with alignment and reaction support.",
       "files": ["src/components/ui/bubble.tsx"],
-      "accessibility": "Keep sender and timing information available in text and preserve chronological reading order."
+      "accessibility": "When bubbles form a conversation, provide a named log, identify each speaker and preserve chronological DOM order."
     },
     {
       "name": "button",
@@ -163,7 +163,7 @@
       "category": "layout",
       "description": "A compositional surface for grouped content and actions.",
       "files": ["src/components/ui/card.tsx"],
-      "accessibility": "Choose semantic children and headings based on the content hierarchy."
+      "accessibility": "Add region or article semantics only when the card is a meaningful standalone section and connect it to a heading at the correct level."
     },
     {
       "name": "carousel",
@@ -277,7 +277,7 @@
       "category": "utility",
       "description": "A provider for left-to-right and right-to-left component behavior.",
       "files": ["src/components/ui/direction.ts"],
-      "accessibility": "Keep the provider direction aligned with the document language and reading order."
+      "accessibility": "Keep direction aligned with the content language and DOM reading order; the provider must not reverse meaning or keyboard sequence."
     },
     {
       "name": "drawer",
@@ -301,7 +301,7 @@
       "category": "feedback",
       "description": "A structured empty state with media, explanation and an optional next action.",
       "files": ["src/components/ui/empty.tsx"],
-      "accessibility": "Use a real heading and concise description; keep the primary recovery action keyboard accessible."
+      "accessibility": "Use a programmatic heading, concise description, decorative media and a named keyboard-operable recovery action."
     },
     {
       "name": "field",
@@ -363,7 +363,7 @@
       "description": "A compositional row for media, title, description and related actions.",
       "files": ["src/components/ui/item.tsx"],
       "registryDependencies": ["separator"],
-      "accessibility": "Use Field instead when the row contains a form control; label icon-only actions."
+      "accessibility": "Give standalone items an appropriate article, listitem or link semantic, connect title and description, and name every action; use Field for form controls."
     },
     {
       "name": "kbd",
@@ -371,7 +371,7 @@
       "category": "data-display",
       "description": "A compact representation of keyboard input or shortcuts.",
       "files": ["src/components/ui/kbd.tsx"],
-      "accessibility": "Include the shortcut in adjacent text when its meaning is not evident from the key labels."
+      "accessibility": "Use native kbd markup and pair keys with adjacent text that explains the command; do not make the keycap itself focusable."
     },
     {
       "name": "label",
@@ -379,7 +379,7 @@
       "category": "form-structure",
       "description": "A visible label for form controls.",
       "files": ["src/components/ui/label.tsx"],
-      "accessibility": "Use htmlFor to bind the label to a native or Base UI control."
+      "accessibility": "Bind the visible label to exactly one labelable control with htmlFor and a matching id so pointer activation moves focus."
     },
     {
       "name": "marker",
@@ -391,7 +391,7 @@
         "src/components/ui/marker.components.tsx",
         "src/components/ui/marker.variants.ts"
       ],
-      "accessibility": "Mark decorative icons hidden and keep the marker text meaningful without visual separators."
+      "accessibility": "Keep marker text meaningful without its icon or separator; hide decorative media and add status semantics only for real updates."
     },
     {
       "name": "menubar",
@@ -407,7 +407,7 @@
       "category": "data-display",
       "description": "A structured conversation message with content, metadata and actions.",
       "files": ["src/components/ui/message.tsx"],
-      "accessibility": "Preserve chronological DOM order and include sender and status information in accessible text."
+      "accessibility": "Expose each message as a named article when needed, keep sender, content and delivery state in accessible text and preserve chronological DOM order."
     },
     {
       "name": "message-scroller",
@@ -516,7 +516,7 @@
       "category": "layout",
       "description": "A horizontal or vertical visual divider.",
       "files": ["src/components/ui/separator.tsx"],
-      "accessibility": "Use decorative=false only when the divider conveys document structure."
+      "accessibility": "Keep purely visual dividers decorative; expose separator semantics and orientation only when the divider communicates document structure."
     },
     {
       "name": "sheet",
@@ -547,7 +547,7 @@
       "category": "feedback",
       "description": "A non-interactive placeholder for content that is loading.",
       "files": ["src/components/ui/skeleton.tsx"],
-      "accessibility": "Mark the containing region busy and provide a meaningful loading label outside the skeleton."
+      "accessibility": "Keep skeleton shapes hidden from assistive technology and mark the containing region busy with one meaningful loading label."
     },
     {
       "name": "slider",
@@ -572,7 +572,7 @@
       "category": "feedback",
       "description": "A compact animated progress indicator for indeterminate work.",
       "files": ["src/components/ui/spinner.tsx"],
-      "accessibility": "Provides role=status and a default accessible label that can be localized."
+      "accessibility": "Name standalone loading status, localize that label and hide the spinner when adjacent button or status text already communicates loading."
     },
     {
       "name": "switch",
@@ -588,7 +588,7 @@
       "category": "data-display",
       "description": "Semantic table primitives for structured rows, headers, captions and summaries.",
       "files": ["src/components/ui/table.tsx"],
-      "accessibility": "Use header cells with scope, a caption or nearby heading, and expose sorting state when interactive."
+      "accessibility": "Provide a caption or associated name, use scoped header cells and native row order, and expose sorting only through actual controls and aria-sort."
     },
     {
       "name": "tabs",
@@ -654,7 +654,7 @@
         "src/components/ui/typography.tsx",
         "src/components/ui/typography.css"
       ],
-      "accessibility": "Preserves the semantics of headings, paragraphs, lists, links, code and tables; content authors remain responsible for a logical heading order."
+      "accessibility": "Preserve native document elements, logical heading order, meaningful links and readable lists; Typeset changes presentation, not semantics."
     }
   ]
 }

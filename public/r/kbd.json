@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Include the shortcut in adjacent text when its meaning is not evident from the key labels.",
+    "accessibility": "Use native kbd markup and pair keys with adjacent text that explains the command; do not make the keycap itself focusable.",
     "status": "alpha"
   },
   "categories": [

@@ -38,6 +38,20 @@ test.describe("contract: accordion", () => {
   })
 })
 
+test.describe("contract: alert", () => {
+  test("separates advisory status from urgent alert semantics", async ({ page }) => {
+    const row = component(page, "alert")
+    const advisory = row.getByRole("status")
+    const urgent = row.getByRole("alert")
+
+    await expect(advisory).toContainText("Ready to install")
+    await expect(urgent).toContainText("Review required")
+    await expect(row.getByRole("alert")).toHaveCount(1)
+    await expect(row.getByRole("button", { name: "Review" })).toBeEnabled()
+    await expect(advisory).not.toHaveAttribute("tabindex")
+  })
+})
+
 test.describe("contract: alert-dialog", () => {
   test("labels, constrains focus and restores the trigger", async ({ page }) => {
     const trigger = component(page, "alert-dialog").getByRole("button", {
@@ -54,6 +68,22 @@ test.describe("contract: alert-dialog", () => {
     await expectFocusInside(dialog)
     await page.keyboard.press("Escape")
     await expect(trigger).toBeFocused()
+  })
+})
+
+test.describe("contract: aspect-ratio", () => {
+  test("constrains layout while the hosted figure owns semantics", async ({ page }) => {
+    const row = component(page, "aspect-ratio")
+    const figure = row.getByRole("figure", { name: "Widescreen component preview" })
+    const ratio = row.locator('[data-slot="aspect-ratio"]')
+
+    await expect(figure).toBeVisible()
+    const dimensions = await ratio.evaluate((element) => ({
+      height: element.getBoundingClientRect().height,
+      width: element.getBoundingClientRect().width,
+    }))
+    expect(dimensions.width / dimensions.height).toBeCloseTo(16 / 9, 1)
+    await expect(ratio).not.toHaveAttribute("tabindex")
   })
 })
 
@@ -80,6 +110,29 @@ test.describe("contract: attachment", () => {
   })
 })
 
+test.describe("contract: avatar", () => {
+  test("names informative people and contextualizes group overflow", async ({ page }) => {
+    const group = component(page, "avatar").getByRole("group", { name: "Project members" })
+
+    await expect(group.getByRole("img", { name: "Ana Martins" })).toBeVisible()
+    await expect(group.getByRole("img", { name: "João Silva" })).toBeVisible()
+    await expect(group.getByRole("img", { name: "Rita Kiala" })).toBeVisible()
+    await expect(group).toContainText("+4")
+    await expect(group.getByRole("button")).toHaveCount(0)
+  })
+})
+
+test.describe("contract: badge", () => {
+  test("keeps labels passive and adds status semantics only to actual state", async ({ page }) => {
+    const row = component(page, "badge")
+    const specimen = row.locator(".component-specimen")
+
+    await expect(specimen.getByText("Default", { exact: true })).toBeVisible()
+    await expect(specimen.getByRole("status")).toHaveText("Blocked")
+    await expect(specimen.getByRole("button")).toHaveCount(0)
+  })
+})
+
 test.describe("contract: breadcrumb", () => {
   test("exposes a named path with native links and one current page", async ({ page }) => {
     const row = component(page, "breadcrumb")
@@ -91,6 +144,19 @@ test.describe("contract: breadcrumb", () => {
     await expect(navigation.getByRole("link", { name: "Breadcrumb" })).toHaveAttribute("aria-current", "page")
     await expect(navigation.locator('[data-slot="breadcrumb-separator"]')).toHaveCount(2)
     await expect(navigation.locator('[data-slot="breadcrumb-separator"]').first()).toHaveAttribute("aria-hidden", "true")
+  })
+})
+
+test.describe("contract: bubble", () => {
+  test("exposes a named chronological conversation with speaker context", async ({ page }) => {
+    const log = component(page, "bubble").getByRole("log", { name: "Theme support conversation" })
+    const messages = log.getByRole("article")
+
+    await expect(messages).toHaveCount(2)
+    await expect(messages.nth(0)).toHaveAccessibleName("Question from developer")
+    await expect(messages.nth(1)).toHaveAccessibleName("Answer from UI Foundation")
+    await expect(messages.nth(0)).toContainText("Can I use the neutral theme?")
+    await expect(messages.nth(1)).toContainText("The TIS identity is optional")
   })
 })
 
@@ -149,6 +215,19 @@ test.describe("contract: calendar", () => {
     await nextDate.press("Enter")
     await expect(nextDate).toHaveAccessibleName(/selected/)
     await expect(nextDate).toBeFocused()
+  })
+})
+
+test.describe("contract: card", () => {
+  test("names a standalone region from a contextual heading", async ({ page }) => {
+    const card = component(page, "card").getByRole("region", { name: "Component ownership" })
+
+    await expect(card.getByRole("heading", { level: 4, name: "Component ownership" })).toBeVisible()
+    await expect(card).toContainText("Source code remains in your project")
+    const action = card.getByRole("button", { name: "View source" })
+    await action.focus()
+    await expect(action).toBeFocused()
+    await expect(card).not.toHaveAttribute("tabindex")
   })
 })
 
@@ -364,6 +443,20 @@ test.describe("contract: dialog", () => {
   })
 })
 
+test.describe("contract: direction", () => {
+  test("applies RTL visually while preserving logical DOM and tab order", async ({ page }) => {
+    const group = component(page, "direction").getByRole("group", { name: "RTL example" })
+    const first = group.getByRole("button", { name: "الأول" })
+    const next = group.getByRole("button", { name: "التالي" })
+
+    await expect(group).toHaveAttribute("dir", "rtl")
+    await expect(group.getByRole("button").nth(0)).toHaveText("الأول")
+    await first.focus()
+    await first.press("Tab")
+    await expect(next).toBeFocused()
+  })
+})
+
 test.describe("contract: drawer", () => {
   test("traps focus and supports keyboard dismissal without swipe", async ({ page }) => {
     const trigger = component(page, "drawer").getByRole("button", { name: "Open drawer" })
@@ -400,6 +493,21 @@ test.describe("contract: dropdown-menu", () => {
     await expect(page.getByRole("menuitem", { name: "Delete", exact: true })).toBeFocused()
     await page.keyboard.press("Escape")
     await expect(trigger).toBeFocused()
+  })
+})
+
+test.describe("contract: empty", () => {
+  test("connects heading, description and a keyboard recovery action", async ({ page }) => {
+    const row = component(page, "empty")
+    const region = row.getByRole("region", { name: "No components selected" })
+    const action = region.getByRole("button", { name: "Browse components" })
+
+    await expect(region.getByRole("heading", { level: 4 })).toHaveText("No components selected")
+    await expect(region).toContainText("Choose a component to add it to the project")
+    await expect(region.locator('[data-slot="empty-icon"] svg')).toHaveAttribute("aria-hidden", "true")
+    await action.focus()
+    await action.press("Enter")
+    await expect(row.locator("[data-contract-status]")).toHaveText("Component browser opened")
   })
 })
 
@@ -523,6 +631,57 @@ test.describe("contract: input-otp", () => {
   })
 })
 
+test.describe("contract: item", () => {
+  test("names standalone content and keeps its action independently operable", async ({ page }) => {
+    const row = component(page, "item")
+    const article = row.getByRole("article", { name: "Registry connected" })
+    const action = article.getByRole("button", { name: "Inspect" })
+
+    await expect(article.getByRole("heading", { level: 4 })).toHaveText("Registry connected")
+    await expect(article).toContainText("Component source can be installed locally")
+    await expect(article.locator('[data-slot="item-media"] svg')).toHaveAttribute("aria-hidden", "true")
+    await action.focus()
+    await action.press("Space")
+    await expect(row.locator("[data-contract-status]")).toHaveText("Registry details opened")
+  })
+})
+
+test.describe("contract: kbd", () => {
+  test("uses native keycap markup next to the command meaning", async ({ page }) => {
+    const row = component(page, "kbd")
+    const specimen = row.locator(".component-specimen")
+    const keys = specimen.locator("kbd")
+
+    await expect(specimen).toContainText("Open search")
+    await expect(keys).toHaveCount(2)
+    await expect(keys.nth(0)).toHaveText("⌘")
+    await expect(keys.nth(1)).toHaveText("K")
+    await expect(specimen.getByRole("button")).toHaveCount(0)
+  })
+})
+
+test.describe("contract: label", () => {
+  test("binds visible text to one control and transfers focus on activation", async ({ page }) => {
+    const row = component(page, "label")
+    const label = row.getByText("Visible label", { exact: true })
+    const input = row.getByRole("textbox", { name: "Visible label" })
+
+    await expect(label).toHaveAttribute("for")
+    await label.click()
+    await expect(input).toBeFocused()
+  })
+})
+
+test.describe("contract: marker", () => {
+  test("keeps status meaningful without decorative icon or separator", async ({ page }) => {
+    const marker = component(page, "marker").getByRole("status")
+
+    await expect(marker).toHaveText(/12 components validated/)
+    await expect(marker.locator('[data-slot="marker-icon"]')).toHaveAttribute("aria-hidden", "true")
+    await expect(marker).not.toHaveAttribute("tabindex")
+  })
+})
+
 test.describe("contract: menubar", () => {
   test("uses roving trigger focus and restores the active trigger", async ({ page }) => {
     const row = component(page, "menubar")
@@ -540,6 +699,19 @@ test.describe("contract: menubar", () => {
     await expect(page.getByRole("menuitem", { name: "Close", exact: true })).toBeFocused()
     await page.keyboard.press("Escape")
     await expect(file).toBeFocused()
+  })
+})
+
+test.describe("contract: message", () => {
+  test("exposes sender, content and delivery state as one named article", async ({ page }) => {
+    const article = component(page, "message").getByRole("article", {
+      name: "Message from UI Foundation",
+    })
+
+    await expect(article).toContainText("UI Foundation")
+    await expect(article).toContainText("The component is ready to install")
+    await expect(article).toContainText("Delivered")
+    await expect(article.getByRole("button")).toHaveCount(0)
   })
 })
 
@@ -754,6 +926,19 @@ test.describe("contract: select", () => {
   })
 })
 
+test.describe("contract: separator", () => {
+  test("distinguishes one structural divider from a decorative divider", async ({ page }) => {
+    const row = component(page, "separator")
+    const structural = row.getByRole("separator")
+    const decorative = row.locator('[data-slot="separator"][aria-hidden="true"]')
+
+    await expect(structural).toHaveAttribute("aria-orientation", "horizontal")
+    await expect(structural).not.toHaveAttribute("tabindex")
+    await expect(decorative).toHaveCount(1)
+    await expect(decorative).toHaveAttribute("role", "presentation")
+  })
+})
+
 test.describe("contract: sheet", () => {
   test("keeps close paths reachable at mobile width and restores the trigger", async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 568 })
@@ -810,6 +995,20 @@ test.describe("contract: sidebar", () => {
   })
 })
 
+test.describe("contract: skeleton", () => {
+  test("marks one busy status while hiding every visual placeholder", async ({ page }) => {
+    const status = component(page, "skeleton").getByRole("status", { name: "Loading content" })
+    const shapes = status.locator('[data-slot="skeleton"]')
+
+    await expect(status).toHaveAttribute("aria-busy", "true")
+    await expect(shapes).toHaveCount(3)
+    for (const shape of await shapes.all()) {
+      await expect(shape).toHaveAttribute("aria-hidden", "true")
+      await expect(shape).not.toHaveAttribute("tabindex")
+    }
+  })
+})
+
 test.describe("contract: slider", () => {
   test("exposes one scalar thumb with keyboard range semantics and visible focus", async ({ page }) => {
     const row = component(page, "slider")
@@ -852,6 +1051,18 @@ test.describe("contract: sonner", () => {
   })
 })
 
+test.describe("contract: spinner", () => {
+  test("names standalone loading status and hides the spinner inside a named button", async ({ page }) => {
+    const row = component(page, "spinner")
+
+    await expect(row.getByRole("status", { name: "Loading", exact: true })).toBeVisible()
+    await expect(row.getByRole("status", { name: "Loading preview" })).toBeVisible()
+    const saving = row.getByRole("button", { name: "Saving" })
+    await expect(saving).toBeDisabled()
+    await expect(saving.locator('[data-slot="spinner"]')).toHaveAttribute("aria-hidden", "true")
+  })
+})
+
 test.describe("contract: switch", () => {
   test("uses its visible label and toggles with Space", async ({ page }) => {
     const switchControl = component(page, "switch").getByRole("switch", {
@@ -862,6 +1073,18 @@ test.describe("contract: switch", () => {
     await switchControl.press("Space")
     await expect(switchControl).not.toBeChecked()
     await expect(switchControl).toBeFocused()
+  })
+})
+
+test.describe("contract: table", () => {
+  test("uses a caption, scoped headers and native row order", async ({ page }) => {
+    const table = component(page, "table").getByRole("table", { name: "Installed components" })
+
+    await expect(table.locator("caption")).toHaveText("Installed components")
+    await expect(table.getByRole("columnheader", { name: "Component" })).toHaveAttribute("scope", "col")
+    await expect(table.getByRole("columnheader", { name: "Status" })).toHaveAttribute("scope", "col")
+    await expect(table.getByRole("row")).toHaveCount(3)
+    await expect(table.getByRole("button")).toHaveCount(0)
   })
 })
 
@@ -981,5 +1204,17 @@ test.describe("contract: tooltip", () => {
     await page.keyboard.press("Escape")
     await expect(visualTooltip).toBeHidden()
     await expect(trigger).toBeFocused()
+  })
+})
+
+test.describe("contract: typography", () => {
+  test("preserves native article, heading, paragraph and list semantics", async ({ page }) => {
+    const article = component(page, "typography").getByRole("article")
+
+    await expect(article.getByRole("heading", { level: 4, name: "Readable content" })).toBeVisible()
+    await expect(article.locator("p")).toContainText("Semantic HTML follows the active theme")
+    await expect(article.getByRole("list")).toBeVisible()
+    await expect(article.getByRole("listitem")).toHaveCount(2)
+    await expect(article).not.toHaveAttribute("tabindex")
   })
 })

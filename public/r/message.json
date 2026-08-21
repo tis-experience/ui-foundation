@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Preserve chronological DOM order and include sender and status information in accessible text.",
+    "accessibility": "Expose each message as a named article when needed, keep sender, content and delivery state in accessible text and preserve chronological DOM order.",
     "status": "alpha"
   },
   "categories": [

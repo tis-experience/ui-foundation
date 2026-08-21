@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Choose semantic children and headings based on the content hierarchy.",
+    "accessibility": "Add region or article semantics only when the card is a meaningful standalone section and connect it to a heading at the correct level.",
     "status": "alpha"
   },
   "categories": [

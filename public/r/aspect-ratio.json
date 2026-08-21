@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "The wrapper is presentational; provide appropriate semantics and alternative text for its content.",
+    "accessibility": "The ratio wrapper is presentational; give the hosted image, media, figure or other content its own semantics and alternative text.",
     "status": "alpha"
   },
   "categories": [

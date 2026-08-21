@@ -80,9 +80,47 @@
         "Choose status or alert semantics from urgency",
         "Provide actionable recovery copy when applicable"
       ],
-      "accessibility": "Uses role=alert; reserve it for content that should be announced immediately.",
+      "accessibility": "Choose role=status for advisory updates and role=alert only for urgent dynamic content; keep title, description and recovery action visible.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "advisory-update.role=status",
+          "urgent-dynamic-update.role=alert",
+          "title=visible-text",
+          "description=visible-text",
+          "action=native-control"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Skip the passive container and move to any available alert action"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused recovery action exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Do not add the alert container to the tab sequence",
+          "Do not move focus when advisory content appears",
+          "Keep focus on an alert action while it remains available"
+        ],
+        "requiredComposition": [
+          "Choose status or alert from urgency instead of visual variant",
+          "Keep title, description and recovery action visible",
+          "Do not repeat the same message through nested live regions"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/alert",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/alert_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#alert"
       }
     },
     {
@@ -163,9 +201,36 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "The wrapper is presentational; provide appropriate semantics and alternative text for its content.",
+      "accessibility": "The ratio wrapper is presentational; give the hosted image, media, figure or other content its own semantics and alternative text.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "wrapper=presentational-layout",
+          "hosted-content=owns-semantics",
+          "ratio=visual-constraint"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Add no keyboard behavior beyond that of the hosted content"
+          }
+        ],
+        "focusManagement": [
+          "Do not add the ratio wrapper to the tab sequence",
+          "Preserve the hosted content focus order"
+        ],
+        "requiredComposition": [
+          "Give hosted images, media or figures their own semantics and alternative text",
+          "Keep essential text available outside decorative media",
+          "Provide a positive finite ratio"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/aspect-ratio",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/figure"
+        },
+        "evidence": "tests/component-contracts.spec.ts#aspect-ratio"
       }
     },
     {
@@ -242,9 +307,39 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Provide meaningful alt text for informative images and always include AvatarFallback.",
+      "accessibility": "Name informative people or entities, keep decorative avatars hidden, always include AvatarFallback and provide context for group overflow counts.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "informative-avatar.role=img",
+          "informative-avatar.name=person-or-entity",
+          "fallback=required",
+          "group.role=group",
+          "group-name=required",
+          "overflow-count=contextual"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive unless the consumer deliberately renders the avatar as an interactive trigger"
+          }
+        ],
+        "focusManagement": [
+          "Do not add passive avatars or groups to the tab sequence",
+          "When used as a trigger, inherit focus behavior from the rendered button or link"
+        ],
+        "requiredComposition": [
+          "Always include AvatarFallback",
+          "Name informative people or entities and hide decorative avatars",
+          "Describe group overflow counts in context rather than exposing only a number"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/avatar",
+          "behavior": "https://base-ui.com/react/components/avatar"
+        },
+        "evidence": "tests/component-contracts.spec.ts#avatar"
       }
     },
     {
@@ -262,9 +357,36 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Decorative badges must not be the only way status is communicated.",
+      "accessibility": "Keep badges as text by default; use status semantics only for actual state and never rely on color alone.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "default=plain-text",
+          "status-role=only-for-actual-state",
+          "meaning=not-color-only"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive unless rendered as a real link or button"
+          }
+        ],
+        "focusManagement": [
+          "Do not add passive badges to the tab sequence",
+          "When rendered interactively, inherit native focus from the chosen link or button"
+        ],
+        "requiredComposition": [
+          "Use concise visible text",
+          "Do not encode status only through color",
+          "Render navigation or actions as real links or buttons rather than making a span clickable"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/badge",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#badge"
       }
     },
     {
@@ -343,9 +465,39 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Keep sender and timing information available in text and preserve chronological reading order.",
+      "accessibility": "When bubbles form a conversation, provide a named log, identify each speaker and preserve chronological DOM order.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "conversation=role-log",
+          "conversation-name=required",
+          "message=article",
+          "speaker=available",
+          "order=chronological-dom"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move only through deliberately interactive bubble content in chronological order"
+          }
+        ],
+        "focusManagement": [
+          "Do not add passive bubbles to the tab sequence",
+          "Do not move focus when conversation content updates"
+        ],
+        "requiredComposition": [
+          "Provide speaker context and chronological DOM order",
+          "Name a conversation log when the surrounding page does not already identify it",
+          "Render actions and links through native interactive elements"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/bubble",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/log_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#bubble"
       }
     },
     {
@@ -540,9 +692,38 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Choose semantic children and headings based on the content hierarchy.",
+      "accessibility": "Add region or article semantics only when the card is a meaningful standalone section and connect it to a heading at the correct level.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "container=generic-by-default",
+          "standalone-section=region-or-article",
+          "standalone-name=heading",
+          "heading-level=contextual"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through real links and actions inside the card in document order"
+          }
+        ],
+        "focusManagement": [
+          "Do not make the card container focusable by default",
+          "Expose visible focus only on the interactive descendants or an intentionally linked card"
+        ],
+        "requiredComposition": [
+          "Add region or article semantics only for meaningful standalone content",
+          "Connect a standalone card to a heading at the correct page level",
+          "Do not nest interactive controls inside a card-wide link"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/card",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/region_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#card"
       }
     },
     {
@@ -1185,9 +1366,37 @@
       "consumerResponsibilities": [
         "Apply only at an intentional application boundary"
       ],
-      "accessibility": "Keep the provider direction aligned with the document language and reading order.",
+      "accessibility": "Keep direction aligned with the content language and DOM reading order; the provider must not reverse meaning or keyboard sequence.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "dir=ltr-or-rtl",
+          "direction=matches-content-language",
+          "dom-order=logical-reading-order"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Follow logical DOM order while visual layout respects the active direction"
+          }
+        ],
+        "focusManagement": [
+          "Do not add a provider tab stop",
+          "Preserve native focus order and component-specific directional key behavior"
+        ],
+        "requiredComposition": [
+          "Set direction at the nearest meaningful content boundary",
+          "Keep DOM order logical instead of reversing source order",
+          "Keep document language and direction aligned"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/direction",
+          "behavior": "https://base-ui.com/react/utils/direction-provider"
+        },
+        "evidence": "tests/component-contracts.spec.ts#direction"
       }
     },
     {
@@ -1342,9 +1551,46 @@
         "Choose status or alert semantics from urgency",
         "Provide actionable recovery copy when applicable"
       ],
-      "accessibility": "Use a real heading and concise description; keep the primary recovery action keyboard accessible.",
+      "accessibility": "Use a programmatic heading, concise description, decorative media and a named keyboard-operable recovery action.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "container=name-from-heading",
+          "title=heading",
+          "description=visible-text",
+          "media=decorative-unless-informative",
+          "recovery=native-action"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move to the primary and secondary recovery actions in document order"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused recovery action exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Do not focus an empty state merely because it appears",
+          "Move focus only when the application replaces a prior focused result or validates a user action"
+        ],
+        "requiredComposition": [
+          "Provide a programmatic heading and concise description",
+          "Hide decorative media from assistive technology",
+          "Offer a named recovery action when recovery exists"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/empty",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/region_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#empty"
       }
     },
     {
@@ -1714,9 +1960,45 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Use Field instead when the row contains a form control; label icon-only actions.",
+      "accessibility": "Give standalone items an appropriate article, listitem or link semantic, connect title and description, and name every action; use Field for form controls.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "container=article-listitem-link-or-generic",
+          "name=title-when-standalone",
+          "description=visible-text",
+          "actions=native-controls"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through item links and actions in document order"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused item action exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Do not make a passive item focusable",
+          "When the complete item is a destination, render it as one native link and avoid nested controls"
+        ],
+        "requiredComposition": [
+          "Choose semantics from whether the item is content, a list entry or a destination",
+          "Connect standalone content to its title",
+          "Name icon-only actions and use Field instead for form controls"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/item",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/article_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#item"
       }
     },
     {
@@ -1734,9 +2016,35 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Include the shortcut in adjacent text when its meaning is not evident from the key labels.",
+      "accessibility": "Use native kbd markup and pair keys with adjacent text that explains the command; do not make the keycap itself focusable.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "element=kbd",
+          "keys=visible-text",
+          "command-meaning=adjacent-text"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Describe a keyboard input without becoming an interactive control"
+          }
+        ],
+        "focusManagement": [
+          "Do not add keycaps to the tab sequence"
+        ],
+        "requiredComposition": [
+          "Use one kbd element per logical key",
+          "Pair the shortcut with adjacent text describing the command",
+          "Localize platform-specific modifier labels when needed"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/kbd",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd"
+        },
+        "evidence": "tests/component-contracts.spec.ts#kbd"
       }
     },
     {
@@ -1758,9 +2066,37 @@
         "Maintain stable IDs and label relationships",
         "Connect descriptions and errors with aria-describedby"
       ],
-      "accessibility": "Use htmlFor to bind the label to a native or Base UI control.",
+      "accessibility": "Bind the visible label to exactly one labelable control with htmlFor and a matching id so pointer activation moves focus.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "element=label",
+          "for=matching-control-id",
+          "visible-text=control-name",
+          "relationship=one-labelable-control"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Pointer activation"
+            ],
+            "outcome": "Move focus to the associated labelable control"
+          }
+        ],
+        "focusManagement": [
+          "Do not add the label itself to the tab sequence",
+          "Let activation transfer focus to the associated control"
+        ],
+        "requiredComposition": [
+          "Use htmlFor with a matching stable control id",
+          "Keep the primary label visible",
+          "Use Field description and error slots for supplementary text"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/label",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label"
+        },
+        "evidence": "tests/component-contracts.spec.ts#label"
       }
     },
     {
@@ -1778,9 +2114,36 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Mark decorative icons hidden and keep the marker text meaningful without visual separators.",
+      "accessibility": "Keep marker text meaningful without its icon or separator; hide decorative media and add status semantics only for real updates.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "content=meaningful-text",
+          "icon=decorative",
+          "status-role=only-for-actual-update",
+          "separator=visual-only"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive unless the content deliberately contains a real link or action"
+          }
+        ],
+        "focusManagement": [
+          "Do not add a passive marker to the tab sequence"
+        ],
+        "requiredComposition": [
+          "Keep the text meaningful without its icon or visual separator",
+          "Hide decorative media",
+          "Use status semantics only when the marker communicates a real update"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/marker",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#marker"
       }
     },
     {
@@ -1873,9 +2236,40 @@
         "Choose status or alert semantics from urgency",
         "Provide actionable recovery copy when applicable"
       ],
-      "accessibility": "Preserve chronological DOM order and include sender and status information in accessible text.",
+      "accessibility": "Expose each message as a named article when needed, keep sender, content and delivery state in accessible text and preserve chronological DOM order.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "message=article",
+          "message-name=sender-or-context",
+          "sender=visible-text",
+          "content=visible-text",
+          "delivery-state=visible-text",
+          "order=chronological-dom"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move only through deliberately interactive message content in chronological order"
+          }
+        ],
+        "focusManagement": [
+          "Do not add passive messages to the tab sequence",
+          "Do not move focus when delivery state changes"
+        ],
+        "requiredComposition": [
+          "Keep sender, content and relevant delivery state available in text",
+          "Use article semantics and a name when a message must be independently discoverable",
+          "Preserve chronological DOM order"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/message",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/article_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#message"
       }
     },
     {
@@ -2578,9 +2972,36 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Use decorative=false only when the divider conveys document structure.",
+      "accessibility": "Keep purely visual dividers decorative; expose separator semantics and orientation only when the divider communicates document structure.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "decorative=true-for-visual-divider",
+          "structural.role=separator",
+          "structural.aria-orientation=state",
+          "adjustable=false"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive; use Resizable for an adjustable separator"
+          }
+        ],
+        "focusManagement": [
+          "Do not add visual or structural non-adjustable separators to the tab sequence"
+        ],
+        "requiredComposition": [
+          "Keep visual dividers decorative",
+          "Set decorative=false only when the divider communicates document structure",
+          "Provide the correct structural orientation"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/separator",
+          "behavior": "https://base-ui.com/react/components/separator"
+        },
+        "evidence": "tests/component-contracts.spec.ts#separator"
       }
     },
     {
@@ -2739,9 +3160,37 @@
         "Provide an accessible status name when progress is not already described nearby",
         "Avoid announcing decorative loading placeholders"
       ],
-      "accessibility": "Mark the containing region busy and provide a meaningful loading label outside the skeleton.",
+      "accessibility": "Keep skeleton shapes hidden from assistive technology and mark the containing region busy with one meaningful loading label.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "shape=aria-hidden",
+          "container.aria-busy=true",
+          "container.status-name=required",
+          "content=visual-placeholder"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive and expose no placeholder tab stops"
+          }
+        ],
+        "focusManagement": [
+          "Do not add skeleton shapes to the tab sequence",
+          "When replacing focused content, move focus according to the application flow rather than the skeleton"
+        ],
+        "requiredComposition": [
+          "Hide every visual skeleton shape from assistive technology",
+          "Mark the containing region busy and provide one meaningful loading label",
+          "Clear the busy state when real content replaces the placeholder"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/skeleton",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-busy"
+        },
+        "evidence": "tests/component-contracts.spec.ts#skeleton"
       }
     },
     {
@@ -2891,9 +3340,36 @@
         "Provide an accessible status name when progress is not already described nearby",
         "Avoid announcing decorative loading placeholders"
       ],
-      "accessibility": "Provides role=status and a default accessible label that can be localized.",
+      "accessibility": "Name standalone loading status, localize that label and hide the spinner when adjacent button or status text already communicates loading.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "standalone.role=status",
+          "standalone.name=localized-loading-label",
+          "decorative.aria-hidden=true"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive and expose no spinner tab stop"
+          }
+        ],
+        "focusManagement": [
+          "Do not add a spinner to the tab sequence",
+          "Do not move focus merely because loading starts or completes"
+        ],
+        "requiredComposition": [
+          "Name standalone loading status",
+          "Hide the spinner when adjacent button or status text already communicates loading",
+          "Keep essential progress or error information available as text"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/spinner",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#spinner"
       }
     },
     {
@@ -2962,9 +3438,39 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Use header cells with scope, a caption or nearby heading, and expose sorting state when interactive.",
+      "accessibility": "Provide a caption or associated name, use scoped header cells and native row order, and expose sorting only through actual controls and aria-sort.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "element=table",
+          "name=caption-or-associated-label",
+          "column-headers=th-scope-col",
+          "row-headers=th-scope-row-when-needed",
+          "order=native-dom"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move only through real controls embedded in table cells"
+          }
+        ],
+        "focusManagement": [
+          "Do not add a static table or cells to the tab sequence",
+          "Keep embedded controls in meaningful row order"
+        ],
+        "requiredComposition": [
+          "Provide a caption or associated accessible name",
+          "Use scoped header cells for every relevant row and column",
+          "Use Data Table when sorting, filtering, selection or pagination behavior is required"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/table",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table"
+        },
+        "evidence": "tests/component-contracts.spec.ts#table"
       }
     },
     {
@@ -3348,9 +3854,41 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Preserves the semantics of headings, paragraphs, lists, links, code and tables; content authors remain responsible for a logical heading order.",
+      "accessibility": "Preserve native document elements, logical heading order, meaningful links and readable lists; Typeset changes presentation, not semantics.",
       "verification": {
-        "level": "profile"
+        "level": "interaction-tested",
+        "semantics": [
+          "wrapper=article-section-or-generic",
+          "headings=native-logical-order",
+          "paragraphs=native",
+          "lists=native",
+          "links=native",
+          "code=native"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through real links and controls in native document order"
+          }
+        ],
+        "focusManagement": [
+          "Do not add the Typeset wrapper to the tab sequence",
+          "Preserve native focus indicators on links and controls"
+        ],
+        "requiredComposition": [
+          "Choose article or section only when the content forms that structure",
+          "Preserve logical heading order",
+          "Use meaningful link text and native lists, code and table elements",
+          "Treat Typeset as presentation rather than a semantic replacement"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/typography",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article"
+        },
+        "evidence": "tests/component-contracts.spec.ts#typography"
       }
     }
   ]

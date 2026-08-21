@@ -22,7 +22,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Decorative badges must not be the only way status is communicated.",
+    "accessibility": "Keep badges as text by default; use status semantics only for actual state and never rely on color alone.",
     "status": "alpha"
   },
   "categories": [

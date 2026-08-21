@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Keep the provider direction aligned with the document language and reading order.",
+    "accessibility": "Keep direction aligned with the content language and DOM reading order; the provider must not reverse meaning or keyboard sequence.",
     "status": "alpha"
   },
   "categories": [
