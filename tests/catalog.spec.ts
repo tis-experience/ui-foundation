@@ -260,28 +260,57 @@ test("renders the accessible chart recipe gallery", async ({ page }) => {
 })
 
 test("publishes complete machine-readable sources for developers and AI", async ({ request }) => {
-  const [manifestResponse, customizerResponse, llmsResponse, blockResponse, chartsResponse] = await Promise.all([
+  const [manifestResponse, contractsResponse, customizerResponse, llmsResponse, blockResponse, chartsResponse] = await Promise.all([
     request.get("/ai/manifest.json"),
+    request.get("/contracts/components.json"),
     request.get("/ai/customizer.json"),
     request.get("/llms.txt"),
     request.get("/r/dashboard-overview.json"),
     request.get("/r/chart-recipes.json"),
   ])
 
-  for (const response of [manifestResponse, customizerResponse, llmsResponse, blockResponse, chartsResponse]) {
+  for (const response of [manifestResponse, contractsResponse, customizerResponse, llmsResponse, blockResponse, chartsResponse]) {
     expect(response.ok()).toBe(true)
   }
 
   const manifest = await manifestResponse.json() as {
     blocks: unknown[]
     charts: unknown[]
-    components: unknown[]
+    componentContracts: { components: number; profiles: number; source: string }
+    components: Array<{ contract: { profile: string; source: string }; name: string }>
     theming: { customizer: { outputs: string[] } }
+  }
+  const contracts = await contractsResponse.json() as {
+    components: Array<{
+      behaviorOwner: string
+      consumerResponsibilities: string[]
+      keyboard: string
+      name: string
+      requiredStates: string[]
+      responsive: string
+    }>
   }
   expect(manifest.components).toHaveLength(componentCount)
   expect(manifest.blocks).toHaveLength(blockCount)
   expect(manifest.charts).toHaveLength(1)
+  expect(manifest.componentContracts.components).toBe(componentCount)
+  expect(manifest.componentContracts.profiles).toBeGreaterThan(0)
+  expect(manifest.componentContracts.source).toMatch(/\/contracts\/components\.json$/)
   expect(manifest.theming.customizer.outputs).toEqual(["css", "registry-theme", "share-url"])
+
+  expect(contracts.components).toHaveLength(componentCount)
+  expect(new Set(contracts.components.map(({ name }) => name)).size).toBe(componentCount)
+  for (const contract of contracts.components) {
+    expect(contract.behaviorOwner).toBeTruthy()
+    expect(contract.keyboard).toBeTruthy()
+    expect(contract.responsive).toBeTruthy()
+    expect(contract.requiredStates.length).toBeGreaterThan(0)
+    expect(contract.consumerResponsibilities.length).toBeGreaterThan(0)
+  }
+  for (const component of manifest.components) {
+    expect(component.contract.profile).toBeTruthy()
+    expect(component.contract.source).toBe(manifest.componentContracts.source)
+  }
 
   const block = await blockResponse.json() as { type: string; files: Array<{ target?: string }> }
   const charts = await chartsResponse.json() as { type: string; files: Array<{ target?: string }> }

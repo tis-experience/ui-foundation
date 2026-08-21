@@ -20,6 +20,8 @@ Blocks and chart recipes are `registry:block` compositions. They consume the sam
 
 The catalog application consumes the same source and is therefore an integration surface, not a separate implementation.
 
+Behavior profiles in `contracts/component-contracts.json` describe the conceptual contract shared with future adapters. The public resolved contract expands every component into its behavior owner, keyboard strategy, responsive responsibility, required states and consumer responsibilities. React source remains the implementation evidence; the profile is not a universal runtime.
+
 ## What is intentionally absent
 
 - No dependency on `ds-tis`.

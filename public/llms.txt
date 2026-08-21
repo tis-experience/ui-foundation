@@ -12,6 +12,7 @@ Standalone React component library. Neutral is the default theme; TIS is optiona
 ## Agent rules
 
 - Read this manifest before selecting or generating components.
+- Read the selected resolved component contracts before implementing behavior or states.
 - Install registry source instead of recreating component markup from memory.
 - Use Neutral unless the TIS identity is explicitly requested.
 - Use Comfortable density unless the product explicitly requires Compact or Spacious controls.
@@ -53,6 +54,12 @@ Standalone React component library. Neutral is the default theme; TIS is optiona
 - Borders: --border-width-default, --border-width-strong, --focus-ring-width, --focus-ring-offset
 - Elevation: --shadow-xs, --shadow-sm, --shadow-md, --shadow-lg
 - Motion: --duration-fast, --duration-normal, --duration-slow, --ease-standard, --ease-enter, --ease-exit
+
+## Component contracts
+
+- Resolved source: https://tis-experience.github.io/ui-foundation/contracts/components.json
+- 66 components across 27 behavior profiles
+- Each contract declares behavior ownership, keyboard strategy, responsive responsibility, required states and consumer responsibilities.
 
 ## Components (66)
 

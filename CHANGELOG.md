@@ -6,6 +6,8 @@ All notable changes to UI Foundation will be documented in this file.
 
 ### Added
 
+- Standalone construction and maintenance harness adapted from proven DS TIS governance principles, with read-only preflight, explicit behavior profiles and resolved contracts for all 66 components.
+- Pull-request CI running the same build, clean consumer, interaction and accessibility gates required for GitHub Pages publication.
 - Standalone React foundation using shadcn source distribution and Base UI 1.7.0 behavior.
 - Neutral light/dark theme and optional standalone TIS light/dark preset.
 - Local catalog of 66 installable components with interactive examples.
@@ -31,6 +33,7 @@ All notable changes to UI Foundation will be documented in this file.
 
 ### Fixed
 
+- Upgrade GitHub Pages workflows to current Node 24-based Actions while retaining Node 22 as the library build runtime.
 - Restore Calendar arrow-key focus movement by attaching the DayPicker focus ref to each rendered day button.
 - Preserve native link semantics in Pagination instead of exposing page navigation links as buttons through the Base UI Button adapter.
 - Publish absolute shadcn registry dependency URLs so public installs resolve the base item and composed dependencies correctly.
