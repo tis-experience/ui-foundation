@@ -48,6 +48,7 @@ import {
   AttachmentDescription,
   AttachmentMedia,
   AttachmentTitle,
+  AttachmentTrigger,
 } from "@/components/ui/attachment"
 import {
   Avatar,
@@ -223,6 +224,7 @@ import {
 } from "@/components/ui/message"
 import {
   MessageScroller,
+  MessageScrollerButton,
   MessageScrollerContent,
   MessageScrollerItem,
   MessageScrollerProvider,
@@ -448,6 +450,99 @@ function CommandPreview() {
   )
 }
 
+function AttachmentPreview() {
+  const [status, setStatus] = useState("No attachment action")
+
+  return (
+    <div className="preview-stack">
+      <Attachment>
+        <AttachmentMedia><FileTextIcon aria-hidden="true" /></AttachmentMedia>
+        <AttachmentContent>
+          <AttachmentTitle>component-spec.pdf</AttachmentTitle>
+          <AttachmentDescription>PDF · 248 KB</AttachmentDescription>
+        </AttachmentContent>
+        <AttachmentActions>
+          <AttachmentAction
+            aria-label="Remove component-spec.pdf"
+            onClick={() => setStatus("Attachment removed")}
+          >
+            ×
+          </AttachmentAction>
+        </AttachmentActions>
+        <AttachmentTrigger
+          aria-label="Preview component-spec.pdf"
+          onClick={() => setStatus("Attachment preview opened")}
+        />
+      </Attachment>
+      <span className="sr-only" data-contract-status aria-live="polite">{status}</span>
+    </div>
+  )
+}
+
+function ButtonGroupPreview() {
+  const [status, setStatus] = useState("No document action")
+
+  return (
+    <div className="preview-stack">
+      <ButtonGroup aria-label="Document actions">
+        <Button variant="outline" onClick={() => setStatus("Document archived")}>Archive</Button>
+        <Button variant="outline" onClick={() => setStatus("Document reported")}>Report</Button>
+        <Button variant="outline" onClick={() => setStatus("Document snoozed")}>Snooze</Button>
+      </ButtonGroup>
+      <span className="sr-only" data-contract-status aria-live="polite">{status}</span>
+    </div>
+  )
+}
+
+function SonnerPreview() {
+  const [status, setStatus] = useState("No Sonner action")
+
+  return (
+    <>
+      <Button
+        variant="outline"
+        onClick={() => sonnerToast.success("Theme saved", {
+          duration: Infinity,
+          action: {
+            label: "Undo theme change",
+            onClick: () => setStatus("Theme change undone"),
+          },
+        })}
+      >
+        Show Sonner toast
+      </Button>
+      <span className="sr-only" data-contract-status aria-live="polite">{status}</span>
+      <SonnerToaster position="bottom-right" />
+    </>
+  )
+}
+
+function ToastPreview() {
+  const [status, setStatus] = useState("No toast action")
+
+  return (
+    <>
+      <Button
+        variant="outline"
+        onClick={() => baseToast.add({
+          title: "Component installed",
+          description: "Source files are now in your project.",
+          type: "success",
+          timeout: 0,
+          actionProps: {
+            children: "Undo install",
+            onClick: () => setStatus("Installation undone"),
+          },
+        })}
+      >
+        Show Base UI toast
+      </Button>
+      <span className="sr-only" data-contract-status aria-live="polite">{status}</span>
+      <ToastToaster />
+    </>
+  )
+}
+
 function QuestionnairePreview({ id }: { id: string }) {
   const inputLabelId = `${id}-preset-name-label`
 
@@ -552,18 +647,7 @@ function ComponentPreview({ name }: { name: string }) {
       )
 
     case "attachment":
-      return (
-        <Attachment>
-          <AttachmentMedia><FileTextIcon /></AttachmentMedia>
-          <AttachmentContent>
-            <AttachmentTitle>component-spec.pdf</AttachmentTitle>
-            <AttachmentDescription>PDF · 248 KB</AttachmentDescription>
-          </AttachmentContent>
-          <AttachmentActions>
-            <AttachmentAction aria-label="Remove attachment" variant="ghost">×</AttachmentAction>
-          </AttachmentActions>
-        </Attachment>
-      )
+      return <AttachmentPreview />
 
     case "avatar":
       return (
@@ -619,13 +703,7 @@ function ComponentPreview({ name }: { name: string }) {
       )
 
     case "button-group":
-      return (
-        <ButtonGroup aria-label="Text alignment">
-          <Button variant="outline">Left</Button>
-          <Button variant="outline">Center</Button>
-          <Button variant="outline">Right</Button>
-        </ButtonGroup>
-      )
+      return <ButtonGroupPreview />
 
     case "calendar":
       return <CalendarPreview id={id} />
@@ -659,17 +737,30 @@ function ComponentPreview({ name }: { name: string }) {
         </Carousel>
       )
 
-    case "chart":
+    case "chart": {
+      const summaryId = `${id}-chart-summary`
       return (
-        <ChartContainer config={chartConfig} className="h-40 w-72 aspect-auto" role="img" aria-label="Monthly component installs">
-          <BarChart accessibilityLayer data={chartData}>
-            <CartesianGrid vertical={false} />
-            <XAxis dataKey="month" tickLine={false} axisLine={false} />
-            <ChartTooltip content={<ChartTooltipContent />} />
-            <Bar dataKey="installs" fill="var(--color-installs)" radius={6} />
-          </BarChart>
-        </ChartContainer>
+        <div>
+          <ChartContainer
+            config={chartConfig}
+            className="h-40 w-72 aspect-auto"
+            role="img"
+            aria-label="Monthly component installs"
+            aria-describedby={summaryId}
+          >
+            <BarChart accessibilityLayer data={chartData}>
+              <CartesianGrid vertical={false} />
+              <XAxis dataKey="month" tickLine={false} axisLine={false} />
+              <ChartTooltip content={<ChartTooltipContent />} />
+              <Bar dataKey="installs" fill="var(--color-installs)" radius={6} />
+            </BarChart>
+          </ChartContainer>
+          <p id={summaryId} className="sr-only">
+            Installs increased each month from 86 in May to 212 in August.
+          </p>
+        </div>
       )
+    }
 
     case "checkbox": {
       const checkboxId = `${id}-checkbox`
@@ -1034,12 +1125,17 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "message-scroller":
       return (
-        <MessageScrollerProvider>
+        <MessageScrollerProvider defaultScrollPosition="start">
           <MessageScroller className="h-44 w-72 rounded-lg border">
-            <MessageScrollerViewport>
-              <MessageScrollerContent className="gap-3 p-3">
+            <MessageScrollerViewport aria-label="Component conversation">
+              <MessageScrollerContent
+                className="gap-3 p-3"
+                role="log"
+                aria-label="Component conversation"
+                aria-live="polite"
+              >
                 {[1, 2, 3, 4].map((message) => (
-                  <MessageScrollerItem key={message} scrollAnchor={message === 4}>
+                  <MessageScrollerItem key={message} messageId={`message-${message}`} scrollAnchor={message === 4}>
                     <Bubble variant={message % 2 ? "muted" : "default"} align={message % 2 ? "start" : "end"}>
                       <BubbleContent>Message {message}</BubbleContent>
                     </Bubble>
@@ -1047,6 +1143,7 @@ function ComponentPreview({ name }: { name: string }) {
                 ))}
               </MessageScrollerContent>
             </MessageScrollerViewport>
+            <MessageScrollerButton />
           </MessageScroller>
         </MessageScrollerProvider>
       )
@@ -1147,8 +1244,15 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "scroll-area":
       return (
-        <ScrollArea className="h-32 w-64 rounded-lg border">
-          <div className="space-y-2 p-3">
+        <ScrollArea
+          className="h-32 w-64 rounded-lg border"
+          viewportProps={{
+            "aria-label": "Component list",
+            role: "region",
+            tabIndex: 0,
+          }}
+        >
+          <div className="flex flex-col gap-2 p-3">
             {Array.from({ length: 8 }, (_, index) => <p key={index} className="text-sm">Component {index + 1}</p>)}
           </div>
         </ScrollArea>
@@ -1235,12 +1339,7 @@ function ComponentPreview({ name }: { name: string }) {
       return <Slider className="w-64" defaultValue={35} getThumbAriaLabel={() => "Volume"} />
 
     case "sonner":
-      return (
-        <>
-          <Button variant="outline" onClick={() => sonnerToast.success("Theme saved")}>Show Sonner toast</Button>
-          <SonnerToaster position="bottom-right" />
-        </>
-      )
+      return <SonnerPreview />
 
     case "spinner":
       return (
@@ -1294,19 +1393,12 @@ function ComponentPreview({ name }: { name: string }) {
       )
 
     case "toast":
-      return (
-        <>
-          <Button variant="outline" onClick={() => baseToast.add({ title: "Component installed", description: "Source files are now in your project.", type: "success" })}>
-            Show Base UI toast
-          </Button>
-          <ToastToaster />
-        </>
-      )
+      return <ToastPreview />
 
     case "toggle":
       return (
-        <Toggle aria-label="Toggle bold" defaultPressed>
-          <BoldIcon />
+        <Toggle defaultPressed>
+          <BoldIcon aria-hidden="true" />
           Bold
         </Toggle>
       )

@@ -20,7 +20,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Provide a textual summary or data table and never rely on color alone to distinguish series.",
+    "accessibility": "Name the graphic, provide a concise text summary and exact values when the task requires them, and never rely on color alone to distinguish series.",
     "status": "alpha"
   },
   "categories": [

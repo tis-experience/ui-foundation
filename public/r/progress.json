@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Provide a label and meaningful value; use Spinner instead when progress is indeterminate.",
+    "accessibility": "Provide an accessible label plus minimum, maximum and current values when determinate; omit the current value when indeterminate and do not add a tab stop.",
     "status": "alpha"
   },
   "categories": [

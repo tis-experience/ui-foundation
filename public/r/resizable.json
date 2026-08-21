@@ -19,7 +19,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Keep the separator keyboard operable and provide sensible minimum and maximum panel sizes.",
+    "accessibility": "Expose the separator orientation and current range, keep every drag adjustment keyboard operable and provide sensible minimum and maximum panel sizes.",
     "status": "alpha"
   },
   "categories": [

@@ -28,7 +28,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Use the appropriate urgency, keep action labels concise and never rely on a transient toast for essential information.",
+    "accessibility": "Choose the appropriate live-region urgency, never steal focus, pause dismissal during interaction, name every action and keep essential information persistent elsewhere.",
     "status": "alpha"
   },
   "categories": [

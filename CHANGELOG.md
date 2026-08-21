@@ -33,9 +33,12 @@ All notable changes to UI Foundation will be documented in this file.
 - First interaction-tested contract wave for 12 high-risk controls and overlays, publishing exact semantics, keyboard outcomes, focus management, composition rules, official upstream references and matching Playwright evidence.
 - Second interaction-tested contract wave for 12 form and data-entry components, raising published behavior evidence to 24 of 66 catalog components.
 - Third interaction-tested contract wave for 12 disclosure, navigation and overlay components, raising published behavior evidence to 36 of 66 catalog components.
+- Fourth interaction-tested contract wave for Attachment, Breadcrumb, Button Group, Chart, Data Table, Message Scroller, Progress, Resizable, Scroll Area, Sonner, Toast and Toggle, raising published behavior evidence to 48 of 66 catalog components.
 
 ### Fixed
 
+- Align the fourth-wave catalog specimens with their public contracts: independent Attachment actions, native Button Group actions, named scroll regions, stable live content, accessible chart summaries, actionable toasts and stateful Toggle behavior.
+- Remove inherited attachment focus halos, preserve per-control outlines and expose the Scroll Area viewport API required for named keyboard-scrollable regions.
 - Forward Toggle Group orientation and merged consumer styles to Base UI so visual direction and roving keyboard focus stay aligned.
 - Stop Carousel from intercepting arrow keys in nested controls, preserve consumer click handlers and publish named carousel and slide specimens.
 - Replace the Hover Card button specimen with a real destination link and align Menubar groups, Navigation Menu current state and Pagination disabled links with their public contracts.

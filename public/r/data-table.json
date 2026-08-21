@@ -32,7 +32,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Requires an accessible table name, exposes aria-sort on sortable headers and keeps filter and pagination controls keyboard operable.",
+    "accessibility": "Provide a table name or caption, associated headers, aria-sort, keyboard-operable filter and pagination controls, empty feedback and a live result count.",
     "status": "alpha",
     "introducedIn": "0.1.0-alpha.0"
   },
