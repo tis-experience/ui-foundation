@@ -111,12 +111,12 @@ test("keeps disclosure, menu and contextual overlay behavior keyboard-safe", asy
   await expect(navigationTrigger).toBeFocused()
 
   const tooltipTrigger = component(page, "tooltip").getByRole("button", {
-    name: "Hover or focus",
+    name: "Copy component source",
   })
   await component(page, "tooltip").getByRole("button", { name: "Install" }).focus()
   await page.keyboard.press("Tab")
   await expect(tooltipTrigger).toBeFocused()
-  await expect(page.getByText("Copied components remain editable.")).toBeVisible()
+  await expect(page.getByText("Copy component source", { exact: true })).toBeVisible()
 
   const hoverCardTrigger = component(page, "hover-card").getByRole("button", {
     name: "@ui-foundation",

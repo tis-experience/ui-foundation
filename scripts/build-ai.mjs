@@ -53,6 +53,7 @@ const foundationTokenCount = foundations.groups.reduce(
 const resolvedContracts = catalog.components.map((component) => {
   const profileName = contractSource.components[component.name]
   const profile = contractSource.profiles[profileName]
+  const interactionContract = contractSource.interactionContracts[component.name]
 
   if (!profile) {
     throw new Error(`${component.name}: missing or unknown component contract profile`)
@@ -65,6 +66,9 @@ const resolvedContracts = catalog.components.map((component) => {
     profile: profileName,
     ...profile,
     accessibility: component.accessibility,
+    verification: interactionContract
+      ? { level: "interaction-tested", ...interactionContract }
+      : { level: "profile" },
   }
 })
 
@@ -123,6 +127,7 @@ const manifest = {
     source: publicUrl("contracts/components.json"),
     profiles: Object.keys(contractSource.profiles).length,
     components: resolvedContracts.length,
+    interactionTested: Object.keys(contractSource.interactionContracts).length,
   },
   rules: [
     "Read this manifest before selecting or generating components.",
@@ -176,6 +181,9 @@ const manifest = {
     contract: {
       profile: contractSource.components[component.name],
       source: publicUrl("contracts/components.json"),
+      level: contractSource.interactionContracts[component.name]
+        ? "interaction-tested"
+        : "profile",
     },
   })),
   blocks: (catalog.blocks ?? []).map((block) => ({
@@ -252,7 +260,8 @@ ${foundations.groups.map((group) => `- ${group.label}: ${group.tokens.map((token
 
 - Resolved source: ${publicUrl("contracts/components.json")}
 - ${resolvedContracts.length} components across ${Object.keys(contractSource.profiles).length} behavior profiles
-- Each contract declares behavior ownership, keyboard strategy, responsive responsibility, required states and consumer responsibilities.
+- ${Object.keys(contractSource.interactionContracts).length} components have direct semantic, keyboard, focus and composition evidence.
+- Every contract declares behavior ownership, keyboard strategy, responsive responsibility, required states and consumer responsibilities.
 
 ## Components (${manifest.components.length})
 

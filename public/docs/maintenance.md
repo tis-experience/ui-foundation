@@ -30,6 +30,13 @@ UI Foundation borrows proven operating ideas from DS TIS without importing its i
 
 The public `contracts/components.json` resolves every component profile into a complete individual contract. Agents should read that file together with `ai/manifest.json`; screenshots and catalog copy do not override them.
 
+### Verification levels
+
+- `profile` means the component is covered by its shared classification, ownership, states and consumer responsibilities, plus the catalog-wide build, consumer and WCAG gates.
+- `interaction-tested` means the component additionally has an individual contract for semantics, key outcomes, focus management, required composition and upstream sources, backed by a matching group in `tests/component-contracts.spec.ts`.
+
+Interaction-tested is accumulated component by component. The manifest publishes the exact count; the validator fails if a detailed contract has no canonical test group or if its evidence path is stale.
+
 ## Roles
 
 The harness uses three responsibilities. One person or agent may perform more than one locally, but CI remains the independent verifier before merge.
@@ -79,7 +86,7 @@ Do not create a new profile merely because one component has different copy or s
 - required public states;
 - consumer responsibilities.
 
-Every catalog component must map to exactly one existing profile. `npm run check:contracts` blocks missing components, unknown profiles, version drift and non-alphabetical assignments.
+Every catalog component must map to exactly one existing profile. Detailed interaction contracts are also alphabetical and must reference `tests/component-contracts.spec.ts#<component>`. `npm run check:contracts` blocks missing components, unknown profiles, version drift, non-alphabetical assignments and detailed contracts without matching automated evidence.
 
 ## Evidence required in a pull request
 

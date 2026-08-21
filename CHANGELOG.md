@@ -30,9 +30,12 @@ All notable changes to UI Foundation will be documented in this file.
 - Separate human and machine-readable Blocks, Charts and customization documentation.
 - Public GitHub Pages distribution for the interactive catalog, shadcn registry, token contracts, schemas, documentation and AI manifest.
 - Component-level browser contracts for every catalog specimen plus direct keyboard, form, menu, disclosure, scrolling and semantic coverage across previously untested families.
+- First interaction-tested contract wave for 12 high-risk controls and overlays, publishing exact semantics, keyboard outcomes, focus management, composition rules, official upstream references and matching Playwright evidence.
 
 ### Fixed
 
+- Align the Tooltip specimen with Base UI's visual-only guidance by giving its icon trigger a matching accessible name and keeping the popup supplementary.
+- Provide a visible keyboard-operable action menu alongside the Context Menu specimen and a programmatic group name for the Radio Group specimen.
 - Upgrade GitHub Pages workflows to current Node 24-based Actions while retaining Node 22 as the library build runtime.
 - Restore Calendar arrow-key focus movement by attaching the DayPicker focus ref to each rendered day button.
 - Preserve native link semantics in Pagination instead of exposing page navigation links as buttons through the Base UI Button adapter.

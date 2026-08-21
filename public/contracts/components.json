@@ -21,7 +21,10 @@
         "Use concise trigger labels",
         "Keep hidden content understandable when revealed"
       ],
-      "accessibility": "Base UI manages keyboard navigation, expanded state and panel relationships."
+      "accessibility": "Base UI manages keyboard navigation, expanded state and panel relationships.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "alert",
@@ -42,7 +45,10 @@
         "Choose status or alert semantics from urgency",
         "Provide actionable recovery copy when applicable"
       ],
-      "accessibility": "Uses role=alert; reserve it for content that should be announced immediately."
+      "accessibility": "Uses role=alert; reserve it for content that should be announced immediately.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "alert-dialog",
@@ -62,7 +68,50 @@
         "Provide a title and description",
         "Provide a clear close or decision path"
       ],
-      "accessibility": "Always provide a title and description; Base UI traps focus and requires an explicit response."
+      "accessibility": "Always provide a title and description; Base UI traps focus and requires an explicit response.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=alertdialog",
+          "name=title",
+          "description=required"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open from the trigger"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close without confirming"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Cycle focus within the alert dialog"
+          }
+        ],
+        "focusManagement": [
+          "Move initial focus to the least destructive action",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Include AlertDialogTitle and AlertDialogDescription",
+          "Provide explicit cancel and confirm actions"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/alert-dialog",
+          "behavior": "https://base-ui.com/react/components/alert-dialog"
+        },
+        "evidence": "tests/component-contracts.spec.ts#alert-dialog"
+      }
     },
     {
       "name": "aspect-ratio",
@@ -79,7 +128,10 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "The wrapper is presentational; provide appropriate semantics and alternative text for its content."
+      "accessibility": "The wrapper is presentational; provide appropriate semantics and alternative text for its content.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "attachment",
@@ -99,7 +151,10 @@
         "Provide an accessible name",
         "Choose button or link semantics from the intended action"
       ],
-      "accessibility": "Use descriptive filenames, expose file type and size in text, and label icon-only actions."
+      "accessibility": "Use descriptive filenames, expose file type and size in text, and label icon-only actions.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "avatar",
@@ -116,7 +171,10 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Provide meaningful alt text for informative images and always include AvatarFallback."
+      "accessibility": "Provide meaningful alt text for informative images and always include AvatarFallback.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "badge",
@@ -133,7 +191,10 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Decorative badges must not be the only way status is communicated."
+      "accessibility": "Decorative badges must not be the only way status is communicated.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "breadcrumb",
@@ -154,7 +215,10 @@
         "Provide a navigation label when multiple regions exist",
         "Own routes and destination state"
       ],
-      "accessibility": "Uses a named breadcrumb navigation landmark and aria-current on the current page."
+      "accessibility": "Uses a named breadcrumb navigation landmark and aria-current on the current page.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "bubble",
@@ -171,7 +235,10 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Keep sender and timing information available in text and preserve chronological reading order."
+      "accessibility": "Keep sender and timing information available in text and preserve chronological reading order.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "button",
@@ -191,7 +258,36 @@
         "Provide an accessible name",
         "Choose button or link semantics from the intended action"
       ],
-      "accessibility": "Base UI preserves native button semantics, disabled state and keyboard activation."
+      "accessibility": "Base UI preserves native button semantics, disabled state and keyboard activation.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=button",
+          "name=required"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the action exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Participate in native tab order when enabled",
+          "Expose a visible focus indicator"
+        ],
+        "requiredComposition": [
+          "Render a button for actions and a link for navigation",
+          "Mark decorative icons as hidden from assistive technology"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/button",
+          "behavior": "https://base-ui.com/react/components/button"
+        },
+        "evidence": "tests/component-contracts.spec.ts#button"
+      }
     },
     {
       "name": "button-group",
@@ -212,7 +308,10 @@
         "Provide a group label",
         "Keep the action order meaningful"
       ],
-      "accessibility": "Provide an accessible label for the group when the relationship is not clear from context."
+      "accessibility": "Provide an accessible label for the group when the relationship is not clear from context.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "calendar",
@@ -233,7 +332,10 @@
         "Compose a visible label and error description",
         "Own value, validation and submission"
       ],
-      "accessibility": "Provide a visible purpose and date format; React DayPicker manages the calendar grid and keyboard navigation."
+      "accessibility": "Provide a visible purpose and date format; React DayPicker manages the calendar grid and keyboard navigation.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "card",
@@ -250,7 +352,10 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Choose semantic children and headings based on the content hierarchy."
+      "accessibility": "Choose semantic children and headings based on the content hierarchy.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "carousel",
@@ -270,7 +375,10 @@
         "Provide accessible names",
         "Own application data and side effects"
       ],
-      "accessibility": "Name the carousel, label meaningful slides and keep previous and next controls available to keyboard users."
+      "accessibility": "Name the carousel, label meaningful slides and keep previous and next controls available to keyboard users.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "chart",
@@ -290,7 +398,10 @@
         "Provide a concise text summary",
         "Provide exact values in a table when the task requires them"
       ],
-      "accessibility": "Provide a textual summary or data table and never rely on color alone to distinguish series."
+      "accessibility": "Provide a textual summary or data table and never rely on color alone to distinguish series.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "checkbox",
@@ -312,7 +423,36 @@
         "Compose a visible label and error description",
         "Own value, validation and submission"
       ],
-      "accessibility": "Pair with FieldLabel; Base UI manages checked, indeterminate and disabled states."
+      "accessibility": "Pair with FieldLabel; Base UI manages checked, indeterminate and disabled states.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=checkbox",
+          "name=required",
+          "aria-checked=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Space"
+            ],
+            "outcome": "Toggle the checked state"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the control after toggling",
+          "Expose a visible focus indicator"
+        ],
+        "requiredComposition": [
+          "Associate a visible label or provide an accessible name",
+          "Connect error copy when invalid"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/checkbox",
+          "behavior": "https://base-ui.com/react/components/checkbox"
+        },
+        "evidence": "tests/component-contracts.spec.ts#checkbox"
+      }
     },
     {
       "name": "collapsible",
@@ -333,7 +473,10 @@
         "Use concise trigger labels",
         "Keep hidden content understandable when revealed"
       ],
-      "accessibility": "Base UI connects trigger and panel while exposing expanded state to assistive technology."
+      "accessibility": "Base UI connects trigger and panel while exposing expanded state to assistive technology.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "combobox",
@@ -355,7 +498,10 @@
         "Compose visible labels, descriptions and errors",
         "Own value, validation and submission"
       ],
-      "accessibility": "Use a visible label; Base UI manages active options, selection, filtering and keyboard navigation."
+      "accessibility": "Use a visible label; Base UI manages active options, selection, filtering and keyboard navigation.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "command",
@@ -375,7 +521,10 @@
         "Provide accessible names",
         "Own application data and side effects"
       ],
-      "accessibility": "Give the search input a clear label and keep every command reachable by keyboard."
+      "accessibility": "Give the search input a clear label and keep every command reachable by keyboard.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "context-menu",
@@ -397,7 +546,43 @@
         "Use menus for actions rather than arbitrary form values",
         "Provide meaningful item labels"
       ],
-      "accessibility": "Base UI manages focus and menu navigation; every action must remain available without a pointing device."
+      "accessibility": "Base UI manages focus and menu navigation; every action must remain available without a pointing device.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=menu",
+          "items=menuitem",
+          "visible-alternative=required"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Move between enabled items"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close the menu"
+          }
+        ],
+        "focusManagement": [
+          "Move focus through menu items while open",
+          "Return focus to the visible alternative after its menu closes"
+        ],
+        "requiredComposition": [
+          "Treat the context menu as an enhancement",
+          "Provide a visible control exposing the same actions"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/context-menu",
+          "behavior": "https://base-ui.com/react/components/context-menu"
+        },
+        "evidence": "tests/component-contracts.spec.ts#context-menu"
+      }
     },
     {
       "name": "data-table",
@@ -418,7 +603,10 @@
         "Provide column labels",
         "Own sorting, filtering, pagination and data state"
       ],
-      "accessibility": "Requires an accessible table name, exposes aria-sort on sortable headers and keeps filter and pagination controls keyboard operable."
+      "accessibility": "Requires an accessible table name, exposes aria-sort on sortable headers and keeps filter and pagination controls keyboard operable.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "date-picker",
@@ -440,7 +628,10 @@
         "Compose visible labels, descriptions and errors",
         "Own value, validation and submission"
       ],
-      "accessibility": "Use with a visible FieldLabel; the trigger has native button semantics and the calendar preserves DayPicker keyboard navigation."
+      "accessibility": "Use with a visible FieldLabel; the trigger has native button semantics and the calendar preserves DayPicker keyboard navigation.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "dialog",
@@ -460,7 +651,51 @@
         "Provide a title and description",
         "Provide a clear close or decision path"
       ],
-      "accessibility": "Always provide DialogTitle and DialogDescription; Base UI manages focus trapping and restoration."
+      "accessibility": "Always provide DialogTitle and DialogDescription; Base UI manages focus trapping and restoration.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=dialog",
+          "name=title",
+          "description=required",
+          "background=inert"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open from the trigger"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Request close"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Cycle focus within the dialog"
+          }
+        ],
+        "focusManagement": [
+          "Move focus inside on open",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Include DialogTitle and DialogDescription",
+          "Provide a visible close or completion action"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/dialog",
+          "behavior": "https://base-ui.com/react/components/dialog"
+        },
+        "evidence": "tests/component-contracts.spec.ts#dialog"
+      }
     },
     {
       "name": "direction",
@@ -477,7 +712,10 @@
       "consumerResponsibilities": [
         "Apply only at an intentional application boundary"
       ],
-      "accessibility": "Keep the provider direction aligned with the document language and reading order."
+      "accessibility": "Keep the provider direction aligned with the document language and reading order.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "drawer",
@@ -497,7 +735,10 @@
         "Provide a title and description",
         "Provide a clear close or decision path"
       ],
-      "accessibility": "Always provide a title and description; Base UI manages modal focus and dismissal."
+      "accessibility": "Always provide a title and description; Base UI manages modal focus and dismissal.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "dropdown-menu",
@@ -519,7 +760,50 @@
         "Use menus for actions rather than arbitrary form values",
         "Provide meaningful item labels"
       ],
-      "accessibility": "Use menu items for actions rather than site navigation; Base UI manages roving focus and keyboard navigation."
+      "accessibility": "Use menu items for actions rather than site navigation; Base UI manages roving focus and keyboard navigation.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=menu",
+          "items=menuitem",
+          "trigger.aria-expanded=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Open or move between enabled items"
+          },
+          {
+            "keys": [
+              "Home",
+              "End"
+            ],
+            "outcome": "Move to the first or last enabled item"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close the menu"
+          }
+        ],
+        "focusManagement": [
+          "Move focus to an item when opened from the keyboard",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Use menu items for actions and link items for destinations",
+          "Keep labels meaningful for typeahead navigation"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/dropdown-menu",
+          "behavior": "https://base-ui.com/react/components/menu"
+        },
+        "evidence": "tests/component-contracts.spec.ts#dropdown-menu"
+      }
     },
     {
       "name": "empty",
@@ -540,7 +824,10 @@
         "Choose status or alert semantics from urgency",
         "Provide actionable recovery copy when applicable"
       ],
-      "accessibility": "Use a real heading and concise description; keep the primary recovery action keyboard accessible."
+      "accessibility": "Use a real heading and concise description; keep the primary recovery action keyboard accessible.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "field",
@@ -561,7 +848,10 @@
         "Maintain stable IDs and label relationships",
         "Connect descriptions and errors with aria-describedby"
       ],
-      "accessibility": "Connect labels, descriptions and errors to the control with stable IDs and aria-describedby."
+      "accessibility": "Connect labels, descriptions and errors to the control with stable IDs and aria-describedby.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "form",
@@ -582,7 +872,10 @@
         "Maintain stable IDs and label relationships",
         "Connect descriptions and errors with aria-describedby"
       ],
-      "accessibility": "Preserves native form submission and validation semantics; compose every control with a visible label and connected error text."
+      "accessibility": "Preserves native form submission and validation semantics; compose every control with a visible label and connected error text.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "hover-card",
@@ -602,7 +895,10 @@
         "Provide an accessible trigger name",
         "Keep essential information available without relying only on the overlay"
       ],
-      "accessibility": "Do not hide essential actions in the preview; Base UI supports pointer and keyboard focus triggers."
+      "accessibility": "Do not hide essential actions in the preview; Base UI supports pointer and keyboard focus triggers.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "input",
@@ -624,7 +920,10 @@
         "Compose a visible label and error description",
         "Own value, validation and submission"
       ],
-      "accessibility": "Use inside Field with a visible label; provide autocomplete and inputMode where relevant."
+      "accessibility": "Use inside Field with a visible label; provide autocomplete and inputMode where relevant.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "input-group",
@@ -646,7 +945,10 @@
         "Compose visible labels, descriptions and errors",
         "Own value, validation and submission"
       ],
-      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons."
+      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "input-otp",
@@ -667,7 +969,10 @@
         "Compose a visible label and error description",
         "Own value, validation and submission"
       ],
-      "accessibility": "Provide a visible label, autocomplete=one-time-code and clear validation text."
+      "accessibility": "Provide a visible label, autocomplete=one-time-code and clear validation text.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "item",
@@ -684,7 +989,10 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Use Field instead when the row contains a form control; label icon-only actions."
+      "accessibility": "Use Field instead when the row contains a form control; label icon-only actions.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "kbd",
@@ -701,7 +1009,10 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Include the shortcut in adjacent text when its meaning is not evident from the key labels."
+      "accessibility": "Include the shortcut in adjacent text when its meaning is not evident from the key labels.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "label",
@@ -722,7 +1033,10 @@
         "Maintain stable IDs and label relationships",
         "Connect descriptions and errors with aria-describedby"
       ],
-      "accessibility": "Use htmlFor to bind the label to a native or Base UI control."
+      "accessibility": "Use htmlFor to bind the label to a native or Base UI control.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "marker",
@@ -739,7 +1053,10 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Mark decorative icons hidden and keep the marker text meaningful without visual separators."
+      "accessibility": "Mark decorative icons hidden and keep the marker text meaningful without visual separators.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "menubar",
@@ -761,7 +1078,10 @@
         "Use menus for actions rather than arbitrary form values",
         "Provide meaningful item labels"
       ],
-      "accessibility": "Use for application commands, not ordinary site navigation; Base UI manages menu bar keyboard patterns."
+      "accessibility": "Use for application commands, not ordinary site navigation; Base UI manages menu bar keyboard patterns.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "message",
@@ -782,7 +1102,10 @@
         "Choose status or alert semantics from urgency",
         "Provide actionable recovery copy when applicable"
       ],
-      "accessibility": "Preserve chronological DOM order and include sender and status information in accessible text."
+      "accessibility": "Preserve chronological DOM order and include sender and status information in accessible text.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "message-scroller",
@@ -802,7 +1125,10 @@
         "Provide a constrained size",
         "Do not hide essential actions outside the initial viewport"
       ],
-      "accessibility": "Announce newly received messages intentionally and keep scroll controls named and keyboard operable."
+      "accessibility": "Announce newly received messages intentionally and keep scroll controls named and keyboard operable.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "native-select",
@@ -824,7 +1150,10 @@
         "Compose a visible label and error description",
         "Own value, validation and submission"
       ],
-      "accessibility": "Associate the select with a visible label and use optgroup for meaningful option groups."
+      "accessibility": "Associate the select with a visible label and use optgroup for meaningful option groups.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "navigation-menu",
@@ -845,7 +1174,10 @@
         "Use real links for destinations",
         "Provide meaningful trigger and link labels"
       ],
-      "accessibility": "Use real links for destinations and ensure disclosed content remains reachable by keyboard."
+      "accessibility": "Use real links for destinations and ensure disclosed content remains reachable by keyboard.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "pagination",
@@ -866,7 +1198,10 @@
         "Provide a navigation label when multiple regions exist",
         "Own routes and destination state"
       ],
-      "accessibility": "Provide destination links, mark the current page and localize the navigation label."
+      "accessibility": "Provide destination links, mark the current page and localize the navigation label.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "popover",
@@ -886,7 +1221,43 @@
         "Provide an accessible trigger name",
         "Keep essential information available without relying only on the overlay"
       ],
-      "accessibility": "Use a meaningful trigger and title or description when the content needs a named region."
+      "accessibility": "Use a meaningful trigger and title or description when the content needs a named region.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=dialog",
+          "name=title",
+          "trigger.aria-expanded=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Toggle the popover from the trigger"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close the popover"
+          }
+        ],
+        "focusManagement": [
+          "Move focus according to the interactive content",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Include a title when the content needs an accessible name",
+          "Do not use for information that must remain continuously available"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/popover",
+          "behavior": "https://base-ui.com/react/components/popover"
+        },
+        "evidence": "tests/component-contracts.spec.ts#popover"
+      }
     },
     {
       "name": "progress",
@@ -906,7 +1277,10 @@
         "Provide an accessible name",
         "Expose determinate values when known"
       ],
-      "accessibility": "Provide a label and meaningful value; use Spinner instead when progress is indeterminate."
+      "accessibility": "Provide a label and meaningful value; use Spinner instead when progress is indeterminate.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "questionnaire",
@@ -927,7 +1301,10 @@
         "Maintain stable IDs and label relationships",
         "Connect descriptions and errors with aria-describedby"
       ],
-      "accessibility": "Use semantic field groups and announce step changes, validation errors and progress."
+      "accessibility": "Use semantic field groups and announce step changes, validation errors and progress.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "radio-group",
@@ -949,7 +1326,45 @@
         "Compose a visible label and error description",
         "Own value, validation and submission"
       ],
-      "accessibility": "Wrap the group in FieldSet and FieldLegend; Base UI manages arrow-key navigation."
+      "accessibility": "Wrap the group in FieldSet and FieldLegend; Base UI manages arrow-key navigation.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=radiogroup",
+          "group-name=required",
+          "items=radio",
+          "aria-checked=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowRight"
+            ],
+            "outcome": "Move focus and selection to the next radio"
+          },
+          {
+            "keys": [
+              "ArrowUp",
+              "ArrowLeft"
+            ],
+            "outcome": "Move focus and selection to the previous radio"
+          }
+        ],
+        "focusManagement": [
+          "Use roving focus within the group",
+          "Expose a visible focus indicator on the active radio"
+        ],
+        "requiredComposition": [
+          "Provide a programmatic group label",
+          "Associate a visible label with every radio"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/radio-group",
+          "behavior": "https://base-ui.com/react/components/radio-group"
+        },
+        "evidence": "tests/component-contracts.spec.ts#radio-group"
+      }
     },
     {
       "name": "resizable",
@@ -969,7 +1384,10 @@
         "Provide accessible names",
         "Own application data and side effects"
       ],
-      "accessibility": "Keep the separator keyboard operable and provide sensible minimum and maximum panel sizes."
+      "accessibility": "Keep the separator keyboard operable and provide sensible minimum and maximum panel sizes.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "scroll-area",
@@ -989,7 +1407,10 @@
         "Provide a constrained size",
         "Do not hide essential actions outside the initial viewport"
       ],
-      "accessibility": "Only add a tab stop when the region needs keyboard focus and provide an accessible name in that case."
+      "accessibility": "Only add a tab stop when the region needs keyboard focus and provide an accessible name in that case.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "select",
@@ -1011,7 +1432,54 @@
         "Compose a visible label and error description",
         "Own value, validation and submission"
       ],
-      "accessibility": "Base UI manages trigger, popup, active option and keyboard navigation relationships."
+      "accessibility": "Base UI manages trigger, popup, active option and keyboard navigation relationships.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=combobox",
+          "name=required",
+          "popup=listbox",
+          "items=option",
+          "trigger.aria-expanded=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp",
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open and navigate available options"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Commit the highlighted option"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close without changing the committed value"
+          }
+        ],
+        "focusManagement": [
+          "Keep DOM focus on the trigger while using active descendant navigation",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Provide a visible label or accessible name",
+          "Place SelectItem instances inside SelectGroup"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/select",
+          "behavior": "https://base-ui.com/react/components/select"
+        },
+        "evidence": "tests/component-contracts.spec.ts#select"
+      }
     },
     {
       "name": "separator",
@@ -1028,7 +1496,10 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Use decorative=false only when the divider conveys document structure."
+      "accessibility": "Use decorative=false only when the divider conveys document structure.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "sheet",
@@ -1048,7 +1519,10 @@
         "Provide a title and description",
         "Provide a clear close or decision path"
       ],
-      "accessibility": "Always provide SheetTitle and SheetDescription; Base UI manages focus trapping and restoration."
+      "accessibility": "Always provide SheetTitle and SheetDescription; Base UI manages focus trapping and restoration.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "sidebar",
@@ -1069,7 +1543,10 @@
         "Provide a navigation label when multiple regions exist",
         "Own routes and destination state"
       ],
-      "accessibility": "Label the navigation landmark, expose the collapse control name and preserve access to all destinations on mobile."
+      "accessibility": "Label the navigation landmark, expose the collapse control name and preserve access to all destinations on mobile.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "skeleton",
@@ -1089,7 +1566,10 @@
         "Provide an accessible status name when progress is not already described nearby",
         "Avoid announcing decorative loading placeholders"
       ],
-      "accessibility": "Mark the containing region busy and provide a meaningful loading label outside the skeleton."
+      "accessibility": "Mark the containing region busy and provide a meaningful loading label outside the skeleton.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "slider",
@@ -1111,7 +1591,10 @@
         "Compose a visible label and error description",
         "Own value, validation and submission"
       ],
-      "accessibility": "Provide an accessible label and meaningful minimum, maximum and step values for every thumb."
+      "accessibility": "Provide an accessible label and meaningful minimum, maximum and step values for every thumb.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "sonner",
@@ -1132,7 +1615,10 @@
         "Use the correct urgency",
         "Keep dismiss and action labels explicit"
       ],
-      "accessibility": "Choose polite or assertive announcements based on urgency and keep important actions available elsewhere."
+      "accessibility": "Choose polite or assertive announcements based on urgency and keep important actions available elsewhere.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "spinner",
@@ -1152,7 +1638,10 @@
         "Provide an accessible status name when progress is not already described nearby",
         "Avoid announcing decorative loading placeholders"
       ],
-      "accessibility": "Provides role=status and a default accessible label that can be localized."
+      "accessibility": "Provides role=status and a default accessible label that can be localized.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "switch",
@@ -1174,7 +1663,36 @@
         "Compose a visible label and error description",
         "Own value, validation and submission"
       ],
-      "accessibility": "Pair with FieldLabel; Base UI exposes switch semantics and checked state."
+      "accessibility": "Pair with FieldLabel; Base UI exposes switch semantics and checked state.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=switch",
+          "name=required",
+          "aria-checked=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Space"
+            ],
+            "outcome": "Toggle the checked state"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the control after toggling",
+          "Expose a visible focus indicator"
+        ],
+        "requiredComposition": [
+          "Associate a visible label or provide an accessible name",
+          "Use for immediate binary settings rather than form submission choices"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/switch",
+          "behavior": "https://base-ui.com/react/components/switch"
+        },
+        "evidence": "tests/component-contracts.spec.ts#switch"
+      }
     },
     {
       "name": "table",
@@ -1191,7 +1709,10 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Use header cells with scope, a caption or nearby heading, and expose sorting state when interactive."
+      "accessibility": "Use header cells with scope, a caption or nearby heading, and expose sorting state when interactive.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "tabs",
@@ -1212,7 +1733,52 @@
         "Use concise tab labels",
         "Keep each panel associated with its tab"
       ],
-      "accessibility": "Keep triggers inside TabsList; Base UI manages roles, selection and arrow-key navigation."
+      "accessibility": "Keep triggers inside TabsList; Base UI manages roles, selection and arrow-key navigation.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=tablist",
+          "items=tab",
+          "panels=tabpanel",
+          "aria-selected=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft"
+            ],
+            "outcome": "Move focus to the next or previous horizontal tab"
+          },
+          {
+            "keys": [
+              "Home",
+              "End"
+            ],
+            "outcome": "Move focus to the first or last tab"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused tab in manual activation mode"
+          }
+        ],
+        "focusManagement": [
+          "Use roving focus within the tab list",
+          "Keep each tab associated with its panel"
+        ],
+        "requiredComposition": [
+          "Place TabsTrigger instances inside TabsList",
+          "Provide a TabsContent panel for each tab value"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/tabs",
+          "behavior": "https://base-ui.com/react/components/tabs"
+        },
+        "evidence": "tests/component-contracts.spec.ts#tabs"
+      }
     },
     {
       "name": "textarea",
@@ -1234,7 +1800,10 @@
         "Compose a visible label and error description",
         "Own value, validation and submission"
       ],
-      "accessibility": "Use inside Field with a visible label and describe limits or requirements before errors occur."
+      "accessibility": "Use inside Field with a visible label and describe limits or requirements before errors occur.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "toast",
@@ -1255,7 +1824,10 @@
         "Use the correct urgency",
         "Keep dismiss and action labels explicit"
       ],
-      "accessibility": "Use the appropriate urgency, keep action labels concise and never rely on a transient toast for essential information."
+      "accessibility": "Use the appropriate urgency, keep action labels concise and never rely on a transient toast for essential information.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "toggle",
@@ -1276,7 +1848,10 @@
         "Provide an accessible name",
         "Expose pressed state without relying on color alone"
       ],
-      "accessibility": "Provide an accessible name, especially for icon-only toggles; Base UI exposes pressed state."
+      "accessibility": "Provide an accessible name, especially for icon-only toggles; Base UI exposes pressed state.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "toggle-group",
@@ -1297,7 +1872,10 @@
         "Provide a group label",
         "Keep the action order meaningful"
       ],
-      "accessibility": "Provide a group label and use Base UI array values for both single and multiple selection."
+      "accessibility": "Provide a group label and use Base UI array values for both single and multiple selection.",
+      "verification": {
+        "level": "profile"
+      }
     },
     {
       "name": "tooltip",
@@ -1317,7 +1895,44 @@
         "Provide an accessible trigger name",
         "Keep essential information available without relying only on the overlay"
       ],
-      "accessibility": "Do not place interactive content in a tooltip; wrap the application in TooltipProvider."
+      "accessibility": "Do not place interactive content in a tooltip; wrap the application in TooltipProvider.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "visual-supplement=true",
+          "trigger.name=required",
+          "assistive-technology-dependency=forbidden",
+          "interactive-content=forbidden"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab"
+            ],
+            "outcome": "Show when the trigger receives keyboard focus"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Dismiss without moving trigger focus"
+          }
+        ],
+        "focusManagement": [
+          "Never move focus into the tooltip",
+          "Keep focus on the trigger while visible"
+        ],
+        "requiredComposition": [
+          "Give the trigger an accessible name that matches its purpose",
+          "Use only for supplementary non-interactive information",
+          "Keep essential information available outside the tooltip"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/tooltip",
+          "behavior": "https://base-ui.com/react/components/tooltip"
+        },
+        "evidence": "tests/component-contracts.spec.ts#tooltip"
+      }
     },
     {
       "name": "typography",
@@ -1334,7 +1949,10 @@
       "consumerResponsibilities": [
         "Provide meaningful content and alternatives for non-text information"
       ],
-      "accessibility": "Preserves the semantics of headings, paragraphs, lists, links, code and tables; content authors remain responsible for a logical heading order."
+      "accessibility": "Preserves the semantics of headings, paragraphs, lists, links, code and tables; content authors remain responsible for a logical heading order.",
+      "verification": {
+        "level": "profile"
+      }
     }
   ]
 }

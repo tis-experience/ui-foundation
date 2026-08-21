@@ -1,6 +1,6 @@
 # AI usage guide
 
-UI Foundation exposes one entrypoint for agents: `public/ai/manifest.json`. Read it before generating a screen, selecting components, or changing library source. Then read the selected items in `public/contracts/components.json` for behavior ownership, keyboard strategy, responsive responsibility, required states and consumer obligations.
+UI Foundation exposes one entrypoint for agents: `public/ai/manifest.json`. Read it before generating a screen, selecting components, or changing library source. Then read the selected items in `public/contracts/components.json` for behavior ownership, keyboard strategy, responsive responsibility, required states and consumer obligations. Prefer contracts with `verification.level: "interaction-tested"` when choosing between equivalent patterns; those entries also expose exact semantics, keyboard outcomes, focus rules, composition requirements, upstream references and automated evidence.
 
 ## For an AI building an application
 

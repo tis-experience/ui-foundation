@@ -286,5 +286,177 @@
     "toggle-group": "action-group",
     "tooltip": "nonmodal-overlay",
     "typography": "data-display"
+  },
+  "interactionContracts": {
+    "alert-dialog": {
+      "semantics": ["role=alertdialog", "name=title", "description=required"],
+      "keyboardInteractions": [
+        { "keys": ["Enter", "Space"], "outcome": "Open from the trigger" },
+        { "keys": ["Escape"], "outcome": "Close without confirming" },
+        { "keys": ["Tab", "Shift+Tab"], "outcome": "Cycle focus within the alert dialog" }
+      ],
+      "focusManagement": ["Move initial focus to the least destructive action", "Restore focus to the trigger after close"],
+      "requiredComposition": ["Include AlertDialogTitle and AlertDialogDescription", "Provide explicit cancel and confirm actions"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/alert-dialog",
+        "behavior": "https://base-ui.com/react/components/alert-dialog"
+      },
+      "evidence": "tests/component-contracts.spec.ts#alert-dialog"
+    },
+    "button": {
+      "semantics": ["role=button", "name=required"],
+      "keyboardInteractions": [
+        { "keys": ["Enter", "Space"], "outcome": "Activate the action exactly once" }
+      ],
+      "focusManagement": ["Participate in native tab order when enabled", "Expose a visible focus indicator"],
+      "requiredComposition": ["Render a button for actions and a link for navigation", "Mark decorative icons as hidden from assistive technology"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/button",
+        "behavior": "https://base-ui.com/react/components/button"
+      },
+      "evidence": "tests/component-contracts.spec.ts#button"
+    },
+    "checkbox": {
+      "semantics": ["role=checkbox", "name=required", "aria-checked=state"],
+      "keyboardInteractions": [
+        { "keys": ["Space"], "outcome": "Toggle the checked state" }
+      ],
+      "focusManagement": ["Keep focus on the control after toggling", "Expose a visible focus indicator"],
+      "requiredComposition": ["Associate a visible label or provide an accessible name", "Connect error copy when invalid"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/checkbox",
+        "behavior": "https://base-ui.com/react/components/checkbox"
+      },
+      "evidence": "tests/component-contracts.spec.ts#checkbox"
+    },
+    "context-menu": {
+      "semantics": ["role=menu", "items=menuitem", "visible-alternative=required"],
+      "keyboardInteractions": [
+        { "keys": ["ArrowDown", "ArrowUp"], "outcome": "Move between enabled items" },
+        { "keys": ["Escape"], "outcome": "Close the menu" }
+      ],
+      "focusManagement": ["Move focus through menu items while open", "Return focus to the visible alternative after its menu closes"],
+      "requiredComposition": ["Treat the context menu as an enhancement", "Provide a visible control exposing the same actions"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/context-menu",
+        "behavior": "https://base-ui.com/react/components/context-menu"
+      },
+      "evidence": "tests/component-contracts.spec.ts#context-menu"
+    },
+    "dialog": {
+      "semantics": ["role=dialog", "name=title", "description=required", "background=inert"],
+      "keyboardInteractions": [
+        { "keys": ["Enter", "Space"], "outcome": "Open from the trigger" },
+        { "keys": ["Escape"], "outcome": "Request close" },
+        { "keys": ["Tab", "Shift+Tab"], "outcome": "Cycle focus within the dialog" }
+      ],
+      "focusManagement": ["Move focus inside on open", "Restore focus to the trigger after close"],
+      "requiredComposition": ["Include DialogTitle and DialogDescription", "Provide a visible close or completion action"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/dialog",
+        "behavior": "https://base-ui.com/react/components/dialog"
+      },
+      "evidence": "tests/component-contracts.spec.ts#dialog"
+    },
+    "dropdown-menu": {
+      "semantics": ["role=menu", "items=menuitem", "trigger.aria-expanded=state"],
+      "keyboardInteractions": [
+        { "keys": ["ArrowDown", "ArrowUp"], "outcome": "Open or move between enabled items" },
+        { "keys": ["Home", "End"], "outcome": "Move to the first or last enabled item" },
+        { "keys": ["Escape"], "outcome": "Close the menu" }
+      ],
+      "focusManagement": ["Move focus to an item when opened from the keyboard", "Restore focus to the trigger after close"],
+      "requiredComposition": ["Use menu items for actions and link items for destinations", "Keep labels meaningful for typeahead navigation"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/dropdown-menu",
+        "behavior": "https://base-ui.com/react/components/menu"
+      },
+      "evidence": "tests/component-contracts.spec.ts#dropdown-menu"
+    },
+    "popover": {
+      "semantics": ["role=dialog", "name=title", "trigger.aria-expanded=state"],
+      "keyboardInteractions": [
+        { "keys": ["Enter", "Space"], "outcome": "Toggle the popover from the trigger" },
+        { "keys": ["Escape"], "outcome": "Close the popover" }
+      ],
+      "focusManagement": ["Move focus according to the interactive content", "Restore focus to the trigger after close"],
+      "requiredComposition": ["Include a title when the content needs an accessible name", "Do not use for information that must remain continuously available"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/popover",
+        "behavior": "https://base-ui.com/react/components/popover"
+      },
+      "evidence": "tests/component-contracts.spec.ts#popover"
+    },
+    "radio-group": {
+      "semantics": ["role=radiogroup", "group-name=required", "items=radio", "aria-checked=state"],
+      "keyboardInteractions": [
+        { "keys": ["ArrowDown", "ArrowRight"], "outcome": "Move focus and selection to the next radio" },
+        { "keys": ["ArrowUp", "ArrowLeft"], "outcome": "Move focus and selection to the previous radio" }
+      ],
+      "focusManagement": ["Use roving focus within the group", "Expose a visible focus indicator on the active radio"],
+      "requiredComposition": ["Provide a programmatic group label", "Associate a visible label with every radio"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/radio-group",
+        "behavior": "https://base-ui.com/react/components/radio-group"
+      },
+      "evidence": "tests/component-contracts.spec.ts#radio-group"
+    },
+    "select": {
+      "semantics": ["role=combobox", "name=required", "popup=listbox", "items=option", "trigger.aria-expanded=state"],
+      "keyboardInteractions": [
+        { "keys": ["ArrowDown", "ArrowUp", "Enter", "Space"], "outcome": "Open and navigate available options" },
+        { "keys": ["Enter", "Space"], "outcome": "Commit the highlighted option" },
+        { "keys": ["Escape"], "outcome": "Close without changing the committed value" }
+      ],
+      "focusManagement": ["Keep DOM focus on the trigger while using active descendant navigation", "Restore focus to the trigger after close"],
+      "requiredComposition": ["Provide a visible label or accessible name", "Place SelectItem instances inside SelectGroup"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/select",
+        "behavior": "https://base-ui.com/react/components/select"
+      },
+      "evidence": "tests/component-contracts.spec.ts#select"
+    },
+    "switch": {
+      "semantics": ["role=switch", "name=required", "aria-checked=state"],
+      "keyboardInteractions": [
+        { "keys": ["Space"], "outcome": "Toggle the checked state" }
+      ],
+      "focusManagement": ["Keep focus on the control after toggling", "Expose a visible focus indicator"],
+      "requiredComposition": ["Associate a visible label or provide an accessible name", "Use for immediate binary settings rather than form submission choices"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/switch",
+        "behavior": "https://base-ui.com/react/components/switch"
+      },
+      "evidence": "tests/component-contracts.spec.ts#switch"
+    },
+    "tabs": {
+      "semantics": ["role=tablist", "items=tab", "panels=tabpanel", "aria-selected=state"],
+      "keyboardInteractions": [
+        { "keys": ["ArrowRight", "ArrowLeft"], "outcome": "Move focus to the next or previous horizontal tab" },
+        { "keys": ["Home", "End"], "outcome": "Move focus to the first or last tab" },
+        { "keys": ["Enter", "Space"], "outcome": "Activate the focused tab in manual activation mode" }
+      ],
+      "focusManagement": ["Use roving focus within the tab list", "Keep each tab associated with its panel"],
+      "requiredComposition": ["Place TabsTrigger instances inside TabsList", "Provide a TabsContent panel for each tab value"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/tabs",
+        "behavior": "https://base-ui.com/react/components/tabs"
+      },
+      "evidence": "tests/component-contracts.spec.ts#tabs"
+    },
+    "tooltip": {
+      "semantics": ["visual-supplement=true", "trigger.name=required", "assistive-technology-dependency=forbidden", "interactive-content=forbidden"],
+      "keyboardInteractions": [
+        { "keys": ["Tab"], "outcome": "Show when the trigger receives keyboard focus" },
+        { "keys": ["Escape"], "outcome": "Dismiss without moving trigger focus" }
+      ],
+      "focusManagement": ["Never move focus into the tooltip", "Keep focus on the trigger while visible"],
+      "requiredComposition": ["Give the trigger an accessible name that matches its purpose", "Use only for supplementary non-interactive information", "Keep essential information available outside the tooltip"],
+      "upstream": {
+        "shadcn": "https://ui.shadcn.com/docs/components/base/tooltip",
+        "behavior": "https://base-ui.com/react/components/tooltip"
+      },
+      "evidence": "tests/component-contracts.spec.ts#tooltip"
+    }
   }
 }

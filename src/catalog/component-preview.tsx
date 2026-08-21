@@ -4,6 +4,7 @@ import {
   BoldIcon,
   CheckCircle2Icon,
   ChevronsUpDownIcon,
+  CopyIcon,
   FileTextIcon,
   FolderOpenIcon,
   ItalicIcon,
@@ -637,17 +638,30 @@ function ComponentPreview({ name }: { name: string }) {
 
     case "context-menu":
       return (
-        <ContextMenu>
-          <ContextMenuTrigger className="flex h-28 w-64 items-center justify-center rounded-lg border border-dashed text-sm text-muted-foreground">
-            Right-click this area
-          </ContextMenuTrigger>
-          <ContextMenuContent>
-            <ContextMenuItem>Open</ContextMenuItem>
-            <ContextMenuItem>Duplicate <ContextMenuShortcut>⌘D</ContextMenuShortcut></ContextMenuItem>
-            <ContextMenuSeparator />
-            <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
-          </ContextMenuContent>
-        </ContextMenu>
+        <div className="preview-stack">
+          <DropdownMenu>
+            <DropdownMenuTrigger render={<Button size="sm" variant="outline" />}>
+              Actions
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>Open</DropdownMenuItem>
+              <DropdownMenuItem>Duplicate <DropdownMenuShortcut>⌘D</DropdownMenuShortcut></DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <ContextMenu>
+            <ContextMenuTrigger className="flex h-28 w-64 items-center justify-center rounded-lg border border-dashed text-sm text-muted-foreground">
+              Right-click this area
+            </ContextMenuTrigger>
+            <ContextMenuContent>
+              <ContextMenuItem>Open</ContextMenuItem>
+              <ContextMenuItem>Duplicate <ContextMenuShortcut>⌘D</ContextMenuShortcut></ContextMenuItem>
+              <ContextMenuSeparator />
+              <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+            </ContextMenuContent>
+          </ContextMenu>
+        </div>
       )
 
     case "data-table":
@@ -1006,7 +1020,7 @@ function ComponentPreview({ name }: { name: string }) {
       return (
         <FieldSet className="preview-form">
           <FieldLegend variant="label">Distribution</FieldLegend>
-          <RadioGroup defaultValue="source">
+          <RadioGroup aria-label="Distribution" defaultValue="source">
             <Field orientation="horizontal">
               <RadioGroupItem id={`${id}-source`} value="source" />
               <FieldLabel htmlFor={`${id}-source`}>Source files</FieldLabel>
@@ -1190,8 +1204,18 @@ function ComponentPreview({ name }: { name: string }) {
     case "tooltip":
       return (
         <Tooltip>
-          <TooltipTrigger render={<Button variant="outline" />}>Hover or focus</TooltipTrigger>
-          <TooltipContent>Copied components remain editable.</TooltipContent>
+          <TooltipTrigger
+            render={
+              <Button
+                aria-label="Copy component source"
+                size="icon"
+                variant="outline"
+              />
+            }
+          >
+            <CopyIcon aria-hidden="true" />
+          </TooltipTrigger>
+          <TooltipContent>Copy component source</TooltipContent>
         </Tooltip>
       )
 

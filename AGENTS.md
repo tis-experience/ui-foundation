@@ -35,7 +35,7 @@ Read `docs/maintenance.md` for the standalone contract, responsibilities and rel
 
 1. Read the official shadcn page and the matching Base UI primitive documentation.
 2. Classify the component and record it in `registry/catalog.json` before calling it supported. New entries must include `introducedIn` with the release version; the catalog derives the temporary `Recently added` filter from the current minor release line.
-3. Assign exactly one behavior profile in `contracts/component-contracts.json`. Change or add a profile only when ownership, keyboard, responsive strategy, required states or consumer responsibility actually differs.
+3. Assign exactly one behavior profile in `contracts/component-contracts.json`. Change or add a profile only when ownership, keyboard, responsive strategy, required states or consumer responsibility actually differs. Add an `interactionContracts` entry only with a matching `test.describe("contract: <name>")` group that proves its semantics, keyboard and focus behavior.
 4. Add or update source in `src/components/ui`.
 5. Preserve accessible names, keyboard behavior, focus visibility, reduced motion, and forced state semantics.
 6. Regenerate the registry, resolved contracts and AI surfaces.
