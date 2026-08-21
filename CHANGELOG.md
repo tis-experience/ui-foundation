@@ -27,9 +27,12 @@ All notable changes to UI Foundation will be documented in this file.
 - Installable Chart Recipes bundle with accessible Area, Bar, Line, Pie, Radar and Radial examples.
 - Separate human and machine-readable Blocks, Charts and customization documentation.
 - Public GitHub Pages distribution for the interactive catalog, shadcn registry, token contracts, schemas, documentation and AI manifest.
+- Component-level browser contracts for every catalog specimen plus direct keyboard, form, menu, disclosure, scrolling and semantic coverage across previously untested families.
 
 ### Fixed
 
+- Restore Calendar arrow-key focus movement by attaching the DayPicker focus ref to each rendered day button.
+- Preserve native link semantics in Pagination instead of exposing page navigation links as buttons through the Base UI Button adapter.
 - Publish absolute shadcn registry dependency URLs so public installs resolve the base item and composed dependencies correctly.
 - Allow the complete 24-state WCAG theme and catalog matrix to finish on slower CI runners without reducing coverage.
 - Separate control and surface radius roles so Pill / Full affects controls while cards, panels, dialogs and other containers remain at Large.
