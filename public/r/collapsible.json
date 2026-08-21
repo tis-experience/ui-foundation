@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Base UI connects trigger and panel while exposing expanded state to assistive technology.",
+    "accessibility": "Base UI connects the trigger and panel with expanded and controlled-region state while preserving trigger focus.",
     "status": "alpha"
   },
   "categories": [

@@ -37,6 +37,7 @@ function PaginationItem({ ...props }: React.ComponentProps<"li">) {
 }
 
 type PaginationLinkProps = {
+  disabled?: boolean
   isActive?: boolean
   size?: ButtonVariantProps["size"]
 } &
@@ -44,23 +45,35 @@ type PaginationLinkProps = {
 
 function PaginationLink({
   className,
+  disabled = false,
+  href,
   isActive,
+  onClick,
   size = "icon",
+  tabIndex,
   ...props
 }: PaginationLinkProps) {
   return (
     <a
+      {...props}
+      aria-disabled={disabled || undefined}
       aria-current={isActive ? "page" : undefined}
       data-slot="pagination-link"
       data-active={isActive}
+      href={disabled ? undefined : href}
+      tabIndex={disabled ? -1 : tabIndex}
       className={cn(
         buttonVariants({
           variant: isActive ? "outline" : "ghost",
           size,
         }),
+        "aria-disabled:pointer-events-none aria-disabled:opacity-50",
         className
       )}
-      {...props}
+      onClick={(event) => {
+        onClick?.(event)
+        if (disabled) event.preventDefault()
+      }}
     />
   )
 }
@@ -117,7 +130,6 @@ function PaginationEllipsis({
     >
       <MoreHorizontalIcon
       />
-      <span className="sr-only">More pages</span>
     </span>
   )
 }

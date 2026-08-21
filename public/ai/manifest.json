@@ -608,9 +608,9 @@
   },
   "componentContracts": {
     "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-    "profiles": 32,
+    "profiles": 36,
     "components": 66,
-    "interactionTested": 24
+    "interactionTested": 36
   },
   "rules": [
     "Read this manifest before selecting or generating components.",
@@ -664,11 +664,11 @@
       ],
       "dependencies": [],
       "registryDependencies": [],
-      "accessibility": "Base UI manages keyboard navigation, expanded state and panel relationships.",
+      "accessibility": "Base UI connects headings, triggers and panels; Enter and Space toggle a panel while Tab follows normal document order.",
       "contract": {
         "profile": "disclosure",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1029,11 +1029,11 @@
       "registryDependencies": [
         "button"
       ],
-      "accessibility": "Name the carousel, label meaningful slides and keep previous and next controls available to keyboard users.",
+      "accessibility": "Name the carousel and every slide, provide Previous and Next as non-drag controls, and do not capture arrow keys from interactive slide content.",
       "contract": {
         "profile": "external-interactive",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1106,11 +1106,11 @@
       ],
       "dependencies": [],
       "registryDependencies": [],
-      "accessibility": "Base UI connects trigger and panel while exposing expanded state to assistive technology.",
+      "accessibility": "Base UI connects the trigger and panel with expanded and controlled-region state while preserving trigger focus.",
       "contract": {
         "profile": "disclosure",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1183,11 +1183,11 @@
         "dialog",
         "input-group"
       ],
-      "accessibility": "Give the search input a clear label and keep every command reachable by keyboard.",
+      "accessibility": "Name the search input, keep items inside groups with stable values, and attach one observable onSelect action to every executable command.",
       "contract": {
-        "profile": "external-interactive",
+        "profile": "command-list",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1373,11 +1373,11 @@
       ],
       "dependencies": [],
       "registryDependencies": [],
-      "accessibility": "Always provide a title and description; Base UI manages modal focus and dismissal.",
+      "accessibility": "Always provide a title, description and explicit close path; swipe and snap points require equivalent non-drag controls, and the base stylesheet positions body for iOS Safari.",
       "contract": {
         "profile": "modal-overlay",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1522,11 +1522,11 @@
       ],
       "dependencies": [],
       "registryDependencies": [],
-      "accessibility": "Do not hide essential actions in the preview; Base UI supports pointer and keyboard focus triggers.",
+      "accessibility": "Use a real destination link as the trigger, keep focus on that link and never hide essential information or actions only in the visual preview.",
       "contract": {
         "profile": "nonmodal-overlay",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1744,11 +1744,11 @@
       ],
       "dependencies": [],
       "registryDependencies": [],
-      "accessibility": "Use for application commands, not ordinary site navigation; Base UI manages menu bar keyboard patterns.",
+      "accessibility": "Use for application commands, place items inside MenubarGroup and connect every action; Base UI manages roving trigger and menu focus.",
       "contract": {
         "profile": "menu",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1862,11 +1862,11 @@
       ],
       "dependencies": [],
       "registryDependencies": [],
-      "accessibility": "Use real links for destinations and ensure disclosed content remains reachable by keyboard.",
+      "accessibility": "Name the navigation landmark, use real links, mark the current route and keep disclosed destinations reachable by keyboard.",
       "contract": {
         "profile": "navigation-overlay",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -1892,11 +1892,11 @@
       "registryDependencies": [
         "button"
       ],
-      "accessibility": "Provide destination links, mark the current page and localize the navigation label.",
+      "accessibility": "Provide unique native links, mark exactly one current page, localize the landmark and remove unavailable Previous or Next links from the tab order.",
       "contract": {
-        "profile": "navigation",
+        "profile": "native-link-navigation",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -2141,11 +2141,11 @@
       "registryDependencies": [
         "button"
       ],
-      "accessibility": "Always provide SheetTitle and SheetDescription; Base UI manages focus trapping and restoration.",
+      "accessibility": "Always provide SheetTitle, SheetDescription and an explicit close path; content and actions must remain scroll-reachable at mobile widths and zoom.",
       "contract": {
         "profile": "modal-overlay",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -2197,11 +2197,11 @@
         "skeleton",
         "tooltip"
       ],
-      "accessibility": "Label the navigation landmark, expose the collapse control name and preserve access to all destinations on mobile.",
+      "accessibility": "Compose a named navigation landmark with real links, aria-current and the generated trigger relationship; keep a visible close path in the mobile Sheet.",
       "contract": {
-        "profile": "navigation",
+        "profile": "responsive-navigation-shell",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {
@@ -2476,11 +2476,11 @@
       "registryDependencies": [
         "toggle"
       ],
-      "accessibility": "Provide a group label and use Base UI array values for both single and multiple selection.",
+      "accessibility": "Provide a group and item names, unique array values and an explicit selection mode; visual orientation is forwarded to Base UI keyboard behavior.",
       "contract": {
-        "profile": "action-group",
+        "profile": "toggle-group",
         "source": "https://tis-experience.github.io/ui-foundation/contracts/components.json",
-        "level": "profile"
+        "level": "interaction-tested"
       }
     },
     {

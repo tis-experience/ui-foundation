@@ -118,7 +118,7 @@ test("keeps disclosure, menu and contextual overlay behavior keyboard-safe", asy
   await expect(tooltipTrigger).toBeFocused()
   await expect(page.getByText("Copy component source", { exact: true })).toBeVisible()
 
-  const hoverCardTrigger = component(page, "hover-card").getByRole("button", {
+  const hoverCardTrigger = component(page, "hover-card").getByRole("link", {
     name: "@ui-foundation",
   })
   await hoverCardTrigger.hover()

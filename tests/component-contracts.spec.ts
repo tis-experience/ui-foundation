@@ -14,6 +14,30 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/#components")
 })
 
+test.describe("contract: accordion", () => {
+  test("connects headings and panels while keeping trigger focus", async ({ page }) => {
+    const row = component(page, "accordion")
+    const overview = row.getByRole("button", { name: "What does source-first mean?" })
+    const engine = row.getByRole("button", { name: "Where does behavior come from?" })
+
+    await expect(row.getByRole("heading", { level: 3, name: "What does source-first mean?" })).toBeVisible()
+    await expect(overview).toHaveAttribute("aria-expanded", "true")
+    const panelId = await overview.getAttribute("aria-controls")
+    expect(panelId).toBeTruthy()
+    await expect(page.locator(`#${panelId}`)).toBeVisible()
+
+    await overview.focus()
+    await overview.press("Space")
+    await expect(overview).toHaveAttribute("aria-expanded", "false")
+    await expect(overview).toBeFocused()
+    await overview.press("Enter")
+    await expect(page.locator(`#${panelId}`)).toBeVisible()
+    await expect(overview).toBeFocused()
+    await overview.press("Tab")
+    await expect(engine).toBeFocused()
+  })
+})
+
 test.describe("contract: alert-dialog", () => {
   test("labels, constrains focus and restores the trigger", async ({ page }) => {
     const trigger = component(page, "alert-dialog").getByRole("button", {
@@ -73,6 +97,38 @@ test.describe("contract: calendar", () => {
   })
 })
 
+test.describe("contract: carousel", () => {
+  test("names slides, preserves nested arrow keys and keeps control focus", async ({ page }) => {
+    const row = component(page, "carousel")
+    const carousel = row.getByRole("region", { name: "Featured components" })
+    await expect(carousel.getByRole("group", { name: "1 of 3" })).toBeVisible()
+    await expect(carousel.getByRole("group", { name: "2 of 3" })).toBeAttached()
+    await expect(carousel.getByRole("group", { name: "3 of 3" })).toBeAttached()
+
+    const previous = carousel.getByRole("button", { name: "Previous slide" })
+    const next = carousel.getByRole("button", { name: "Next slide" })
+    await expect(previous).toBeDisabled()
+
+    const nestedInput = carousel.locator("input[data-carousel-contract]")
+    await carousel.getByRole("group", { name: "1 of 3" }).evaluate((slide) => {
+      const input = document.createElement("input")
+      input.dataset.carouselContract = "true"
+      input.setAttribute("aria-label", "Slide value")
+      slide.append(input)
+    })
+    await nestedInput.focus()
+    await nestedInput.press("ArrowRight")
+    await expect(previous).toBeDisabled()
+
+    await next.focus()
+    await next.press("Enter")
+    await expect(previous).toBeEnabled()
+    await expect(next).toBeFocused()
+    await next.press("Space")
+    await expect(next).toBeDisabled()
+  })
+})
+
 test.describe("contract: checkbox", () => {
   test("uses its visible label and toggles with Space", async ({ page }) => {
     const checkbox = component(page, "checkbox").getByRole("checkbox", {
@@ -83,6 +139,28 @@ test.describe("contract: checkbox", () => {
     await checkbox.press("Space")
     await expect(checkbox).not.toBeChecked()
     await expect(checkbox).toBeFocused()
+  })
+})
+
+test.describe("contract: collapsible", () => {
+  test("toggles its related panel without adding a wrapper tab stop", async ({ page }) => {
+    const row = component(page, "collapsible")
+    const trigger = row.getByRole("button", { name: "Package details" })
+    const panelId = await trigger.getAttribute("aria-controls")
+    expect(panelId).toBeTruthy()
+    const panel = page.locator(`#${panelId}`)
+
+    await expect(trigger).toHaveAttribute("aria-expanded", "true")
+    await expect(panel).toBeVisible()
+    await trigger.focus()
+    await trigger.press("Space")
+    await expect(trigger).toHaveAttribute("aria-expanded", "false")
+    await expect(trigger).toBeFocused()
+    await trigger.press("Enter")
+    await expect(panel).toBeVisible()
+    await expect(trigger).toBeFocused()
+    await expect(row.locator('[data-slot="collapsible"]')).not.toHaveAttribute("tabindex", /0/)
+    await expect(row.locator('[data-slot="collapsible-content"]')).not.toHaveAttribute("tabindex", /0/)
   })
 })
 
@@ -107,6 +185,26 @@ test.describe("contract: combobox", () => {
     await row.getByRole("button", { name: "Clear selection" }).click()
     await expect(input).toHaveValue("")
     await expect(input).toBeFocused()
+  })
+})
+
+test.describe("contract: command", () => {
+  test("filters and executes the active command while input focus remains", async ({ page }) => {
+    const row = component(page, "command")
+    const input = row.getByRole("combobox", { name: "Search commands" })
+    await input.focus()
+    await input.fill("copy")
+    const copyCommand = row.getByRole("option", { name: /Copy install command/ })
+    await expect(copyCommand).toBeVisible()
+    await input.press("ArrowDown")
+    await expect(copyCommand).toHaveAttribute("aria-selected", "true")
+    await expect(input).toBeFocused()
+    await input.press("Enter")
+    await expect(row.getByText("Copy install command executed", { exact: true })).toBeVisible()
+    await expect(input).toBeFocused()
+
+    await input.fill("not available")
+    await expect(row.getByText("No command found.", { exact: true })).toBeVisible()
   })
 })
 
@@ -174,6 +272,30 @@ test.describe("contract: dialog", () => {
   })
 })
 
+test.describe("contract: drawer", () => {
+  test("traps focus and supports keyboard dismissal without swipe", async ({ page }) => {
+    const trigger = component(page, "drawer").getByRole("button", { name: "Open drawer" })
+    await trigger.focus()
+    await trigger.press("Enter")
+
+    const dialog = page.getByRole("dialog", { name: "Install component" })
+    await expect(dialog).toBeVisible()
+    await expect(dialog).toHaveAccessibleDescription("Review the source files before adding them.")
+    await expectFocusInside(dialog)
+    await page.keyboard.press("Tab")
+    await expectFocusInside(dialog)
+    await page.keyboard.press("Escape")
+    await expect(trigger).toBeFocused()
+
+    await trigger.press("Space")
+    const cancel = page.getByRole("button", { name: "Cancel", exact: true })
+    await cancel.focus()
+    await cancel.press("Space")
+    await expect(dialog).toBeHidden()
+    await expect(trigger).toBeFocused()
+  })
+})
+
 test.describe("contract: dropdown-menu", () => {
   test("opens from the keyboard, navigates items and restores focus", async ({ page }) => {
     const trigger = component(page, "dropdown-menu").getByRole("button", {
@@ -236,6 +358,24 @@ test.describe("contract: form", () => {
   })
 })
 
+test.describe("contract: hover-card", () => {
+  test("previews a real link without moving focus into the popup", async ({ page }) => {
+    const row = component(page, "hover-card")
+    const trigger = row.getByRole("link", { name: "@ui-foundation" })
+    await expect(trigger).toHaveAttribute("href", "#components")
+    await trigger.focus()
+
+    const popup = page.locator('[data-slot="hover-card-content"]')
+    await expect(popup).toBeVisible()
+    await expect(popup).not.toHaveAttribute("role", "dialog")
+    await expect(popup).not.toHaveAttribute("role", "tooltip")
+    await expect(trigger).toBeFocused()
+    await page.keyboard.press("Escape")
+    await expect(popup).toBeHidden()
+    await expect(trigger).toBeFocused()
+  })
+})
+
 test.describe("contract: input", () => {
   test("edits natively and remains focusable but immutable when read-only", async ({ page }) => {
     const input = component(page, "input").getByRole("textbox", {
@@ -291,6 +431,26 @@ test.describe("contract: input-otp", () => {
   })
 })
 
+test.describe("contract: menubar", () => {
+  test("uses roving trigger focus and restores the active trigger", async ({ page }) => {
+    const row = component(page, "menubar")
+    const file = row.getByRole("menuitem", { name: "File" })
+    const edit = row.getByRole("menuitem", { name: "Edit" })
+
+    await file.focus()
+    await file.press("ArrowRight")
+    await expect(edit).toBeFocused()
+    await edit.press("ArrowLeft")
+    await expect(file).toBeFocused()
+    await file.press("ArrowDown")
+    await expect(page.getByRole("menuitem", { name: /^New file/ })).toBeFocused()
+    await page.keyboard.press("End")
+    await expect(page.getByRole("menuitem", { name: "Close", exact: true })).toBeFocused()
+    await page.keyboard.press("Escape")
+    await expect(file).toBeFocused()
+  })
+})
+
 test.describe("contract: native-select", () => {
   test("uses its visible label and native keyboard selection", async ({ page }) => {
     const select = component(page, "native-select").getByRole("combobox", {
@@ -300,6 +460,46 @@ test.describe("contract: native-select", () => {
     await select.press("p")
     await expect(select).toHaveValue("preview")
     await expect(select).toBeFocused()
+  })
+})
+
+test.describe("contract: navigation-menu", () => {
+  test("names the landmark, traverses top-level items and restores the trigger", async ({ page }) => {
+    const navigation = component(page, "navigation-menu").getByRole("navigation", { name: "Primary" })
+    const trigger = navigation.getByRole("button", { name: "Components" })
+    const themes = navigation.getByRole("link", { name: "Themes" })
+    await trigger.focus()
+    await trigger.press("ArrowRight")
+    await expect(themes).toBeFocused()
+    await themes.press("ArrowLeft")
+    await expect(trigger).toBeFocused()
+
+    await trigger.press("Enter")
+    const current = page.getByRole("link", { name: "Browse catalog" })
+    await expect(current).toBeVisible()
+    await expect(current).toHaveAttribute("aria-current", "page")
+    await expect(current).toBeFocused()
+    await current.press("ArrowDown")
+    await expect(page.getByRole("link", { name: "Installation" })).toBeFocused()
+    await page.keyboard.press("Escape")
+    await expect(trigger).toBeFocused()
+  })
+})
+
+test.describe("contract: pagination", () => {
+  test("uses native destinations, one current page and a disabled previous link", async ({ page }) => {
+    const navigation = component(page, "pagination").getByRole("navigation", { name: "Component pages" })
+    const previous = navigation.locator('[aria-label="Go to previous page"]')
+    await expect(previous).toHaveAttribute("aria-disabled", "true")
+    await expect(previous).not.toHaveAttribute("href")
+    await expect(previous).toHaveAttribute("tabindex", "-1")
+    await expect(navigation.locator('[aria-current="page"]')).toHaveCount(1)
+    await expect(navigation.locator('[data-slot="pagination-ellipsis"]')).toHaveAttribute("aria-hidden", "true")
+
+    const pageTwo = navigation.getByRole("link", { name: "Page 2" })
+    await pageTwo.focus()
+    await pageTwo.press("Enter")
+    await expect(page).toHaveURL(/#page-2$/)
   })
 })
 
@@ -392,6 +592,62 @@ test.describe("contract: select", () => {
   })
 })
 
+test.describe("contract: sheet", () => {
+  test("keeps close paths reachable at mobile width and restores the trigger", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 568 })
+    const trigger = component(page, "sheet").getByRole("button", { name: "Open sheet" })
+    await trigger.focus()
+    await trigger.press("Space")
+
+    const dialog = page.getByRole("dialog", { name: "Component settings" })
+    await expect(dialog).toBeVisible()
+    await expect(dialog).toHaveAccessibleDescription("Configure the local source before installation.")
+    await expectFocusInside(dialog)
+    await expect.poll(async () => {
+      const box = await dialog.boundingBox()
+      return box ? { left: Math.round(box.x), right: Math.round(box.x + box.width) } : null
+    }).toEqual({ left: 80, right: 320 })
+    const close = dialog.getByRole("button", { name: "Close" })
+    await expect(close).toBeVisible()
+    await close.click()
+    await expect(trigger).toBeFocused()
+
+    await trigger.press("Enter")
+    await page.keyboard.press("Escape")
+    await expect(trigger).toBeFocused()
+  })
+})
+
+test.describe("contract: sidebar", () => {
+  test("relates its trigger, current destination and responsive mobile dialog", async ({ page }) => {
+    const row = component(page, "sidebar")
+    const navigation = row.getByRole("navigation", { name: "Component catalog" })
+    const current = navigation.getByRole("link", { name: "Components" })
+    await expect(current).toHaveAttribute("aria-current", "page")
+
+    const trigger = row.getByRole("button", { name: "Toggle Sidebar" })
+    const controlledId = await trigger.getAttribute("aria-controls")
+    expect(controlledId).toBeTruthy()
+    await expect(page.locator(`#${controlledId}`)).toBeAttached()
+    await expect(trigger).toHaveAttribute("aria-expanded", "true")
+    await trigger.focus()
+    await trigger.press("Space")
+    await expect(trigger).toHaveAttribute("aria-expanded", "false")
+    await expect(trigger).toBeFocused()
+    await page.keyboard.press("Control+b")
+    await expect(trigger).toHaveAttribute("aria-expanded", "true")
+
+    await page.setViewportSize({ width: 390, height: 700 })
+    await expect(trigger).toHaveAttribute("aria-expanded", "false")
+    await trigger.press("Enter")
+    const mobileDialog = page.getByRole("dialog", { name: "Sidebar" })
+    await expect(mobileDialog).toBeVisible()
+    await expect(mobileDialog.getByRole("button", { name: "Close" })).toBeVisible()
+    await page.keyboard.press("Escape")
+    await expect(trigger).toBeFocused()
+  })
+})
+
 test.describe("contract: slider", () => {
   test("exposes one scalar thumb with keyboard range semantics and visible focus", async ({ page }) => {
     const row = component(page, "slider")
@@ -467,6 +723,33 @@ test.describe("contract: textarea", () => {
     await textarea.pressSequentially("X")
     await expect(textarea).toHaveValue("Line one\nLine two")
     await expect(textarea).toBeFocused()
+  })
+})
+
+test.describe("contract: toggle-group", () => {
+  test("aligns roving focus and selection with horizontal and vertical orientation", async ({ page }) => {
+    const row = component(page, "toggle-group")
+    const formatting = row.getByRole("group", { name: "Text formatting" })
+    const bold = formatting.getByRole("button", { name: "Bold" })
+    const italic = formatting.getByRole("button", { name: "Italic" })
+    await expect(bold).toHaveAttribute("aria-pressed", "true")
+    await bold.focus()
+    await bold.press("ArrowRight")
+    await expect(italic).toBeFocused()
+    await italic.press("Space")
+    await expect(italic).toHaveAttribute("aria-pressed", "true")
+    await expect(bold).toHaveAttribute("aria-pressed", "true")
+
+    const alignment = row.getByRole("group", { name: "Text alignment" })
+    const left = alignment.getByRole("button", { name: "Left" })
+    const center = alignment.getByRole("button", { name: "Center" })
+    await expect(left).toHaveAttribute("aria-pressed", "true")
+    await left.focus()
+    await left.press("ArrowDown")
+    await expect(center).toBeFocused()
+    await center.press("Space")
+    await expect(center).toHaveAttribute("aria-pressed", "true")
+    await expect(left).toHaveAttribute("aria-pressed", "false")
   })
 })
 

@@ -28,6 +28,7 @@ function ToggleGroup({
   size,
   spacing = 2,
   orientation = "horizontal",
+  style,
   children,
   ...props
 }: ToggleGroupPrimitive.Props &
@@ -35,14 +36,20 @@ function ToggleGroup({
     spacing?: number
     orientation?: "horizontal" | "vertical"
   }) {
+  const rootStyle: React.CSSProperties & { "--gap": number } = {
+    ...style,
+    "--gap": spacing,
+  }
+
   return (
     <ToggleGroupPrimitive
+      orientation={orientation}
       data-slot="toggle-group"
       data-variant={variant}
       data-size={size}
       data-spacing={spacing}
       data-orientation={orientation}
-      style={{ "--gap": spacing } as React.CSSProperties}
+      style={rootStyle}
       className={cn(
         "group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-[var(--control-radius)] data-[size=sm]:rounded-[var(--control-radius-sm)] data-vertical:flex-col data-vertical:items-stretch",
         className

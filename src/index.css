@@ -157,7 +157,7 @@
     outline-color: var(--focus-ring-color, var(--ring));
     }
   body {
-    @apply bg-background text-foreground;
+    @apply relative bg-background text-foreground;
     }
   html {
     @apply font-sans;

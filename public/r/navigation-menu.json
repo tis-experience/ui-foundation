@@ -27,7 +27,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Use real links for destinations and ensure disclosed content remains reachable by keyboard.",
+    "accessibility": "Name the navigation landmark, use real links, mark the current route and keep disclosed destinations reachable by keyboard.",
     "status": "alpha"
   },
   "categories": [

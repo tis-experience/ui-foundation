@@ -17,7 +17,7 @@
   "meta": {
     "behaviorEngine": "@base-ui/react@1.7.0",
     "distribution": "shadcn-source",
-    "accessibility": "Do not hide essential actions in the preview; Base UI supports pointer and keyboard focus triggers.",
+    "accessibility": "Use a real destination link as the trigger, keep focus on that link and never hide essential information or actions only in the visual preview.",
     "status": "alpha"
   },
   "categories": [

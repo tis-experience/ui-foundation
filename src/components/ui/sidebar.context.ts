@@ -1,6 +1,7 @@
 import * as React from "react"
 
 type SidebarContextValue = {
+  sidebarId: string
   state: "expanded" | "collapsed"
   open: boolean
   setOpen: (open: boolean | ((open: boolean) => boolean)) => void
