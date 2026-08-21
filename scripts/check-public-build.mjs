@@ -20,6 +20,7 @@ assert(fs.existsSync(dist), "dist is missing. Run npm run build first.")
 
 const requiredFiles = [
   "index.html",
+  "LICENSE",
   "ai/manifest.json",
   "ai/customizer.json",
   "llms.txt",
@@ -37,12 +38,16 @@ const requiredFiles = [
   "schemas/component-catalog.schema.json",
   "schemas/component-contracts.schema.json",
   "schemas/resolved-component-contracts.schema.json",
+  "schemas/release-manifest.schema.json",
   "docs/ai-usage.md",
+  "docs/developer-api.md",
+  "docs/installation.md",
   "docs/blocks.md",
   "docs/charts.md",
   "docs/customization.md",
   "docs/compositions.md",
   "docs/maintenance.md",
+  "docs/releases.md",
 ]
 
 for (const relativePath of requiredFiles) {
@@ -57,6 +62,12 @@ const manifestSchema = JSON.parse(read("schemas/ai-manifest.schema.json"))
 const contracts = JSON.parse(read("contracts/components.json"))
 const registry = JSON.parse(read("r/registry.json"))
 assert(manifest.distribution.registryBaseUrl === `${siteBaseUrl}r`, "Registry base URL is not public")
+assert(manifest.distribution.releases.preview === `${siteBaseUrl}r`, "Preview registry URL is not public")
+assert(
+  manifest.distribution.releases.pattern === `${siteBaseUrl}releases/<version>/r`,
+  "Versioned registry pattern is not public"
+)
+assert(manifest.distribution.releases.npmPackage === false, "Manifest must preserve the source-registry boundary")
 assert(manifest.theming.customizer.route === `${siteBaseUrl}#customize`, "Customizer URL is not public")
 assert(
   manifestSchema.properties.components.items.required.includes("contract") &&

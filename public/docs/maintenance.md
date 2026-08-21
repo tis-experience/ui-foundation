@@ -61,6 +61,7 @@ The harness uses three responsibilities. One person or agent may perform more th
 - runs all three required gates;
 - verifies a clean registry installation in a separate project;
 - publishes through a pull request and confirms the public artifact after deploy.
+- rehearses the versioned registry snapshot and verifies the hosted registry from a clean consumer after deploy.
 
 ## Workflow
 
@@ -74,6 +75,7 @@ The harness uses three responsibilities. One person or agent may perform more th
 8. Review `git diff --check` and the exact staged paths.
 9. Open a pull request. CI must pass before merge.
 10. After `main` deploys, verify the catalog, manifest and affected registry items publicly.
+11. Before a versioned release, obtain owner approval for the version, run `npm run release:stage -- --version <approved-version>`, and preserve the resulting release directory immutably.
 
 ## Contract changes
 
@@ -97,3 +99,5 @@ Every catalog component must map to exactly one existing profile. Detailed inter
 - `npm run test:consumer` result;
 - `npm run test:e2e` result;
 - public verification when the change reaches `main`.
+- `npm run release:dry-run` result for release-affecting changes.
+- `npm run test:consumer:public` result after deployment.

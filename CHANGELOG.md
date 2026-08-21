@@ -6,6 +6,8 @@ All notable changes to UI Foundation will be documented in this file.
 
 ### Added
 
+- Reproducible source-registry release harness with immutable version snapshots, SHA-256 manifests, compatibility metadata and a no-write rehearsal gate.
+- Developer installation, source API and release documentation plus a clean-consumer smoke test for the hosted registry.
 - Standalone construction and maintenance harness adapted from proven DS TIS governance principles, with read-only preflight, explicit behavior profiles and resolved contracts for all 66 components.
 - Pull-request CI running the same build, clean consumer, interaction and accessibility gates required for GitHub Pages publication.
 - Standalone React foundation using shadcn source distribution and Base UI 1.7.0 behavior.

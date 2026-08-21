@@ -52,6 +52,8 @@ npm run test:e2e
 
 `npm run test` validates generated contracts, TypeScript, lint, and the production catalog build. The consumer test proves source installation into a separate Vite project. The browser test proves interaction, responsive behavior, and automated WCAG A/AA checks.
 
+`npm test` also rehearses a versioned source-registry release in a temporary directory. After `main` deploys, run `npm run test:consumer:public` to prove the hosted registry from a clean project. `npm run release:stage -- --version <approved-version>` is reserved for an owner-approved version change and must never overwrite an existing release directory.
+
 ## Forbidden without owner approval
 
 - Writing to Figma.

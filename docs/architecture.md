@@ -10,7 +10,7 @@ The React adapter uses five deliberately separate layers:
 2. **Density contract** — Compact, Comfortable and Spacious control scales in `tokens/densities.json`. Comfortable is the default; the active profile jointly controls height, inline padding, gap, font size and icon size.
 3. **Theme contract** — semantic color pairs and the theme radius base with light and dark modes. Neutral is the default; TIS is an optional adapter.
 4. **Behavior adapter** — Base UI primitives provide interaction, focus management, keyboard behavior, and ARIA relationships.
-5. **Distribution adapter** — shadcn installs readable source files and the foundation, density and theme contracts into the consumer project.
+5. **Distribution adapter** — shadcn installs readable source files and the foundation, density and theme contracts into the consumer project. `/r` is the current preview channel; formal releases are immutable snapshots under `/releases/<version>` with SHA-256 evidence.
 
 Focus is shared by all identities and densities: one 2px solid semantic outline sits 2px outside the focused element, with no halo. The outline follows the target radius, its color comes from the active theme or state, and forced-colors mode uses the system Highlight color.
 
@@ -28,7 +28,7 @@ Behavior profiles in `contracts/component-contracts.json` describe the conceptua
 - No Figma library or Figma sync.
 - No Ark UI, Zag, Radix UI, or provider mixing in the React adapter.
 - No universal component runtime shared by future frameworks.
-- No public package or hosted registry in the local alpha phase.
+- No monolithic npm runtime package. The public shadcn registry is the React adapter distribution.
 
 ## Replication to another technology
 

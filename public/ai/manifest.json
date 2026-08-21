@@ -12,7 +12,13 @@
     "model": "shadcn-source",
     "cli": "shadcn@4.18.0",
     "behaviorEngine": "@base-ui/react@1.7.0",
-    "registryBaseUrl": "https://tis-experience.github.io/ui-foundation/r"
+    "registryBaseUrl": "https://tis-experience.github.io/ui-foundation/r",
+    "releases": {
+      "preview": "https://tis-experience.github.io/ui-foundation/r",
+      "pattern": "https://tis-experience.github.io/ui-foundation/releases/<version>/r",
+      "policy": "https://tis-experience.github.io/ui-foundation/docs/releases.md",
+      "npmPackage": false
+    }
   },
   "theming": {
     "default": "neutral",
@@ -616,6 +622,7 @@
     "Read this manifest before selecting or generating components.",
     "Read the selected resolved component contracts before implementing behavior or states.",
     "Install registry source instead of recreating component markup from memory.",
+    "Use an immutable versioned registry URL for production installation; use the preview /r channel only for evaluation and controlled updates.",
     "Use Neutral unless the TIS identity is explicitly requested.",
     "Use Comfortable density unless the product explicitly requires Compact or Spacious controls.",
     "Use Base UI render composition; do not translate examples to Radix asChild.",
@@ -638,11 +645,14 @@
     "https://tis-experience.github.io/ui-foundation/tokens/themes/neutral.json",
     "https://tis-experience.github.io/ui-foundation/tokens/themes/tis.json",
     "https://tis-experience.github.io/ui-foundation/docs/ai-usage.md",
+    "https://tis-experience.github.io/ui-foundation/docs/developer-api.md",
+    "https://tis-experience.github.io/ui-foundation/docs/installation.md",
     "https://tis-experience.github.io/ui-foundation/docs/blocks.md",
     "https://tis-experience.github.io/ui-foundation/docs/charts.md",
     "https://tis-experience.github.io/ui-foundation/docs/customization.md",
     "https://tis-experience.github.io/ui-foundation/docs/compositions.md",
-    "https://tis-experience.github.io/ui-foundation/docs/maintenance.md"
+    "https://tis-experience.github.io/ui-foundation/docs/maintenance.md",
+    "https://tis-experience.github.io/ui-foundation/docs/releases.md"
   ],
   "guides": [],
   "components": [
