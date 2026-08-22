@@ -97,6 +97,12 @@ const manifest = {
     cli: "shadcn@4.18.0",
     behaviorEngine: catalog.behaviorEngine,
     registryBaseUrl: publicUrl("r"),
+    releases: {
+      preview: publicUrl("r"),
+      pattern: publicUrl("releases/<version>/r"),
+      policy: publicUrl("docs/releases.md"),
+      npmPackage: false,
+    },
   },
   theming: {
     default: neutral.name,
@@ -133,6 +139,7 @@ const manifest = {
     "Read this manifest before selecting or generating components.",
     "Read the selected resolved component contracts before implementing behavior or states.",
     "Install registry source instead of recreating component markup from memory.",
+    "Use an immutable versioned registry URL for production installation; use the preview /r channel only for evaluation and controlled updates.",
     "Use Neutral unless the TIS identity is explicitly requested.",
     "Use Comfortable density unless the product explicitly requires Compact or Spacious controls.",
     "Use Base UI render composition; do not translate examples to Radix asChild.",
@@ -155,11 +162,14 @@ const manifest = {
     publicUrl("tokens/themes/neutral.json"),
     publicUrl("tokens/themes/tis.json"),
     publicUrl("docs/ai-usage.md"),
+    publicUrl("docs/developer-api.md"),
+    publicUrl("docs/installation.md"),
     publicUrl("docs/blocks.md"),
     publicUrl("docs/charts.md"),
     publicUrl("docs/customization.md"),
     publicUrl("docs/compositions.md"),
     publicUrl("docs/maintenance.md"),
+    publicUrl("docs/releases.md"),
   ],
   guides: (catalog.guides ?? []).map((guide) => ({
     ...guide,
@@ -224,6 +234,9 @@ Standalone React component library. Neutral is the default theme; TIS is optiona
 - shadcn source registry: 4.18.0
 - Base UI behavior engine: 1.7.0
 - Tailwind CSS 4
+- npm package: intentionally unavailable; install owned source from the registry
+- preview registry: ${publicUrl("r")}
+- immutable releases: ${publicUrl("releases/<version>/r")}
 
 ## Agent rules
 
@@ -285,6 +298,7 @@ const guideLlms = manifest.guides.length
   : ""
 
 const outputs = new Map([
+  ["public/LICENSE", fs.readFileSync(path.join(root, "LICENSE"), "utf8")],
   ["public/ai/manifest.json", `${JSON.stringify(manifest, null, 2)}\n`],
   ["public/ai/customizer.json", `${JSON.stringify(customizer, null, 2)}\n`],
   ["public/llms.txt", `${llms}${guideLlms}`],
@@ -303,6 +317,7 @@ const outputs = new Map([
   ["public/schemas/component-catalog.schema.json", fs.readFileSync(path.join(root, "schemas/component-catalog.schema.json"), "utf8")],
   ["public/schemas/component-contracts.schema.json", fs.readFileSync(path.join(root, "schemas/component-contracts.schema.json"), "utf8")],
   ["public/schemas/resolved-component-contracts.schema.json", fs.readFileSync(path.join(root, "schemas/resolved-component-contracts.schema.json"), "utf8")],
+  ["public/schemas/release-manifest.schema.json", fs.readFileSync(path.join(root, "schemas/release-manifest.schema.json"), "utf8")],
   ["public/tokens/foundation.schema.json", fs.readFileSync(path.join(root, "tokens/foundation.schema.json"), "utf8")],
   ["public/tokens/density.schema.json", fs.readFileSync(path.join(root, "tokens/density.schema.json"), "utf8")],
   ["public/tokens/customizer.schema.json", fs.readFileSync(path.join(root, "tokens/customizer.schema.json"), "utf8")],

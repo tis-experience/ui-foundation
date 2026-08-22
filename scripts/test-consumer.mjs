@@ -14,6 +14,7 @@ const catalog = JSON.parse(
 const consumer = fs.mkdtempSync(path.join(os.tmpdir(), "ui-foundation-consumer-"))
 const npmCache = path.join(os.tmpdir(), "ui-foundation-npm-cache")
 const publicRegistryBaseUrl = "https://tis-experience.github.io/ui-foundation/r/"
+const publicMode = process.argv.includes("--public")
 let passed = false
 
 function run(command, args, cwd = consumer) {
@@ -26,13 +27,15 @@ function run(command, args, cwd = consumer) {
 
 try {
   fs.cpSync(template, consumer, { recursive: true })
-  for (const file of fs.readdirSync(path.join(root, "public", "r"))) {
-    if (file.endsWith(".json")) {
-      const source = fs.readFileSync(path.join(root, "public", "r", file), "utf8")
-      fs.writeFileSync(
-        path.join(consumer, file),
-        source.replaceAll(publicRegistryBaseUrl, `${consumer}${path.sep}`)
-      )
+  if (!publicMode) {
+    for (const file of fs.readdirSync(path.join(root, "public", "r"))) {
+      if (file.endsWith(".json")) {
+        const source = fs.readFileSync(path.join(root, "public", "r", file), "utf8")
+        fs.writeFileSync(
+          path.join(consumer, file),
+          source.replaceAll(publicRegistryBaseUrl, `${consumer}${path.sep}`)
+        )
+      }
     }
   }
   run("npm", ["install", "--no-audit", "--no-fund"])
@@ -42,8 +45,9 @@ try {
     ...(catalog.blocks ?? []).map(({ name }) => name),
     ...(catalog.charts ?? []).map(({ name }) => name),
     "theme-tis",
-  ].map((name) =>
-    path.join(consumer, `${name}.json`)
+  ].map((name) => publicMode
+    ? `${publicRegistryBaseUrl}${name}.json`
+    : path.join(consumer, `${name}.json`)
   )
   run(path.join(root, "node_modules", ".bin", "shadcn"), [
     "add",
@@ -94,7 +98,7 @@ try {
   }
 
   run("npm", ["run", "build"])
-  console.log(`Consumer smoke passed: ${catalog.components.length} components, ${(catalog.blocks ?? []).length} blocks, ${(catalog.charts ?? []).length} chart bundles, dependencies, density profiles, accessible focus, portable Typeset rhythm, TIS preset and production build.`)
+  console.log(`Consumer smoke passed against the ${publicMode ? "published" : "generated"} registry: ${catalog.components.length} components, ${(catalog.blocks ?? []).length} blocks, ${(catalog.charts ?? []).length} chart bundles, dependencies, density profiles, accessible focus, portable Typeset rhythm, TIS preset and production build.`)
   passed = true
 } finally {
   if (passed) {

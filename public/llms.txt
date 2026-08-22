@@ -8,12 +8,16 @@ Standalone React component library. Neutral is the default theme; TIS is optiona
 - shadcn source registry: 4.18.0
 - Base UI behavior engine: 1.7.0
 - Tailwind CSS 4
+- npm package: intentionally unavailable; install owned source from the registry
+- preview registry: https://tis-experience.github.io/ui-foundation/r
+- immutable releases: https://tis-experience.github.io/ui-foundation/releases/<version>/r
 
 ## Agent rules
 
 - Read this manifest before selecting or generating components.
 - Read the selected resolved component contracts before implementing behavior or states.
 - Install registry source instead of recreating component markup from memory.
+- Use an immutable versioned registry URL for production installation; use the preview /r channel only for evaluation and controlled updates.
 - Use Neutral unless the TIS identity is explicitly requested.
 - Use Comfortable density unless the product explicitly requires Compact or Spacious controls.
 - Use Base UI render composition; do not translate examples to Radix asChild.

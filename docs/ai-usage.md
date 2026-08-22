@@ -8,7 +8,7 @@ UI Foundation exposes one entrypoint for agents: `public/ai/manifest.json`. Read
 2. Select density explicitly: `comfortable` by default, `compact` for data-heavy interfaces, or `spacious` for generous and touch-oriented interfaces.
 3. Use only components whose `status` is `alpha` or later in the manifest.
 4. Read the selected component contract and implement its required states and consumer responsibilities.
-5. Install each component from the source registry; do not recreate its markup from memory.
+5. Install each component from the source registry; do not recreate its markup from memory. Pin an immutable `/releases/<version>/r` URL for production work and use `/r` only for evaluation or controlled updates.
 6. Use the exported component composition and Base UI `render` API. Never translate examples to `asChild`.
 7. Compose form controls with `Field`, visible labels, descriptions, stable IDs, and errors.
 8. Preserve the theme, density and foundation tokens. Do not add brand hex values or fixed control heights inside component classes.

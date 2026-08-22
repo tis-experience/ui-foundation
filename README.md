@@ -4,6 +4,8 @@ Biblioteca React independente, baseada em shadcn e Base UI. Ela oferece um tema 
 
 Esta versão é um alpha público e source-first: os componentes entram no projeto consumidor como código auditável por meio do registry do shadcn.
 
+O registry é a distribuição do produto. O package do repositório permanece `private` para npm e não oferece um pacote runtime monolítico.
+
 Catálogo público: [tis-experience.github.io/ui-foundation](https://tis-experience.github.io/ui-foundation/)
 
 ## O que já funciona
@@ -49,6 +51,8 @@ Um consumidor pode instalar código-fonte diretamente do registry público pela 
 npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/r/button.json
 ```
 
+O caminho `/r` acompanha a versão mais recente publicada. Releases formais usam URLs imutáveis em `/releases/<version>/r/<item>.json`, acompanhadas por manifesto SHA-256. Consulte [docs/installation.md](docs/installation.md) e [docs/releases.md](docs/releases.md).
+
 Para aplicar a identidade TIS, instale também o preset e selecione-o no elemento raiz:
 
 ```bash
@@ -87,6 +91,7 @@ Consulte [docs/blocks.md](docs/blocks.md) e [docs/charts.md](docs/charts.md) par
 registry/catalog.json       catálogo canônico
         │
         ├── public/r/*.json código distribuído pelo shadcn
+        ├── public/releases snapshots imutáveis e manifestos de integridade
         ├── public/ai/*     contrato machine-readable para IA
         └── src/catalog/*   catálogo humano e interativo
 
@@ -110,6 +115,8 @@ As fronteiras são intencionais:
 
 Mais detalhes em [docs/architecture.md](docs/architecture.md), [ADR-001](docs/decisions/ADR-001-standalone-source-first.md) e [ADR-002](docs/decisions/ADR-002-density-and-focus-contract.md).
 
+Para desenvolvimento e releases, consulte [Developer API](docs/developer-api.md), [Installation](docs/installation.md) e [Registry releases](docs/releases.md).
+
 ## Uso por IA
 
 Uma IA deve ler, nesta ordem:
@@ -121,9 +128,10 @@ Uma IA deve ler, nesta ordem:
 5. `tokens/densities.json` — escala ativa de altura, padding, gap, tipografia e ícones dos controles;
 6. `tokens/customizer.json` — opções, defaults e saídas reproduzíveis do preset;
 7. `docs/ai-usage.md` — processo para implementação e design assistido;
-8. `docs/blocks.md` e `docs/charts.md` — padrões de aplicação e visualização instaláveis;
-9. `docs/compositions.md` — uso das composições instaláveis;
-10. o source real do componente, Block ou receita selecionada.
+8. `docs/developer-api.md` e `docs/installation.md` — API source-first e instalação;
+9. `docs/blocks.md` e `docs/charts.md` — padrões de aplicação e visualização instaláveis;
+10. `docs/compositions.md` — uso das composições instaláveis;
+11. o source real do componente, Block ou receita selecionada.
 
 A IA deve gerar uma composição executável com componentes existentes, não inventar um handoff ou afirmar que existe uma biblioteca Figma.
 
@@ -133,13 +141,15 @@ A IA deve gerar uma composição executável com componentes existentes, não in
 npm test              # geração, lint e build
 npm run test:consumer # instalação real em consumidor limpo
 npm run test:e2e      # interação, responsividade e WCAG/Axe
+npm run release:dry-run       # ensaio isolado do snapshot versionado
+npm run test:consumer:public  # smoke pós-deploy contra o registry hospedado
 ```
 
 ## Estado e limites
 
 - versão: `0.1.0-alpha.0`;
 - repositório e catálogo públicos no GitHub Pages;
-- nenhum pacote publicado;
+- nenhum pacote npm por decisão arquitetural; a distribuição é o registry source-first;
 - nenhum Figma criado nesta fase;
 - nenhuma dependência do DS TIS atual;
 - 66 componentes, 4 Blocks e 1 bundle com 6 receitas de Charts estão incorporados como source instalável.

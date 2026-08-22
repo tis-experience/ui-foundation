@@ -2,6 +2,16 @@
   "name": "ui-foundation",
   "private": true,
   "version": "0.1.0-alpha.0",
+  "description": "Source-first React component registry built with shadcn and Base UI.",
+  "license": "MIT",
+  "homepage": "https://tis-experience.github.io/ui-foundation/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tis-experience/ui-foundation.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
   "type": "module",
   "scripts": {
     "agent:preflight": "node scripts/agent-preflight.mjs",
@@ -14,6 +24,8 @@
     "build:ai": "node scripts/build-ai.mjs",
     "check:ai": "node scripts/build-ai.mjs --check",
     "check:public": "node scripts/check-public-build.mjs",
+    "release:dry-run": "node scripts/release-registry.mjs",
+    "release:stage": "node scripts/release-registry.mjs --write",
     "build:all": "npm run build:themes && npm run build:registry && npm run build:ai && npm run build",
     "predev": "npm run build:themes",
     "dev": "vite",
@@ -23,7 +35,8 @@
     "preview": "vite preview",
     "test:e2e": "playwright test",
     "test:consumer": "node scripts/test-consumer.mjs",
-    "test": "npm run check:themes && npm run check:registry && npm run check:contracts && npm run check:ai && npm run lint && npm run build && npm run check:public"
+    "test:consumer:public": "node scripts/test-consumer.mjs --public",
+    "test": "npm run check:themes && npm run check:registry && npm run check:contracts && npm run check:ai && npm run release:dry-run && npm run lint && npm run build && npm run check:public"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
