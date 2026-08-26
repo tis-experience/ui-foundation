@@ -1,0 +1,3895 @@
+{
+  "$schema": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/schemas/resolved-component-contracts.schema.json",
+  "version": "0.1.0-beta.0",
+  "components": [
+    {
+      "name": "accordion",
+      "title": "Accordion",
+      "category": "disclosure",
+      "profile": "disclosure",
+      "classification": "disclosure",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "collapsed",
+        "expanded",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Use concise trigger labels",
+        "Keep hidden content understandable when revealed"
+      ],
+      "accessibility": "Base UI connects headings, triggers and panels; Enter and Space toggle a panel while Tab follows normal document order.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "headers=heading",
+          "triggers=button",
+          "trigger.aria-expanded=state",
+          "trigger.aria-controls=panel"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Toggle the focused panel"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through enabled triggers in document order without roving focus"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the trigger after expanding or collapsing",
+          "Expose every enabled trigger in the normal tab sequence"
+        ],
+        "requiredComposition": [
+          "Place each Trigger and Content inside one uniquely-valued AccordionItem",
+          "Keep trigger text concise and do not nest interactive controls inside it"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/accordion",
+          "behavior": "https://base-ui.com/react/components/accordion"
+        },
+        "evidence": "tests/component-contracts.spec.ts#accordion"
+      }
+    },
+    {
+      "name": "alert",
+      "title": "Alert",
+      "category": "feedback",
+      "profile": "static-feedback",
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "success",
+        "warning",
+        "error"
+      ],
+      "consumerResponsibilities": [
+        "Choose status or alert semantics from urgency",
+        "Provide actionable recovery copy when applicable"
+      ],
+      "accessibility": "Choose role=status for advisory updates and role=alert only for urgent dynamic content; keep title, description and recovery action visible.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "advisory-update.role=status",
+          "urgent-dynamic-update.role=alert",
+          "title=visible-text",
+          "description=visible-text",
+          "action=native-control"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Skip the passive container and move to any available alert action"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused recovery action exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Do not add the alert container to the tab sequence",
+          "Do not move focus when advisory content appears",
+          "Keep focus on an alert action while it remains available"
+        ],
+        "requiredComposition": [
+          "Choose status or alert from urgency instead of visual variant",
+          "Keep title, description and recovery action visible",
+          "Do not repeat the same message through nested live regions"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/alert",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/alert_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#alert"
+      }
+    },
+    {
+      "name": "alert-dialog",
+      "title": "Alert Dialog",
+      "category": "overlay",
+      "profile": "modal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a title and description",
+        "Provide a clear close or decision path"
+      ],
+      "accessibility": "Always provide a title and description; Base UI traps focus and requires an explicit response.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=alertdialog",
+          "name=title",
+          "description=required"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open from the trigger"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close without confirming"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Cycle focus within the alert dialog"
+          }
+        ],
+        "focusManagement": [
+          "Move initial focus to the least destructive action",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Include AlertDialogTitle and AlertDialogDescription",
+          "Provide explicit cancel and confirm actions"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/alert-dialog",
+          "behavior": "https://base-ui.com/react/components/alert-dialog"
+        },
+        "evidence": "tests/component-contracts.spec.ts#alert-dialog"
+      }
+    },
+    {
+      "name": "aspect-ratio",
+      "title": "Aspect Ratio",
+      "category": "layout",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "The ratio wrapper is presentational; give the hosted image, media, figure or other content its own semantics and alternative text.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "wrapper=presentational-layout",
+          "hosted-content=owns-semantics",
+          "ratio=visual-constraint"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Add no keyboard behavior beyond that of the hosted content"
+          }
+        ],
+        "focusManagement": [
+          "Do not add the ratio wrapper to the tab sequence",
+          "Preserve the hosted content focus order"
+        ],
+        "requiredComposition": [
+          "Give hosted images, media or figures their own semantics and alternative text",
+          "Keep essential text available outside decorative media",
+          "Provide a positive finite ratio"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/aspect-ratio",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/figure"
+        },
+        "evidence": "tests/component-contracts.spec.ts#aspect-ratio"
+      }
+    },
+    {
+      "name": "attachment",
+      "title": "Attachment",
+      "category": "data-display",
+      "profile": "action",
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible name",
+        "Choose button or link semantics from the intended action"
+      ],
+      "accessibility": "Keep filename, file type, size and upload or error state available as text; give every icon-only action and trigger its own accessible name and tab stop.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "container=attachment",
+          "trigger=native-button-or-link",
+          "actions=native-buttons",
+          "state=visible-text"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move independently through the attachment actions and trigger"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused attachment action or trigger exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Expose every enabled action and trigger in the normal tab sequence",
+          "Draw the focus outline only around the focused control"
+        ],
+        "requiredComposition": [
+          "Keep filename, file type and size available as text",
+          "Give every icon-only action and trigger an accessible name",
+          "Expose upload or error state in text rather than color alone"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/attachment",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button"
+        },
+        "evidence": "tests/component-contracts.spec.ts#attachment"
+      }
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Name informative people or entities, keep decorative avatars hidden, always include AvatarFallback and provide context for group overflow counts.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "informative-avatar.role=img",
+          "informative-avatar.name=person-or-entity",
+          "fallback=required",
+          "group.role=group",
+          "group-name=required",
+          "overflow-count=contextual"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive unless the consumer deliberately renders the avatar as an interactive trigger"
+          }
+        ],
+        "focusManagement": [
+          "Do not add passive avatars or groups to the tab sequence",
+          "When used as a trigger, inherit focus behavior from the rendered button or link"
+        ],
+        "requiredComposition": [
+          "Always include AvatarFallback",
+          "Name informative people or entities and hide decorative avatars",
+          "Describe group overflow counts in context rather than exposing only a number"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/avatar",
+          "behavior": "https://base-ui.com/react/components/avatar"
+        },
+        "evidence": "tests/component-contracts.spec.ts#avatar"
+      }
+    },
+    {
+      "name": "badge",
+      "title": "Badge",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Keep badges as text by default; use status semantics only for actual state and never rely on color alone.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "default=plain-text",
+          "status-role=only-for-actual-state",
+          "meaning=not-color-only"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive unless rendered as a real link or button"
+          }
+        ],
+        "focusManagement": [
+          "Do not add passive badges to the tab sequence",
+          "When rendered interactively, inherit native focus from the chosen link or button"
+        ],
+        "requiredComposition": [
+          "Use concise visible text",
+          "Do not encode status only through color",
+          "Render navigation or actions as real links or buttons rather than making a span clickable"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/badge",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#badge"
+      }
+    },
+    {
+      "name": "breadcrumb",
+      "title": "Breadcrumb",
+      "category": "navigation",
+      "profile": "navigation",
+      "classification": "navigation",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "current",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a navigation label when multiple regions exist",
+        "Own routes and destination state"
+      ],
+      "accessibility": "Use a named navigation landmark with an ordered list, real destination links, decorative separators and aria-current on exactly one current page.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "landmark=navigation",
+          "landmark-name=required",
+          "items=ordered-list",
+          "destinations=native-links",
+          "current=exactly-one-page",
+          "separators=decorative"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through breadcrumb destinations in document order"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Follow the focused destination natively"
+          }
+        ],
+        "focusManagement": [
+          "Expose only available destinations in the normal tab sequence",
+          "Keep the current non-link page out of the tab sequence"
+        ],
+        "requiredComposition": [
+          "Provide a navigation label when more than one navigation region exists",
+          "Use real links for destinations and aria-current on exactly one current page",
+          "When collapsing items, expose them through a labelled menu trigger"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/breadcrumb",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav"
+        },
+        "evidence": "tests/component-contracts.spec.ts#breadcrumb"
+      }
+    },
+    {
+      "name": "bubble",
+      "title": "Bubble",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "When bubbles form a conversation, provide a named log, identify each speaker and preserve chronological DOM order.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "conversation=role-log",
+          "conversation-name=required",
+          "message=article",
+          "speaker=available",
+          "order=chronological-dom"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move only through deliberately interactive bubble content in chronological order"
+          }
+        ],
+        "focusManagement": [
+          "Do not add passive bubbles to the tab sequence",
+          "Do not move focus when conversation content updates"
+        ],
+        "requiredComposition": [
+          "Provide speaker context and chronological DOM order",
+          "Name a conversation log when the surrounding page does not already identify it",
+          "Render actions and links through native interactive elements"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/bubble",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/log_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#bubble"
+      }
+    },
+    {
+      "name": "button",
+      "title": "Button",
+      "category": "action",
+      "profile": "action",
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible name",
+        "Choose button or link semantics from the intended action"
+      ],
+      "accessibility": "Base UI preserves native button semantics, disabled state and keyboard activation.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=button",
+          "name=required"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the action exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Participate in native tab order when enabled",
+          "Expose a visible focus indicator"
+        ],
+        "requiredComposition": [
+          "Render a button for actions and a link for navigation",
+          "Mark decorative icons as hidden from assistive technology"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/button",
+          "behavior": "https://base-ui.com/react/components/button"
+        },
+        "evidence": "tests/component-contracts.spec.ts#button"
+      }
+    },
+    {
+      "name": "button-group",
+      "title": "Button Group",
+      "category": "action",
+      "profile": "action-group",
+      "classification": "action",
+      "behaviorOwner": "library",
+      "keyboard": "native",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a group label",
+        "Keep the action order meaningful",
+        "Use Toggle Group when the items expose pressed or mutually exclusive state"
+      ],
+      "accessibility": "Name the group, preserve native tab order and use Toggle Group instead when the items represent pressed or mutually exclusive state.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=group",
+          "group-name=required",
+          "items=independent-native-controls",
+          "pressed-state=not-implied"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through enabled actions in native document order"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused action exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Do not use roving focus for independent actions",
+          "Keep focus on the activated action while it remains available"
+        ],
+        "requiredComposition": [
+          "Provide a group name and keep action order meaningful",
+          "Use Toggle Group instead when items expose pressed or mutually exclusive state",
+          "Keep separators decorative"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/button-group",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button"
+        },
+        "evidence": "tests/component-contracts.spec.ts#button-group"
+      }
+    },
+    {
+      "name": "calendar",
+      "title": "Calendar",
+      "category": "form-control",
+      "profile": "external-control",
+      "classification": "form-control",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Provide a visible purpose and date format; React DayPicker manages the calendar grid and keyboard navigation.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "grid=calendar",
+          "days=buttons",
+          "selected-date=state",
+          "purpose=visible"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft",
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Move focus by day or week"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Select the focused date"
+          },
+          {
+            "keys": [
+              "PageDown",
+              "PageUp"
+            ],
+            "outcome": "Move to the next or previous month"
+          }
+        ],
+        "focusManagement": [
+          "Use one roving tab stop in the date grid",
+          "Keep focus on the selected day after selection"
+        ],
+        "requiredComposition": [
+          "Provide a visible purpose for the calendar",
+          "Own selected state and onSelect when the calendar is interactive"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/calendar",
+          "behavior": "https://react-day-picker.js.org"
+        },
+        "evidence": "tests/component-contracts.spec.ts#calendar"
+      }
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "category": "layout",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Add region or article semantics only when the card is a meaningful standalone section and connect it to a heading at the correct level.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "container=generic-by-default",
+          "standalone-section=region-or-article",
+          "standalone-name=heading",
+          "heading-level=contextual"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through real links and actions inside the card in document order"
+          }
+        ],
+        "focusManagement": [
+          "Do not make the card container focusable by default",
+          "Expose visible focus only on the interactive descendants or an intentionally linked card"
+        ],
+        "requiredComposition": [
+          "Add region or article semantics only for meaningful standalone content",
+          "Connect a standalone card to a heading at the correct page level",
+          "Do not nest interactive controls inside a card-wide link"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/card",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/region_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#card"
+      }
+    },
+    {
+      "name": "carousel",
+      "title": "Carousel",
+      "category": "data-display",
+      "profile": "external-interactive",
+      "classification": "interactive-composition",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide accessible names",
+        "Own application data and side effects"
+      ],
+      "accessibility": "Name the carousel and every slide, provide Previous and Next as non-drag controls, and do not capture arrow keys from interactive slide content.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=region-or-group",
+          "aria-roledescription=carousel",
+          "name=required",
+          "slides=group+slide-description+name",
+          "controls=native-buttons"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through carousel controls and interactive slide content in document order"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate Previous or Next without moving focus from the control"
+          }
+        ],
+        "focusManagement": [
+          "Do not capture arrow keys from controls nested inside slides",
+          "Keep focus on an activated navigation button while it remains available",
+          "Keep non-visible interactive slide content out of the tab sequence"
+        ],
+        "requiredComposition": [
+          "Name the carousel without repeating the word carousel",
+          "Name every slide by content or position such as 1 of 3",
+          "Provide Previous and Next as keyboard and single-pointer alternatives to swipe",
+          "If autoplay is used, provide a start-stop control and stop on focus and hover"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/carousel",
+          "behavior": "https://www.embla-carousel.com/"
+        },
+        "evidence": "tests/component-contracts.spec.ts#carousel"
+      }
+    },
+    {
+      "name": "chart",
+      "title": "Chart",
+      "category": "data-display",
+      "profile": "data-visualization",
+      "classification": "data-display",
+      "behaviorOwner": "external",
+      "keyboard": "composed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "empty",
+        "loading"
+      ],
+      "consumerResponsibilities": [
+        "Provide a concise text summary",
+        "Provide exact values in a table when the task requires them"
+      ],
+      "accessibility": "Name the graphic, provide a concise text summary and exact values when the task requires them, and never rely on color alone to distinguish series.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "graphic=role-img-or-figure",
+          "name=required",
+          "text-summary=required",
+          "exact-values=available-when-task-requires"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move only through intentionally interactive chart controls or data points"
+          }
+        ],
+        "focusManagement": [
+          "Do not add graph marks to the tab sequence unless they perform an interaction",
+          "Expose a visible focus indicator on every interactive chart control"
+        ],
+        "requiredComposition": [
+          "Provide a concise text summary of the visible trend or comparison",
+          "Provide exact values in a table when users must inspect or compare them",
+          "Do not communicate series or state through color alone"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/chart",
+          "behavior": "https://recharts.github.io/en-US/guide/accessibility/"
+        },
+        "evidence": "tests/component-contracts.spec.ts#chart"
+      }
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "category": "form-control",
+      "profile": "selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Pair with FieldLabel; Base UI manages checked, indeterminate and disabled states.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=checkbox",
+          "name=required",
+          "aria-checked=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Space"
+            ],
+            "outcome": "Toggle the checked state"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the control after toggling",
+          "Expose a visible focus indicator"
+        ],
+        "requiredComposition": [
+          "Associate a visible label or provide an accessible name",
+          "Connect error copy when invalid"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/checkbox",
+          "behavior": "https://base-ui.com/react/components/checkbox"
+        },
+        "evidence": "tests/component-contracts.spec.ts#checkbox"
+      }
+    },
+    {
+      "name": "collapsible",
+      "title": "Collapsible",
+      "category": "disclosure",
+      "profile": "disclosure",
+      "classification": "disclosure",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "collapsed",
+        "expanded",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Use concise trigger labels",
+        "Keep hidden content understandable when revealed"
+      ],
+      "accessibility": "Base UI connects the trigger and panel with expanded and controlled-region state while preserving trigger focus.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "trigger.role=button",
+          "trigger.aria-expanded=state",
+          "trigger.aria-controls=panel"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Toggle the related panel"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the trigger after toggling",
+          "Do not add a separate tab stop for the panel or root"
+        ],
+        "requiredComposition": [
+          "Compose one Root, one Trigger and one related Content panel",
+          "Use Base UI render composition when the trigger is a Button"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/collapsible",
+          "behavior": "https://base-ui.com/react/components/collapsible"
+        },
+        "evidence": "tests/component-contracts.spec.ts#collapsible"
+      }
+    },
+    {
+      "name": "combobox",
+      "title": "Combobox",
+      "category": "form-control",
+      "profile": "searchable-selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected",
+        "empty"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and connected error description",
+        "Own items, value, validation and submission"
+      ],
+      "accessibility": "Use a visible label and name clear or remove actions; Base UI manages active options, selection, filtering and keyboard navigation.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=combobox",
+          "name=required",
+          "popup=listbox",
+          "items=option",
+          "aria-expanded=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Typing"
+            ],
+            "outcome": "Filter the available options"
+          },
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Open and move the active option"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Commit the active option"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close without replacing the committed value"
+          }
+        ],
+        "focusManagement": [
+          "Keep DOM focus on the input while navigating options",
+          "Return focus to the input after commit, clear or dismissal"
+        ],
+        "requiredComposition": [
+          "Associate a visible label with the input",
+          "Give clear and chip removal controls accessible names"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/combobox",
+          "behavior": "https://base-ui.com/react/components/combobox"
+        },
+        "evidence": "tests/component-contracts.spec.ts#combobox"
+      }
+    },
+    {
+      "name": "command",
+      "title": "Command",
+      "category": "navigation",
+      "profile": "command-list",
+      "classification": "navigation",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "filtered",
+        "empty",
+        "selected",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a named search input and stable item values",
+        "Connect every executable item to one onSelect action"
+      ],
+      "accessibility": "Name the search input, keep items inside groups with stable values, and attach one observable onSelect action to every executable command.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=combobox",
+          "name=required",
+          "popup=listbox",
+          "items=option",
+          "selected-option=aria-selected"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Typing"
+            ],
+            "outcome": "Filter the available commands"
+          },
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp",
+              "Home",
+              "End"
+            ],
+            "outcome": "Move the selected option while keeping DOM focus on the input"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Execute the active command exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Keep DOM focus on the command input while options are active",
+          "In CommandDialog, focus the input on open and restore the opener on close"
+        ],
+        "requiredComposition": [
+          "Compose CommandInput and CommandList, with CommandItem instances inside CommandGroup",
+          "Keep CommandEmpty inside CommandList",
+          "Give every item a stable value and onSelect action"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/command",
+          "behavior": "https://github.com/dip/cmdk"
+        },
+        "evidence": "tests/component-contracts.spec.ts#command"
+      }
+    },
+    {
+      "name": "context-menu",
+      "title": "Context Menu",
+      "category": "navigation",
+      "profile": "menu",
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Use menus for actions rather than arbitrary form values",
+        "Provide meaningful item labels"
+      ],
+      "accessibility": "Base UI manages focus and menu navigation; every action must remain available without a pointing device.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=menu",
+          "items=menuitem",
+          "visible-alternative=required"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Move between enabled items"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close the menu"
+          }
+        ],
+        "focusManagement": [
+          "Move focus through menu items while open",
+          "Return focus to the visible alternative after its menu closes"
+        ],
+        "requiredComposition": [
+          "Treat the context menu as an enhancement",
+          "Provide a visible control exposing the same actions"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/context-menu",
+          "behavior": "https://base-ui.com/react/components/context-menu"
+        },
+        "evidence": "tests/component-contracts.spec.ts#context-menu"
+      }
+    },
+    {
+      "name": "data-table",
+      "title": "Data Table",
+      "category": "data-display",
+      "profile": "data-table",
+      "classification": "data-display",
+      "behaviorOwner": "external",
+      "keyboard": "composed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "empty",
+        "loading",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Provide column labels",
+        "Own sorting, filtering, pagination and data state"
+      ],
+      "accessibility": "Provide a table name or caption, associated headers, aria-sort, keyboard-operable filter and pagination controls, empty feedback and a live result count.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "element=table",
+          "name-or-caption=required",
+          "headers=associated",
+          "sortable-header.aria-sort=state",
+          "result-status=live"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through sorting, filtering, selection and pagination controls in document order"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused sort, selection or pagination control"
+          },
+          {
+            "keys": [
+              "Typing"
+            ],
+            "outcome": "Filter the owned data through the named filter control"
+          }
+        ],
+        "focusManagement": [
+          "Use native table reading order and native focus for embedded controls",
+          "Preserve a meaningful focus target after sorting, filtering or pagination updates"
+        ],
+        "requiredComposition": [
+          "Define meaningful column labels and associate row and column headers",
+          "Own sorting, filtering, selection, pagination and loading state",
+          "Provide empty and result-count feedback",
+          "Keep the table horizontally scrollable at narrow widths and high zoom"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/data-table",
+          "behavior": "https://tanstack.com/table/latest/docs/introduction"
+        },
+        "evidence": "tests/component-contracts.spec.ts#data-table"
+      }
+    },
+    {
+      "name": "date-picker",
+      "title": "Date Picker",
+      "category": "form-control",
+      "profile": "date-selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and contextual popup name",
+        "Own value, validation, time zone and submission"
+      ],
+      "accessibility": "Use a visible FieldLabel and named popup; the trigger restores focus, the calendar preserves DayPicker keyboard navigation and the hidden form value follows disabled state.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "trigger.role=button",
+          "trigger.name=visible-label",
+          "popup.name=required",
+          "hidden-value=selected-date"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open the date picker"
+          },
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft",
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Move through dates in the calendar"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Commit the focused date"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close without changing the selected date"
+          }
+        ],
+        "focusManagement": [
+          "Move focus to the selected date when opened",
+          "Restore focus to the trigger after commit or dismissal"
+        ],
+        "requiredComposition": [
+          "Compose Button, Popover and Calendar",
+          "Provide a visible FieldLabel and a contextual popup title"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/date-picker",
+          "behavior": "https://base-ui.com/react/components/popover"
+        },
+        "evidence": "tests/component-contracts.spec.ts#date-picker"
+      }
+    },
+    {
+      "name": "dialog",
+      "title": "Dialog",
+      "category": "overlay",
+      "profile": "modal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a title and description",
+        "Provide a clear close or decision path"
+      ],
+      "accessibility": "Always provide DialogTitle and DialogDescription; Base UI manages focus trapping and restoration.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=dialog",
+          "name=title",
+          "description=required",
+          "background=inert"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open from the trigger"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Request close"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Cycle focus within the dialog"
+          }
+        ],
+        "focusManagement": [
+          "Move focus inside on open",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Include DialogTitle and DialogDescription",
+          "Provide a visible close or completion action"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/dialog",
+          "behavior": "https://base-ui.com/react/components/dialog"
+        },
+        "evidence": "tests/component-contracts.spec.ts#dialog"
+      }
+    },
+    {
+      "name": "direction",
+      "title": "Direction",
+      "category": "utility",
+      "profile": "utility",
+      "classification": "utility",
+      "behaviorOwner": "base-ui",
+      "keyboard": "not-applicable",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Apply only at an intentional application boundary"
+      ],
+      "accessibility": "Keep direction aligned with the content language and DOM reading order; the provider must not reverse meaning or keyboard sequence.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "dir=ltr-or-rtl",
+          "direction=matches-content-language",
+          "dom-order=logical-reading-order"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Follow logical DOM order while visual layout respects the active direction"
+          }
+        ],
+        "focusManagement": [
+          "Do not add a provider tab stop",
+          "Preserve native focus order and component-specific directional key behavior"
+        ],
+        "requiredComposition": [
+          "Set direction at the nearest meaningful content boundary",
+          "Keep DOM order logical instead of reversing source order",
+          "Keep document language and direction aligned"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/direction",
+          "behavior": "https://base-ui.com/react/utils/direction-provider"
+        },
+        "evidence": "tests/component-contracts.spec.ts#direction"
+      }
+    },
+    {
+      "name": "drawer",
+      "title": "Drawer",
+      "category": "overlay",
+      "profile": "modal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a title and description",
+        "Provide a clear close or decision path"
+      ],
+      "accessibility": "Always provide a title, description and explicit close path; swipe and snap points require equivalent non-drag controls, and the base stylesheet positions body for iOS Safari.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=dialog",
+          "name=title",
+          "description=required",
+          "aria-modal=true-when-modal"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open from the trigger and activate explicit close actions"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Dismiss without completing the action"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Cycle focus within a modal drawer"
+          }
+        ],
+        "focusManagement": [
+          "Move focus inside after keyboard open",
+          "Trap focus while modal",
+          "Restore focus to the trigger after every dismissal path"
+        ],
+        "requiredComposition": [
+          "Include DrawerTitle and DrawerDescription",
+          "Provide DrawerClose or another explicit close action",
+          "Never make swipe the only dismissal path",
+          "Provide buttons or another non-drag alternative when snap points expose meaningful states",
+          "Install the required positioned-body base style for iOS Safari"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/drawer",
+          "behavior": "https://base-ui.com/react/components/drawer"
+        },
+        "evidence": "tests/component-contracts.spec.ts#drawer"
+      }
+    },
+    {
+      "name": "dropdown-menu",
+      "title": "Dropdown Menu",
+      "category": "navigation",
+      "profile": "menu",
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Use menus for actions rather than arbitrary form values",
+        "Provide meaningful item labels"
+      ],
+      "accessibility": "Use menu items for actions rather than site navigation; Base UI manages roving focus and keyboard navigation.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=menu",
+          "items=menuitem",
+          "trigger.aria-expanded=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Open or move between enabled items"
+          },
+          {
+            "keys": [
+              "Home",
+              "End"
+            ],
+            "outcome": "Move to the first or last enabled item"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close the menu"
+          }
+        ],
+        "focusManagement": [
+          "Move focus to an item when opened from the keyboard",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Use menu items for actions and link items for destinations",
+          "Keep labels meaningful for typeahead navigation"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/dropdown-menu",
+          "behavior": "https://base-ui.com/react/components/menu"
+        },
+        "evidence": "tests/component-contracts.spec.ts#dropdown-menu"
+      }
+    },
+    {
+      "name": "empty",
+      "title": "Empty",
+      "category": "feedback",
+      "profile": "static-feedback",
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "success",
+        "warning",
+        "error"
+      ],
+      "consumerResponsibilities": [
+        "Choose status or alert semantics from urgency",
+        "Provide actionable recovery copy when applicable"
+      ],
+      "accessibility": "Use a programmatic heading, concise description, decorative media and a named keyboard-operable recovery action.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "container=name-from-heading",
+          "title=heading",
+          "description=visible-text",
+          "media=decorative-unless-informative",
+          "recovery=native-action"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move to the primary and secondary recovery actions in document order"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused recovery action exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Do not focus an empty state merely because it appears",
+          "Move focus only when the application replaces a prior focused result or validates a user action"
+        ],
+        "requiredComposition": [
+          "Provide a programmatic heading and concise description",
+          "Hide decorative media from assistive technology",
+          "Offer a named recovery action when recovery exists"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/empty",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/region_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#empty"
+      }
+    },
+    {
+      "name": "field",
+      "title": "Field",
+      "category": "form-structure",
+      "profile": "form-structure",
+      "classification": "form-structure",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Maintain stable IDs and label relationships",
+        "Connect descriptions and errors with aria-describedby"
+      ],
+      "accessibility": "Connect labels, descriptions and errors to the control with stable IDs and aria-describedby.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "label=control-name",
+          "description=aria-describedby",
+          "error=alert",
+          "grouping=fieldset-and-legend"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through contained controls without adding a wrapper tab stop"
+          }
+        ],
+        "focusManagement": [
+          "Clicking the label focuses its associated control",
+          "Validation errors do not replace control focus"
+        ],
+        "requiredComposition": [
+          "Use stable IDs for label, description and error relationships",
+          "Use FieldSet and FieldLegend for related choices"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/field",
+          "behavior": "https://www.w3.org/WAI/tutorials/forms/labels/"
+        },
+        "evidence": "tests/component-contracts.spec.ts#field"
+      }
+    },
+    {
+      "name": "form",
+      "title": "Form",
+      "category": "form-structure",
+      "profile": "native-form",
+      "classification": "form-structure",
+      "behaviorOwner": "browser",
+      "keyboard": "native",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "invalid",
+        "pending"
+      ],
+      "consumerResponsibilities": [
+        "Compose labelled controls and connected validation messages",
+        "Own submission side effects and duplicate-submit protection"
+      ],
+      "accessibility": "Preserves native form submission and validation semantics; compose every control with a visible label and connected error text.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "element=form",
+          "name=required-for-landmark",
+          "native-validation=preserved",
+          "aria-busy=pending-state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Submit from an eligible control when native validation passes"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Follow the same logical and visual control order"
+          }
+        ],
+        "focusManagement": [
+          "Keep the first invalid native control available for correction",
+          "Do not introduce focusable layout wrappers"
+        ],
+        "requiredComposition": [
+          "Use FormBody with Field-based controls",
+          "Keep submit and reset actions in FormActions"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/field",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form"
+        },
+        "evidence": "tests/component-contracts.spec.ts#form"
+      }
+    },
+    {
+      "name": "hover-card",
+      "title": "Hover Card",
+      "category": "overlay",
+      "profile": "nonmodal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible trigger name",
+        "Keep essential information available without relying only on the overlay"
+      ],
+      "accessibility": "Use a real destination link as the trigger, keep focus on that link and never hide essential information or actions only in the visual preview.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "trigger=link",
+          "name=required",
+          "popup=visual-preview",
+          "no-dialog-or-tooltip-role"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Focusing the link exposes the preview without moving focus"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Dismiss the preview while retaining focus on the link"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Follow the trigger link rather than moving focus into the preview"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the trigger",
+          "Close after focus leaves the trigger",
+          "Do not add preview contents to the tab sequence"
+        ],
+        "requiredComposition": [
+          "Use a real link with an href",
+          "Keep all essential information and actions available at the destination",
+          "Allow pointer movement from trigger to popup without premature dismissal"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/hover-card",
+          "behavior": "https://base-ui.com/react/components/preview-card"
+        },
+        "evidence": "tests/component-contracts.spec.ts#hover-card"
+      }
+    },
+    {
+      "name": "input",
+      "title": "Input",
+      "category": "form-control",
+      "profile": "text-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "native",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Use inside Field with a visible label; provide autocomplete and inputMode where relevant.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=textbox",
+          "name=visible-label",
+          "readonly=native",
+          "invalid=aria-invalid"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Typing",
+              "Backspace",
+              "Delete"
+            ],
+            "outcome": "Edit the native value when enabled and writable"
+          },
+          {
+            "keys": [
+              "Tab"
+            ],
+            "outcome": "Participate once in the native tab order"
+          }
+        ],
+        "focusManagement": [
+          "Remain focusable when read-only",
+          "Expose a visible state-aware focus outline"
+        ],
+        "requiredComposition": [
+          "Compose inside Field with a visible FieldLabel",
+          "Connect descriptions and errors with aria-describedby"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/input",
+          "behavior": "https://base-ui.com/react/components/input"
+        },
+        "evidence": "tests/component-contracts.spec.ts#input"
+      }
+    },
+    {
+      "name": "input-group",
+      "title": "Input Group",
+      "category": "form-control",
+      "profile": "form-composition",
+      "classification": "form-control",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Compose visible labels, descriptions and errors",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons; clicking a non-interactive addon focuses the contained control.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=group",
+          "group-name=required",
+          "control=InputGroupInput-or-InputGroupTextarea",
+          "addons=supplementary"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move between the control and named addon buttons without stopping on layout wrappers"
+          },
+          {
+            "keys": [
+              "Typing"
+            ],
+            "outcome": "Edit the composed input or textarea"
+          }
+        ],
+        "focusManagement": [
+          "Clicking a non-button addon focuses the composed control",
+          "Display the focus outline on the group container"
+        ],
+        "requiredComposition": [
+          "Use InputGroupInput or InputGroupTextarea as the control",
+          "Give interactive addons accessible names and type=button by default"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/input-group",
+          "behavior": "https://base-ui.com/react/components/input"
+        },
+        "evidence": "tests/component-contracts.spec.ts#input-group"
+      }
+    },
+    {
+      "name": "input-otp",
+      "title": "Input OTP",
+      "category": "form-control",
+      "profile": "external-control",
+      "classification": "form-control",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Provide a visible label, autocomplete=one-time-code and clear validation text.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=textbox",
+          "name=visible-label",
+          "one-real-input=true",
+          "autocomplete=one-time-code"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Typing",
+              "Backspace",
+              "Delete"
+            ],
+            "outcome": "Edit one shared OTP value"
+          },
+          {
+            "keys": [
+              "Paste"
+            ],
+            "outcome": "Populate the complete code through one input event"
+          }
+        ],
+        "focusManagement": [
+          "Expose exactly one tab stop",
+          "Mirror caret and invalid state into the visual slots"
+        ],
+        "requiredComposition": [
+          "Provide a visible label and one-time-code autocomplete",
+          "Use slots only as visual mirrors of the real input"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/input-otp",
+          "behavior": "https://input-otp.rodz.dev"
+        },
+        "evidence": "tests/component-contracts.spec.ts#input-otp"
+      }
+    },
+    {
+      "name": "item",
+      "title": "Item",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Give standalone items an appropriate article, listitem or link semantic, connect title and description, and name every action; use Field for form controls.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "container=article-listitem-link-or-generic",
+          "name=title-when-standalone",
+          "description=visible-text",
+          "actions=native-controls"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through item links and actions in document order"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused item action exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Do not make a passive item focusable",
+          "When the complete item is a destination, render it as one native link and avoid nested controls"
+        ],
+        "requiredComposition": [
+          "Choose semantics from whether the item is content, a list entry or a destination",
+          "Connect standalone content to its title",
+          "Name icon-only actions and use Field instead for form controls"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/item",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/article_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#item"
+      }
+    },
+    {
+      "name": "kbd",
+      "title": "Kbd",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Use native kbd markup and pair keys with adjacent text that explains the command; do not make the keycap itself focusable.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "element=kbd",
+          "keys=visible-text",
+          "command-meaning=adjacent-text"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Describe a keyboard input without becoming an interactive control"
+          }
+        ],
+        "focusManagement": [
+          "Do not add keycaps to the tab sequence"
+        ],
+        "requiredComposition": [
+          "Use one kbd element per logical key",
+          "Pair the shortcut with adjacent text describing the command",
+          "Localize platform-specific modifier labels when needed"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/kbd",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd"
+        },
+        "evidence": "tests/component-contracts.spec.ts#kbd"
+      }
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "category": "form-structure",
+      "profile": "form-structure",
+      "classification": "form-structure",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Maintain stable IDs and label relationships",
+        "Connect descriptions and errors with aria-describedby"
+      ],
+      "accessibility": "Bind the visible label to exactly one labelable control with htmlFor and a matching id so pointer activation moves focus.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "element=label",
+          "for=matching-control-id",
+          "visible-text=control-name",
+          "relationship=one-labelable-control"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Pointer activation"
+            ],
+            "outcome": "Move focus to the associated labelable control"
+          }
+        ],
+        "focusManagement": [
+          "Do not add the label itself to the tab sequence",
+          "Let activation transfer focus to the associated control"
+        ],
+        "requiredComposition": [
+          "Use htmlFor with a matching stable control id",
+          "Keep the primary label visible",
+          "Use Field description and error slots for supplementary text"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/label",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label"
+        },
+        "evidence": "tests/component-contracts.spec.ts#label"
+      }
+    },
+    {
+      "name": "marker",
+      "title": "Marker",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Keep marker text meaningful without its icon or separator; hide decorative media and add status semantics only for real updates.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "content=meaningful-text",
+          "icon=decorative",
+          "status-role=only-for-actual-update",
+          "separator=visual-only"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive unless the content deliberately contains a real link or action"
+          }
+        ],
+        "focusManagement": [
+          "Do not add a passive marker to the tab sequence"
+        ],
+        "requiredComposition": [
+          "Keep the text meaningful without its icon or visual separator",
+          "Hide decorative media",
+          "Use status semantics only when the marker communicates a real update"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/marker",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#marker"
+      }
+    },
+    {
+      "name": "menubar",
+      "title": "Menubar",
+      "category": "navigation",
+      "profile": "menu",
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Use menus for actions rather than arbitrary form values",
+        "Provide meaningful item labels"
+      ],
+      "accessibility": "Use for application commands, place items inside MenubarGroup and connect every action; Base UI manages roving trigger and menu focus.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=menubar",
+          "orientation=horizontal",
+          "triggers=menuitem",
+          "popup=menu",
+          "actions=menuitem"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft",
+              "Home",
+              "End"
+            ],
+            "outcome": "Move roving focus between menu triggers"
+          },
+          {
+            "keys": [
+              "ArrowDown",
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open a menu and focus an item"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close the menu"
+          }
+        ],
+        "focusManagement": [
+          "Expose one menubar trigger in the tab sequence",
+          "Move focus into the open menu and restore its trigger after dismissal"
+        ],
+        "requiredComposition": [
+          "Compose MenubarMenu with Trigger and Content",
+          "Place MenubarItem instances inside MenubarGroup",
+          "Use callbacks for actions and links for destinations"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/menubar",
+          "behavior": "https://base-ui.com/react/components/menubar"
+        },
+        "evidence": "tests/component-contracts.spec.ts#menubar"
+      }
+    },
+    {
+      "name": "message",
+      "title": "Message",
+      "category": "data-display",
+      "profile": "static-feedback",
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "success",
+        "warning",
+        "error"
+      ],
+      "consumerResponsibilities": [
+        "Choose status or alert semantics from urgency",
+        "Provide actionable recovery copy when applicable"
+      ],
+      "accessibility": "Expose each message as a named article when needed, keep sender, content and delivery state in accessible text and preserve chronological DOM order.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "message=article",
+          "message-name=sender-or-context",
+          "sender=visible-text",
+          "content=visible-text",
+          "delivery-state=visible-text",
+          "order=chronological-dom"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move only through deliberately interactive message content in chronological order"
+          }
+        ],
+        "focusManagement": [
+          "Do not add passive messages to the tab sequence",
+          "Do not move focus when delivery state changes"
+        ],
+        "requiredComposition": [
+          "Keep sender, content and relevant delivery state available in text",
+          "Use article semantics and a name when a message must be independently discoverable",
+          "Preserve chronological DOM order"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/message",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/article_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#message"
+      }
+    },
+    {
+      "name": "message-scroller",
+      "title": "Message Scroller",
+      "category": "layout",
+      "profile": "scroll-surface",
+      "classification": "layout",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "scroll-contained",
+      "requiredStates": [
+        "default",
+        "focus-visible",
+        "overflowing"
+      ],
+      "consumerResponsibilities": [
+        "Provide a constrained size",
+        "Do not hide essential actions outside the initial viewport"
+      ],
+      "accessibility": "Name the scroll viewport and log, keep stable message IDs, announce new content intentionally, preserve reader position and transfer focus to the viewport after the scroll-to-end control disappears.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "viewport=scroll-container",
+          "feed=role-log",
+          "feed-name=required",
+          "messages=stable-id",
+          "scroll-to-end=native-button"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "PageDown",
+              "PageUp",
+              "Home",
+              "End"
+            ],
+            "outcome": "Scroll the focused viewport natively"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Move the viewport to the live edge from the scroll button"
+          }
+        ],
+        "focusManagement": [
+          "Never move keyboard focus when messages stream",
+          "Follow new content only while the reader remains at the live edge",
+          "Keep the scroll-to-end button focusable when it is shown and move focus to the viewport after activation makes the button unavailable"
+        ],
+        "requiredComposition": [
+          "Give the viewport and log a contextual name",
+          "Provide a stable messageId and a meaningful scroll anchor",
+          "Include MessageScrollerButton when readers can move away from the live edge",
+          "Use live announcements intentionally and avoid re-announcing the complete history"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/message-scroller",
+          "behavior": "https://ui.shadcn.com/docs/components/base/message-scroller"
+        },
+        "evidence": "tests/component-contracts.spec.ts#message-scroller"
+      }
+    },
+    {
+      "name": "native-select",
+      "title": "Native Select",
+      "category": "form-control",
+      "profile": "native-choice-control",
+      "classification": "form-control",
+      "behaviorOwner": "browser",
+      "keyboard": "native",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own options, value, validation and submission"
+      ],
+      "accessibility": "Associate the select with a visible label and use optgroup for meaningful option groups.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=combobox",
+          "name=visible-label",
+          "options=native",
+          "invalid=aria-invalid"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Move through native options"
+          },
+          {
+            "keys": [
+              "Typing"
+            ],
+            "outcome": "Select the next native option matching the typed prefix"
+          },
+          {
+            "keys": [
+              "Tab"
+            ],
+            "outcome": "Participate once in the native tab order"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the select while changing options",
+          "Skip the control when disabled"
+        ],
+        "requiredComposition": [
+          "Associate a visible label with the select",
+          "Use optgroup for meaningful option groups"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/native-select",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select"
+        },
+        "evidence": "tests/component-contracts.spec.ts#native-select"
+      }
+    },
+    {
+      "name": "navigation-menu",
+      "title": "Navigation Menu",
+      "category": "navigation",
+      "profile": "navigation-overlay",
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "current",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Use real links for destinations and mark the current route",
+        "Provide a landmark label plus meaningful trigger and link labels"
+      ],
+      "accessibility": "Name the navigation landmark, use real links, mark the current route and keep disclosed destinations reachable by keyboard.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "landmark=navigation",
+          "landmark-name=required",
+          "trigger.aria-expanded=state",
+          "destinations=links",
+          "current=aria-current-page"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft"
+            ],
+            "outcome": "Move between top-level items"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open disclosed content and focus its first link"
+          },
+          {
+            "keys": [
+              "ArrowDown"
+            ],
+            "outcome": "Open from a horizontal trigger or move between disclosed links"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move between disclosed links and adjacent page controls"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close disclosed content"
+          }
+        ],
+        "focusManagement": [
+          "Move to the first disclosed link when opened with Enter or Space",
+          "Restore focus to the trigger after Escape"
+        ],
+        "requiredComposition": [
+          "Place each Trigger and Content pair inside NavigationMenuItem",
+          "Use real links or router links through render",
+          "Mark the active destination with active and aria-current"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/navigation-menu",
+          "behavior": "https://base-ui.com/react/components/navigation-menu"
+        },
+        "evidence": "tests/component-contracts.spec.ts#navigation-menu"
+      }
+    },
+    {
+      "name": "pagination",
+      "title": "Pagination",
+      "category": "navigation",
+      "profile": "native-link-navigation",
+      "classification": "navigation",
+      "behaviorOwner": "browser",
+      "keyboard": "native",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "current",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide unique destination links and a localized landmark name",
+        "Omit href and tab stops from unavailable Previous or Next links"
+      ],
+      "accessibility": "Provide unique native links, mark exactly one current page, localize the landmark and remove unavailable Previous or Next links from the tab order.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "landmark=navigation",
+          "landmark-name=required",
+          "destinations=native-links",
+          "current=exactly-one-page",
+          "ellipsis=decorative"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through available destinations in document order"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Navigate to the focused destination natively"
+          }
+        ],
+        "focusManagement": [
+          "Expose a visible native focus indicator on every available link",
+          "Let the application place focus in updated content after navigation"
+        ],
+        "requiredComposition": [
+          "Use unique href values and a localized navigation label",
+          "Mark exactly one page current",
+          "Omit href, use aria-disabled and remove unavailable Previous or Next links from the tab order"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/pagination",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+        },
+        "evidence": "tests/component-contracts.spec.ts#pagination"
+      }
+    },
+    {
+      "name": "popover",
+      "title": "Popover",
+      "category": "overlay",
+      "profile": "nonmodal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible trigger name",
+        "Keep essential information available without relying only on the overlay"
+      ],
+      "accessibility": "Use a meaningful trigger and title or description when the content needs a named region.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=dialog",
+          "name=title",
+          "trigger.aria-expanded=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Toggle the popover from the trigger"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close the popover"
+          }
+        ],
+        "focusManagement": [
+          "Move focus according to the interactive content",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Include a title when the content needs an accessible name",
+          "Do not use for information that must remain continuously available"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/popover",
+          "behavior": "https://base-ui.com/react/components/popover"
+        },
+        "evidence": "tests/component-contracts.spec.ts#popover"
+      }
+    },
+    {
+      "name": "progress",
+      "title": "Progress",
+      "category": "feedback",
+      "profile": "status",
+      "classification": "feedback",
+      "behaviorOwner": "base-ui",
+      "keyboard": "not-applicable",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "loading",
+        "complete"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible name",
+        "Expose determinate values when known"
+      ],
+      "accessibility": "Provide an accessible label plus minimum, maximum and current values when determinate; omit the current value when indeterminate and do not add a tab stop.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=progressbar",
+          "name=required",
+          "aria-valuemin=state",
+          "aria-valuemax=state",
+          "aria-valuenow=determinate-state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive; progress is exposed through progressbar semantics and live status rather than keyboard interaction"
+          }
+        ],
+        "focusManagement": [
+          "Do not add a passive progress indicator to the tab sequence"
+        ],
+        "requiredComposition": [
+          "Provide an accessible label and expose the current value when determinate",
+          "Omit the current value when progress is indeterminate",
+          "Do not rely on the visual indicator as the only status feedback"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/progress",
+          "behavior": "https://base-ui.com/react/components/progress"
+        },
+        "evidence": "tests/component-contracts.spec.ts#progress"
+      }
+    },
+    {
+      "name": "questionnaire",
+      "title": "Questionnaire",
+      "category": "form-structure",
+      "profile": "external-form-flow",
+      "classification": "form-structure",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "unanswered",
+        "answered",
+        "skipped",
+        "invalid",
+        "disabled"
+      ],
+      "consumerResponsibilities": [
+        "Keep the items contract aligned with rendered questions",
+        "Own persistence, transport and conditional branching"
+      ],
+      "accessibility": "The declared @shadcn/react flow owns step behavior; use semantic field groups and announce step changes, validation errors and progress.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "element=form",
+          "items=fieldset",
+          "titles=legend",
+          "progress=progressbar",
+          "errors=alert"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Space",
+              "Number shortcuts"
+            ],
+            "outcome": "Select and focus a choice"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Advance from an answered choice"
+          },
+          {
+            "keys": [
+              "Control+Enter",
+              "Meta+Enter"
+            ],
+            "outcome": "Advance or submit the active item"
+          }
+        ],
+        "focusManagement": [
+          "Focus the first invalid answer when validation fails",
+          "Move focus into the newly active item and keep inactive items inert"
+        ],
+        "requiredComposition": [
+          "Keep Root.items aligned with rendered Item and Choice elements",
+          "Include Description and Error for every validated item"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/questionnaire",
+          "behavior": "https://ui.shadcn.com/docs/components/base/questionnaire"
+        },
+        "evidence": "tests/component-contracts.spec.ts#questionnaire"
+      }
+    },
+    {
+      "name": "radio-group",
+      "title": "Radio Group",
+      "category": "form-control",
+      "profile": "selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Wrap the group in FieldSet and FieldLegend; Base UI manages arrow-key navigation.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=radiogroup",
+          "group-name=required",
+          "items=radio",
+          "aria-checked=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowRight"
+            ],
+            "outcome": "Move focus and selection to the next radio"
+          },
+          {
+            "keys": [
+              "ArrowUp",
+              "ArrowLeft"
+            ],
+            "outcome": "Move focus and selection to the previous radio"
+          }
+        ],
+        "focusManagement": [
+          "Use roving focus within the group",
+          "Expose a visible focus indicator on the active radio"
+        ],
+        "requiredComposition": [
+          "Provide a programmatic group label",
+          "Associate a visible label with every radio"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/radio-group",
+          "behavior": "https://base-ui.com/react/components/radio-group"
+        },
+        "evidence": "tests/component-contracts.spec.ts#radio-group"
+      }
+    },
+    {
+      "name": "resizable",
+      "title": "Resizable",
+      "category": "layout",
+      "profile": "external-interactive",
+      "classification": "interactive-composition",
+      "behaviorOwner": "external",
+      "keyboard": "managed",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide accessible names",
+        "Own application data and side effects"
+      ],
+      "accessibility": "Expose the separator orientation and current range, keep every drag adjustment keyboard operable and provide sensible minimum and maximum panel sizes.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "handle.role=separator",
+          "handle.orientation=state",
+          "handle.aria-valuemin=state",
+          "handle.aria-valuemax=state",
+          "handle.aria-valuenow=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowDown"
+            ],
+            "outcome": "Increase the panel size associated with the focused separator"
+          },
+          {
+            "keys": [
+              "ArrowLeft",
+              "ArrowUp"
+            ],
+            "outcome": "Decrease the panel size associated with the focused separator"
+          }
+        ],
+        "focusManagement": [
+          "Expose every enabled separator in the tab sequence",
+          "Keep focus on the separator while resizing and show a visible outline"
+        ],
+        "requiredComposition": [
+          "Place one handle between adjacent panels",
+          "Provide practical minimum and maximum panel sizes",
+          "Keep every drag operation available from the keyboard"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/resizable",
+          "behavior": "https://github.com/bvaughn/react-resizable-panels"
+        },
+        "evidence": "tests/component-contracts.spec.ts#resizable"
+      }
+    },
+    {
+      "name": "scroll-area",
+      "title": "Scroll Area",
+      "category": "layout",
+      "profile": "scroll-surface",
+      "classification": "layout",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "scroll-contained",
+      "requiredStates": [
+        "default",
+        "focus-visible",
+        "overflowing"
+      ],
+      "consumerResponsibilities": [
+        "Provide a constrained size",
+        "Do not hide essential actions outside the initial viewport"
+      ],
+      "accessibility": "Preserve native scrolling; only add a viewport tab stop when keyboard scrolling is required and provide a contextual region name in that case.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "viewport=native-scroll-container",
+          "region-name=required-when-focusable",
+          "scrollbars=visual-enhancement"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "PageDown",
+              "PageUp",
+              "Home",
+              "End"
+            ],
+            "outcome": "Scroll the focused viewport natively"
+          }
+        ],
+        "focusManagement": [
+          "Add a viewport tab stop only when the region has an accessible name",
+          "Keep focusable descendants in document order"
+        ],
+        "requiredComposition": [
+          "Provide a constrained size and preserve native overflow behavior",
+          "Keep essential actions initially visible or otherwise clearly reachable",
+          "Give a focusable scroll region a contextual accessible name"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/scroll-area",
+          "behavior": "https://base-ui.com/react/components/scroll-area"
+        },
+        "evidence": "tests/component-contracts.spec.ts#scroll-area"
+      }
+    },
+    {
+      "name": "select",
+      "title": "Select",
+      "category": "form-control",
+      "profile": "selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Base UI manages trigger, popup, active option and keyboard navigation relationships.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=combobox",
+          "name=required",
+          "popup=listbox",
+          "items=option",
+          "trigger.aria-expanded=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp",
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open and navigate available options"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Commit the highlighted option"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close without changing the committed value"
+          }
+        ],
+        "focusManagement": [
+          "Keep DOM focus on the trigger while using active descendant navigation",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Provide a visible label or accessible name",
+          "Place SelectItem instances inside SelectGroup"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/select",
+          "behavior": "https://base-ui.com/react/components/select"
+        },
+        "evidence": "tests/component-contracts.spec.ts#select"
+      }
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "category": "layout",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Keep purely visual dividers decorative; expose separator semantics and orientation only when the divider communicates document structure.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "decorative=true-for-visual-divider",
+          "structural.role=separator",
+          "structural.aria-orientation=state",
+          "adjustable=false"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive; use Resizable for an adjustable separator"
+          }
+        ],
+        "focusManagement": [
+          "Do not add visual or structural non-adjustable separators to the tab sequence"
+        ],
+        "requiredComposition": [
+          "Keep visual dividers decorative",
+          "Set decorative=false only when the divider communicates document structure",
+          "Provide the correct structural orientation"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/separator",
+          "behavior": "https://base-ui.com/react/components/separator"
+        },
+        "evidence": "tests/component-contracts.spec.ts#separator"
+      }
+    },
+    {
+      "name": "sheet",
+      "title": "Sheet",
+      "category": "overlay",
+      "profile": "modal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide a title and description",
+        "Provide a clear close or decision path"
+      ],
+      "accessibility": "Always provide SheetTitle, SheetDescription and an explicit close path; content and actions must remain scroll-reachable at mobile widths and zoom.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=dialog",
+          "name=title",
+          "description=required",
+          "aria-modal=true"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Open from the trigger and activate close actions"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Dismiss the sheet"
+          },
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Cycle focus within the sheet"
+          }
+        ],
+        "focusManagement": [
+          "Move initial focus to the first meaningful control or the popup",
+          "Trap focus while open",
+          "Restore focus to the trigger after close"
+        ],
+        "requiredComposition": [
+          "Include SheetTitle and SheetDescription",
+          "Provide an explicit close path when showCloseButton is false",
+          "Keep content and close actions reachable at mobile widths and zoom"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/sheet",
+          "behavior": "https://base-ui.com/react/components/dialog"
+        },
+        "evidence": "tests/component-contracts.spec.ts#sheet"
+      }
+    },
+    {
+      "name": "sidebar",
+      "title": "Sidebar",
+      "category": "navigation",
+      "profile": "responsive-navigation-shell",
+      "classification": "navigation",
+      "behaviorOwner": "library",
+      "keyboard": "composed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "expanded",
+        "collapsed",
+        "mobile-open",
+        "current",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Compose Provider, Sidebar, Trigger and Inset with a named navigation landmark",
+        "Render destinations as links, mark the current route and keep a visible mobile close path"
+      ],
+      "accessibility": "Compose a named navigation landmark with real links, aria-current and the generated trigger relationship; keep a visible close path in the mobile Sheet.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "landmark=navigation",
+          "landmark-name=required",
+          "trigger.aria-expanded=state",
+          "trigger.aria-controls=sidebar",
+          "current=aria-current-page",
+          "mobile=dialog"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Toggle the sidebar from its trigger"
+          },
+          {
+            "keys": [
+              "Control+B",
+              "Meta+B"
+            ],
+            "outcome": "Toggle once from the application shortcut"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Close the mobile sidebar"
+          }
+        ],
+        "focusManagement": [
+          "Keep trigger focus when toggling the desktop sidebar",
+          "Move focus inside the mobile dialog and restore the trigger when it closes",
+          "Keep hidden destinations out of the tab sequence"
+        ],
+        "requiredComposition": [
+          "Wrap Sidebar, SidebarTrigger and SidebarInset in SidebarProvider",
+          "Place real destination links inside a named navigation landmark",
+          "Mark the current destination with aria-current",
+          "Keep a visible close path in the mobile sheet"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/sidebar",
+          "behavior": "https://base-ui.com/react/components/dialog"
+        },
+        "evidence": "tests/component-contracts.spec.ts#sidebar"
+      }
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "category": "feedback",
+      "profile": "passive-status",
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "loading",
+        "complete"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible status name when progress is not already described nearby",
+        "Avoid announcing decorative loading placeholders"
+      ],
+      "accessibility": "Keep skeleton shapes hidden from assistive technology and mark the containing region busy with one meaningful loading label.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "shape=aria-hidden",
+          "container.aria-busy=true",
+          "container.status-name=required",
+          "content=visual-placeholder"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive and expose no placeholder tab stops"
+          }
+        ],
+        "focusManagement": [
+          "Do not add skeleton shapes to the tab sequence",
+          "When replacing focused content, move focus according to the application flow rather than the skeleton"
+        ],
+        "requiredComposition": [
+          "Hide every visual skeleton shape from assistive technology",
+          "Mark the containing region busy and provide one meaningful loading label",
+          "Clear the busy state when real content replaces the placeholder"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/skeleton",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-busy"
+        },
+        "evidence": "tests/component-contracts.spec.ts#skeleton"
+      }
+    },
+    {
+      "name": "slider",
+      "title": "Slider",
+      "category": "form-control",
+      "profile": "selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Provide an accessible label and meaningful minimum, maximum and step values for every thumb.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=slider-per-thumb",
+          "name=required-per-thumb",
+          "aria-valuemin=state",
+          "aria-valuemax=state",
+          "aria-valuenow=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowUp"
+            ],
+            "outcome": "Increase the active value by one step"
+          },
+          {
+            "keys": [
+              "ArrowLeft",
+              "ArrowDown"
+            ],
+            "outcome": "Decrease the active value by one step"
+          },
+          {
+            "keys": [
+              "Home",
+              "End"
+            ],
+            "outcome": "Move to the minimum or maximum"
+          }
+        ],
+        "focusManagement": [
+          "Expose one tab stop per thumb",
+          "Draw the visible focus outline around the rendered thumb"
+        ],
+        "requiredComposition": [
+          "Provide an accessible label for every thumb",
+          "Pass an explicit index to every range thumb"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/slider",
+          "behavior": "https://base-ui.com/react/components/slider"
+        },
+        "evidence": "tests/component-contracts.spec.ts#slider"
+      }
+    },
+    {
+      "name": "sonner",
+      "title": "Sonner",
+      "category": "feedback",
+      "profile": "external-live-feedback",
+      "classification": "feedback",
+      "behaviorOwner": "external",
+      "keyboard": "composed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "default",
+        "success",
+        "warning",
+        "error"
+      ],
+      "consumerResponsibilities": [
+        "Use the correct urgency",
+        "Keep dismiss and action labels explicit"
+      ],
+      "accessibility": "Choose polite or assertive announcements from urgency, never steal focus, name every action and keep essential information available in persistent content.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "container=live-region",
+          "urgency=polite-or-assertive",
+          "content=visible-text",
+          "actions=native-buttons"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move to an available toast action or dismiss control"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused action or dismiss control"
+          }
+        ],
+        "focusManagement": [
+          "Never steal focus when a toast arrives",
+          "Keep a toast visible while its controls are focused or hovered",
+          "After dismissal, preserve or restore a logical application focus target"
+        ],
+        "requiredComposition": [
+          "Choose live-region urgency from the consequence rather than visual style",
+          "Keep essential information available in persistent page content",
+          "Give every action and dismiss control an explicit name"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/sonner",
+          "behavior": "https://sonner.emilkowal.ski/"
+        },
+        "evidence": "tests/component-contracts.spec.ts#sonner"
+      }
+    },
+    {
+      "name": "spinner",
+      "title": "Spinner",
+      "category": "feedback",
+      "profile": "passive-status",
+      "classification": "feedback",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "loading",
+        "complete"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible status name when progress is not already described nearby",
+        "Avoid announcing decorative loading placeholders"
+      ],
+      "accessibility": "Name standalone loading status, localize that label and hide the spinner when adjacent button or status text already communicates loading.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "standalone.role=status",
+          "standalone.name=localized-loading-label",
+          "decorative.aria-hidden=true"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Not applicable"
+            ],
+            "outcome": "Remain passive and expose no spinner tab stop"
+          }
+        ],
+        "focusManagement": [
+          "Do not add a spinner to the tab sequence",
+          "Do not move focus merely because loading starts or completes"
+        ],
+        "requiredComposition": [
+          "Name standalone loading status",
+          "Hide the spinner when adjacent button or status text already communicates loading",
+          "Keep essential progress or error information available as text"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/spinner",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role"
+        },
+        "evidence": "tests/component-contracts.spec.ts#spinner"
+      }
+    },
+    {
+      "name": "switch",
+      "title": "Switch",
+      "category": "form-control",
+      "profile": "selection-control",
+      "classification": "form-control",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Pair with FieldLabel; Base UI exposes switch semantics and checked state.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=switch",
+          "name=required",
+          "aria-checked=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Space"
+            ],
+            "outcome": "Toggle the checked state"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the control after toggling",
+          "Expose a visible focus indicator"
+        ],
+        "requiredComposition": [
+          "Associate a visible label or provide an accessible name",
+          "Use for immediate binary settings rather than form submission choices"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/switch",
+          "behavior": "https://base-ui.com/react/components/switch"
+        },
+        "evidence": "tests/component-contracts.spec.ts#switch"
+      }
+    },
+    {
+      "name": "table",
+      "title": "Table",
+      "category": "data-display",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Provide a caption or associated name, use scoped header cells and native row order, and expose sorting only through actual controls and aria-sort.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "element=table",
+          "name=caption-or-associated-label",
+          "column-headers=th-scope-col",
+          "row-headers=th-scope-row-when-needed",
+          "order=native-dom"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move only through real controls embedded in table cells"
+          }
+        ],
+        "focusManagement": [
+          "Do not add a static table or cells to the tab sequence",
+          "Keep embedded controls in meaningful row order"
+        ],
+        "requiredComposition": [
+          "Provide a caption or associated accessible name",
+          "Use scoped header cells for every relevant row and column",
+          "Use Data Table when sorting, filtering, selection or pagination behavior is required"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/table",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table"
+        },
+        "evidence": "tests/component-contracts.spec.ts#table"
+      }
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "category": "navigation",
+      "profile": "tabs",
+      "classification": "navigation",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "selected",
+        "disabled",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Use concise tab labels",
+        "Keep each panel associated with its tab"
+      ],
+      "accessibility": "Keep triggers inside TabsList; Base UI manages roles, selection and arrow-key navigation.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=tablist",
+          "items=tab",
+          "panels=tabpanel",
+          "aria-selected=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft"
+            ],
+            "outcome": "Move focus to the next or previous horizontal tab"
+          },
+          {
+            "keys": [
+              "Home",
+              "End"
+            ],
+            "outcome": "Move focus to the first or last tab"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused tab in manual activation mode"
+          }
+        ],
+        "focusManagement": [
+          "Use roving focus within the tab list",
+          "Keep each tab associated with its panel"
+        ],
+        "requiredComposition": [
+          "Place TabsTrigger instances inside TabsList",
+          "Provide a TabsContent panel for each tab value"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/tabs",
+          "behavior": "https://base-ui.com/react/components/tabs"
+        },
+        "evidence": "tests/component-contracts.spec.ts#tabs"
+      }
+    },
+    {
+      "name": "textarea",
+      "title": "Textarea",
+      "category": "form-control",
+      "profile": "native-control",
+      "classification": "form-control",
+      "behaviorOwner": "browser",
+      "keyboard": "native",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "invalid",
+        "read-only"
+      ],
+      "consumerResponsibilities": [
+        "Compose a visible label and error description",
+        "Own value, validation and submission"
+      ],
+      "accessibility": "Use inside Field with a visible label and describe limits or requirements before errors occur.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=textbox",
+          "multiline=true",
+          "name=visible-label",
+          "readonly=native",
+          "invalid=aria-invalid"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Typing",
+              "Backspace",
+              "Delete"
+            ],
+            "outcome": "Edit the native multi-line value when enabled and writable"
+          },
+          {
+            "keys": [
+              "Enter"
+            ],
+            "outcome": "Insert a line break without submitting the enclosing form"
+          }
+        ],
+        "focusManagement": [
+          "Remain focusable when read-only",
+          "Expose a visible state-aware focus outline"
+        ],
+        "requiredComposition": [
+          "Compose inside Field with a visible FieldLabel",
+          "Describe limits and validation requirements with aria-describedby"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/textarea",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea"
+        },
+        "evidence": "tests/component-contracts.spec.ts#textarea"
+      }
+    },
+    {
+      "name": "toast",
+      "title": "Toast",
+      "category": "feedback",
+      "profile": "live-feedback",
+      "classification": "feedback",
+      "behaviorOwner": "base-ui",
+      "keyboard": "composed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "default",
+        "success",
+        "warning",
+        "error"
+      ],
+      "consumerResponsibilities": [
+        "Use the correct urgency",
+        "Keep dismiss and action labels explicit"
+      ],
+      "accessibility": "Choose the appropriate live-region urgency, never steal focus, pause dismissal during interaction, name every action and keep essential information persistent elsewhere.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "container=live-region",
+          "urgency=polite-or-assertive",
+          "content=visible-text",
+          "actions=native-buttons",
+          "stacking=managed"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move to an available toast action or dismiss control"
+          },
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Activate the focused action or dismiss control"
+          }
+        ],
+        "focusManagement": [
+          "Never steal focus when a toast arrives",
+          "Pause dismissal while a toast control is focused",
+          "After dismissal, preserve or restore a logical application focus target"
+        ],
+        "requiredComposition": [
+          "Choose live-region urgency from the consequence rather than visual style",
+          "Keep essential information available in persistent page content",
+          "Give every action and close control an explicit name"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/toast",
+          "behavior": "https://base-ui.com/react/components/toast"
+        },
+        "evidence": "tests/component-contracts.spec.ts#toast"
+      }
+    },
+    {
+      "name": "toggle",
+      "title": "Toggle",
+      "category": "form-control",
+      "profile": "toggle-action",
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "intrinsic",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible name",
+        "Expose pressed state without relying on color alone"
+      ],
+      "accessibility": "Provide a visible or equivalent accessible name, expose aria-pressed without relying on color and keep focus on the control after keyboard activation.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=button",
+          "name=required",
+          "aria-pressed=state"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Enter",
+              "Space"
+            ],
+            "outcome": "Toggle the pressed state exactly once"
+          }
+        ],
+        "focusManagement": [
+          "Keep focus on the control after toggling",
+          "Expose a visible focus indicator"
+        ],
+        "requiredComposition": [
+          "Provide a visible label or equivalent accessible name",
+          "Expose pressed state without relying on color alone",
+          "Use Toggle Group when multiple toggles form one coordinated choice"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/toggle",
+          "behavior": "https://base-ui.com/react/components/toggle"
+        },
+        "evidence": "tests/component-contracts.spec.ts#toggle"
+      }
+    },
+    {
+      "name": "toggle-group",
+      "title": "Toggle Group",
+      "category": "form-control",
+      "profile": "toggle-group",
+      "classification": "action",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "consumer-managed-horizontal",
+      "requiredStates": [
+        "default",
+        "disabled",
+        "focus-visible",
+        "selected"
+      ],
+      "consumerResponsibilities": [
+        "Provide a group label and unique item values",
+        "Choose single or multiple selection and forward the visual orientation to behavior"
+      ],
+      "accessibility": "Provide a group and item names, unique array values and an explicit selection mode; visual orientation is forwarded to Base UI keyboard behavior.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "role=group",
+          "group-name=required",
+          "items=buttons",
+          "items.aria-pressed=state",
+          "value=array",
+          "mode=single-or-multiple"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "ArrowRight",
+              "ArrowLeft"
+            ],
+            "outcome": "Move roving focus in a horizontal group"
+          },
+          {
+            "keys": [
+              "ArrowDown",
+              "ArrowUp"
+            ],
+            "outcome": "Move roving focus in a vertical group"
+          },
+          {
+            "keys": [
+              "Space"
+            ],
+            "outcome": "Select or toggle the focused item according to multiple mode"
+          }
+        ],
+        "focusManagement": [
+          "Expose one roving tab stop within the enabled group",
+          "Skip disabled items and optionally loop according to loopFocus"
+        ],
+        "requiredComposition": [
+          "Provide a group name and an accessible name for every item",
+          "Use unique item values and explicitly choose single or multiple selection",
+          "Forward orientation to the Base UI primitive"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/toggle-group",
+          "behavior": "https://base-ui.com/react/components/toggle-group"
+        },
+        "evidence": "tests/component-contracts.spec.ts#toggle-group"
+      }
+    },
+    {
+      "name": "tooltip",
+      "title": "Tooltip",
+      "category": "overlay",
+      "profile": "nonmodal-overlay",
+      "classification": "overlay",
+      "behaviorOwner": "base-ui",
+      "keyboard": "managed",
+      "responsive": "viewport-constrained",
+      "requiredStates": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "consumerResponsibilities": [
+        "Provide an accessible trigger name",
+        "Keep essential information available without relying only on the overlay"
+      ],
+      "accessibility": "Do not place interactive content in a tooltip; wrap the application in TooltipProvider.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "visual-supplement=true",
+          "trigger.name=required",
+          "assistive-technology-dependency=forbidden",
+          "interactive-content=forbidden"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab"
+            ],
+            "outcome": "Show when the trigger receives keyboard focus"
+          },
+          {
+            "keys": [
+              "Escape"
+            ],
+            "outcome": "Dismiss without moving trigger focus"
+          }
+        ],
+        "focusManagement": [
+          "Never move focus into the tooltip",
+          "Keep focus on the trigger while visible"
+        ],
+        "requiredComposition": [
+          "Give the trigger an accessible name that matches its purpose",
+          "Use only for supplementary non-interactive information",
+          "Keep essential information available outside the tooltip"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/tooltip",
+          "behavior": "https://base-ui.com/react/components/tooltip"
+        },
+        "evidence": "tests/component-contracts.spec.ts#tooltip"
+      }
+    },
+    {
+      "name": "typography",
+      "title": "Typography",
+      "category": "content",
+      "profile": "data-display",
+      "classification": "data-display",
+      "behaviorOwner": "library",
+      "keyboard": "not-applicable",
+      "responsive": "consumer-layout",
+      "requiredStates": [
+        "default"
+      ],
+      "consumerResponsibilities": [
+        "Provide meaningful content and alternatives for non-text information"
+      ],
+      "accessibility": "Preserve native document elements, logical heading order, meaningful links and readable lists; Typeset changes presentation, not semantics.",
+      "verification": {
+        "level": "interaction-tested",
+        "semantics": [
+          "wrapper=article-section-or-generic",
+          "headings=native-logical-order",
+          "paragraphs=native",
+          "lists=native",
+          "links=native",
+          "code=native"
+        ],
+        "keyboardInteractions": [
+          {
+            "keys": [
+              "Tab",
+              "Shift+Tab"
+            ],
+            "outcome": "Move through real links and controls in native document order"
+          }
+        ],
+        "focusManagement": [
+          "Do not add the Typeset wrapper to the tab sequence",
+          "Preserve native focus indicators on links and controls"
+        ],
+        "requiredComposition": [
+          "Choose article or section only when the content forms that structure",
+          "Preserve logical heading order",
+          "Use meaningful link text and native lists, code and table elements",
+          "Treat Typeset as presentation rather than a semantic replacement"
+        ],
+        "upstream": {
+          "shadcn": "https://ui.shadcn.com/docs/components/base/typography",
+          "behavior": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article"
+        },
+        "evidence": "tests/component-contracts.spec.ts#typography"
+      }
+    }
+  ]
+}

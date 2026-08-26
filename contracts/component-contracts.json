@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/component-contracts.schema.json",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-beta.0",
   "profiles": {
     "action": {
       "classification": "action",

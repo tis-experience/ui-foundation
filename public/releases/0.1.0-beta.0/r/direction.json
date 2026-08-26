@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "direction",
+  "title": "Direction",
+  "description": "A provider for left-to-right and right-to-left component behavior.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/ui-base.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/direction.ts",
+      "content": "export {\n  DirectionProvider,\n  useDirection,\n} from \"@base-ui/react/direction-provider\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "distribution": "shadcn-source",
+    "accessibility": "Keep direction aligned with the content language and DOM reading order; the provider must not reverse meaning or keyboard sequence.",
+    "status": "alpha"
+  },
+  "categories": [
+    "utility"
+  ],
+  "type": "registry:ui"
+}

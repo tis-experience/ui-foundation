@@ -1,7 +1,7 @@
 {
   "$schema": "https://tis-experience.github.io/ui-foundation/schemas/ai-manifest.schema.json",
   "name": "ui-foundation",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-beta.0",
   "status": "alpha",
   "independence": {
     "standalone": true,

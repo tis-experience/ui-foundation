@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-otp",
+  "title": "Input OTP",
+  "description": "A segmented one-time-password input backed by a single accessible value.",
+  "dependencies": [
+    "input-otp@1.5.0"
+  ],
+  "registryDependencies": [
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/ui-base.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/input-otp.tsx",
+      "content": "import * as React from \"react\"\nimport { OTPInput, OTPInputContext } from \"input-otp\"\n\nimport { cn } from \"@/lib/utils\"\nimport { MinusIcon } from \"lucide-react\"\n\nconst InputOTPInvalidContext = React.createContext(false)\n\nfunction InputOTP({\n  className,\n  containerClassName,\n  defaultValue,\n  value,\n  onChange,\n  ...props\n}: React.ComponentProps<typeof OTPInput> & {\n  containerClassName?: string\n}) {\n  const [uncontrolledValue, setUncontrolledValue] = React.useState(\n    typeof defaultValue === \"string\" ? defaultValue : \"\"\n  )\n  const controlled = typeof value === \"string\"\n  const currentValue = controlled ? value : uncontrolledValue\n  const invalid = props[\"aria-invalid\"] === true || props[\"aria-invalid\"] === \"true\"\n\n  return (\n    <InputOTPInvalidContext.Provider value={invalid}>\n      <OTPInput\n        data-slot=\"input-otp\"\n        containerClassName={cn(\n          \"cn-input-otp flex items-center has-disabled:opacity-50\",\n          containerClassName\n        )}\n        spellCheck={false}\n        value={currentValue}\n        onChange={(nextValue) => {\n          if (!controlled) setUncontrolledValue(nextValue)\n          onChange?.(nextValue)\n        }}\n        className={cn(\"disabled:cursor-not-allowed\", className)}\n        {...props}\n      />\n    </InputOTPInvalidContext.Provider>\n  )\n}\n\nfunction InputOTPGroup({ className, ...props }: React.ComponentProps<\"div\">) {\n  const invalid = React.useContext(InputOTPInvalidContext)\n\n  return (\n    <div\n      data-slot=\"input-otp-group\"\n      data-invalid={invalid || undefined}\n      className={cn(\n        \"flex items-center rounded-lg data-[invalid=true]:border-destructive data-[invalid=true]:ring-3 data-[invalid=true]:ring-destructive/20 dark:data-[invalid=true]:ring-destructive/40\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction InputOTPSlot({\n  index,\n  className,\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  index: number\n}) {\n  const inputOTPContext = React.useContext(OTPInputContext)\n  const invalid = React.useContext(InputOTPInvalidContext)\n  const { char, hasFakeCaret, isActive } = inputOTPContext?.slots[index] ?? {}\n\n  return (\n    <div\n      data-slot=\"input-otp-slot\"\n      data-active={isActive}\n      data-invalid={invalid || undefined}\n      className={cn(\n        \"relative flex size-[var(--ui-control-height-md)] items-center justify-center border-y border-r border-input text-[length:var(--ui-control-font-size-md)] transition-all outline-none first:rounded-l-lg first:border-l last:rounded-r-lg data-[invalid=true]:border-destructive data-[active=true]:z-10 data-[active=true]:border-ring data-[active=true]:ring-3 data-[active=true]:ring-ring/50 data-[active=true][data-invalid=true]:border-destructive data-[active=true][data-invalid=true]:ring-destructive/20 dark:bg-input/30 dark:data-[active=true][data-invalid=true]:ring-destructive/40\",\n        className\n      )}\n      {...props}\n    >\n      {char}\n      {hasFakeCaret && (\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n          <div className=\"h-4 w-px animate-caret-blink bg-foreground duration-1000\" />\n        </div>\n      )}\n    </div>\n  )\n}\n\nfunction InputOTPSeparator({ ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"input-otp-separator\"\n      className=\"flex items-center [&_svg:not([class*='size-'])]:size-4\"\n      role=\"separator\"\n      {...props}\n    >\n      <MinusIcon\n      />\n    </div>\n  )\n}\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "distribution": "shadcn-source",
+    "accessibility": "Provide a visible label, autocomplete=one-time-code and clear validation text.",
+    "status": "alpha"
+  },
+  "categories": [
+    "form-control"
+  ],
+  "type": "registry:ui"
+}

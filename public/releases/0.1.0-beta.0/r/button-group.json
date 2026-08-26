@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group",
+  "title": "Button Group",
+  "description": "A visual and semantic grouping for closely related actions or controls.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/separator.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/button-group.tsx",
+      "content": "import { mergeProps } from \"@base-ui/react/merge-props\"\nimport { useRender } from \"@base-ui/react/use-render\"\nimport { cn } from \"@/lib/utils\"\nimport {\n  buttonGroupVariants,\n  type ButtonGroupVariantProps,\n} from \"@/components/ui/button-group.variants\"\nimport { Separator } from \"@/components/ui/separator\"\n\nfunction ButtonGroup({\n  className,\n  orientation = \"horizontal\",\n  ...props\n}: React.ComponentProps<\"div\"> & ButtonGroupVariantProps) {\n  return (\n    <div\n      role=\"group\"\n      data-slot=\"button-group\"\n      data-orientation={orientation}\n      className={cn(buttonGroupVariants({ orientation }), className)}\n      {...props}\n    />\n  )\n}\n\nfunction ButtonGroupText({\n  className,\n  render,\n  ...props\n}: useRender.ComponentProps<\"div\">) {\n  return useRender({\n    defaultTagName: \"div\",\n    props: mergeProps<\"div\">(\n      {\n        className: cn(\n          \"flex items-center gap-2 rounded-lg border bg-muted px-2.5 text-sm font-medium [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4\",\n          className\n        ),\n      },\n      props\n    ),\n    render,\n    state: {\n      slot: \"button-group-text\",\n    },\n  })\n}\n\nfunction ButtonGroupSeparator({\n  className,\n  orientation = \"vertical\",\n  ...props\n}: React.ComponentProps<typeof Separator>) {\n  return (\n    <Separator\n      data-slot=\"button-group-separator\"\n      orientation={orientation}\n      className={cn(\n        \"relative self-stretch bg-input data-horizontal:mx-px data-horizontal:w-auto data-vertical:my-px data-vertical:h-auto\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport {\n  ButtonGroup,\n  ButtonGroupSeparator,\n  ButtonGroupText,\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/button-group.variants.ts",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\"\n\nconst buttonGroupVariants = cva(\n  \"flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-[var(--control-radius)] [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1\",\n  {\n    variants: {\n      orientation: {\n        horizontal:\n          \"*:data-slot:rounded-r-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-[var(--control-radius)]! [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0\",\n        vertical:\n          \"flex-col *:data-slot:rounded-b-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-[var(--control-radius)]! [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0\",\n      },\n    },\n    defaultVariants: {\n      orientation: \"horizontal\",\n    },\n  }\n)\n\ntype ButtonGroupVariantProps = VariantProps<typeof buttonGroupVariants>\n\nexport { buttonGroupVariants, type ButtonGroupVariantProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "distribution": "shadcn-source",
+    "accessibility": "Name the group, preserve native tab order and use Toggle Group instead when the items represent pressed or mutually exclusive state.",
+    "status": "alpha"
+  },
+  "categories": [
+    "action"
+  ],
+  "type": "registry:ui"
+}

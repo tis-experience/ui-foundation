@@ -1,0 +1,91 @@
+{
+  "$schema": "./foundation.schema.json",
+  "groups": [
+    {
+      "name": "typography",
+      "label": "Typography",
+      "tokens": [
+        { "name": "font-sans", "type": "fontFamily", "value": "'Geist Variable', sans-serif" },
+        { "name": "font-heading", "type": "fontFamily", "value": "var(--font-sans)" },
+        { "name": "font-mono", "type": "fontFamily", "value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" },
+        { "name": "text-xs", "type": "fontSize", "value": "0.75rem" },
+        { "name": "text-xs--line-height", "type": "lineHeight", "value": "1rem" },
+        { "name": "text-sm", "type": "fontSize", "value": "0.875rem" },
+        { "name": "text-sm--line-height", "type": "lineHeight", "value": "1.25rem" },
+        { "name": "text-base", "type": "fontSize", "value": "1rem" },
+        { "name": "text-base--line-height", "type": "lineHeight", "value": "1.5rem" },
+        { "name": "text-lg", "type": "fontSize", "value": "1.125rem" },
+        { "name": "text-lg--line-height", "type": "lineHeight", "value": "1.75rem" },
+        { "name": "text-xl", "type": "fontSize", "value": "1.25rem" },
+        { "name": "text-xl--line-height", "type": "lineHeight", "value": "1.75rem" },
+        { "name": "text-2xl", "type": "fontSize", "value": "1.5rem" },
+        { "name": "text-2xl--line-height", "type": "lineHeight", "value": "2rem" },
+        { "name": "text-3xl", "type": "fontSize", "value": "1.875rem" },
+        { "name": "text-3xl--line-height", "type": "lineHeight", "value": "2.25rem" },
+        { "name": "text-4xl", "type": "fontSize", "value": "2.25rem" },
+        { "name": "text-4xl--line-height", "type": "lineHeight", "value": "2.5rem" },
+        { "name": "font-weight-normal", "type": "fontWeight", "value": "400" },
+        { "name": "font-weight-medium", "type": "fontWeight", "value": "500" },
+        { "name": "font-weight-semibold", "type": "fontWeight", "value": "600" },
+        { "name": "font-weight-bold", "type": "fontWeight", "value": "700" },
+        { "name": "tracking-tight", "type": "letterSpacing", "value": "-0.025em" },
+        { "name": "tracking-normal", "type": "letterSpacing", "value": "0" },
+        { "name": "tracking-wide", "type": "letterSpacing", "value": "0.025em" }
+      ]
+    },
+    {
+      "name": "spacing",
+      "label": "Spacing",
+      "tokens": [
+        { "name": "spacing", "type": "dimension", "value": "0.25rem" }
+      ]
+    },
+    {
+      "name": "radius",
+      "label": "Radius",
+      "tokens": [
+        { "name": "control-radius", "type": "radius", "value": "var(--radius)" },
+        { "name": "control-radius-sm", "type": "radius", "value": "calc(var(--control-radius) * 0.8)" },
+        { "name": "radius-sm", "type": "radius", "value": "calc(var(--radius) * 0.6)" },
+        { "name": "radius-md", "type": "radius", "value": "calc(var(--radius) * 0.8)" },
+        { "name": "radius-lg", "type": "radius", "value": "var(--radius)" },
+        { "name": "radius-xl", "type": "radius", "value": "calc(var(--radius) * 1.4)" },
+        { "name": "radius-2xl", "type": "radius", "value": "calc(var(--radius) * 1.8)" },
+        { "name": "radius-3xl", "type": "radius", "value": "calc(var(--radius) * 2.2)" },
+        { "name": "radius-4xl", "type": "radius", "value": "calc(var(--radius) * 2.6)" }
+      ]
+    },
+    {
+      "name": "borders",
+      "label": "Borders",
+      "tokens": [
+        { "name": "border-width-default", "type": "borderWidth", "value": "1px" },
+        { "name": "border-width-strong", "type": "borderWidth", "value": "2px" },
+        { "name": "focus-ring-width", "type": "borderWidth", "value": "2px" },
+        { "name": "focus-ring-offset", "type": "borderWidth", "value": "2px" }
+      ]
+    },
+    {
+      "name": "elevation",
+      "label": "Elevation",
+      "tokens": [
+        { "name": "shadow-xs", "type": "shadow", "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)" },
+        { "name": "shadow-sm", "type": "shadow", "value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)" },
+        { "name": "shadow-md", "type": "shadow", "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)" },
+        { "name": "shadow-lg", "type": "shadow", "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)" }
+      ]
+    },
+    {
+      "name": "motion",
+      "label": "Motion",
+      "tokens": [
+        { "name": "duration-fast", "type": "duration", "value": "100ms" },
+        { "name": "duration-normal", "type": "duration", "value": "150ms" },
+        { "name": "duration-slow", "type": "duration", "value": "300ms" },
+        { "name": "ease-standard", "type": "cubicBezier", "value": "cubic-bezier(0.2, 0, 0, 1)" },
+        { "name": "ease-enter", "type": "cubicBezier", "value": "cubic-bezier(0, 0, 0.2, 1)" },
+        { "name": "ease-exit", "type": "cubicBezier", "value": "cubic-bezier(0.4, 0, 1, 1)" }
+      ]
+    }
+  ]
+}

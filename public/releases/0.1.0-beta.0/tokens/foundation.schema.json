@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/tokens/foundation.schema.json",
+  "title": "UI Foundation core tokens",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["groups"],
+  "properties": {
+    "groups": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/group" }
+    }
+  },
+  "$defs": {
+    "group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "label", "tokens"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+        "label": { "type": "string", "minLength": 1 },
+        "tokens": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/token" }
+        }
+      }
+    },
+    "token": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "value"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+        "type": {
+          "enum": [
+            "fontFamily",
+            "fontSize",
+            "lineHeight",
+            "fontWeight",
+            "letterSpacing",
+            "dimension",
+            "radius",
+            "borderWidth",
+            "shadow",
+            "duration",
+            "cubicBezier"
+          ]
+        },
+        "value": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

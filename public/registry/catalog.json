@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/component-catalog.schema.json",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-beta.0",
   "distribution": "shadcn-source",
   "behaviorEngine": "@base-ui/react@1.7.0",
   "defaultTheme": "neutral",

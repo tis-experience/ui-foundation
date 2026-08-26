@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/tokens/customizer.schema.json",
+  "title": "UI Foundation customizer contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "default", "presets", "options", "outputs"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "type": "string" },
+    "default": { "$ref": "#/$defs/config" },
+    "presets": {
+      "type": "object",
+      "required": ["neutral", "tis"],
+      "additionalProperties": { "$ref": "#/$defs/config" }
+    },
+    "options": {
+      "type": "object",
+      "required": ["baseColor", "chartPalette", "density", "font", "identity", "mode", "radius", "typeset"],
+      "additionalProperties": false,
+      "properties": {
+        "baseColor": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/option" },
+              { "type": "object", "required": ["swatch"], "properties": { "swatch": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" } } }
+            ]
+          }
+        },
+        "chartPalette": { "$ref": "#/$defs/options" },
+        "density": { "$ref": "#/$defs/options" },
+        "identity": { "$ref": "#/$defs/options" },
+        "mode": { "$ref": "#/$defs/options" },
+        "font": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/option" },
+              {
+                "type": "object",
+                "required": ["source", "stack"],
+                "properties": {
+                  "source": { "enum": ["bundled", "system-stack"] },
+                  "stack": { "type": "string" }
+                }
+              }
+            ]
+          }
+        },
+        "typeset": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/option" },
+              {
+                "type": "object",
+                "required": ["flow", "leading", "measure", "size"],
+                "properties": {
+                  "flow": { "type": "number", "minimum": 0.75, "maximum": 2.5 },
+                  "leading": { "type": "number", "minimum": 1.3, "maximum": 2.4 },
+                  "measure": { "type": "number", "minimum": 40, "maximum": 90 },
+                  "size": { "type": "number", "minimum": 12, "maximum": 24 }
+                }
+              }
+            ]
+          }
+        },
+        "radius": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/option" },
+              {
+                "type": "object",
+                "required": ["cssValue", "surfaceValue"],
+                "properties": {
+                  "cssValue": { "type": "string" },
+                  "surfaceValue": { "type": "string" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["css", "registry-theme", "share-url"] }
+    }
+  },
+  "$defs": {
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identity", "baseColor", "brand", "chartPalette", "bodyFont", "headingFont", "typesetPreset", "typesetSize", "typesetLeading", "typesetFlow", "typesetMeasure", "radius", "density", "mode"],
+      "properties": {
+        "identity": { "enum": ["neutral", "tis", "custom"] },
+        "baseColor": { "enum": ["neutral", "slate", "stone", "zinc"] },
+        "brand": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "chartPalette": { "enum": ["brand", "categorical", "neutral"] },
+        "bodyFont": { "enum": ["geist", "humanist", "serif", "system"] },
+        "headingFont": { "enum": ["geist", "humanist", "serif", "system"] },
+        "typesetPreset": { "enum": ["compact", "default", "reading", "custom"] },
+        "typesetSize": { "type": "number", "minimum": 12, "maximum": 24 },
+        "typesetLeading": { "type": "number", "minimum": 1.3, "maximum": 2.4 },
+        "typesetFlow": { "type": "number", "minimum": 0.75, "maximum": 2.5 },
+        "typesetMeasure": { "type": "number", "minimum": 40, "maximum": 90 },
+        "radius": { "enum": ["none", "small", "default", "large", "full"] },
+        "density": { "enum": ["compact", "comfortable", "spacious"] },
+        "mode": { "enum": ["light", "dark"] }
+      }
+    },
+    "option": {
+      "type": "object",
+      "required": ["label", "value"],
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "type": "string" }
+      }
+    },
+    "options": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/option" }
+    }
+  }
+}

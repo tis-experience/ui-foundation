@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle",
+  "title": "Toggle",
+  "description": "A two-state pressed control for formatting or view options.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/ui-base.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/toggle.tsx",
+      "content": "\"use client\"\n\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\n\nimport { cn } from \"@/lib/utils\"\nimport {\n  toggleVariants,\n  type ToggleVariantProps,\n} from \"@/components/ui/toggle.variants\"\n\nfunction Toggle({\n  className,\n  variant = \"default\",\n  size = \"default\",\n  ...props\n}: TogglePrimitive.Props & ToggleVariantProps) {\n  return (\n    <TogglePrimitive\n      data-slot=\"toggle\"\n      data-size={size}\n      className={cn(toggleVariants({ variant, size, className }))}\n      {...props}\n    />\n  )\n}\n\nexport { Toggle }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/toggle.variants.ts",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\"\n\nconst toggleVariants = cva(\n  \"group/toggle inline-flex items-center justify-center rounded-[var(--control-radius)] font-medium whitespace-nowrap transition-all outline-none hover:bg-muted hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted data-[state=on]:bg-muted dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline: \"border border-input bg-transparent hover:bg-muted\",\n      },\n      size: {\n        default:\n          \"h-[var(--ui-control-height-md)] min-w-[var(--ui-control-height-md)] gap-[var(--ui-control-gap-md)] px-[var(--ui-control-padding-inline-md)] text-[length:var(--ui-control-font-size-md)] [&_svg:not([class*='size-'])]:size-[var(--ui-control-icon-size-md)]\",\n        sm: \"h-[var(--ui-control-height-sm)] min-w-[var(--ui-control-height-sm)] gap-[var(--ui-control-gap-sm)] rounded-[var(--control-radius-sm)] px-[var(--ui-control-padding-inline-sm)] text-[length:var(--ui-control-font-size-sm)] [&_svg:not([class*='size-'])]:size-[var(--ui-control-icon-size-sm)]\",\n        lg: \"h-[var(--ui-control-height-lg)] min-w-[var(--ui-control-height-lg)] gap-[var(--ui-control-gap-lg)] px-[var(--ui-control-padding-inline-lg)] text-[length:var(--ui-control-font-size-lg)] [&_svg:not([class*='size-'])]:size-[var(--ui-control-icon-size-lg)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\ntype ToggleVariantProps = VariantProps<typeof toggleVariants>\n\nexport { toggleVariants, type ToggleVariantProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "distribution": "shadcn-source",
+    "accessibility": "Provide a visible or equivalent accessible name, expose aria-pressed without relying on color and keep focus on the control after keyboard activation.",
+    "status": "alpha"
+  },
+  "categories": [
+    "form-control"
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "./density.schema.json",
+  "default": "comfortable",
+  "profiles": [
+    {
+      "name": "compact",
+      "label": "Compact",
+      "description": "Dense controls for data-heavy interfaces and constrained workspaces.",
+      "control": {
+        "height": { "sm": "1.75rem", "md": "2rem", "lg": "2.25rem" },
+        "paddingInline": { "sm": "0.625rem", "md": "0.75rem", "lg": "1rem" },
+        "gap": { "sm": "0.25rem", "md": "0.375rem", "lg": "0.375rem" },
+        "fontSize": { "sm": "0.75rem", "md": "0.875rem", "lg": "0.875rem" },
+        "iconSize": { "sm": "0.875rem", "md": "1rem", "lg": "1.125rem" }
+      }
+    },
+    {
+      "name": "comfortable",
+      "label": "Comfortable",
+      "description": "Balanced controls for product interfaces and the default UI Foundation experience.",
+      "control": {
+        "height": { "sm": "2rem", "md": "2.5rem", "lg": "3rem" },
+        "paddingInline": { "sm": "0.75rem", "md": "1rem", "lg": "1.25rem" },
+        "gap": { "sm": "0.375rem", "md": "0.5rem", "lg": "0.5rem" },
+        "fontSize": { "sm": "0.875rem", "md": "0.875rem", "lg": "1rem" },
+        "iconSize": { "sm": "1rem", "md": "1.125rem", "lg": "1.25rem" }
+      }
+    },
+    {
+      "name": "spacious",
+      "label": "Spacious",
+      "description": "Generous controls for touch-oriented, public-facing and low-density interfaces.",
+      "control": {
+        "height": { "sm": "2.5rem", "md": "3rem", "lg": "3.5rem" },
+        "paddingInline": { "sm": "1rem", "md": "1.25rem", "lg": "1.5rem" },
+        "gap": { "sm": "0.5rem", "md": "0.5rem", "lg": "0.75rem" },
+        "fontSize": { "sm": "0.875rem", "md": "1rem", "lg": "1.125rem" },
+        "iconSize": { "sm": "1.125rem", "md": "1.25rem", "lg": "1.5rem" }
+      }
+    }
+  ]
+}

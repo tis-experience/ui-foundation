@@ -1,7 +1,7 @@
 {
   "name": "ui-foundation",
   "private": true,
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-beta.0",
   "description": "Source-first React component registry built with shadcn and Base UI.",
   "license": "MIT",
   "homepage": "https://tis-experience.github.io/ui-foundation/",
@@ -35,7 +35,9 @@
     "preview": "vite preview",
     "test:e2e": "playwright test",
     "test:consumer": "node scripts/test-consumer.mjs",
+    "test:consumer:release": "node scripts/test-consumer.mjs --release",
     "test:consumer:public": "node scripts/test-consumer.mjs --public",
+    "test:consumer:public-release": "node scripts/test-consumer.mjs --public-release",
     "test": "npm run check:themes && npm run check:registry && npm run check:contracts && npm run check:ai && npm run release:dry-run && npm run lint && npm run build && npm run check:public"
   },
   "dependencies": {
