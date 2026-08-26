@@ -98,13 +98,29 @@ async function assertAccessible(page, surface) {
   )
 }
 
+async function stopPreview(preview) {
+  if (preview.exitCode !== null || preview.signalCode !== null) return
+
+  const exited = new Promise((resolve) => preview.once("exit", resolve))
+  preview.kill("SIGTERM")
+  await Promise.race([exited, delay(3_000)])
+
+  if (preview.exitCode === null && preview.signalCode === null) {
+    preview.kill("SIGKILL")
+    await exited
+  }
+}
+
 async function verifyRuntime() {
   const port = await getAvailablePort()
   const url = `http://127.0.0.1:${port}`
   const serverLogs = []
+  const vite = process.platform === "win32"
+    ? path.join(consumer, "node_modules", ".bin", "vite.cmd")
+    : path.join(consumer, "node_modules", ".bin", "vite")
   const preview = spawn(
-    "npm",
-    ["run", "preview", "--", "--host", "127.0.0.1", "--port", String(port), "--strictPort"],
+    vite,
+    ["preview", "--host", "127.0.0.1", "--port", String(port), "--strictPort"],
     {
       cwd: consumer,
       env: { ...process.env, npm_config_cache: npmCache },
@@ -191,7 +207,7 @@ async function verifyRuntime() {
     await context.close()
   } finally {
     if (browser) await browser.close()
-    preview.kill("SIGTERM")
+    await stopPreview(preview)
   }
 }
 
