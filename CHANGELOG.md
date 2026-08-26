@@ -4,6 +4,14 @@ All notable changes to UI Foundation will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Real clean-consumer application harness covering installable Blocks, theme and density controls, keyboard navigation, Dialog focus restoration, responsive layout and axe after a production build.
+
+### Fixed
+
+- Document the current shadcn 4.18 Vite initialization flags, TypeScript 6 alias configuration and path-safe Vite alias resolution.
+
 ## [0.1.0-beta.0] - 2026-08-26
 
 ### Added

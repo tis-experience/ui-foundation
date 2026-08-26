@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 
-import { execFileSync } from "node:child_process"
+import assert from "node:assert/strict"
+import { execFileSync, spawn } from "node:child_process"
 import fs from "node:fs"
+import net from "node:net"
 import os from "node:os"
 import path from "node:path"
+import { setTimeout as delay } from "node:timers/promises"
 import { fileURLToPath } from "node:url"
+import AxeBuilder from "@axe-core/playwright"
+import { chromium } from "@playwright/test"
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const template = path.join(root, "fixtures", "consumer-template")
@@ -12,7 +17,7 @@ const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), 
 const catalog = JSON.parse(
   fs.readFileSync(path.join(root, "registry", "catalog.json"), "utf8")
 )
-const consumer = fs.mkdtempSync(path.join(os.tmpdir(), "ui-foundation-consumer-"))
+const consumer = fs.mkdtempSync(path.join(os.tmpdir(), "UI Foundation Consumer "))
 const npmCache = path.join(os.tmpdir(), "ui-foundation-npm-cache")
 const publicRegistryBaseUrl = "https://tis-experience.github.io/ui-foundation/r/"
 
@@ -48,6 +53,162 @@ function run(command, args, cwd = consumer) {
     env: { ...process.env, npm_config_cache: npmCache },
     stdio: "inherit",
   })
+}
+
+async function getAvailablePort() {
+  const server = net.createServer()
+  await new Promise((resolve, reject) => {
+    server.once("error", reject)
+    server.listen(0, "127.0.0.1", resolve)
+  })
+  const address = server.address()
+  assert(address && typeof address === "object", "Could not allocate a consumer preview port")
+  const port = address.port
+  await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()))
+  return port
+}
+
+async function waitForPreview(url, child, logs) {
+  const deadline = Date.now() + 20_000
+  while (Date.now() < deadline) {
+    if (child.exitCode !== null) {
+      throw new Error(`Consumer preview stopped before it was ready.\n${logs.join("")}`)
+    }
+    try {
+      const response = await fetch(url)
+      if (response.ok) return
+    } catch {
+      // The preview may still be binding the local port.
+    }
+    await delay(100)
+  }
+  throw new Error(`Consumer preview did not become ready at ${url}.\n${logs.join("")}`)
+}
+
+async function assertAccessible(page, surface) {
+  const results = await new AxeBuilder({ page }).analyze()
+  assert.deepEqual(
+    results.violations.map(({ id, impact, nodes }) => ({
+      id,
+      impact,
+      targets: nodes.map((node) => node.target.join(" ")),
+    })),
+    [],
+    `${surface} has automated accessibility violations`
+  )
+}
+
+async function stopPreview(preview) {
+  if (preview.exitCode !== null || preview.signalCode !== null) return
+
+  const exited = new Promise((resolve) => preview.once("exit", resolve))
+  preview.kill("SIGTERM")
+  await Promise.race([exited, delay(3_000)])
+
+  if (preview.exitCode === null && preview.signalCode === null) {
+    preview.kill("SIGKILL")
+    await exited
+  }
+}
+
+async function verifyRuntime() {
+  const port = await getAvailablePort()
+  const url = `http://127.0.0.1:${port}`
+  const serverLogs = []
+  const vite = process.platform === "win32"
+    ? path.join(consumer, "node_modules", ".bin", "vite.cmd")
+    : path.join(consumer, "node_modules", ".bin", "vite")
+  const preview = spawn(
+    vite,
+    ["preview", "--host", "127.0.0.1", "--port", String(port), "--strictPort"],
+    {
+      cwd: consumer,
+      env: { ...process.env, npm_config_cache: npmCache },
+      stdio: ["ignore", "pipe", "pipe"],
+    }
+  )
+  preview.stdout.on("data", (chunk) => serverLogs.push(chunk.toString()))
+  preview.stderr.on("data", (chunk) => serverLogs.push(chunk.toString()))
+
+  let browser
+  try {
+    await waitForPreview(url, preview, serverLogs)
+    browser = await chromium.launch({ channel: "chrome", headless: true })
+    const context = await browser.newContext({ viewport: { width: 1280, height: 900 } })
+    const page = await context.newPage()
+    const browserErrors = []
+    page.on("console", (message) => {
+      if (["error", "warning"].includes(message.type())) browserErrors.push(`${message.type()}: ${message.text()}`)
+    })
+    page.on("pageerror", (error) => browserErrors.push(`pageerror: ${error.message}`))
+
+    await page.goto(url)
+    assert.equal(await page.title(), "UI Foundation consumer smoke")
+    await page.getByRole("heading", { name: "Operations Workspace" }).waitFor()
+    await assertAccessible(page, "Overview")
+
+    await page.getByLabel("Interface density").selectOption("compact")
+    assert.equal(await page.locator("html").getAttribute("data-ui-density"), "compact")
+    await page.getByRole("button", { name: "Neutral" }).click()
+    assert.equal(await page.locator("html").getAttribute("data-ui-theme"), "tis")
+    await page.getByRole("button", { name: "Use dark mode" }).click()
+    assert.equal(await page.locator("html").evaluate((element) => element.classList.contains("dark")), true)
+
+    const newItemTrigger = page.getByRole("button", { name: "New work item" })
+    await newItemTrigger.click()
+    await page.getByRole("dialog").waitFor()
+    assert.equal(await page.evaluate(() => document.activeElement?.id), "work-item-title")
+    await page.waitForTimeout(150)
+    await assertAccessible(page, "Dialog")
+    await page.getByRole("textbox", { name: "Title" }).fill("Validate registry adoption")
+    await page.getByLabel("Priority").selectOption("high")
+    await page.getByRole("button", { name: "Create item" }).click()
+    await page.getByRole("dialog").waitFor({ state: "detached" })
+    assert.equal(await page.getByRole("dialog").count(), 0)
+    assert.equal(await newItemTrigger.evaluate((element) => element === document.activeElement), true)
+    await page.getByRole("status").filter({ hasText: "Work item Validate registry adoption created" }).waitFor()
+
+    const overviewTab = page.getByRole("tab", { name: "Overview" })
+    await overviewTab.focus()
+    await page.keyboard.press("ArrowRight")
+    await page.keyboard.press("ArrowRight")
+    await page.keyboard.press("Enter")
+    const componentTab = page.getByRole("tab", { name: "Component states" })
+    assert.equal(await componentTab.getAttribute("aria-selected"), "true")
+    await page.getByRole("region", { name: "Component states" }).waitFor()
+    await page.keyboard.press("Tab")
+    await page.keyboard.press("Tab")
+    assert.equal((await page.evaluate(() => document.activeElement?.textContent))?.trim(), "Primary action")
+    const focus = await page.evaluate(() => {
+      const style = getComputedStyle(document.activeElement)
+      return {
+        outlineOffset: style.outlineOffset,
+        outlineStyle: style.outlineStyle,
+        outlineWidth: style.outlineWidth,
+      }
+    })
+    assert.deepEqual(focus, { outlineOffset: "2px", outlineStyle: "solid", outlineWidth: "2px" })
+    await assertAccessible(page, "Component states")
+
+    await page.getByRole("tab", { name: "Settings" }).click()
+    await page.getByRole("textbox", { name: "Workspace name" }).fill("TIS Experience Lab")
+    await page.getByLabel("Default locale").selectOption("pt-BR")
+    await page.getByRole("button", { name: "Save settings" }).click()
+    await page.getByRole("status").filter({ hasText: "Workspace settings saved" }).waitFor()
+    await assertAccessible(page, "Settings")
+
+    await page.setViewportSize({ width: 320, height: 800 })
+    const responsive = await page.evaluate(() => ({
+      innerWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }))
+    assert.equal(responsive.scrollWidth, responsive.innerWidth, "Consumer app overflows at the 320px minimum width")
+    assert.deepEqual(browserErrors, [], "Consumer runtime emitted console or page errors")
+    await context.close()
+  } finally {
+    if (browser) await browser.close()
+    await stopPreview(preview)
+  }
 }
 
 try {
@@ -126,10 +287,11 @@ try {
   }
 
   run("npm", ["run", "build"])
+  await verifyRuntime()
   const channel = publicMode
     ? releaseVersion ? `published ${releaseVersion}` : "published preview"
     : releaseVersion ? `staged ${releaseVersion}` : "generated preview"
-  console.log(`Consumer smoke passed against the ${channel} registry: ${catalog.components.length} components, ${(catalog.blocks ?? []).length} blocks, ${(catalog.charts ?? []).length} chart bundles, dependencies, density profiles, accessible focus, portable Typeset rhythm, TIS preset and production build.`)
+  console.log(`Consumer smoke passed against the ${channel} registry: ${catalog.components.length} components, ${(catalog.blocks ?? []).length} blocks, ${(catalog.charts ?? []).length} chart bundles, dependencies, build, real Blocks, theme and density controls, keyboard paths, focus restoration, 320px layout and axe.`)
   passed = true
 } finally {
   if (passed) {
