@@ -1,6 +1,6 @@
 {
   "$schema": "https://tis-experience.github.io/ui-foundation/schemas/resolved-component-contracts.schema.json",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-beta.0",
   "components": [
     {
       "name": "accordion",

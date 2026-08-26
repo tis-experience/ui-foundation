@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/schemas/resolved-component-contracts.schema.json",
+  "title": "UI Foundation resolved component contracts",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "components"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "type": "string" },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "title", "category", "profile", "classification", "behaviorOwner", "keyboard", "responsive", "requiredStates", "consumerResponsibilities", "accessibility", "verification"],
+        "properties": {
+          "name": { "type": "string" },
+          "title": { "type": "string" },
+          "category": { "type": "string" },
+          "profile": { "type": "string" },
+          "classification": { "type": "string" },
+          "behaviorOwner": { "enum": ["base-ui", "browser", "external", "library"] },
+          "keyboard": { "enum": ["managed", "native", "composed", "not-applicable"] },
+          "responsive": { "enum": ["intrinsic", "consumer-layout", "consumer-managed-horizontal", "scroll-contained", "viewport-constrained"] },
+          "requiredStates": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+          "consumerResponsibilities": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+          "accessibility": { "type": "string" },
+          "verification": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["level"],
+            "properties": {
+              "level": { "enum": ["profile", "interaction-tested"] },
+              "semantics": { "type": "array", "minItems": 1, "items": { "type": "string" }, "uniqueItems": true },
+              "keyboardInteractions": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["keys", "outcome"],
+                  "properties": {
+                    "keys": { "type": "array", "minItems": 1, "items": { "type": "string" }, "uniqueItems": true },
+                    "outcome": { "type": "string" }
+                  }
+                }
+              },
+              "focusManagement": { "type": "array", "minItems": 1, "items": { "type": "string" }, "uniqueItems": true },
+              "requiredComposition": { "type": "array", "minItems": 1, "items": { "type": "string" }, "uniqueItems": true },
+              "upstream": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["shadcn", "behavior"],
+                "properties": {
+                  "shadcn": { "type": "string", "format": "uri" },
+                  "behavior": { "type": "string", "format": "uri" }
+                }
+              },
+              "evidence": { "type": "string" }
+            },
+            "if": { "properties": { "level": { "const": "interaction-tested" } } },
+            "then": { "required": ["semantics", "keyboardInteractions", "focusManagement", "requiredComposition", "upstream", "evidence"] }
+          }
+        }
+      }
+    }
+  }
+}

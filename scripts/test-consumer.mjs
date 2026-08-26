@@ -8,14 +8,39 @@ import { fileURLToPath } from "node:url"
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const template = path.join(root, "fixtures", "consumer-template")
+const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"))
 const catalog = JSON.parse(
   fs.readFileSync(path.join(root, "registry", "catalog.json"), "utf8")
 )
 const consumer = fs.mkdtempSync(path.join(os.tmpdir(), "ui-foundation-consumer-"))
 const npmCache = path.join(os.tmpdir(), "ui-foundation-npm-cache")
 const publicRegistryBaseUrl = "https://tis-experience.github.io/ui-foundation/r/"
-const publicMode = process.argv.includes("--public")
+
+function releaseVersionFor(flag) {
+  const index = process.argv.indexOf(flag)
+  if (index < 0) return null
+  const candidate = process.argv[index + 1]
+  return candidate && !candidate.startsWith("--") ? candidate : packageJson.version
+}
+
+const localReleaseVersion = releaseVersionFor("--release")
+const publicReleaseVersion = releaseVersionFor("--public-release")
+const publicMode = process.argv.includes("--public") || publicReleaseVersion !== null
+const releaseVersion = localReleaseVersion ?? publicReleaseVersion
+const registryBaseUrl = publicReleaseVersion
+  ? `https://tis-experience.github.io/ui-foundation/releases/${publicReleaseVersion}/r/`
+  : publicRegistryBaseUrl
+const localRegistryDirectory = localReleaseVersion
+  ? path.join(root, "public", "releases", localReleaseVersion, "r")
+  : path.join(root, "public", "r")
+const sourceRegistryBaseUrl = localReleaseVersion
+  ? `https://tis-experience.github.io/ui-foundation/releases/${localReleaseVersion}/r/`
+  : publicRegistryBaseUrl
 let passed = false
+
+if (localReleaseVersion && publicReleaseVersion) {
+  throw new Error("Choose either --release or --public-release, not both")
+}
 
 function run(command, args, cwd = consumer) {
   execFileSync(command, args, {
@@ -28,12 +53,15 @@ function run(command, args, cwd = consumer) {
 try {
   fs.cpSync(template, consumer, { recursive: true })
   if (!publicMode) {
-    for (const file of fs.readdirSync(path.join(root, "public", "r"))) {
+    if (!fs.existsSync(localRegistryDirectory)) {
+      throw new Error(`Staged release registry is missing: ${localRegistryDirectory}`)
+    }
+    for (const file of fs.readdirSync(localRegistryDirectory)) {
       if (file.endsWith(".json")) {
-        const source = fs.readFileSync(path.join(root, "public", "r", file), "utf8")
+        const source = fs.readFileSync(path.join(localRegistryDirectory, file), "utf8")
         fs.writeFileSync(
           path.join(consumer, file),
-          source.replaceAll(publicRegistryBaseUrl, `${consumer}${path.sep}`)
+          source.replaceAll(sourceRegistryBaseUrl, `${consumer}${path.sep}`)
         )
       }
     }
@@ -46,7 +74,7 @@ try {
     ...(catalog.charts ?? []).map(({ name }) => name),
     "theme-tis",
   ].map((name) => publicMode
-    ? `${publicRegistryBaseUrl}${name}.json`
+    ? `${registryBaseUrl}${name}.json`
     : path.join(consumer, `${name}.json`)
   )
   run(path.join(root, "node_modules", ".bin", "shadcn"), [
@@ -98,7 +126,10 @@ try {
   }
 
   run("npm", ["run", "build"])
-  console.log(`Consumer smoke passed against the ${publicMode ? "published" : "generated"} registry: ${catalog.components.length} components, ${(catalog.blocks ?? []).length} blocks, ${(catalog.charts ?? []).length} chart bundles, dependencies, density profiles, accessible focus, portable Typeset rhythm, TIS preset and production build.`)
+  const channel = publicMode
+    ? releaseVersion ? `published ${releaseVersion}` : "published preview"
+    : releaseVersion ? `staged ${releaseVersion}` : "generated preview"
+  console.log(`Consumer smoke passed against the ${channel} registry: ${catalog.components.length} components, ${(catalog.blocks ?? []).length} blocks, ${(catalog.charts ?? []).length} chart bundles, dependencies, density profiles, accessible focus, portable Typeset rhythm, TIS preset and production build.`)
   passed = true
 } finally {
   if (passed) {

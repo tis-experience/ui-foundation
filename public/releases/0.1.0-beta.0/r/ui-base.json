@@ -1,0 +1,272 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ui-base",
+  "title": "UI Foundation Base",
+  "description": "Base dependencies, utilities and neutral semantic theme for UI Foundation components.",
+  "dependencies": [
+    "@base-ui/react@1.7.0",
+    "class-variance-authority@0.7.1",
+    "clsx@2.1.1",
+    "lucide-react@1.33.0",
+    "shadcn@4.18.0",
+    "tailwind-merge@3.6.0",
+    "tw-animate-css@1.4.0"
+  ],
+  "files": [
+    {
+      "path": "src/lib/utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { twMerge } from \"tailwind-merge\"\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "cssVars": {
+    "theme": {
+      "font-sans": "'Geist Variable', sans-serif",
+      "font-heading": "var(--font-sans)",
+      "font-mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+      "text-xs": "0.75rem",
+      "text-xs--line-height": "1rem",
+      "text-sm": "0.875rem",
+      "text-sm--line-height": "1.25rem",
+      "text-base": "1rem",
+      "text-base--line-height": "1.5rem",
+      "text-lg": "1.125rem",
+      "text-lg--line-height": "1.75rem",
+      "text-xl": "1.25rem",
+      "text-xl--line-height": "1.75rem",
+      "text-2xl": "1.5rem",
+      "text-2xl--line-height": "2rem",
+      "text-3xl": "1.875rem",
+      "text-3xl--line-height": "2.25rem",
+      "text-4xl": "2.25rem",
+      "text-4xl--line-height": "2.5rem",
+      "font-weight-normal": "400",
+      "font-weight-medium": "500",
+      "font-weight-semibold": "600",
+      "font-weight-bold": "700",
+      "tracking-tight": "-0.025em",
+      "tracking-normal": "0",
+      "tracking-wide": "0.025em",
+      "spacing": "0.25rem",
+      "control-radius": "var(--radius)",
+      "control-radius-sm": "calc(var(--control-radius) * 0.8)",
+      "radius-sm": "calc(var(--radius) * 0.6)",
+      "radius-md": "calc(var(--radius) * 0.8)",
+      "radius-lg": "var(--radius)",
+      "radius-xl": "calc(var(--radius) * 1.4)",
+      "radius-2xl": "calc(var(--radius) * 1.8)",
+      "radius-3xl": "calc(var(--radius) * 2.2)",
+      "radius-4xl": "calc(var(--radius) * 2.6)",
+      "border-width-default": "1px",
+      "border-width-strong": "2px",
+      "focus-ring-width": "2px",
+      "focus-ring-offset": "2px",
+      "shadow-xs": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      "shadow-sm": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+      "shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+      "shadow-lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+      "duration-fast": "100ms",
+      "duration-normal": "150ms",
+      "duration-slow": "300ms",
+      "ease-standard": "cubic-bezier(0.2, 0, 0, 1)",
+      "ease-enter": "cubic-bezier(0, 0, 0.2, 1)",
+      "ease-exit": "cubic-bezier(0.4, 0, 1, 1)",
+      "color-overlay": "var(--overlay)"
+    },
+    "light": {
+      "background": "oklch(1 0 0)",
+      "foreground": "oklch(0.145 0 0)",
+      "card": "oklch(1 0 0)",
+      "card-foreground": "oklch(0.145 0 0)",
+      "popover": "oklch(1 0 0)",
+      "popover-foreground": "oklch(0.145 0 0)",
+      "primary": "oklch(0.205 0 0)",
+      "primary-foreground": "oklch(0.985 0 0)",
+      "secondary": "oklch(0.97 0 0)",
+      "secondary-foreground": "oklch(0.205 0 0)",
+      "muted": "oklch(0.97 0 0)",
+      "muted-foreground": "oklch(0.53 0 0)",
+      "overlay": "oklch(0 0 0 / 10%)",
+      "accent": "oklch(0.97 0 0)",
+      "accent-foreground": "oklch(0.205 0 0)",
+      "destructive": "oklch(0.48 0.19 27.325)",
+      "border": "oklch(0.922 0 0)",
+      "input": "oklch(0.922 0 0)",
+      "ring": "oklch(0.45 0 0)",
+      "chart-1": "oklch(0.87 0 0)",
+      "chart-2": "oklch(0.556 0 0)",
+      "chart-3": "oklch(0.439 0 0)",
+      "chart-4": "oklch(0.371 0 0)",
+      "chart-5": "oklch(0.269 0 0)",
+      "radius": "0.625rem",
+      "sidebar": "oklch(0.985 0 0)",
+      "sidebar-foreground": "oklch(0.145 0 0)",
+      "sidebar-primary": "oklch(0.205 0 0)",
+      "sidebar-primary-foreground": "oklch(0.985 0 0)",
+      "sidebar-accent": "oklch(0.97 0 0)",
+      "sidebar-accent-foreground": "oklch(0.205 0 0)",
+      "sidebar-border": "oklch(0.922 0 0)",
+      "sidebar-ring": "oklch(0.708 0 0)"
+    },
+    "dark": {
+      "background": "oklch(0.145 0 0)",
+      "foreground": "oklch(0.985 0 0)",
+      "card": "oklch(0.205 0 0)",
+      "card-foreground": "oklch(0.985 0 0)",
+      "popover": "oklch(0.205 0 0)",
+      "popover-foreground": "oklch(0.985 0 0)",
+      "primary": "oklch(0.922 0 0)",
+      "primary-foreground": "oklch(0.205 0 0)",
+      "secondary": "oklch(0.269 0 0)",
+      "secondary-foreground": "oklch(0.985 0 0)",
+      "muted": "oklch(0.269 0 0)",
+      "muted-foreground": "oklch(0.708 0 0)",
+      "overlay": "oklch(0 0 0 / 55%)",
+      "accent": "oklch(0.269 0 0)",
+      "accent-foreground": "oklch(0.985 0 0)",
+      "destructive": "oklch(0.704 0.191 22.216)",
+      "border": "oklch(1 0 0 / 10%)",
+      "input": "oklch(1 0 0 / 15%)",
+      "ring": "oklch(0.75 0 0)",
+      "chart-1": "oklch(0.87 0 0)",
+      "chart-2": "oklch(0.556 0 0)",
+      "chart-3": "oklch(0.439 0 0)",
+      "chart-4": "oklch(0.371 0 0)",
+      "chart-5": "oklch(0.269 0 0)",
+      "radius": "0.625rem",
+      "sidebar": "oklch(0.205 0 0)",
+      "sidebar-foreground": "oklch(0.985 0 0)",
+      "sidebar-primary": "oklch(0.922 0 0)",
+      "sidebar-primary-foreground": "oklch(0.205 0 0)",
+      "sidebar-accent": "oklch(0.269 0 0)",
+      "sidebar-accent-foreground": "oklch(0.985 0 0)",
+      "sidebar-border": "oklch(1 0 0 / 10%)",
+      "sidebar-ring": "oklch(0.556 0 0)"
+    }
+  },
+  "css": {
+    ":root, [data-ui-density=\"comfortable\"]": {
+      "--ui-control-height-sm": "2rem",
+      "--ui-control-height-md": "2.5rem",
+      "--ui-control-height-lg": "3rem",
+      "--ui-control-padding-inline-sm": "0.75rem",
+      "--ui-control-padding-inline-md": "1rem",
+      "--ui-control-padding-inline-lg": "1.25rem",
+      "--ui-control-gap-sm": "0.375rem",
+      "--ui-control-gap-md": "0.5rem",
+      "--ui-control-gap-lg": "0.5rem",
+      "--ui-control-font-size-sm": "0.875rem",
+      "--ui-control-font-size-md": "0.875rem",
+      "--ui-control-font-size-lg": "1rem",
+      "--ui-control-icon-size-sm": "1rem",
+      "--ui-control-icon-size-md": "1.125rem",
+      "--ui-control-icon-size-lg": "1.25rem"
+    },
+    "[data-ui-density=\"compact\"]": {
+      "--ui-control-height-sm": "1.75rem",
+      "--ui-control-height-md": "2rem",
+      "--ui-control-height-lg": "2.25rem",
+      "--ui-control-padding-inline-sm": "0.625rem",
+      "--ui-control-padding-inline-md": "0.75rem",
+      "--ui-control-padding-inline-lg": "1rem",
+      "--ui-control-gap-sm": "0.25rem",
+      "--ui-control-gap-md": "0.375rem",
+      "--ui-control-gap-lg": "0.375rem",
+      "--ui-control-font-size-sm": "0.75rem",
+      "--ui-control-font-size-md": "0.875rem",
+      "--ui-control-font-size-lg": "0.875rem",
+      "--ui-control-icon-size-sm": "0.875rem",
+      "--ui-control-icon-size-md": "1rem",
+      "--ui-control-icon-size-lg": "1.125rem"
+    },
+    "[data-ui-density=\"spacious\"]": {
+      "--ui-control-height-sm": "2.5rem",
+      "--ui-control-height-md": "3rem",
+      "--ui-control-height-lg": "3.5rem",
+      "--ui-control-padding-inline-sm": "1rem",
+      "--ui-control-padding-inline-md": "1.25rem",
+      "--ui-control-padding-inline-lg": "1.5rem",
+      "--ui-control-gap-sm": "0.5rem",
+      "--ui-control-gap-md": "0.5rem",
+      "--ui-control-gap-lg": "0.75rem",
+      "--ui-control-font-size-sm": "0.875rem",
+      "--ui-control-font-size-md": "1rem",
+      "--ui-control-font-size-lg": "1.125rem",
+      "--ui-control-icon-size-sm": "1.125rem",
+      "--ui-control-icon-size-md": "1.25rem",
+      "--ui-control-icon-size-lg": "1.5rem"
+    },
+    "*": {
+      "outline-color": "var(--focus-ring-color, var(--ring))"
+    },
+    ":where([data-slot]), :where([data-slot] button, [data-slot] a, [data-slot] input, [data-slot] textarea, [data-slot] select, [data-slot] [tabindex]:not([tabindex=\"-1\"]))": {
+      "outline-color": "var(--focus-ring-color, var(--ring))",
+      "outline-offset": "var(--focus-ring-offset)",
+      "outline-width": "var(--focus-ring-width)"
+    },
+    ":where([data-slot]):focus-visible:not([data-slot=\"input-group-control\"], [data-slot=\"combobox-input\"], [data-slot=\"message-scroller-viewport\"], [data-slot=\"resizable-handle\"])": {
+      "--tw-ring-offset-shadow": "0 0 #0000 !important",
+      "--tw-ring-shadow": "0 0 #0000 !important",
+      "outline-color": "var(--focus-ring-color, var(--ring)) !important",
+      "outline-offset": "var(--focus-ring-offset) !important",
+      "outline-style": "solid !important",
+      "outline-width": "var(--focus-ring-width) !important"
+    },
+    ":where([data-slot] button, [data-slot] a, [data-slot] input, [data-slot] textarea, [data-slot] select, [data-slot] [tabindex]:not([tabindex=\"-1\"])):focus-visible:not([data-slot=\"input-group-control\"], [data-slot=\"combobox-input\"], [data-slot=\"message-scroller-viewport\"], [data-slot=\"resizable-handle\"])": {
+      "--tw-ring-offset-shadow": "0 0 #0000 !important",
+      "--tw-ring-shadow": "0 0 #0000 !important",
+      "outline-color": "var(--focus-ring-color, var(--ring)) !important",
+      "outline-offset": "var(--focus-ring-offset) !important",
+      "outline-style": "solid !important",
+      "outline-width": "var(--focus-ring-width) !important"
+    },
+    ":where([data-slot=\"input-group\"]):has([data-slot=\"input-group-control\"]:focus-visible), :where([data-slot=\"combobox-chips\"]):focus-within, :where([data-slot=\"questionnaire-choice\"]):has(input:focus-visible), :where([data-slot=\"message-scroller\"]):has([data-slot=\"message-scroller-viewport\"]:focus-visible), :where([data-slot=\"resizable-panel-group\"]):has([data-slot=\"resizable-handle\"]:focus-visible)": {
+      "--tw-ring-offset-shadow": "0 0 #0000 !important",
+      "--tw-ring-shadow": "0 0 #0000 !important",
+      "outline-color": "var(--focus-ring-color, var(--ring)) !important",
+      "outline-offset": "var(--focus-ring-offset) !important",
+      "outline-style": "solid !important",
+      "outline-width": "var(--focus-ring-width) !important"
+    },
+    ":where([readonly], [aria-readonly=\"true\"], [data-readonly])": {
+      "--focus-ring-color": "var(--muted-foreground)"
+    },
+    ":where([data-slot=\"input-group\"]):has([readonly], [aria-readonly=\"true\"], [data-readonly]), :where([data-slot=\"combobox-chips\"]):has([readonly], [aria-readonly=\"true\"], [data-readonly]), :where([data-slot=\"questionnaire-choice\"]):has([readonly], [aria-readonly=\"true\"], [data-readonly])": {
+      "--focus-ring-color": "var(--muted-foreground)"
+    },
+    ":where([aria-invalid=\"true\"], [data-invalid])": {
+      "--focus-ring-color": "var(--destructive)"
+    },
+    ":where([data-slot=\"input-group\"]):has([aria-invalid=\"true\"], [data-invalid]), :where([data-slot=\"combobox-chips\"]):has([aria-invalid=\"true\"], [data-invalid]), :where([data-slot=\"questionnaire-choice\"]):has([aria-invalid=\"true\"], [data-invalid])": {
+      "--focus-ring-color": "var(--destructive)"
+    },
+    ":where([data-slot=\"field-label\"]):has(:focus-visible), :where([data-slot=\"attachment\"]):focus-within": {
+      "--tw-ring-offset-shadow": "0 0 #0000 !important",
+      "--tw-ring-shadow": "0 0 #0000 !important"
+    },
+    ":where([data-slot=\"message-scroller-viewport\"], [data-slot=\"resizable-handle\"]):focus-visible": {
+      "--tw-ring-offset-shadow": "0 0 #0000 !important",
+      "--tw-ring-shadow": "0 0 #0000 !important",
+      "outline-style": "none !important"
+    },
+    "@media (forced-colors: active)": {
+      ":where([data-slot]):focus-visible, :where([data-slot] button, [data-slot] a, [data-slot] input, [data-slot] textarea, [data-slot] select, [data-slot] [tabindex]:not([tabindex=\"-1\"])):focus-visible, :where([data-slot=\"input-group\"]):has([data-slot=\"input-group-control\"]:focus-visible), :where([data-slot=\"combobox-chips\"]):focus-within, :where([data-slot=\"questionnaire-choice\"]):has(input:focus-visible), :where([data-slot=\"message-scroller\"]):has([data-slot=\"message-scroller-viewport\"]:focus-visible), :where([data-slot=\"resizable-panel-group\"]):has([data-slot=\"resizable-handle\"]:focus-visible)": {
+        "outline-color": "Highlight !important"
+      }
+    }
+  },
+  "meta": {
+    "distribution": "shadcn-source",
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "defaultTheme": "neutral",
+    "foundationTokenCount": 50,
+    "defaultDensity": "comfortable",
+    "densityProfiles": [
+      "compact",
+      "comfortable",
+      "spacious"
+    ]
+  },
+  "docs": "Neutral and Comfortable are the defaults. Set data-ui-density to compact, comfortable or spacious. Add theme-tis separately and set data-ui-theme=\"tis\" on the document root to opt into the TIS identity.",
+  "type": "registry:base"
+}

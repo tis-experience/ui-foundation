@@ -4,6 +4,8 @@ All notable changes to UI Foundation will be documented in this file.
 
 ## [Unreleased]
 
+## [0.1.0-beta.0] - 2026-08-26
+
 ### Added
 
 - Reproducible source-registry release harness with immutable version snapshots, SHA-256 manifests, compatibility metadata and a no-write rehearsal gate.

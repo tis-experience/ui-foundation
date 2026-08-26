@@ -1,0 +1,2676 @@
+{
+  "$schema": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/schemas/ai-manifest.schema.json",
+  "name": "ui-foundation",
+  "version": "0.1.0-beta.0",
+  "status": "alpha",
+  "independence": {
+    "standalone": true,
+    "dependsOnDsTis": false,
+    "figmaAvailable": false
+  },
+  "distribution": {
+    "model": "shadcn-source",
+    "cli": "shadcn@4.18.0",
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "registryBaseUrl": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r",
+    "releases": {
+      "preview": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r",
+      "pattern": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/releases/<version>/r",
+      "policy": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/docs/releases.md",
+      "npmPackage": false
+    }
+  },
+  "theming": {
+    "default": "neutral",
+    "optional": [
+      "tis"
+    ],
+    "selector": "data-ui-theme",
+    "colorModes": [
+      "light",
+      "dark"
+    ],
+    "darkModeSelector": ".dark",
+    "density": {
+      "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/tokens/densities.json",
+      "selector": "data-ui-density",
+      "default": "comfortable",
+      "profiles": [
+        {
+          "name": "compact",
+          "label": "Compact",
+          "description": "Dense controls for data-heavy interfaces and constrained workspaces.",
+          "control": {
+            "height": {
+              "sm": "1.75rem",
+              "md": "2rem",
+              "lg": "2.25rem"
+            },
+            "paddingInline": {
+              "sm": "0.625rem",
+              "md": "0.75rem",
+              "lg": "1rem"
+            },
+            "gap": {
+              "sm": "0.25rem",
+              "md": "0.375rem",
+              "lg": "0.375rem"
+            },
+            "fontSize": {
+              "sm": "0.75rem",
+              "md": "0.875rem",
+              "lg": "0.875rem"
+            },
+            "iconSize": {
+              "sm": "0.875rem",
+              "md": "1rem",
+              "lg": "1.125rem"
+            }
+          }
+        },
+        {
+          "name": "comfortable",
+          "label": "Comfortable",
+          "description": "Balanced controls for product interfaces and the default UI Foundation experience.",
+          "control": {
+            "height": {
+              "sm": "2rem",
+              "md": "2.5rem",
+              "lg": "3rem"
+            },
+            "paddingInline": {
+              "sm": "0.75rem",
+              "md": "1rem",
+              "lg": "1.25rem"
+            },
+            "gap": {
+              "sm": "0.375rem",
+              "md": "0.5rem",
+              "lg": "0.5rem"
+            },
+            "fontSize": {
+              "sm": "0.875rem",
+              "md": "0.875rem",
+              "lg": "1rem"
+            },
+            "iconSize": {
+              "sm": "1rem",
+              "md": "1.125rem",
+              "lg": "1.25rem"
+            }
+          }
+        },
+        {
+          "name": "spacious",
+          "label": "Spacious",
+          "description": "Generous controls for touch-oriented, public-facing and low-density interfaces.",
+          "control": {
+            "height": {
+              "sm": "2.5rem",
+              "md": "3rem",
+              "lg": "3.5rem"
+            },
+            "paddingInline": {
+              "sm": "1rem",
+              "md": "1.25rem",
+              "lg": "1.5rem"
+            },
+            "gap": {
+              "sm": "0.5rem",
+              "md": "0.5rem",
+              "lg": "0.75rem"
+            },
+            "fontSize": {
+              "sm": "0.875rem",
+              "md": "1rem",
+              "lg": "1.125rem"
+            },
+            "iconSize": {
+              "sm": "1.125rem",
+              "md": "1.25rem",
+              "lg": "1.5rem"
+            }
+          }
+        }
+      ]
+    },
+    "customizer": {
+      "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/tokens/customizer.json",
+      "route": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/#customize",
+      "default": {
+        "identity": "neutral",
+        "baseColor": "neutral",
+        "brand": "#171717",
+        "chartPalette": "neutral",
+        "bodyFont": "geist",
+        "headingFont": "geist",
+        "typesetPreset": "default",
+        "typesetSize": 16,
+        "typesetLeading": 1.75,
+        "typesetFlow": 1.25,
+        "typesetMeasure": 65,
+        "radius": "default",
+        "density": "comfortable",
+        "mode": "light"
+      },
+      "options": {
+        "identity": [
+          {
+            "label": "Neutral",
+            "value": "neutral"
+          },
+          {
+            "label": "TIS",
+            "value": "tis"
+          },
+          {
+            "label": "Custom",
+            "value": "custom"
+          }
+        ],
+        "density": [
+          {
+            "label": "Compact",
+            "value": "compact"
+          },
+          {
+            "label": "Comfortable",
+            "value": "comfortable"
+          },
+          {
+            "label": "Spacious",
+            "value": "spacious"
+          }
+        ],
+        "mode": [
+          {
+            "label": "Light",
+            "value": "light"
+          },
+          {
+            "label": "Dark",
+            "value": "dark"
+          }
+        ],
+        "baseColor": [
+          {
+            "label": "Neutral",
+            "value": "neutral",
+            "swatch": "#737373"
+          },
+          {
+            "label": "Slate",
+            "value": "slate",
+            "swatch": "#64748b"
+          },
+          {
+            "label": "Stone",
+            "value": "stone",
+            "swatch": "#78716c"
+          },
+          {
+            "label": "Zinc",
+            "value": "zinc",
+            "swatch": "#71717a"
+          }
+        ],
+        "chartPalette": [
+          {
+            "label": "Brand",
+            "value": "brand"
+          },
+          {
+            "label": "Categorical",
+            "value": "categorical"
+          },
+          {
+            "label": "Neutral",
+            "value": "neutral"
+          }
+        ],
+        "font": [
+          {
+            "label": "Geist",
+            "value": "geist",
+            "stack": "'Geist Variable', 'Geist', ui-sans-serif, system-ui, sans-serif",
+            "source": "bundled"
+          },
+          {
+            "label": "Humanist",
+            "value": "humanist",
+            "stack": "'Avenir Next', Avenir, 'Segoe UI', ui-sans-serif, system-ui, sans-serif",
+            "source": "system-stack"
+          },
+          {
+            "label": "Serif",
+            "value": "serif",
+            "stack": "Charter, 'Iowan Old Style', Georgia, serif",
+            "source": "system-stack"
+          },
+          {
+            "label": "System",
+            "value": "system",
+            "stack": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+            "source": "system-stack"
+          }
+        ],
+        "typeset": [
+          {
+            "label": "Compact",
+            "value": "compact",
+            "size": 14,
+            "leading": 1.6,
+            "flow": 1,
+            "measure": 58
+          },
+          {
+            "label": "Default",
+            "value": "default",
+            "size": 16,
+            "leading": 1.75,
+            "flow": 1.25,
+            "measure": 65
+          },
+          {
+            "label": "Reading",
+            "value": "reading",
+            "size": 18,
+            "leading": 1.9,
+            "flow": 1.5,
+            "measure": 68
+          }
+        ],
+        "radius": [
+          {
+            "label": "None",
+            "value": "none",
+            "cssValue": "0rem",
+            "surfaceValue": "0rem"
+          },
+          {
+            "label": "Small",
+            "value": "small",
+            "cssValue": "0.375rem",
+            "surfaceValue": "0.375rem"
+          },
+          {
+            "label": "Default",
+            "value": "default",
+            "cssValue": "0.625rem",
+            "surfaceValue": "0.625rem"
+          },
+          {
+            "label": "Large",
+            "value": "large",
+            "cssValue": "0.875rem",
+            "surfaceValue": "0.875rem"
+          },
+          {
+            "label": "Pill / Full",
+            "value": "full",
+            "cssValue": "9999px",
+            "surfaceValue": "0.875rem"
+          }
+        ]
+      },
+      "outputs": [
+        "css",
+        "registry-theme",
+        "share-url"
+      ]
+    }
+  },
+  "foundations": {
+    "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/tokens/foundations.json",
+    "tokenCount": 50,
+    "groups": [
+      {
+        "name": "typography",
+        "label": "Typography",
+        "tokens": [
+          {
+            "name": "font-sans",
+            "type": "fontFamily",
+            "value": "'Geist Variable', sans-serif"
+          },
+          {
+            "name": "font-heading",
+            "type": "fontFamily",
+            "value": "var(--font-sans)"
+          },
+          {
+            "name": "font-mono",
+            "type": "fontFamily",
+            "value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+          },
+          {
+            "name": "text-xs",
+            "type": "fontSize",
+            "value": "0.75rem"
+          },
+          {
+            "name": "text-xs--line-height",
+            "type": "lineHeight",
+            "value": "1rem"
+          },
+          {
+            "name": "text-sm",
+            "type": "fontSize",
+            "value": "0.875rem"
+          },
+          {
+            "name": "text-sm--line-height",
+            "type": "lineHeight",
+            "value": "1.25rem"
+          },
+          {
+            "name": "text-base",
+            "type": "fontSize",
+            "value": "1rem"
+          },
+          {
+            "name": "text-base--line-height",
+            "type": "lineHeight",
+            "value": "1.5rem"
+          },
+          {
+            "name": "text-lg",
+            "type": "fontSize",
+            "value": "1.125rem"
+          },
+          {
+            "name": "text-lg--line-height",
+            "type": "lineHeight",
+            "value": "1.75rem"
+          },
+          {
+            "name": "text-xl",
+            "type": "fontSize",
+            "value": "1.25rem"
+          },
+          {
+            "name": "text-xl--line-height",
+            "type": "lineHeight",
+            "value": "1.75rem"
+          },
+          {
+            "name": "text-2xl",
+            "type": "fontSize",
+            "value": "1.5rem"
+          },
+          {
+            "name": "text-2xl--line-height",
+            "type": "lineHeight",
+            "value": "2rem"
+          },
+          {
+            "name": "text-3xl",
+            "type": "fontSize",
+            "value": "1.875rem"
+          },
+          {
+            "name": "text-3xl--line-height",
+            "type": "lineHeight",
+            "value": "2.25rem"
+          },
+          {
+            "name": "text-4xl",
+            "type": "fontSize",
+            "value": "2.25rem"
+          },
+          {
+            "name": "text-4xl--line-height",
+            "type": "lineHeight",
+            "value": "2.5rem"
+          },
+          {
+            "name": "font-weight-normal",
+            "type": "fontWeight",
+            "value": "400"
+          },
+          {
+            "name": "font-weight-medium",
+            "type": "fontWeight",
+            "value": "500"
+          },
+          {
+            "name": "font-weight-semibold",
+            "type": "fontWeight",
+            "value": "600"
+          },
+          {
+            "name": "font-weight-bold",
+            "type": "fontWeight",
+            "value": "700"
+          },
+          {
+            "name": "tracking-tight",
+            "type": "letterSpacing",
+            "value": "-0.025em"
+          },
+          {
+            "name": "tracking-normal",
+            "type": "letterSpacing",
+            "value": "0"
+          },
+          {
+            "name": "tracking-wide",
+            "type": "letterSpacing",
+            "value": "0.025em"
+          }
+        ]
+      },
+      {
+        "name": "spacing",
+        "label": "Spacing",
+        "tokens": [
+          {
+            "name": "spacing",
+            "type": "dimension",
+            "value": "0.25rem"
+          }
+        ]
+      },
+      {
+        "name": "radius",
+        "label": "Radius",
+        "tokens": [
+          {
+            "name": "control-radius",
+            "type": "radius",
+            "value": "var(--radius)"
+          },
+          {
+            "name": "control-radius-sm",
+            "type": "radius",
+            "value": "calc(var(--control-radius) * 0.8)"
+          },
+          {
+            "name": "radius-sm",
+            "type": "radius",
+            "value": "calc(var(--radius) * 0.6)"
+          },
+          {
+            "name": "radius-md",
+            "type": "radius",
+            "value": "calc(var(--radius) * 0.8)"
+          },
+          {
+            "name": "radius-lg",
+            "type": "radius",
+            "value": "var(--radius)"
+          },
+          {
+            "name": "radius-xl",
+            "type": "radius",
+            "value": "calc(var(--radius) * 1.4)"
+          },
+          {
+            "name": "radius-2xl",
+            "type": "radius",
+            "value": "calc(var(--radius) * 1.8)"
+          },
+          {
+            "name": "radius-3xl",
+            "type": "radius",
+            "value": "calc(var(--radius) * 2.2)"
+          },
+          {
+            "name": "radius-4xl",
+            "type": "radius",
+            "value": "calc(var(--radius) * 2.6)"
+          }
+        ]
+      },
+      {
+        "name": "borders",
+        "label": "Borders",
+        "tokens": [
+          {
+            "name": "border-width-default",
+            "type": "borderWidth",
+            "value": "1px"
+          },
+          {
+            "name": "border-width-strong",
+            "type": "borderWidth",
+            "value": "2px"
+          },
+          {
+            "name": "focus-ring-width",
+            "type": "borderWidth",
+            "value": "2px"
+          },
+          {
+            "name": "focus-ring-offset",
+            "type": "borderWidth",
+            "value": "2px"
+          }
+        ]
+      },
+      {
+        "name": "elevation",
+        "label": "Elevation",
+        "tokens": [
+          {
+            "name": "shadow-xs",
+            "type": "shadow",
+            "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "name": "shadow-sm",
+            "type": "shadow",
+            "value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)"
+          },
+          {
+            "name": "shadow-md",
+            "type": "shadow",
+            "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
+          },
+          {
+            "name": "shadow-lg",
+            "type": "shadow",
+            "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)"
+          }
+        ]
+      },
+      {
+        "name": "motion",
+        "label": "Motion",
+        "tokens": [
+          {
+            "name": "duration-fast",
+            "type": "duration",
+            "value": "100ms"
+          },
+          {
+            "name": "duration-normal",
+            "type": "duration",
+            "value": "150ms"
+          },
+          {
+            "name": "duration-slow",
+            "type": "duration",
+            "value": "300ms"
+          },
+          {
+            "name": "ease-standard",
+            "type": "cubicBezier",
+            "value": "cubic-bezier(0.2, 0, 0, 1)"
+          },
+          {
+            "name": "ease-enter",
+            "type": "cubicBezier",
+            "value": "cubic-bezier(0, 0, 0.2, 1)"
+          },
+          {
+            "name": "ease-exit",
+            "type": "cubicBezier",
+            "value": "cubic-bezier(0.4, 0, 1, 1)"
+          }
+        ]
+      }
+    ]
+  },
+  "componentContracts": {
+    "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+    "profiles": 36,
+    "components": 66,
+    "interactionTested": 66
+  },
+  "rules": [
+    "Read this manifest before selecting or generating components.",
+    "Read the selected resolved component contracts before implementing behavior or states.",
+    "Install registry source instead of recreating component markup from memory.",
+    "Use an immutable versioned registry URL for production installation; use the preview /r channel only for evaluation and controlled updates.",
+    "Use Neutral unless the TIS identity is explicitly requested.",
+    "Use Comfortable density unless the product explicitly requires Compact or Spacious controls.",
+    "Use Base UI render composition; do not translate examples to Radix asChild.",
+    "Use the theme and foundation token contracts; never hardcode brand colors in components.",
+    "Prefer an installable block when it matches the requested application pattern, then adapt its owned source.",
+    "Use the chart recipe bundle for Area, Bar, Line, Pie, Radar or Radial visualizations and keep its text summary or an equivalent data table.",
+    "Preserve visible labels, focus behavior, keyboard paths and responsive states.",
+    "Do not claim a Figma library or handoff exists for this alpha."
+  ],
+  "sources": [
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/ai/manifest.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/llms.txt",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/registry.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/registry/catalog.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/ai/customizer.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/tokens/foundations.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/tokens/densities.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/tokens/customizer.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/tokens/themes/neutral.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/tokens/themes/tis.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/docs/ai-usage.md",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/docs/developer-api.md",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/docs/installation.md",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/docs/blocks.md",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/docs/charts.md",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/docs/customization.md",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/docs/compositions.md",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/docs/maintenance.md",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/docs/releases.md"
+  ],
+  "guides": [],
+  "components": [
+    {
+      "name": "accordion",
+      "title": "Accordion",
+      "status": "alpha",
+      "category": "disclosure",
+      "description": "A vertically stacked set of interactive headings that reveal content.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/accordion.json",
+      "exports": [
+        "Accordion",
+        "AccordionContent",
+        "AccordionItem",
+        "AccordionTrigger"
+      ],
+      "files": [
+        "src/components/ui/accordion.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Base UI connects headings, triggers and panels; Enter and Space toggle a panel while Tab follows normal document order.",
+      "contract": {
+        "profile": "disclosure",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "alert",
+      "title": "Alert",
+      "status": "alpha",
+      "category": "feedback",
+      "description": "A static status message with optional title, icon and action.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/alert.json",
+      "exports": [
+        "Alert",
+        "AlertAction",
+        "AlertDescription",
+        "AlertTitle"
+      ],
+      "files": [
+        "src/components/ui/alert.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Choose role=status for advisory updates and role=alert only for urgent dynamic content; keep title, description and recovery action visible.",
+      "contract": {
+        "profile": "static-feedback",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "alert-dialog",
+      "title": "Alert Dialog",
+      "status": "alpha",
+      "category": "overlay",
+      "description": "A modal confirmation surface for important or destructive decisions.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/alert-dialog.json",
+      "exports": [
+        "AlertDialog",
+        "AlertDialogAction",
+        "AlertDialogCancel",
+        "AlertDialogContent",
+        "AlertDialogDescription",
+        "AlertDialogFooter",
+        "AlertDialogHeader",
+        "AlertDialogMedia",
+        "AlertDialogOverlay",
+        "AlertDialogPortal",
+        "AlertDialogTitle",
+        "AlertDialogTrigger"
+      ],
+      "files": [
+        "src/components/ui/alert-dialog.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "accessibility": "Always provide a title and description; Base UI traps focus and requires an explicit response.",
+      "contract": {
+        "profile": "modal-overlay",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "aspect-ratio",
+      "title": "Aspect Ratio",
+      "status": "alpha",
+      "category": "layout",
+      "description": "A layout primitive that preserves a fixed width-to-height ratio.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/aspect-ratio.json",
+      "exports": [
+        "AspectRatio"
+      ],
+      "files": [
+        "src/components/ui/aspect-ratio.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "The ratio wrapper is presentational; give the hosted image, media, figure or other content its own semantics and alternative text.",
+      "contract": {
+        "profile": "data-display",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "attachment",
+      "title": "Attachment",
+      "status": "alpha",
+      "category": "data-display",
+      "description": "A file attachment surface with media, metadata, actions and an optional trigger.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/attachment.json",
+      "exports": [
+        "Attachment",
+        "AttachmentAction",
+        "AttachmentActions",
+        "AttachmentContent",
+        "AttachmentDescription",
+        "AttachmentGroup",
+        "AttachmentMedia",
+        "AttachmentTitle",
+        "AttachmentTrigger"
+      ],
+      "files": [
+        "src/components/ui/attachment.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "accessibility": "Keep filename, file type, size and upload or error state available as text; give every icon-only action and trigger its own accessible name and tab stop.",
+      "contract": {
+        "profile": "action",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "status": "alpha",
+      "category": "data-display",
+      "description": "A user or entity image with fallback, badge and grouping support.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/avatar.json",
+      "exports": [
+        "Avatar",
+        "AvatarBadge",
+        "AvatarFallback",
+        "AvatarGroup",
+        "AvatarGroupCount",
+        "AvatarImage"
+      ],
+      "files": [
+        "src/components/ui/avatar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Name informative people or entities, keep decorative avatars hidden, always include AvatarFallback and provide context for group overflow counts.",
+      "contract": {
+        "profile": "data-display",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "badge",
+      "title": "Badge",
+      "status": "alpha",
+      "category": "data-display",
+      "description": "A compact label for status, category or metadata.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/badge.json",
+      "exports": [
+        "Badge",
+        "BadgeVariantProps",
+        "badgeVariants"
+      ],
+      "files": [
+        "src/components/ui/badge.tsx",
+        "src/components/ui/badge.variants.ts"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Keep badges as text by default; use status semantics only for actual state and never rely on color alone.",
+      "contract": {
+        "profile": "data-display",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "breadcrumb",
+      "title": "Breadcrumb",
+      "status": "alpha",
+      "category": "navigation",
+      "description": "A hierarchical path that locates the current page within a structure.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/breadcrumb.json",
+      "exports": [
+        "Breadcrumb",
+        "BreadcrumbEllipsis",
+        "BreadcrumbItem",
+        "BreadcrumbLink",
+        "BreadcrumbList",
+        "BreadcrumbPage",
+        "BreadcrumbSeparator"
+      ],
+      "files": [
+        "src/components/ui/breadcrumb.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Use a named navigation landmark with an ordered list, real destination links, decorative separators and aria-current on exactly one current page.",
+      "contract": {
+        "profile": "navigation",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "bubble",
+      "title": "Bubble",
+      "status": "alpha",
+      "category": "data-display",
+      "description": "A conversational content surface with alignment and reaction support.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/bubble.json",
+      "exports": [
+        "Bubble",
+        "BubbleContent",
+        "BubbleGroup",
+        "BubbleReactions"
+      ],
+      "files": [
+        "src/components/ui/bubble.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "When bubbles form a conversation, provide a named log, identify each speaker and preserve chronological DOM order.",
+      "contract": {
+        "profile": "data-display",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "button",
+      "title": "Button",
+      "status": "alpha",
+      "category": "action",
+      "description": "A primary action primitive with visual variants and sizes.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/button.json",
+      "exports": [
+        "Button",
+        "ButtonVariantProps",
+        "buttonVariants"
+      ],
+      "files": [
+        "src/components/ui/button.tsx",
+        "src/components/ui/button.variants.ts"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Base UI preserves native button semantics, disabled state and keyboard activation.",
+      "contract": {
+        "profile": "action",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "button-group",
+      "title": "Button Group",
+      "status": "alpha",
+      "category": "action",
+      "description": "A visual and semantic grouping for closely related actions or controls.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/button-group.json",
+      "exports": [
+        "ButtonGroup",
+        "ButtonGroupSeparator",
+        "ButtonGroupText",
+        "ButtonGroupVariantProps",
+        "buttonGroupVariants"
+      ],
+      "files": [
+        "src/components/ui/button-group.tsx",
+        "src/components/ui/button-group.variants.ts"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "separator"
+      ],
+      "accessibility": "Name the group, preserve native tab order and use Toggle Group instead when the items represent pressed or mutually exclusive state.",
+      "contract": {
+        "profile": "action-group",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "calendar",
+      "title": "Calendar",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A date selection calendar with single, multiple and range modes.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/calendar.json",
+      "exports": [
+        "Calendar",
+        "CalendarDayButton"
+      ],
+      "files": [
+        "src/components/ui/calendar.tsx"
+      ],
+      "dependencies": [
+        "react-day-picker@10.0.1",
+        "date-fns@4.4.0"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "accessibility": "Provide a visible purpose and date format; React DayPicker manages the calendar grid and keyboard navigation.",
+      "contract": {
+        "profile": "external-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "status": "alpha",
+      "category": "layout",
+      "description": "A compositional surface for grouped content and actions.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/card.json",
+      "exports": [
+        "Card",
+        "CardAction",
+        "CardContent",
+        "CardDescription",
+        "CardFooter",
+        "CardHeader",
+        "CardTitle"
+      ],
+      "files": [
+        "src/components/ui/card.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Add region or article semantics only when the card is a meaningful standalone section and connect it to a heading at the correct level.",
+      "contract": {
+        "profile": "data-display",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "carousel",
+      "title": "Carousel",
+      "status": "alpha",
+      "category": "data-display",
+      "description": "A keyboard-operable sequence of slides powered by Embla Carousel.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/carousel.json",
+      "exports": [
+        "Carousel",
+        "CarouselApi",
+        "CarouselContent",
+        "CarouselContext",
+        "CarouselItem",
+        "CarouselNext",
+        "CarouselPrevious",
+        "useCarousel"
+      ],
+      "files": [
+        "src/components/ui/carousel.ts",
+        "src/components/ui/carousel.components.tsx",
+        "src/components/ui/carousel.context.ts",
+        "src/components/ui/carousel.types.ts"
+      ],
+      "dependencies": [
+        "embla-carousel-react@8.6.0"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "accessibility": "Name the carousel and every slide, provide Previous and Next as non-drag controls, and do not capture arrow keys from interactive slide content.",
+      "contract": {
+        "profile": "external-interactive",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "chart",
+      "title": "Chart",
+      "status": "alpha",
+      "category": "data-display",
+      "description": "Token-aware wrappers, tooltip and legend utilities for Recharts visualizations.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/chart.json",
+      "exports": [
+        "ChartContainer",
+        "ChartLegend",
+        "ChartLegendContent",
+        "ChartStyle",
+        "ChartTooltip",
+        "ChartTooltipContent"
+      ],
+      "files": [
+        "src/components/ui/chart.tsx"
+      ],
+      "dependencies": [
+        "recharts@3.8.0"
+      ],
+      "registryDependencies": [
+        "card"
+      ],
+      "accessibility": "Name the graphic, provide a concise text summary and exact values when the task requires them, and never rely on color alone to distinguish series.",
+      "contract": {
+        "profile": "data-visualization",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A binary or mixed-state selection control.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/checkbox.json",
+      "exports": [
+        "Checkbox"
+      ],
+      "files": [
+        "src/components/ui/checkbox.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Pair with FieldLabel; Base UI manages checked, indeterminate and disabled states.",
+      "contract": {
+        "profile": "selection-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "collapsible",
+      "title": "Collapsible",
+      "status": "alpha",
+      "category": "disclosure",
+      "description": "A trigger that reveals or hides a single region of related content.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/collapsible.json",
+      "exports": [
+        "Collapsible",
+        "CollapsibleContent",
+        "CollapsibleTrigger"
+      ],
+      "files": [
+        "src/components/ui/collapsible.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Base UI connects the trigger and panel with expanded and controlled-region state while preserving trigger focus.",
+      "contract": {
+        "profile": "disclosure",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "combobox",
+      "title": "Combobox",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A searchable single or multiple selection input with listbox behavior.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/combobox.json",
+      "exports": [
+        "Combobox",
+        "ComboboxChip",
+        "ComboboxChips",
+        "ComboboxChipsInput",
+        "ComboboxCollection",
+        "ComboboxContent",
+        "ComboboxEmpty",
+        "ComboboxGroup",
+        "ComboboxInput",
+        "ComboboxItem",
+        "ComboboxLabel",
+        "ComboboxList",
+        "ComboboxSeparator",
+        "ComboboxTrigger",
+        "ComboboxValue",
+        "useComboboxAnchor"
+      ],
+      "files": [
+        "src/components/ui/combobox.ts",
+        "src/components/ui/combobox.components.tsx",
+        "src/components/ui/combobox.hooks.ts"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "input-group"
+      ],
+      "accessibility": "Use a visible label and name clear or remove actions; Base UI manages active options, selection, filtering and keyboard navigation.",
+      "contract": {
+        "profile": "searchable-selection-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "command",
+      "title": "Command",
+      "status": "alpha",
+      "category": "navigation",
+      "description": "A searchable command list that can be embedded or opened in a dialog.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/command.json",
+      "exports": [
+        "Command",
+        "CommandDialog",
+        "CommandEmpty",
+        "CommandGroup",
+        "CommandInput",
+        "CommandItem",
+        "CommandList",
+        "CommandSeparator",
+        "CommandShortcut"
+      ],
+      "files": [
+        "src/components/ui/command.tsx"
+      ],
+      "dependencies": [
+        "cmdk@1.1.1"
+      ],
+      "registryDependencies": [
+        "dialog",
+        "input-group"
+      ],
+      "accessibility": "Name the search input, keep items inside groups with stable values, and attach one observable onSelect action to every executable command.",
+      "contract": {
+        "profile": "command-list",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "context-menu",
+      "title": "Context Menu",
+      "status": "alpha",
+      "category": "navigation",
+      "description": "A contextual action menu opened from pointer or keyboard interaction.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/context-menu.json",
+      "exports": [
+        "ContextMenu",
+        "ContextMenuCheckboxItem",
+        "ContextMenuContent",
+        "ContextMenuGroup",
+        "ContextMenuItem",
+        "ContextMenuLabel",
+        "ContextMenuPortal",
+        "ContextMenuRadioGroup",
+        "ContextMenuRadioItem",
+        "ContextMenuSeparator",
+        "ContextMenuShortcut",
+        "ContextMenuSub",
+        "ContextMenuSubContent",
+        "ContextMenuSubTrigger",
+        "ContextMenuTrigger"
+      ],
+      "files": [
+        "src/components/ui/context-menu.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Base UI manages focus and menu navigation; every action must remain available without a pointing device.",
+      "contract": {
+        "profile": "menu",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "data-table",
+      "title": "Data Table",
+      "status": "alpha",
+      "category": "data-display",
+      "introducedIn": "0.1.0-alpha.0",
+      "description": "A reusable TanStack Table composition with sorting, filtering, pagination and selection support.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/data-table.json",
+      "exports": [
+        "createDataTableColumnHelper",
+        "DataTable",
+        "DataTableColumnHeader",
+        "DataTableColumnHeaderProps",
+        "dataTableFeatures",
+        "DataTableFeatures",
+        "DataTableFilter",
+        "DataTableProps"
+      ],
+      "files": [
+        "src/components/ui/data-table.ts",
+        "src/components/ui/data-table.components.tsx",
+        "src/components/ui/data-table.features.ts"
+      ],
+      "dependencies": [
+        "@tanstack/react-table@9.1.2"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "table"
+      ],
+      "accessibility": "Provide a table name or caption, associated headers, aria-sort, keyboard-operable filter and pagination controls, empty feedback and a live result count.",
+      "contract": {
+        "profile": "data-table",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "date-picker",
+      "title": "Date Picker",
+      "status": "alpha",
+      "category": "form-control",
+      "introducedIn": "0.1.0-alpha.0",
+      "description": "A controlled or uncontrolled date selection composition built from Button, Calendar and Popover.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/date-picker.json",
+      "exports": [
+        "DatePicker",
+        "DatePickerProps"
+      ],
+      "files": [
+        "src/components/ui/date-picker.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "calendar",
+        "popover"
+      ],
+      "accessibility": "Use a visible FieldLabel and named popup; the trigger restores focus, the calendar preserves DayPicker keyboard navigation and the hidden form value follows disabled state.",
+      "contract": {
+        "profile": "date-selection-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "dialog",
+      "title": "Dialog",
+      "status": "alpha",
+      "category": "overlay",
+      "description": "A modal task surface with focus management and dismissal behavior.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/dialog.json",
+      "exports": [
+        "Dialog",
+        "DialogClose",
+        "DialogContent",
+        "DialogDescription",
+        "DialogFooter",
+        "DialogHeader",
+        "DialogOverlay",
+        "DialogPortal",
+        "DialogTitle",
+        "DialogTrigger"
+      ],
+      "files": [
+        "src/components/ui/dialog.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "accessibility": "Always provide DialogTitle and DialogDescription; Base UI manages focus trapping and restoration.",
+      "contract": {
+        "profile": "modal-overlay",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "direction",
+      "title": "Direction",
+      "status": "alpha",
+      "category": "utility",
+      "description": "A provider for left-to-right and right-to-left component behavior.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/direction.json",
+      "exports": [
+        "DirectionProvider",
+        "useDirection"
+      ],
+      "files": [
+        "src/components/ui/direction.ts"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Keep direction aligned with the content language and DOM reading order; the provider must not reverse meaning or keyboard sequence.",
+      "contract": {
+        "profile": "utility",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "drawer",
+      "title": "Drawer",
+      "status": "alpha",
+      "category": "overlay",
+      "description": "A swipeable edge panel with modal, nested and snap-point behavior.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/drawer.json",
+      "exports": [
+        "Drawer",
+        "DrawerClose",
+        "DrawerContent",
+        "DrawerDescription",
+        "DrawerFooter",
+        "DrawerHeader",
+        "DrawerOverlay",
+        "DrawerPortal",
+        "DrawerSwipeHandle",
+        "DrawerTitle",
+        "DrawerTrigger"
+      ],
+      "files": [
+        "src/components/ui/drawer.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Always provide a title, description and explicit close path; swipe and snap points require equivalent non-drag controls, and the base stylesheet positions body for iOS Safari.",
+      "contract": {
+        "profile": "modal-overlay",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "dropdown-menu",
+      "title": "Dropdown Menu",
+      "status": "alpha",
+      "category": "navigation",
+      "description": "An anchored menu for actions, selections and nested commands.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/dropdown-menu.json",
+      "exports": [
+        "DropdownMenu",
+        "DropdownMenuCheckboxItem",
+        "DropdownMenuContent",
+        "DropdownMenuGroup",
+        "DropdownMenuItem",
+        "DropdownMenuLabel",
+        "DropdownMenuPortal",
+        "DropdownMenuRadioGroup",
+        "DropdownMenuRadioItem",
+        "DropdownMenuSeparator",
+        "DropdownMenuShortcut",
+        "DropdownMenuSub",
+        "DropdownMenuSubContent",
+        "DropdownMenuSubTrigger",
+        "DropdownMenuTrigger"
+      ],
+      "files": [
+        "src/components/ui/dropdown-menu.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Use menu items for actions rather than site navigation; Base UI manages roving focus and keyboard navigation.",
+      "contract": {
+        "profile": "menu",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "empty",
+      "title": "Empty",
+      "status": "alpha",
+      "category": "feedback",
+      "description": "A structured empty state with media, explanation and an optional next action.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/empty.json",
+      "exports": [
+        "Empty",
+        "EmptyContent",
+        "EmptyDescription",
+        "EmptyHeader",
+        "EmptyMedia",
+        "EmptyTitle"
+      ],
+      "files": [
+        "src/components/ui/empty.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Use a programmatic heading, concise description, decorative media and a named keyboard-operable recovery action.",
+      "contract": {
+        "profile": "static-feedback",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "field",
+      "title": "Field",
+      "status": "alpha",
+      "category": "form-structure",
+      "description": "A semantic composition for labels, controls, descriptions and validation messages.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/field.json",
+      "exports": [
+        "Field",
+        "FieldContent",
+        "FieldDescription",
+        "FieldError",
+        "FieldGroup",
+        "FieldLabel",
+        "FieldLegend",
+        "FieldSeparator",
+        "FieldSet",
+        "FieldTitle"
+      ],
+      "files": [
+        "src/components/ui/field.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "label",
+        "separator"
+      ],
+      "accessibility": "Connect labels, descriptions and errors to the control with stable IDs and aria-describedby.",
+      "contract": {
+        "profile": "form-structure",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "form",
+      "title": "Form",
+      "status": "alpha",
+      "category": "form-structure",
+      "introducedIn": "0.1.0-alpha.0",
+      "description": "A native form composition with Field-based body layout, pending state and responsive actions.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/form.json",
+      "exports": [
+        "Form",
+        "FormActions",
+        "FormBody",
+        "FormProps"
+      ],
+      "files": [
+        "src/components/ui/form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "field"
+      ],
+      "accessibility": "Preserves native form submission and validation semantics; compose every control with a visible label and connected error text.",
+      "contract": {
+        "profile": "native-form",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "hover-card",
+      "title": "Hover Card",
+      "status": "alpha",
+      "category": "overlay",
+      "description": "A non-modal preview surface shown from hover or keyboard focus.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/hover-card.json",
+      "exports": [
+        "HoverCard",
+        "HoverCardContent",
+        "HoverCardTrigger"
+      ],
+      "files": [
+        "src/components/ui/hover-card.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Use a real destination link as the trigger, keep focus on that link and never hide essential information or actions only in the visual preview.",
+      "contract": {
+        "profile": "nonmodal-overlay",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "input",
+      "title": "Input",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A single-line text input built on the Base UI input primitive.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/input.json",
+      "exports": [
+        "Input"
+      ],
+      "files": [
+        "src/components/ui/input.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Use inside Field with a visible label; provide autocomplete and inputMode where relevant.",
+      "contract": {
+        "profile": "text-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "input-group",
+      "title": "Input Group",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A text control composed with inline addons, actions or keyboard hints.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/input-group.json",
+      "exports": [
+        "InputGroup",
+        "InputGroupAddon",
+        "InputGroupButton",
+        "InputGroupInput",
+        "InputGroupText",
+        "InputGroupTextarea"
+      ],
+      "files": [
+        "src/components/ui/input-group.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "input",
+        "textarea"
+      ],
+      "accessibility": "Use InputGroupInput or InputGroupTextarea with a visible external label and named icon buttons; clicking a non-interactive addon focuses the contained control.",
+      "contract": {
+        "profile": "form-composition",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "input-otp",
+      "title": "Input OTP",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A segmented one-time-password input backed by a single accessible value.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/input-otp.json",
+      "exports": [
+        "InputOTP",
+        "InputOTPGroup",
+        "InputOTPSeparator",
+        "InputOTPSlot"
+      ],
+      "files": [
+        "src/components/ui/input-otp.tsx"
+      ],
+      "dependencies": [
+        "input-otp@1.5.0"
+      ],
+      "registryDependencies": [],
+      "accessibility": "Provide a visible label, autocomplete=one-time-code and clear validation text.",
+      "contract": {
+        "profile": "external-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "item",
+      "title": "Item",
+      "status": "alpha",
+      "category": "data-display",
+      "description": "A compositional row for media, title, description and related actions.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/item.json",
+      "exports": [
+        "Item",
+        "ItemActions",
+        "ItemContent",
+        "ItemDescription",
+        "ItemFooter",
+        "ItemGroup",
+        "ItemHeader",
+        "ItemMedia",
+        "ItemSeparator",
+        "ItemTitle"
+      ],
+      "files": [
+        "src/components/ui/item.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "separator"
+      ],
+      "accessibility": "Give standalone items an appropriate article, listitem or link semantic, connect title and description, and name every action; use Field for form controls.",
+      "contract": {
+        "profile": "data-display",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "kbd",
+      "title": "Kbd",
+      "status": "alpha",
+      "category": "data-display",
+      "description": "A compact representation of keyboard input or shortcuts.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/kbd.json",
+      "exports": [
+        "Kbd",
+        "KbdGroup"
+      ],
+      "files": [
+        "src/components/ui/kbd.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Use native kbd markup and pair keys with adjacent text that explains the command; do not make the keycap itself focusable.",
+      "contract": {
+        "profile": "data-display",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "status": "alpha",
+      "category": "form-structure",
+      "description": "A visible label for form controls.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/label.json",
+      "exports": [
+        "Label"
+      ],
+      "files": [
+        "src/components/ui/label.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Bind the visible label to exactly one labelable control with htmlFor and a matching id so pointer activation moves focus.",
+      "contract": {
+        "profile": "form-structure",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "marker",
+      "title": "Marker",
+      "status": "alpha",
+      "category": "data-display",
+      "description": "A compact annotated line with optional icon, border or separators.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/marker.json",
+      "exports": [
+        "Marker",
+        "MarkerContent",
+        "MarkerIcon",
+        "markerVariants"
+      ],
+      "files": [
+        "src/components/ui/marker.ts",
+        "src/components/ui/marker.components.tsx",
+        "src/components/ui/marker.variants.ts"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Keep marker text meaningful without its icon or separator; hide decorative media and add status semantics only for real updates.",
+      "contract": {
+        "profile": "data-display",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "menubar",
+      "title": "Menubar",
+      "status": "alpha",
+      "category": "navigation",
+      "description": "A persistent horizontal set of menus for application commands.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/menubar.json",
+      "exports": [
+        "Menubar",
+        "MenubarCheckboxItem",
+        "MenubarContent",
+        "MenubarGroup",
+        "MenubarItem",
+        "MenubarLabel",
+        "MenubarMenu",
+        "MenubarPortal",
+        "MenubarRadioGroup",
+        "MenubarRadioItem",
+        "MenubarSeparator",
+        "MenubarShortcut",
+        "MenubarSub",
+        "MenubarSubContent",
+        "MenubarSubTrigger",
+        "MenubarTrigger"
+      ],
+      "files": [
+        "src/components/ui/menubar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Use for application commands, place items inside MenubarGroup and connect every action; Base UI manages roving trigger and menu focus.",
+      "contract": {
+        "profile": "menu",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "message",
+      "title": "Message",
+      "status": "alpha",
+      "category": "data-display",
+      "description": "A structured conversation message with content, metadata and actions.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/message.json",
+      "exports": [
+        "Message",
+        "MessageAvatar",
+        "MessageContent",
+        "MessageFooter",
+        "MessageGroup",
+        "MessageHeader"
+      ],
+      "files": [
+        "src/components/ui/message.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Expose each message as a named article when needed, keep sender, content and delivery state in accessible text and preserve chronological DOM order.",
+      "contract": {
+        "profile": "static-feedback",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "message-scroller",
+      "title": "Message Scroller",
+      "status": "alpha",
+      "category": "layout",
+      "description": "A conversation viewport with managed anchoring and scroll-to-start or end controls.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/message-scroller.json",
+      "exports": [
+        "MessageScroller",
+        "MessageScrollerButton",
+        "MessageScrollerContent",
+        "MessageScrollerItem",
+        "MessageScrollerProvider",
+        "MessageScrollerViewport",
+        "useMessageScroller",
+        "useMessageScrollerScrollable",
+        "useMessageScrollerVisibility"
+      ],
+      "files": [
+        "src/components/ui/message-scroller.ts",
+        "src/components/ui/message-scroller.components.tsx"
+      ],
+      "dependencies": [
+        "@shadcn/react@0.3.0"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "accessibility": "Name the scroll viewport and log, keep stable message IDs, announce new content intentionally, preserve reader position and transfer focus to the viewport after the scroll-to-end control disappears.",
+      "contract": {
+        "profile": "scroll-surface",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "native-select",
+      "title": "Native Select",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A styled native select for simple options and platform-native behavior.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/native-select.json",
+      "exports": [
+        "NativeSelect",
+        "NativeSelectOptGroup",
+        "NativeSelectOption"
+      ],
+      "files": [
+        "src/components/ui/native-select.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Associate the select with a visible label and use optgroup for meaningful option groups.",
+      "contract": {
+        "profile": "native-choice-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "navigation-menu",
+      "title": "Navigation Menu",
+      "status": "alpha",
+      "category": "navigation",
+      "description": "A responsive navigation structure with links and optional disclosure panels.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/navigation-menu.json",
+      "exports": [
+        "NavigationMenu",
+        "NavigationMenuContent",
+        "NavigationMenuIndicator",
+        "NavigationMenuItem",
+        "NavigationMenuLink",
+        "NavigationMenuList",
+        "NavigationMenuPositioner",
+        "NavigationMenuTrigger",
+        "navigationMenuTriggerStyle"
+      ],
+      "files": [
+        "src/components/ui/navigation-menu.ts",
+        "src/components/ui/navigation-menu.components.tsx",
+        "src/components/ui/navigation-menu.variants.ts"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Name the navigation landmark, use real links, mark the current route and keep disclosed destinations reachable by keyboard.",
+      "contract": {
+        "profile": "navigation-overlay",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "pagination",
+      "title": "Pagination",
+      "status": "alpha",
+      "category": "navigation",
+      "description": "A page navigation pattern with current, previous, next and overflow states.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/pagination.json",
+      "exports": [
+        "Pagination",
+        "PaginationContent",
+        "PaginationEllipsis",
+        "PaginationItem",
+        "PaginationLink",
+        "PaginationNext",
+        "PaginationPrevious"
+      ],
+      "files": [
+        "src/components/ui/pagination.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "accessibility": "Provide unique native links, mark exactly one current page, localize the landmark and remove unavailable Previous or Next links from the tab order.",
+      "contract": {
+        "profile": "native-link-navigation",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "popover",
+      "title": "Popover",
+      "status": "alpha",
+      "category": "overlay",
+      "description": "A non-modal anchored surface for compact interactive content.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/popover.json",
+      "exports": [
+        "Popover",
+        "PopoverContent",
+        "PopoverDescription",
+        "PopoverHeader",
+        "PopoverTitle",
+        "PopoverTrigger"
+      ],
+      "files": [
+        "src/components/ui/popover.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Use a meaningful trigger and title or description when the content needs a named region.",
+      "contract": {
+        "profile": "nonmodal-overlay",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "progress",
+      "title": "Progress",
+      "status": "alpha",
+      "category": "feedback",
+      "description": "A determinate progress indicator with optional label and value.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/progress.json",
+      "exports": [
+        "Progress",
+        "ProgressIndicator",
+        "ProgressLabel",
+        "ProgressTrack",
+        "ProgressValue"
+      ],
+      "files": [
+        "src/components/ui/progress.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Provide an accessible label plus minimum, maximum and current values when determinate; omit the current value when indeterminate and do not add a tab stop.",
+      "contract": {
+        "profile": "status",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "questionnaire",
+      "title": "Questionnaire",
+      "status": "alpha",
+      "category": "form-structure",
+      "description": "A multi-step question flow with navigation and progress state.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/questionnaire.json",
+      "exports": [
+        "Questionnaire",
+        "QuestionnaireActions",
+        "QuestionnaireChoice",
+        "QuestionnaireChoiceDescription",
+        "QuestionnaireChoices",
+        "QuestionnaireDescription",
+        "QuestionnaireError",
+        "QuestionnaireInput",
+        "QuestionnaireItem",
+        "QuestionnaireNext",
+        "QuestionnairePrevious",
+        "QuestionnaireProgress",
+        "QuestionnaireSkip",
+        "QuestionnaireSubmit",
+        "QuestionnaireTitle"
+      ],
+      "files": [
+        "src/components/ui/questionnaire.tsx"
+      ],
+      "dependencies": [
+        "@shadcn/react@0.3.0"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "accessibility": "The declared @shadcn/react flow owns step behavior; use semantic field groups and announce step changes, validation errors and progress.",
+      "contract": {
+        "profile": "external-form-flow",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "radio-group",
+      "title": "Radio Group",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A mutually exclusive set of options.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/radio-group.json",
+      "exports": [
+        "RadioGroup",
+        "RadioGroupItem"
+      ],
+      "files": [
+        "src/components/ui/radio-group.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Wrap the group in FieldSet and FieldLegend; Base UI manages arrow-key navigation.",
+      "contract": {
+        "profile": "selection-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "resizable",
+      "title": "Resizable",
+      "status": "alpha",
+      "category": "layout",
+      "description": "A set of panels whose dimensions can be adjusted with a separator.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/resizable.json",
+      "exports": [
+        "ResizableHandle",
+        "ResizablePanel",
+        "ResizablePanelGroup"
+      ],
+      "files": [
+        "src/components/ui/resizable.tsx"
+      ],
+      "dependencies": [
+        "react-resizable-panels@4.12.3"
+      ],
+      "registryDependencies": [],
+      "accessibility": "Expose the separator orientation and current range, keep every drag adjustment keyboard operable and provide sensible minimum and maximum panel sizes.",
+      "contract": {
+        "profile": "external-interactive",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "scroll-area",
+      "title": "Scroll Area",
+      "status": "alpha",
+      "category": "layout",
+      "description": "A styled scroll viewport that preserves native scrolling behavior.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/scroll-area.json",
+      "exports": [
+        "ScrollArea",
+        "ScrollBar"
+      ],
+      "files": [
+        "src/components/ui/scroll-area.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Preserve native scrolling; only add a viewport tab stop when keyboard scrolling is required and provide a contextual region name in that case.",
+      "contract": {
+        "profile": "scroll-surface",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "select",
+      "title": "Select",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A single-selection popup control with groups and scrolling support.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/select.json",
+      "exports": [
+        "Select",
+        "SelectContent",
+        "SelectGroup",
+        "SelectItem",
+        "SelectLabel",
+        "SelectScrollDownButton",
+        "SelectScrollUpButton",
+        "SelectSeparator",
+        "SelectTrigger",
+        "SelectValue"
+      ],
+      "files": [
+        "src/components/ui/select.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Base UI manages trigger, popup, active option and keyboard navigation relationships.",
+      "contract": {
+        "profile": "selection-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "status": "alpha",
+      "category": "layout",
+      "description": "A horizontal or vertical visual divider.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/separator.json",
+      "exports": [
+        "Separator"
+      ],
+      "files": [
+        "src/components/ui/separator.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Keep purely visual dividers decorative; expose separator semantics and orientation only when the divider communicates document structure.",
+      "contract": {
+        "profile": "data-display",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "sheet",
+      "title": "Sheet",
+      "status": "alpha",
+      "category": "overlay",
+      "description": "A modal panel that enters from an edge of the viewport.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/sheet.json",
+      "exports": [
+        "Sheet",
+        "SheetClose",
+        "SheetContent",
+        "SheetDescription",
+        "SheetFooter",
+        "SheetHeader",
+        "SheetTitle",
+        "SheetTrigger"
+      ],
+      "files": [
+        "src/components/ui/sheet.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "accessibility": "Always provide SheetTitle, SheetDescription and an explicit close path; content and actions must remain scroll-reachable at mobile widths and zoom.",
+      "contract": {
+        "profile": "modal-overlay",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "sidebar",
+      "title": "Sidebar",
+      "status": "alpha",
+      "category": "navigation",
+      "description": "A responsive application sidebar with collapsible and mobile sheet behavior.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/sidebar.json",
+      "exports": [
+        "Sidebar",
+        "SidebarContent",
+        "SidebarContext",
+        "SidebarFooter",
+        "SidebarGroup",
+        "SidebarGroupAction",
+        "SidebarGroupContent",
+        "SidebarGroupLabel",
+        "SidebarHeader",
+        "SidebarInput",
+        "SidebarInset",
+        "SidebarMenu",
+        "SidebarMenuAction",
+        "SidebarMenuBadge",
+        "SidebarMenuButton",
+        "SidebarMenuItem",
+        "SidebarMenuSkeleton",
+        "SidebarMenuSub",
+        "SidebarMenuSubButton",
+        "SidebarMenuSubItem",
+        "SidebarProvider",
+        "SidebarRail",
+        "SidebarSeparator",
+        "SidebarTrigger",
+        "useSidebar"
+      ],
+      "files": [
+        "src/components/ui/sidebar.ts",
+        "src/components/ui/sidebar.components.tsx",
+        "src/components/ui/sidebar.context.ts",
+        "src/hooks/use-mobile.ts"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "input",
+        "separator",
+        "sheet",
+        "skeleton",
+        "tooltip"
+      ],
+      "accessibility": "Compose a named navigation landmark with real links, aria-current and the generated trigger relationship; keep a visible close path in the mobile Sheet.",
+      "contract": {
+        "profile": "responsive-navigation-shell",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "status": "alpha",
+      "category": "feedback",
+      "description": "A non-interactive placeholder for content that is loading.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/skeleton.json",
+      "exports": [
+        "Skeleton"
+      ],
+      "files": [
+        "src/components/ui/skeleton.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Keep skeleton shapes hidden from assistive technology and mark the containing region busy with one meaningful loading label.",
+      "contract": {
+        "profile": "passive-status",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "slider",
+      "title": "Slider",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A single or range value input along a horizontal or vertical track.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/slider.json",
+      "exports": [
+        "Slider"
+      ],
+      "files": [
+        "src/components/ui/slider.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Provide an accessible label and meaningful minimum, maximum and step values for every thumb.",
+      "contract": {
+        "profile": "selection-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "sonner",
+      "title": "Sonner",
+      "status": "alpha",
+      "category": "feedback",
+      "description": "A lightweight toast renderer that follows the active UI Foundation theme.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/sonner.json",
+      "exports": [
+        "Toaster"
+      ],
+      "files": [
+        "src/components/ui/sonner.tsx"
+      ],
+      "dependencies": [
+        "sonner@2.0.8"
+      ],
+      "registryDependencies": [],
+      "accessibility": "Choose polite or assertive announcements from urgency, never steal focus, name every action and keep essential information available in persistent content.",
+      "contract": {
+        "profile": "external-live-feedback",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "spinner",
+      "title": "Spinner",
+      "status": "alpha",
+      "category": "feedback",
+      "description": "A compact animated progress indicator for indeterminate work.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/spinner.json",
+      "exports": [
+        "Spinner"
+      ],
+      "files": [
+        "src/components/ui/spinner.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Name standalone loading status, localize that label and hide the spinner when adjacent button or status text already communicates loading.",
+      "contract": {
+        "profile": "passive-status",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "switch",
+      "title": "Switch",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "An immediate on or off setting control.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/switch.json",
+      "exports": [
+        "Switch"
+      ],
+      "files": [
+        "src/components/ui/switch.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Pair with FieldLabel; Base UI exposes switch semantics and checked state.",
+      "contract": {
+        "profile": "selection-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "table",
+      "title": "Table",
+      "status": "alpha",
+      "category": "data-display",
+      "description": "Semantic table primitives for structured rows, headers, captions and summaries.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/table.json",
+      "exports": [
+        "Table",
+        "TableBody",
+        "TableCaption",
+        "TableCell",
+        "TableFooter",
+        "TableHead",
+        "TableHeader",
+        "TableRow"
+      ],
+      "files": [
+        "src/components/ui/table.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Provide a caption or associated name, use scoped header cells and native row order, and expose sorting only through actual controls and aria-sort.",
+      "contract": {
+        "profile": "data-display",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "status": "alpha",
+      "category": "navigation",
+      "description": "A set of panels where one section is visible at a time.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/tabs.json",
+      "exports": [
+        "Tabs",
+        "TabsContent",
+        "TabsList",
+        "TabsListVariantProps",
+        "tabsListVariants",
+        "TabsTrigger"
+      ],
+      "files": [
+        "src/components/ui/tabs.tsx",
+        "src/components/ui/tabs.variants.ts"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Keep triggers inside TabsList; Base UI manages roles, selection and arrow-key navigation.",
+      "contract": {
+        "profile": "tabs",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "textarea",
+      "title": "Textarea",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A multi-line text input that grows with its content.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/textarea.json",
+      "exports": [
+        "Textarea"
+      ],
+      "files": [
+        "src/components/ui/textarea.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Use inside Field with a visible label and describe limits or requirements before errors occur.",
+      "contract": {
+        "profile": "native-control",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "toast",
+      "title": "Toast",
+      "status": "alpha",
+      "category": "feedback",
+      "description": "A Base UI toast system with queueing, actions, swipe dismissal and a five-item visible limit.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/toast.json",
+      "exports": [
+        "createToastManager",
+        "toast",
+        "Toast",
+        "ToastAction",
+        "ToastClose",
+        "ToastContent",
+        "ToastDescription",
+        "Toaster",
+        "ToastPortal",
+        "ToastProvider",
+        "ToastTitle",
+        "ToastViewport",
+        "useToastManager"
+      ],
+      "files": [
+        "src/components/ui/toast.ts",
+        "src/components/ui/toast.components.tsx",
+        "src/components/ui/toast.manager.ts"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "accessibility": "Choose the appropriate live-region urgency, never steal focus, pause dismissal during interaction, name every action and keep essential information persistent elsewhere.",
+      "contract": {
+        "profile": "live-feedback",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "toggle",
+      "title": "Toggle",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A two-state pressed control for formatting or view options.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/toggle.json",
+      "exports": [
+        "Toggle",
+        "ToggleVariantProps",
+        "toggleVariants"
+      ],
+      "files": [
+        "src/components/ui/toggle.tsx",
+        "src/components/ui/toggle.variants.ts"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Provide a visible or equivalent accessible name, expose aria-pressed without relying on color and keep focus on the control after keyboard activation.",
+      "contract": {
+        "profile": "toggle-action",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "toggle-group",
+      "title": "Toggle Group",
+      "status": "alpha",
+      "category": "form-control",
+      "description": "A single or multiple selection group composed from toggle items.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/toggle-group.json",
+      "exports": [
+        "ToggleGroup",
+        "ToggleGroupItem"
+      ],
+      "files": [
+        "src/components/ui/toggle-group.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "toggle"
+      ],
+      "accessibility": "Provide a group and item names, unique array values and an explicit selection mode; visual orientation is forwarded to Base UI keyboard behavior.",
+      "contract": {
+        "profile": "toggle-group",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "tooltip",
+      "title": "Tooltip",
+      "status": "alpha",
+      "category": "overlay",
+      "description": "A short non-interactive explanation for a focused or hovered trigger.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/tooltip.json",
+      "exports": [
+        "Tooltip",
+        "TooltipContent",
+        "TooltipProvider",
+        "TooltipTrigger"
+      ],
+      "files": [
+        "src/components/ui/tooltip.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Do not place interactive content in a tooltip; wrap the application in TooltipProvider.",
+      "contract": {
+        "profile": "nonmodal-overlay",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    },
+    {
+      "name": "typography",
+      "title": "Typography",
+      "status": "alpha",
+      "category": "content",
+      "introducedIn": "0.1.0-alpha.0",
+      "description": "A token-aware Typeset container for semantic HTML and rendered Markdown content.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/typography.json",
+      "exports": [
+        "Typeset",
+        "TypesetProps",
+        "TypesetScroll"
+      ],
+      "files": [
+        "src/components/ui/typography.tsx",
+        "src/components/ui/typography.css"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "accessibility": "Preserve native document elements, logical heading order, meaningful links and readable lists; Typeset changes presentation, not semantics.",
+      "contract": {
+        "profile": "data-display",
+        "source": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/contracts/components.json",
+        "level": "interaction-tested"
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "name": "dashboard-overview",
+      "title": "Dashboard Overview",
+      "status": "alpha",
+      "category": "dashboard",
+      "description": "A responsive product dashboard with metrics, an accessible trend chart and recent activity.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/dashboard-overview.json",
+      "exports": [
+        "DashboardActivity",
+        "DashboardMetric",
+        "DashboardOverview",
+        "DashboardOverviewProps"
+      ],
+      "files": [
+        "src/blocks/dashboard-overview.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "card",
+        "chart",
+        "table"
+      ],
+      "accessibility": "Includes a labelled chart with an accessibility layer, a named activity table and a heading-led page hierarchy."
+    },
+    {
+      "name": "login-page",
+      "title": "Login Page",
+      "status": "alpha",
+      "category": "authentication",
+      "description": "A complete sign-in surface with native form semantics, password recovery and account access guidance.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/login-page.json",
+      "exports": [
+        "LoginPage",
+        "LoginPageProps"
+      ],
+      "files": [
+        "src/blocks/login-page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "checkbox",
+        "field",
+        "input"
+      ],
+      "accessibility": "Uses native labelled inputs, autocomplete attributes, a submit button and visible recovery links."
+    },
+    {
+      "name": "settings-page",
+      "title": "Settings Page",
+      "status": "alpha",
+      "category": "settings",
+      "description": "A responsive workspace settings form for identity, localization and notification preferences.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/settings-page.json",
+      "exports": [
+        "SettingsPage",
+        "SettingsPageProps"
+      ],
+      "files": [
+        "src/blocks/settings-page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "field",
+        "input",
+        "native-select",
+        "separator",
+        "switch"
+      ],
+      "accessibility": "Groups visible labels, descriptions and native form controls in a predictable keyboard order."
+    },
+    {
+      "name": "team-members",
+      "title": "Team Members",
+      "status": "alpha",
+      "category": "team",
+      "description": "A member management card with identity, role, status and explicit row actions.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/team-members.json",
+      "exports": [
+        "TeamMember",
+        "TeamMembers",
+        "TeamMembersProps"
+      ],
+      "files": [
+        "src/blocks/team-members.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "card"
+      ],
+      "accessibility": "Every member action has a unique accessible name and status remains available as text."
+    }
+  ],
+  "charts": [
+    {
+      "name": "chart-recipes",
+      "title": "Chart Recipes",
+      "status": "alpha",
+      "category": "data-visualization",
+      "description": "Six token-aware and accessible Recharts recipes: Area, Bar, Line, Pie, Radar and Radial.",
+      "install": "npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/chart-recipes.json",
+      "exports": [
+        "AreaChartRecipe",
+        "BarChartRecipe",
+        "LineChartRecipe",
+        "PieChartRecipe",
+        "RadarChartRecipe",
+        "RadialChartRecipe"
+      ],
+      "files": [
+        "src/charts/chart-recipes.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "chart"
+      ],
+      "accessibility": "Every chart has an accessible name, Recharts accessibility layer and a concise text summary of the data."
+    }
+  ]
+}

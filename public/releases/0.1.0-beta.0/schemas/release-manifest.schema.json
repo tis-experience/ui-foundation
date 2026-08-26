@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/schemas/release-manifest.schema.json",
+  "title": "UI Foundation registry release manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "version", "status", "immutable", "distribution", "compatibility", "inventory", "integrity"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "name": { "const": "ui-foundation" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" },
+    "status": { "enum": ["prerelease", "stable"] },
+    "immutable": { "const": true },
+    "distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "root", "registry", "npmPackage"],
+      "properties": {
+        "model": { "const": "shadcn-source" },
+        "root": { "type": "string", "format": "uri" },
+        "registry": { "type": "string", "format": "uri" },
+        "npmPackage": { "const": false }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node", "react", "tailwind", "shadcn", "behaviorEngine"],
+      "properties": {
+        "node": { "type": "string" },
+        "react": { "type": "string" },
+        "tailwind": { "type": "string" },
+        "shadcn": { "type": "string" },
+        "behaviorEngine": { "type": "string" }
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["components", "blocks", "chartBundles", "registryItems"],
+      "properties": {
+        "components": { "type": "integer", "minimum": 1 },
+        "blocks": { "type": "integer", "minimum": 0 },
+        "chartBundles": { "type": "integer", "minimum": 0 },
+        "registryItems": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "digest", "files"],
+      "properties": {
+        "algorithm": { "const": "sha256" },
+        "digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "bytes", "sha256"],
+            "properties": {
+              "path": { "type": "string", "minLength": 1 },
+              "bytes": { "type": "integer", "minimum": 1 },
+              "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

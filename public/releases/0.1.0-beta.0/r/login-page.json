@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "login-page",
+  "title": "Login Page",
+  "description": "A complete sign-in surface with native form semantics, password recovery and account access guidance.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/ui-base.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/button.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/card.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/checkbox.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/field.json",
+    "https://tis-experience.github.io/ui-foundation/releases/0.1.0-beta.0/r/input.json"
+  ],
+  "files": [
+    {
+      "path": "src/blocks/login-page.tsx",
+      "content": "import type { FormEventHandler } from \"react\"\nimport { ArrowRightIcon, ShieldCheckIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Checkbox } from \"@/components/ui/checkbox\"\nimport { Field, FieldDescription, FieldGroup, FieldLabel } from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\n\ninterface LoginPageProps {\n  description?: string\n  onSubmit?: FormEventHandler<HTMLFormElement>\n  title?: string\n}\n\nfunction LoginPage({\n  description = \"Use your organization account to continue.\",\n  onSubmit,\n  title = \"Welcome back\",\n}: LoginPageProps) {\n  return (\n    <section className=\"grid min-h-[32rem] place-items-center rounded-xl border bg-muted/40 p-4 sm:p-8\" aria-labelledby=\"login-page-title\">\n      <Card className=\"w-full max-w-md\">\n        <CardHeader>\n          <div className=\"mb-2 grid size-10 place-items-center rounded-lg bg-primary text-primary-foreground\" aria-hidden=\"true\">\n            <ShieldCheckIcon className=\"size-5\" />\n          </div>\n          <CardTitle className=\"text-2xl\"><h2 id=\"login-page-title\">{title}</h2></CardTitle>\n          <CardDescription>{description}</CardDescription>\n        </CardHeader>\n        <CardContent>\n          <form onSubmit={onSubmit}>\n            <FieldGroup>\n              <Field>\n                <FieldLabel htmlFor=\"login-page-email\">Email</FieldLabel>\n                <Input id=\"login-page-email\" name=\"email\" type=\"email\" autoComplete=\"email\" required />\n              </Field>\n              <Field>\n                <div className=\"flex items-center justify-between gap-3\">\n                  <FieldLabel htmlFor=\"login-page-password\">Password</FieldLabel>\n                  <a className=\"text-sm text-primary underline-offset-4 hover:underline\" href=\"#forgot-password\">Forgot password?</a>\n                </div>\n                <Input id=\"login-page-password\" name=\"password\" type=\"password\" autoComplete=\"current-password\" required />\n              </Field>\n              <Field orientation=\"horizontal\">\n                <Checkbox id=\"login-page-remember\" name=\"remember\" />\n                <FieldLabel htmlFor=\"login-page-remember\">Keep me signed in</FieldLabel>\n              </Field>\n              <Button type=\"submit\" className=\"w-full\">\n                Sign in\n                <ArrowRightIcon data-icon=\"inline-end\" />\n              </Button>\n              <FieldDescription className=\"text-center\">\n                Need access? <a href=\"#request-access\">Request an account</a>.\n              </FieldDescription>\n            </FieldGroup>\n          </form>\n        </CardContent>\n      </Card>\n    </section>\n  )\n}\n\nexport { LoginPage, type LoginPageProps }\n",
+      "type": "registry:component",
+      "target": "src/blocks/login-page.tsx"
+    }
+  ],
+  "meta": {
+    "behaviorEngine": "@base-ui/react@1.7.0",
+    "distribution": "shadcn-source",
+    "accessibility": "Uses native labelled inputs, autocomplete attributes, a submit button and visible recovery links.",
+    "status": "alpha"
+  },
+  "categories": [
+    "authentication"
+  ],
+  "type": "registry:block"
+}

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import crypto from "node:crypto"
 import fs from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
@@ -7,6 +8,7 @@ import { fileURLToPath } from "node:url"
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const dist = path.join(root, "dist")
 const siteBaseUrl = "https://tis-experience.github.io/ui-foundation/"
+const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"))
 
 function assert(condition, message) {
   if (!condition) throw new Error(message)
@@ -14,6 +16,10 @@ function assert(condition, message) {
 
 function read(relativePath) {
   return fs.readFileSync(path.join(dist, relativePath), "utf8")
+}
+
+function sha256(buffer) {
+  return crypto.createHash("sha256").update(buffer).digest("hex")
 }
 
 assert(fs.existsSync(dist), "dist is missing. Run npm run build first.")
@@ -48,6 +54,8 @@ const requiredFiles = [
   "docs/compositions.md",
   "docs/maintenance.md",
   "docs/releases.md",
+  "releases/current.json",
+  `releases/${packageJson.version}/manifest.json`,
 ]
 
 for (const relativePath of requiredFiles) {
@@ -61,6 +69,9 @@ const manifest = JSON.parse(read("ai/manifest.json"))
 const manifestSchema = JSON.parse(read("schemas/ai-manifest.schema.json"))
 const contracts = JSON.parse(read("contracts/components.json"))
 const registry = JSON.parse(read("r/registry.json"))
+const releasePointer = JSON.parse(read("releases/current.json"))
+const releaseRoot = `releases/${packageJson.version}`
+const releaseManifest = JSON.parse(read(`${releaseRoot}/manifest.json`))
 assert(manifest.distribution.registryBaseUrl === `${siteBaseUrl}r`, "Registry base URL is not public")
 assert(manifest.distribution.releases.preview === `${siteBaseUrl}r`, "Preview registry URL is not public")
 assert(
@@ -69,6 +80,25 @@ assert(
 )
 assert(manifest.distribution.releases.npmPackage === false, "Manifest must preserve the source-registry boundary")
 assert(manifest.theming.customizer.route === `${siteBaseUrl}#customize`, "Customizer URL is not public")
+assert(releasePointer.version === packageJson.version, "Current release pointer does not match package.json")
+assert(
+  releasePointer.manifest === `${siteBaseUrl}releases/${packageJson.version}/manifest.json`,
+  "Current release manifest URL is not public and versioned"
+)
+assert(releaseManifest.version === packageJson.version, "Release manifest version does not match package.json")
+assert(releaseManifest.immutable === true, "Release manifest must be immutable")
+assert(
+  releaseManifest.status === (packageJson.version.includes("-") ? "prerelease" : "stable"),
+  "Release status does not match the semantic version channel"
+)
+assert(releaseManifest.distribution.npmPackage === false, "Release must preserve the source-registry boundary")
+assert(
+  releaseManifest.distribution.root === `${siteBaseUrl}releases/${packageJson.version}`,
+  "Release root is not public and versioned"
+)
+assert(releaseManifest.inventory.components === manifest.components.length, "Release component inventory is stale")
+assert(releaseManifest.inventory.blocks === manifest.blocks.length, "Release block inventory is stale")
+assert(releaseManifest.inventory.chartBundles === manifest.charts.length, "Release chart inventory is stale")
 assert(
   manifestSchema.properties.components.items.required.includes("contract") &&
     !manifestSchema.properties.blocks.items.required.includes("contract") &&
@@ -120,10 +150,42 @@ for (const item of registry.items) {
   }
 }
 
+const releaseRegistry = JSON.parse(read(`${releaseRoot}/r/registry.json`))
+assert(
+  releaseRegistry.items.length === releaseManifest.inventory.registryItems,
+  "Release registry inventory is stale"
+)
+
+for (const item of releaseRegistry.items) {
+  for (const dependency of item.registryDependencies ?? []) {
+    assert(
+      dependency.startsWith(`${siteBaseUrl}releases/${packageJson.version}/r/`),
+      `${item.name}: release registry dependency is not versioned: ${dependency}`
+    )
+    const relativePath = new URL(dependency).pathname.replace(/^\/ui-foundation\//, "")
+    assert(fs.existsSync(path.join(dist, relativePath)), `${item.name}: missing release dependency ${relativePath}`)
+  }
+}
+
+const integrityLines = []
+for (const file of releaseManifest.integrity.files) {
+  const absolutePath = path.join(dist, releaseRoot, file.path)
+  assert(fs.existsSync(absolutePath), `Release integrity file is missing: ${file.path}`)
+  const content = fs.readFileSync(absolutePath)
+  assert(content.byteLength === file.bytes, `Release byte count changed: ${file.path}`)
+  const digest = sha256(content)
+  assert(digest === file.sha256, `Release SHA-256 changed: ${file.path}`)
+  integrityLines.push(`${file.path}:${digest}`)
+}
+assert(
+  sha256(Buffer.from(integrityLines.join("\n"))) === releaseManifest.integrity.digest,
+  "Release aggregate SHA-256 digest changed"
+)
+
 for (const relativePath of ["ai/manifest.json", "contracts/components.json", "llms.txt", "registry/catalog.json"]) {
   const content = read(relativePath)
   assert(!content.includes("ui-foundation.local"), `${relativePath} contains the retired local hostname`)
   assert(!content.includes("127.0.0.1"), `${relativePath} contains a localhost URL`)
 }
 
-console.log(`Public build valid: ${requiredFiles.length} required artifacts and ${manifest.sources.length} manifest sources.`)
+console.log(`Public build valid: ${requiredFiles.length} required artifacts, ${manifest.sources.length} manifest sources and immutable release ${packageJson.version} with ${releaseManifest.integrity.files.length} integrity-checked files.`)

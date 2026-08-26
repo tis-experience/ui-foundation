@@ -147,7 +147,7 @@ npm run test:consumer:public  # smoke pós-deploy contra o registry hospedado
 
 ## Estado e limites
 
-- versão: `0.1.0-alpha.0`;
+- versão: `0.1.0-beta.0`;
 - repositório e catálogo públicos no GitHub Pages;
 - nenhum pacote npm por decisão arquitetural; a distribuição é o registry source-first;
 - nenhum Figma criado nesta fase;
