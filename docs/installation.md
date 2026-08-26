@@ -20,6 +20,49 @@ npx shadcn@4.18.0 info
 
 The result must report `base: base`, Tailwind v4, the intended import aliases and the CSS entrypoint that will receive the theme variables. This adapter does not support Radix or `asChild`.
 
+### Start from a new Vite project
+
+For a new React project, initialize Vite and shadcn before adding UI Foundation items:
+
+```bash
+npm create vite@9.2.0 my-app -- --template react-ts
+cd my-app
+npm install
+npm install --save-dev tailwindcss@4.3.3 @tailwindcss/vite@4.3.3
+npx shadcn@4.18.0 init --template vite --base base --preset nova --yes --no-monorepo
+npx shadcn@4.18.0 info
+```
+
+The CLI input is `--preset nova --base base`; the resulting `components.json` reports the combined style as `base-nova`.
+
+TypeScript 6 does not require `baseUrl` for aliases. Keep the alias paths relative to the configuration file:
+
+```json
+{
+  "compilerOptions": {
+    "paths": { "@/*": ["./src/*"] }
+  }
+}
+```
+
+Use `fileURLToPath` in Vite so aliases also work when the project path contains spaces:
+
+```ts
+import { fileURLToPath, URL } from "node:url"
+import react from "@vitejs/plugin-react"
+import tailwindcss from "@tailwindcss/vite"
+import { defineConfig } from "vite"
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+})
+```
+
 ## Install source
 
 Install one component from the public registry:
@@ -83,3 +126,5 @@ After installation:
 5. run the consumer accessibility suite.
 
 The exact exports, files, dependencies and resolved behavior contract are available through `ai/manifest.json` and `contracts/components.json`.
+
+The repository runs these same checks against a generated consumer in a temporary path containing spaces. Its smoke app composes Dashboard Overview, Settings Page, Tabs, Dialog, forms, themes and density controls before validating build, keyboard behavior, focus restoration, 320px layout and axe.

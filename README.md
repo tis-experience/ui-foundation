@@ -51,6 +51,8 @@ Um consumidor pode instalar código-fonte diretamente do registry público pela 
 npx shadcn@4.18.0 add https://tis-experience.github.io/ui-foundation/r/button.json
 ```
 
+Em projetos Vite novos, inicialize o shadcn com `--preset nova --base base`. O guia de [instalação](docs/installation.md) inclui o fluxo completo para Tailwind 4, TypeScript 6 e aliases seguros em caminhos com espaços.
+
 O caminho `/r` acompanha a versão mais recente publicada. Releases formais usam URLs imutáveis em `/releases/<version>/r/<item>.json`, acompanhadas por manifesto SHA-256. Consulte [docs/installation.md](docs/installation.md) e [docs/releases.md](docs/releases.md).
 
 Para aplicar a identidade TIS, instale também o preset e selecione-o no elemento raiz:
@@ -138,8 +140,9 @@ A IA deve gerar uma composição executável com componentes existentes, não in
 ## Qualidade
 
 ```bash
+npx playwright install chrome # uma vez por ambiente local
 npm test              # geração, lint e build
-npm run test:consumer # instalação real em consumidor limpo
+npm run test:consumer # instalação, build e runtime de um consumidor real
 npm run test:e2e      # interação, responsividade e WCAG/Axe
 npm run release:dry-run       # ensaio isolado do snapshot versionado
 npm run test:consumer:public  # smoke pós-deploy contra o registry hospedado

@@ -44,12 +44,18 @@
 }
 
 @layer base {
+  html {
+    min-width: 320px;
+  }
+
   * {
     @apply border-border;
     outline-color: var(--focus-ring-color, var(--ring));
   }
 
   body {
+    min-width: 320px;
+    min-height: 100svh;
     @apply bg-background text-foreground;
   }
 }

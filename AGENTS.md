@@ -50,7 +50,9 @@ npm run test:consumer
 npm run test:e2e
 ```
 
-`npm run test` validates generated contracts, TypeScript, lint, and the production catalog build. The consumer test proves source installation into a separate Vite project. The browser test proves interaction, responsive behavior, and automated WCAG A/AA checks.
+`npm run test` validates generated contracts, TypeScript, lint, and the production catalog build. The consumer test installs source into a separate Vite project whose path contains spaces, builds a real app and proves Blocks, theme and density controls, keyboard behavior, focus restoration, 320px layout and automated accessibility. The browser test proves the complete catalog interaction, responsive and WCAG A/AA matrix.
+
+Install the browser dependency once in a new checkout with `npx playwright install chrome` before running the consumer or browser gates locally. CI installs Chrome before both gates.
 
 `npm test` also rehearses a versioned source-registry release in a temporary directory. After `main` deploys, run `npm run test:consumer:public` to prove the hosted registry from a clean project. `npm run release:stage -- --version <approved-version>` is reserved for an owner-approved version change and must never overwrite an existing release directory.
 

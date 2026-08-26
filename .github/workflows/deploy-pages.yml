@@ -36,11 +36,11 @@ jobs:
       - name: Validate generated contracts and build
         run: npm test
 
-      - name: Validate clean consumer installation
-        run: npm run test:consumer
-
       - name: Install Chrome for browser tests
         run: npx playwright install --with-deps chrome
+
+      - name: Validate clean consumer installation and runtime
+        run: npm run test:consumer
 
       - name: Validate interactions and accessibility
         run: npm run test:e2e
