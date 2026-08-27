@@ -44,6 +44,38 @@ test("renders the complete local component catalog", async ({ page }) => {
   expect(overflow).toBe(0)
 })
 
+test("opens the runnable consumer example from the public catalog", async ({ page }) => {
+  const exampleLink = page.getByRole("link", { name: "Example app", exact: true })
+  await expect(exampleLink).toHaveAttribute("href", "./examples/consumer/")
+  await exampleLink.click()
+
+  await expect(page).toHaveURL(/\/examples\/consumer\/$/)
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Operations Workspace" })
+  ).toBeVisible()
+  await expect(page.getByRole("link", { name: "UI Foundation catalog" })).toHaveAttribute(
+    "href",
+    "../../"
+  )
+
+  await page.getByRole("button", { name: "Neutral", exact: true }).click()
+  await page.getByRole("button", { name: "Use dark mode" }).click()
+  await expect(page.locator("html")).toHaveAttribute("data-ui-theme", "tis")
+  await expect(page.locator("html")).toHaveClass(/dark/)
+
+  await page.setViewportSize({ width: 320, height: 844 })
+  const metrics = await page.evaluate(() => ({
+    clientWidth: document.documentElement.clientWidth,
+    scrollWidth: document.documentElement.scrollWidth,
+  }))
+  expect(metrics.scrollWidth).toBe(metrics.clientWidth)
+
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+    .analyze()
+  expect(results.violations).toEqual([])
+})
+
 test("switches between the neutral and optional TIS theme", async ({ page }) => {
   await page.getByRole("button", { name: "TIS", exact: true }).click()
   await page.getByRole("button", { name: "Dark", exact: true }).click()

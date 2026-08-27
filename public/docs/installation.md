@@ -128,3 +128,13 @@ After installation:
 The exact exports, files, dependencies and resolved behavior contract are available through `ai/manifest.json` and `contracts/components.json`.
 
 The repository runs these same checks against a generated consumer in a temporary path containing spaces. Its smoke app composes Dashboard Overview, Settings Page, Tabs, Dialog, forms, themes and density controls before validating build, keyboard behavior, focus restoration, 320px layout and axe.
+
+## Runnable consumer example
+
+The same application used by the clean-consumer harness is published as a separate build at:
+
+```text
+https://tis-experience.github.io/ui-foundation/examples/consumer/
+```
+
+It can also be opened through **Example app** in the public catalog navigation. The public entry reuses `fixtures/consumer-template/src/App.tsx`, so the maintained test fixture and the visible application cannot silently become different implementations.

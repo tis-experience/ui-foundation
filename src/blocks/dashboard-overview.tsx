@@ -130,10 +130,10 @@ function DashboardOverview({
             <CardDescription>Latest changes across the workspace.</CardDescription>
           </CardHeader>
           <CardContent>
-            <Table aria-label="Recent workspace activity">
+            <Table className="table-fixed" aria-label="Recent workspace activity">
               <TableHeader>
                 <TableRow>
-                  <TableHead>Member</TableHead>
+                  <TableHead className="w-2/3">Member</TableHead>
                   <TableHead>Status</TableHead>
                 </TableRow>
               </TableHeader>

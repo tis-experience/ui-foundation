@@ -26,6 +26,7 @@ assert(fs.existsSync(dist), "dist is missing. Run npm run build first.")
 
 const requiredFiles = [
   "index.html",
+  "examples/consumer/index.html",
   "LICENSE",
   "ai/manifest.json",
   "ai/customizer.json",
@@ -64,6 +65,11 @@ for (const relativePath of requiredFiles) {
 
 const index = read("index.html")
 assert(/(?:src|href)="\.\/assets\//.test(index), "Vite assets are not relative to the Pages project path")
+const consumerExample = read("examples/consumer/index.html")
+assert(
+  /(?:src|href)="\.\.\/\.\.\/assets\//.test(consumerExample),
+  "Consumer example assets are not relative to the nested Pages route"
+)
 
 const manifest = JSON.parse(read("ai/manifest.json"))
 const manifestSchema = JSON.parse(read("schemas/ai-manifest.schema.json"))
