@@ -50,7 +50,7 @@ npm run test:consumer
 npm run test:e2e
 ```
 
-`npm run test` validates generated contracts, TypeScript, lint, and the production catalog build. The consumer test installs source into a separate Vite project whose path contains spaces, builds a real app and proves Blocks, theme and density controls, keyboard behavior, focus restoration, 320px layout and automated accessibility. The browser test proves the complete catalog interaction, responsive and WCAG A/AA matrix.
+`npm run test` validates generated contracts, TypeScript, lint, and the production catalog build. The consumer test installs source into a separate Vite project whose path contains spaces, builds a real app and proves Blocks, theme and density controls, keyboard behavior, focus restoration, 320px layout and automated accessibility. That same fixture powers the independent public page at `/examples/consumer/`; do not fork a second demo implementation. The browser test proves the complete catalog interaction, responsive and WCAG A/AA matrix.
 
 Install the browser dependency once in a new checkout with `npx playwright install chrome` before running the consumer or browser gates locally. CI installs Chrome before both gates.
 

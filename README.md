@@ -8,6 +8,8 @@ O registry é a distribuição do produto. O package do repositório permanece `
 
 Catálogo público: [tis-experience.github.io/ui-foundation](https://tis-experience.github.io/ui-foundation/)
 
+Aplicação de exemplo: [tis-experience.github.io/ui-foundation/examples/consumer](https://tis-experience.github.io/ui-foundation/examples/consumer/)
+
 ## O que já funciona
 
 - 66 componentes instaláveis do registry, incluindo Data Table, Date Picker, Form e Typography;
@@ -22,6 +24,7 @@ Catálogo público: [tis-experience.github.io/ui-foundation](https://tis-experie
 - 4 Blocks instaláveis: Dashboard Overview, Login Page, Settings Page e Team Members;
 - 6 receitas instaláveis de Charts: Area, Bar, Line, Pie, Radar e Radial;
 - instalação validada em um projeto React/Vite limpo;
+- aplicação consumidora navegável, construída com os mesmos componentes e Blocks do teste de instalação;
 - manifesto estruturado e instruções para agentes de IA.
 
 ## Consultar ou executar o catálogo
@@ -41,7 +44,7 @@ npm run dev
 
 O catálogo local abre em `http://127.0.0.1:4310/` quando iniciado com a porta usada neste trabalho.
 
-As áreas principais são Components, Blocks, Charts, Customize, Foundations e Tokens.
+As áreas principais são Components, Blocks, Charts, Customize, Foundations e Tokens. O link **Example app** abre uma aplicação separada e funcional que demonstra o registry em contexto de produto.
 
 ## Instalar um componente
 

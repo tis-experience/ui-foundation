@@ -1,10 +1,11 @@
 import { useEffect, useState, type FormEvent } from "react"
-import { CircleHelpIcon, MoonIcon, PaletteIcon, PlusIcon, SunIcon } from "lucide-react"
+import { ArrowLeftIcon, CircleHelpIcon, MoonIcon, PaletteIcon, PlusIcon, SunIcon } from "lucide-react"
 
 import { DashboardOverview } from "@/blocks/dashboard-overview"
 import { SettingsPage } from "@/blocks/settings-page"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button.variants"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Dialog,
@@ -25,6 +26,10 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 type Density = "compact" | "comfortable" | "spacious"
 type Identity = "neutral" | "tis"
+
+interface ConsumerAppProps {
+  catalogHref?: string
+}
 
 interface NewWorkItemDialogProps {
   onCreated: (title: string) => void
@@ -142,7 +147,7 @@ function ComponentStates() {
   )
 }
 
-function App() {
+function App({ catalogHref }: ConsumerAppProps) {
   const [density, setDensity] = useState<Density>("comfortable")
   const [identity, setIdentity] = useState<Identity>("neutral")
   const [dark, setDark] = useState(false)
@@ -160,6 +165,14 @@ function App() {
     <div className="mx-auto flex min-h-svh w-full max-w-7xl flex-col px-4 py-5 sm:px-6 lg:px-8">
       <header className="flex flex-col gap-5 border-b pb-5 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex flex-col gap-1">
+          {catalogHref ? (
+            <div className="mb-2">
+              <a href={catalogHref} className={buttonVariants({ variant: "ghost", size: "sm" })}>
+                <ArrowLeftIcon data-icon="inline-start" />
+                UI Foundation catalog
+              </a>
+            </div>
+          ) : null}
           <div className="flex flex-wrap items-center gap-2">
             <h1 className="font-heading text-2xl font-semibold tracking-tight">Operations Workspace</h1>
             <Badge variant="outline">Source-owned registry</Badge>

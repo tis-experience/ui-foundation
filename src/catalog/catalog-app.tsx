@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { Fragment, useEffect, useMemo, useState } from "react"
 import { CheckIcon, CopyIcon, SearchIcon } from "lucide-react"
 
 import { ComponentPreview } from "@/catalog/component-preview"
@@ -191,13 +191,17 @@ function CatalogApp() {
           <a className="brand" href="#components" aria-label="UI Foundation components">UI Foundation</a>
           <nav className="site-nav" aria-label="Library reference">
             {views.map((item) => (
-              <a
-                key={item.value}
-                href={`#${item.value}`}
-                aria-current={view === item.value ? "page" : undefined}
-              >
-                {item.label}
-              </a>
+              <Fragment key={item.value}>
+                <a
+                  href={`#${item.value}`}
+                  aria-current={view === item.value ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
+                {item.value === "charts" ? (
+                  <a href="./examples/consumer/">Example app</a>
+                ) : null}
+              </Fragment>
             ))}
           </nav>
         </div>

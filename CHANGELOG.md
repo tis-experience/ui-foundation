@@ -6,10 +6,12 @@ All notable changes to UI Foundation will be documented in this file.
 
 ### Added
 
+- Public, independently bundled consumer application at `/examples/consumer/`, linked from the catalog and sourced from the same fixture used by the clean-install harness.
 - Real clean-consumer application harness covering installable Blocks, theme and density controls, keyboard navigation, Dialog focus restoration, responsive layout and axe after a production build.
 
 ### Fixed
 
+- Preserve native link semantics in the public example return action and keep the Dashboard activity table within narrow mobile cards without creating an inaccessible scroll region.
 - Document the current shadcn 4.18 Vite initialization flags, TypeScript 6 alias configuration and path-safe Vite alias resolution.
 
 ## [0.1.0-beta.0] - 2026-08-26
