@@ -116,6 +116,7 @@ function DatePicker({
           <Calendar
             mode="single"
             selected={selected}
+            defaultMonth={selected}
             onSelect={setSelected}
             autoFocus
             {...calendarProps}

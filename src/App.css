@@ -121,6 +121,11 @@
   line-height: 1.65;
 }
 
+.intro-actions {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
 .install-block {
   display: grid;
   max-width: 46rem;

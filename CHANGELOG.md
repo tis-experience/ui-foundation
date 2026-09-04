@@ -11,6 +11,8 @@ All notable changes to UI Foundation will be documented in this file.
 
 ### Fixed
 
+- Expose the runnable consumer application as a primary action in the catalog introduction instead of relying on the overflowable header navigation.
+- Open Date Picker on its selected date when the value belongs to a different month than the current date.
 - Preserve native link semantics in the public example return action and keep the Dashboard activity table within narrow mobile cards without creating an inaccessible scroll region.
 - Document the current shadcn 4.18 Vite initialization flags, TypeScript 6 alias configuration and path-safe Vite alias resolution.
 

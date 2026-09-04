@@ -33,6 +33,7 @@ import {
 } from "@/catalog/theme-controls"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button.variants"
 import { Input } from "@/components/ui/input"
 import { registryUrl } from "@/lib/public-url"
 
@@ -218,6 +219,11 @@ function CatalogApp() {
                     Install accessible React source into the project, keep full ownership, and
                     choose the neutral theme or the optional TIS identity.
                   </p>
+                  <div className="intro-actions">
+                    <a className={buttonVariants()} href="./examples/consumer/">
+                      Open example app
+                    </a>
+                  </div>
                   <div className="install-block" aria-label="Install command">
                     <span>Install</span>
                     <code>npx shadcn@4.18.0 add {registryUrl("button")}</code>

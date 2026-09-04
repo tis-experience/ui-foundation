@@ -45,7 +45,8 @@ test("renders the complete local component catalog", async ({ page }) => {
 })
 
 test("opens the runnable consumer example from the public catalog", async ({ page }) => {
-  const exampleLink = page.getByRole("link", { name: "Example app", exact: true })
+  const exampleLink = page.getByRole("link", { name: "Open example app", exact: true })
+  await expect(exampleLink).toBeVisible()
   await expect(exampleLink).toHaveAttribute("href", "./examples/consumer/")
   await exampleLink.click()
 
